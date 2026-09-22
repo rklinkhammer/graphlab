@@ -1,0 +1,51 @@
+{
+  "apiVersion": "graphlab.workload/v2",
+  "id": "app-a",
+  "interfaces": {
+    "data0": {
+      "medium": "ethernet",
+      "mtuRange": [
+        1280,
+        9000
+      ],
+      "required": true,
+      "role": "data"
+    },
+    "data1": {
+      "medium": "ethernet",
+      "mtuRange": [
+        1280,
+        9000
+      ],
+      "required": false,
+      "role": "data"
+    },
+    "mgmt0": {
+      "medium": "ethernet",
+      "mtuRange": [
+        1280,
+        9000
+      ],
+      "required": true,
+      "role": "management"
+    }
+  },
+  "kind": "docker",
+  "labSupport": {
+    "language": "cpp23",
+    "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "version": "1.0.0"
+  },
+  "lifecycle": {
+    "gateUntilRelease": true,
+    "quiesce": "supported"
+  },
+  "platforms": [
+    "linux/arm64",
+    "linux/amd64"
+  ],
+  "resources": {
+    "cpus": 1,
+    "memoryMiB": 256
+  }
+}

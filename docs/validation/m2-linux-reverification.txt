@@ -1,0 +1,172 @@
+[0/2] Re-checking globbed directories...
+[1/4] Building CXX object CMakeFiles/lab-api.dir/cpp/console/api_main.cpp.o
+[2/4] Linking CXX executable lab-api
+[3/4] Building CXX object CMakeFiles/lab.dir/cpp/main.cpp.o
+[4/4] Linking CXX executable lab
+Test project /tmp/graphlab-m0-source/build/dev
+    Start 1: m1_acceptance
+1/8 Test #1: m1_acceptance ....................   Passed    4.35 sec
+    Start 2: m0_acceptance
+2/8 Test #2: m0_acceptance ....................   Passed    0.22 sec
+    Start 3: cli_validate
+3/8 Test #3: cli_validate .....................   Passed    0.01 sec
+    Start 4: cli_plan
+4/8 Test #4: cli_plan .........................   Passed    0.01 sec
+    Start 5: cli_preflight
+5/8 Test #5: cli_preflight ....................   Passed    0.00 sec
+    Start 6: cli_side_effects
+6/8 Test #6: cli_side_effects .................   Passed    0.03 sec
+    Start 7: installed_package
+7/8 Test #7: installed_package ................   Passed    0.07 sec
+    Start 8: m2_journal
+8/8 Test #8: m2_journal .......................   Passed    0.93 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =   5.62 sec
+Evidence directory: "/tmp/graphlab-m2-live-bQts4W"
+PASS fixture generated from real image identity
+PASS sentinel bridge created
+PASS runtime topology validated
+PASS real Docker/OVS run ready: {"cancelRequested":false,"createdAt":"2026-09-22T02:23:21Z","error":null,"finishedAt":"2026-09-22T02:23:26Z","id":"e801d3e6-37e2-452b-82f8-506775f183bd","operation":"start","revision":"1","runId":"53d570a6-841d-42be-8f78-e2317e060c9a","state":"succeeded"}
+PASS C++ workload released
+PASS same-VLAN UDP delivered
+PASS management address does not expose data echo
+PASS no capture coverage advertised
+PASS quiesce completes
+PASS held gate denies application probe
+PASS resume completes
+PASS owned resource teardown completes
+PASS unrelated bridge preserved
+PASS container removed
+PASS container removed
+PASS bridge removed
+PASS bridge removed
+PASS bridge removed
+PASS runtime topology validated
+PASS real Docker/OVS run ready: {"cancelRequested":false,"createdAt":"2026-09-22T02:23:27Z","error":null,"finishedAt":"2026-09-22T02:23:31Z","id":"924f4352-2d51-4e0c-8e43-7c938df55980","operation":"start","revision":"1","runId":"6ac40c9d-c65a-4a24-8f63-6167b3b51109","state":"succeeded"}
+PASS C++ workload released
+PASS cross-VLAN traffic denied
+PASS management address does not expose data echo
+PASS no capture coverage advertised
+PASS quiesce completes
+PASS held gate denies application probe
+PASS resume completes
+PASS owned resource teardown completes
+PASS unrelated bridge preserved
+PASS container removed
+PASS container removed
+PASS bridge removed
+PASS bridge removed
+PASS bridge removed
+PASS abrupt exit at resource boundary 0 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 0 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 1 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 1 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 2 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 2 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 3 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 3 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 4 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 4 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 5 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 5 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 6 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 6 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 7 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 7 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 8 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 8 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 9 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 9 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 10 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 10 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+M2 Linux runtime tests passed

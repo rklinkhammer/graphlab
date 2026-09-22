@@ -1,0 +1,171 @@
+---
+apiVersion: graphlab.topology/v2
+artifactLock: sha256:3ec5fba6707505bcd68d5e006cc89bde827aafcb1fb718033e4ecb54cf8f102f
+backend:
+  kind: linux-local
+  switchIsolation: shared-ovs
+capture:
+  format: pcapng
+  required: true
+  scope: all-data-edges
+edges:
+- endpoints:
+  - s1:p2
+  - s2:p1
+  id: l12
+- endpoints:
+  - s2:p3
+  - s3:p2
+  id: l23
+- endpoints:
+  - s3:p1
+  - s1:p3
+  id: l31
+- endpoints:
+  - a:data0
+  - s1:workload
+  id: a-s
+- endpoints:
+  - b:data0
+  - s2:workload
+  id: b-s
+- endpoints:
+  - g:data0
+  - s3:workload
+  id: g-s
+id: triangle
+management:
+  networks:
+    mgmt:
+      dynamicPool: 172.30.80.128/25
+      externalAccess: false
+      gateway: 172.30.80.1
+      subnet: 172.30.80.0/24
+managementAttachments:
+- address: 172.30.80.11/24
+  endpoint: a:mgmt0
+  network: mgmt
+- address: 172.30.80.12/24
+  endpoint: b:mgmt0
+  network: mgmt
+- address: 172.30.80.13/24
+  endpoint: g:mgmt0
+  network: mgmt
+nodes:
+  a:
+    kind: docker
+    ports:
+      data0:
+        medium: ethernet
+        mtu: 1500
+        role: data
+      mgmt0:
+        role: management
+    workload: app-a
+  b:
+    kind: docker
+    ports:
+      data0:
+        medium: ethernet
+        mtu: 1500
+        role: data
+      mgmt0:
+        role: management
+    workload: app-b
+  g:
+    kind: qemu
+    ports:
+      data0:
+        medium: ethernet
+        mtu: 1500
+        role: data
+      mgmt0:
+        role: management
+    workload: guest-linux
+  s1:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports:
+      p2:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      p3:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      workload:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          access: 100
+  s2:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports:
+      p1:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      p3:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      workload:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          access: 100
+  s3:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports:
+      p1:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      p2:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      workload:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          access: 100

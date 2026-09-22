@@ -1,0 +1,32 @@
+{
+  "apiVersion": "graphlab.preflight/v1",
+  "build": {
+    "compiler": "GNU-13.3.0",
+    "cppStandard": 202100,
+    "expectedFeature": 202211,
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024"
+  },
+  "host": {
+    "architecture": "aarch64",
+    "kernel": "6.8.0-134-generic",
+    "os": "Linux"
+  },
+  "kvmDevicePresent": true,
+  "kvmReadWriteAccess": false,
+  "linuxHost": true,
+  "note": "Paths and device access only. No tool subprocess, daemon request, registry fetch, or network mutation performed.",
+  "readOnly": true,
+  "runtimeQualified": false,
+  "tools": {
+    "c++": "/usr/bin/c++",
+    "cmake": null,
+    "docker": "/usr/bin/docker",
+    "ip": "/usr/sbin/ip",
+    "ninja": null,
+    "ovs-vsctl": "/usr/bin/ovs-vsctl",
+    "qemu-system-aarch64": "/usr/bin/qemu-system-aarch64",
+    "qemu-system-x86_64": null,
+    "tc": "/usr/sbin/tc"
+  },
+  "version": "0.1.0"
+}

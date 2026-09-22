@@ -1,0 +1,178 @@
+{
+  "apiVersion": "graphlab.artifacts/v1",
+  "workloads": {
+    "app-a": {
+      "contract": {
+        "apiVersion": "graphlab.workload/v2",
+        "id": "app-a",
+        "interfaces": {
+          "data0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "data"
+          },
+          "data1": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": false,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "management"
+          }
+        },
+        "kind": "docker",
+        "labSupport": {
+          "language": "cpp23",
+          "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "version": "1.0.0"
+        },
+        "lifecycle": {
+          "gateUntilRelease": true,
+          "quiesce": "supported"
+        },
+        "platforms": [
+          "linux/arm64",
+          "linux/amd64"
+        ],
+        "resources": {
+          "cpus": 1,
+          "memoryMiB": 256
+        }
+      },
+      "contractSha256": "sha256:1d21a3201026f341a2f38089b569dcb6c517611576d9cd1b74fd1164c1cbe217",
+      "image": "registry.invalid/app-a@sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "platform": "linux/arm64"
+    },
+    "app-b": {
+      "contract": {
+        "apiVersion": "graphlab.workload/v2",
+        "id": "app-b",
+        "interfaces": {
+          "data0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "data"
+          },
+          "data1": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": false,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "management"
+          }
+        },
+        "kind": "docker",
+        "labSupport": {
+          "language": "cpp23",
+          "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "version": "1.0.0"
+        },
+        "lifecycle": {
+          "gateUntilRelease": true,
+          "quiesce": "supported"
+        },
+        "platforms": [
+          "linux/arm64",
+          "linux/amd64"
+        ],
+        "resources": {
+          "cpus": 1,
+          "memoryMiB": 256
+        }
+      },
+      "contractSha256": "sha256:b7584afaf708f6e9ac1d36087ee59c080e999c9bb6c81a3199ddb2fbfd44b318",
+      "image": "registry.invalid/app-b@sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "platform": "linux/arm64"
+    },
+    "guest-linux": {
+      "contract": {
+        "apiVersion": "graphlab.workload/v2",
+        "id": "guest-linux",
+        "interfaces": {
+          "data0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "data"
+          },
+          "data1": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": false,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "management"
+          }
+        },
+        "kind": "qemu",
+        "labSupport": {
+          "language": "cpp23",
+          "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "version": "1.0.0"
+        },
+        "lifecycle": {
+          "gateUntilRelease": true,
+          "quiesce": "supported"
+        },
+        "platforms": [
+          "linux/arm64",
+          "linux/amd64"
+        ],
+        "resources": {
+          "cpus": 1,
+          "memoryMiB": 256
+        }
+      },
+      "contractSha256": "sha256:dc52619ef5a2fd49f240294035b658611b9e39a8f19104b244b2986895fed739",
+      "diskSha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "platform": "linux/arm64",
+      "vm": {
+        "accelerator": "kvm",
+        "firmwareSha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "machine": "virt-8.2"
+      }
+    }
+  }
+}

@@ -1,0 +1,1290 @@
+Start testing: Sep 21 20:49 EDT
+----------------------------------------------------------
+1/6 Testing: m0_acceptance
+1/6 Test: m0_acceptance
+Command: "/tmp/graphlab-m0-source/build/dev/m0_tests"
+Directory: /tmp/graphlab-m0-source/build/dev
+"m0_acceptance" start time: Sep 21 20:49 EDT
+Output:
+----------------------------------------------------------
+PASS SHA-256 known canonical empty object
+PASS YAML scalar typing and quoted values
+PASS chain
+PASS star
+PASS ring
+PASS mesh
+PASS disconnected
+PASS isolated
+PASS parallel
+PASS mixed Docker QEMU triangle
+PASS generated variable-size graphs and deterministic plans
+PASS multi-interface workload
+PASS direct Docker cable
+PASS deterministic YAML key/edge/attachment/trunk ordering
+PASS default normalization
+PASS duplicate edge ID
+PASS missing endpoint
+PASS reused physical port
+PASS endpoint arity
+PASS VLAN bounds
+PASS trunk duplicates
+PASS MTU mismatch
+PASS missing required workload interface
+PASS undeclared workload interface
+PASS wrong workload kind
+PASS unresolved workload
+PASS unresolved lock digest
+PASS wrong lock digest
+PASS unknown major
+PASS unknown required feature
+PASS unknown field
+PASS node budget
+PASS edge budget
+PASS unsupported isolation
+PASS management/data confusion
+PASS management pool conflict
+PASS management duplicate IP
+PASS management unknown network
+PASS management subnet overlap
+PASS cyclic RSTP policy
+PASS explicit unprotected loops
+PASS guest to guest capability rejection
+PASS tampered contract
+PASS mutable image rejected
+PASS contract language and major
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS unsafe or ambiguous document rejected
+PASS depth limit
+PASS byte limit
+PASS planning does not mutate inputs
+56 acceptance cases passed
+<end of output>
+Test time =   0.23 sec
+----------------------------------------------------------
+Test Passed.
+"m0_acceptance" end time: Sep 21 20:49 EDT
+"m0_acceptance" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/6 Testing: cli_validate
+2/6 Test: cli_validate
+Command: "/tmp/graphlab-m0-source/build/dev/lab" "validate" "/tmp/graphlab-m0-source/topologies/triangle.yaml" "--lock" "/tmp/graphlab-m0-source/topologies/artifacts.lock.json"
+Directory: /tmp/graphlab-m0-source/build/dev
+"cli_validate" start time: Sep 21 20:49 EDT
+Output:
+----------------------------------------------------------
+{
+  "artifactVerification": "local contract and lock integrity; referenced binaries not fetched",
+  "edges": 6,
+  "nodes": 6,
+  "topologyHash": "sha256:4140c398e56b3bc4d8989a98cb0771c4f11d1a6791780514eb140c47e45a21ec",
+  "valid": true
+}
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"cli_validate" end time: Sep 21 20:49 EDT
+"cli_validate" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/6 Testing: cli_plan
+3/6 Test: cli_plan
+Command: "/tmp/graphlab-m0-source/build/dev/lab" "plan" "/tmp/graphlab-m0-source/topologies/triangle.yaml" "--lock" "/tmp/graphlab-m0-source/topologies/artifacts.lock.json"
+Directory: /tmp/graphlab-m0-source/build/dev
+"cli_plan" start time: Sep 21 20:49 EDT
+Output:
+----------------------------------------------------------
+{
+  "apiVersion": "graphlab.plan/v1",
+  "artifactLockHash": "sha256:3ec5fba6707505bcd68d5e006cc89bde827aafcb1fb718033e4ecb54cf8f102f",
+  "canonicalTopology": {
+    "apiVersion": "graphlab.topology/v2",
+    "artifactLock": "sha256:3ec5fba6707505bcd68d5e006cc89bde827aafcb1fb718033e4ecb54cf8f102f",
+    "backend": {
+      "kind": "linux-local",
+      "switchIsolation": "shared-ovs"
+    },
+    "capture": {
+      "format": "pcapng",
+      "required": true,
+      "scope": "all-data-edges"
+    },
+    "edges": [
+      {
+        "endpoints": [
+          "a:data0",
+          "s1:workload"
+        ],
+        "id": "a-s"
+      },
+      {
+        "endpoints": [
+          "b:data0",
+          "s2:workload"
+        ],
+        "id": "b-s"
+      },
+      {
+        "endpoints": [
+          "g:data0",
+          "s3:workload"
+        ],
+        "id": "g-s"
+      },
+      {
+        "endpoints": [
+          "s1:p2",
+          "s2:p1"
+        ],
+        "id": "l12"
+      },
+      {
+        "endpoints": [
+          "s2:p3",
+          "s3:p2"
+        ],
+        "id": "l23"
+      },
+      {
+        "endpoints": [
+          "s3:p1",
+          "s1:p3"
+        ],
+        "id": "l31"
+      }
+    ],
+    "id": "triangle",
+    "limits": {
+      "maxEdges": 8192,
+      "maxNodes": 1024
+    },
+    "loopPolicy": "rstp",
+    "management": {
+      "networks": {
+        "mgmt": {
+          "dynamicPool": "172.30.80.128/25",
+          "externalAccess": false,
+          "gateway": "172.30.80.1",
+          "subnet": "172.30.80.0/24"
+        }
+      }
+    },
+    "managementAttachments": [
+      {
+        "address": "172.30.80.11/24",
+        "endpoint": "a:mgmt0",
+        "network": "mgmt"
+      },
+      {
+        "address": "172.30.80.12/24",
+        "endpoint": "b:mgmt0",
+        "network": "mgmt"
+      },
+      {
+        "address": "172.30.80.13/24",
+        "endpoint": "g:mgmt0",
+        "network": "mgmt"
+      }
+    ],
+    "nodes": {
+      "a": {
+        "kind": "docker",
+        "ports": {
+          "data0": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "management"
+          }
+        },
+        "workload": "app-a"
+      },
+      "b": {
+        "kind": "docker",
+        "ports": {
+          "data0": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "management"
+          }
+        },
+        "workload": "app-b"
+      },
+      "g": {
+        "kind": "qemu",
+        "ports": {
+          "data0": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "management"
+          }
+        },
+        "workload": "guest-linux"
+      },
+      "s1": {
+        "kind": "ovs-switch",
+        "policy": {
+          "forwarding": "normal",
+          "priority": 4096,
+          "rstp": true
+        },
+        "ports": {
+          "p2": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "trunk": [
+                100,
+                200
+              ]
+            }
+          },
+          "p3": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "trunk": [
+                100,
+                200
+              ]
+            }
+          },
+          "workload": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "access": 100
+            }
+          }
+        }
+      },
+      "s2": {
+        "kind": "ovs-switch",
+        "policy": {
+          "forwarding": "normal",
+          "priority": 4096,
+          "rstp": true
+        },
+        "ports": {
+          "p1": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "trunk": [
+                100,
+                200
+              ]
+            }
+          },
+          "p3": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "trunk": [
+                100,
+                200
+              ]
+            }
+          },
+          "workload": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "access": 100
+            }
+          }
+        }
+      },
+      "s3": {
+        "kind": "ovs-switch",
+        "policy": {
+          "forwarding": "normal",
+          "priority": 4096,
+          "rstp": true
+        },
+        "ports": {
+          "p1": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "trunk": [
+                100,
+                200
+              ]
+            }
+          },
+          "p2": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "trunk": [
+                100,
+                200
+              ]
+            }
+          },
+          "workload": {
+            "medium": "ethernet",
+            "mtu": 1500,
+            "role": "data",
+            "vlan": {
+              "access": 100
+            }
+          }
+        }
+      }
+    },
+    "requiredFeatures": []
+  },
+  "deferredChecks": [
+    "artifact bytes/registry availability",
+    "host routes and resource budgets",
+    "KVM/devices/privileges",
+    "Docker/OVS/QEMU versions and ownership",
+    "capture direction and activation",
+    "runtime generation and physical names"
+  ],
+  "executable": false,
+  "mode": "dry-run",
+  "resourceTeardownOrder": [
+    "guest/g/paused",
+    "capture/l31",
+    "capture/l23",
+    "capture/l12",
+    "capture/g-s",
+    "capture/b-s",
+    "capture/a-s",
+    "edge/l31",
+    "edge/l23",
+    "edge/g-s",
+    "node/s3",
+    "edge/l12",
+    "edge/b-s",
+    "node/s2",
+    "edge/a-s",
+    "node/s1",
+    "node/g",
+    "node/b",
+    "node/a",
+    "management/mgmt"
+  ],
+  "steps": [
+    {
+      "dependsOn": [],
+      "id": "preflight",
+      "operation": "verify-runtime-and-reserve",
+      "resource": {
+        "executionAllowed": false,
+        "runtimeChecks": "deferred"
+      }
+    },
+    {
+      "dependsOn": [
+        "preflight"
+      ],
+      "id": "management/mgmt",
+      "operation": "prepare-management",
+      "resource": {
+        "configuration": {
+          "dynamicPool": "172.30.80.128/25",
+          "externalAccess": false,
+          "gateway": "172.30.80.1",
+          "subnet": "172.30.80.0/24"
+        },
+        "network": "mgmt"
+      }
+    },
+    {
+      "dependsOn": [
+        "management/mgmt",
+        "preflight"
+      ],
+      "id": "node/a",
+      "operation": "prepare-gated-container",
+      "resource": {
+        "artifact": {
+          "contract": {
+            "apiVersion": "graphlab.workload/v2",
+            "id": "app-a",
+            "interfaces": {
+              "data0": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": true,
+                "role": "data"
+              },
+              "data1": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": false,
+                "role": "data"
+              },
+              "mgmt0": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": true,
+                "role": "management"
+              }
+            },
+            "kind": "docker",
+            "labSupport": {
+              "language": "cpp23",
+              "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "version": "1.0.0"
+            },
+            "lifecycle": {
+              "gateUntilRelease": true,
+              "quiesce": "supported"
+            },
+            "platforms": [
+              "linux/arm64",
+              "linux/amd64"
+            ],
+            "resources": {
+              "cpus": 1,
+              "memoryMiB": 256
+            }
+          },
+          "contractSha256": "sha256:1d21a3201026f341a2f38089b569dcb6c517611576d9cd1b74fd1164c1cbe217",
+          "image": "registry.invalid/app-a@sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "platform": "linux/arm64"
+        },
+        "configuration": {
+          "kind": "docker",
+          "ports": {
+            "data0": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data"
+            },
+            "mgmt0": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "management"
+            }
+          },
+          "workload": "app-a"
+        },
+        "kind": "docker",
+        "managementAttachments": [
+          {
+            "address": "172.30.80.11/24",
+            "endpoint": "a:mgmt0",
+            "network": "mgmt"
+          }
+        ],
+        "node": "a"
+      }
+    },
+    {
+      "dependsOn": [
+        "management/mgmt",
+        "preflight"
+      ],
+      "id": "node/b",
+      "operation": "prepare-gated-container",
+      "resource": {
+        "artifact": {
+          "contract": {
+            "apiVersion": "graphlab.workload/v2",
+            "id": "app-b",
+            "interfaces": {
+              "data0": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": true,
+                "role": "data"
+              },
+              "data1": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": false,
+                "role": "data"
+              },
+              "mgmt0": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": true,
+                "role": "management"
+              }
+            },
+            "kind": "docker",
+            "labSupport": {
+              "language": "cpp23",
+              "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "version": "1.0.0"
+            },
+            "lifecycle": {
+              "gateUntilRelease": true,
+              "quiesce": "supported"
+            },
+            "platforms": [
+              "linux/arm64",
+              "linux/amd64"
+            ],
+            "resources": {
+              "cpus": 1,
+              "memoryMiB": 256
+            }
+          },
+          "contractSha256": "sha256:b7584afaf708f6e9ac1d36087ee59c080e999c9bb6c81a3199ddb2fbfd44b318",
+          "image": "registry.invalid/app-b@sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "platform": "linux/arm64"
+        },
+        "configuration": {
+          "kind": "docker",
+          "ports": {
+            "data0": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data"
+            },
+            "mgmt0": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "management"
+            }
+          },
+          "workload": "app-b"
+        },
+        "kind": "docker",
+        "managementAttachments": [
+          {
+            "address": "172.30.80.12/24",
+            "endpoint": "b:mgmt0",
+            "network": "mgmt"
+          }
+        ],
+        "node": "b"
+      }
+    },
+    {
+      "dependsOn": [
+        "management/mgmt",
+        "preflight"
+      ],
+      "id": "node/g",
+      "operation": "prepare-guest-resources",
+      "resource": {
+        "artifact": {
+          "contract": {
+            "apiVersion": "graphlab.workload/v2",
+            "id": "guest-linux",
+            "interfaces": {
+              "data0": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": true,
+                "role": "data"
+              },
+              "data1": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": false,
+                "role": "data"
+              },
+              "mgmt0": {
+                "medium": "ethernet",
+                "mtuRange": [
+                  1280,
+                  9000
+                ],
+                "required": true,
+                "role": "management"
+              }
+            },
+            "kind": "qemu",
+            "labSupport": {
+              "language": "cpp23",
+              "packageSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "version": "1.0.0"
+            },
+            "lifecycle": {
+              "gateUntilRelease": true,
+              "quiesce": "supported"
+            },
+            "platforms": [
+              "linux/arm64",
+              "linux/amd64"
+            ],
+            "resources": {
+              "cpus": 1,
+              "memoryMiB": 256
+            }
+          },
+          "contractSha256": "sha256:dc52619ef5a2fd49f240294035b658611b9e39a8f19104b244b2986895fed739",
+          "diskSha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "platform": "linux/arm64",
+          "vm": {
+            "accelerator": "kvm",
+            "firmwareSha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "machine": "virt-8.2"
+          }
+        },
+        "configuration": {
+          "kind": "qemu",
+          "ports": {
+            "data0": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data"
+            },
+            "mgmt0": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "management"
+            }
+          },
+          "workload": "guest-linux"
+        },
+        "kind": "qemu",
+        "managementAttachments": [
+          {
+            "address": "172.30.80.13/24",
+            "endpoint": "g:mgmt0",
+            "network": "mgmt"
+          }
+        ],
+        "node": "g"
+      }
+    },
+    {
+      "dependsOn": [
+        "preflight"
+      ],
+      "id": "node/s1",
+      "operation": "prepare-ovs-bridge",
+      "resource": {
+        "configuration": {
+          "kind": "ovs-switch",
+          "policy": {
+            "forwarding": "normal",
+            "priority": 4096,
+            "rstp": true
+          },
+          "ports": {
+            "p2": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "trunk": [
+                  100,
+                  200
+                ]
+              }
+            },
+            "p3": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "trunk": [
+                  100,
+                  200
+                ]
+              }
+            },
+            "workload": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "access": 100
+              }
+            }
+          }
+        },
+        "failureDomain": "host/shared-ovs",
+        "kind": "ovs-switch",
+        "managementAttachments": [],
+        "node": "s1"
+      }
+    },
+    {
+      "dependsOn": [
+        "node/a",
+        "node/s1"
+      ],
+      "id": "edge/a-s",
+      "operation": "prepare-disabled-link",
+      "resource": {
+        "adminUp": false,
+        "edge": "a-s",
+        "endpoints": [
+          "a:data0",
+          "s1:workload"
+        ],
+        "primitive": "veth"
+      }
+    },
+    {
+      "dependsOn": [
+        "preflight"
+      ],
+      "id": "node/s2",
+      "operation": "prepare-ovs-bridge",
+      "resource": {
+        "configuration": {
+          "kind": "ovs-switch",
+          "policy": {
+            "forwarding": "normal",
+            "priority": 4096,
+            "rstp": true
+          },
+          "ports": {
+            "p1": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "trunk": [
+                  100,
+                  200
+                ]
+              }
+            },
+            "p3": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "trunk": [
+                  100,
+                  200
+                ]
+              }
+            },
+            "workload": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "access": 100
+              }
+            }
+          }
+        },
+        "failureDomain": "host/shared-ovs",
+        "kind": "ovs-switch",
+        "managementAttachments": [],
+        "node": "s2"
+      }
+    },
+    {
+      "dependsOn": [
+        "node/b",
+        "node/s2"
+      ],
+      "id": "edge/b-s",
+      "operation": "prepare-disabled-link",
+      "resource": {
+        "adminUp": false,
+        "edge": "b-s",
+        "endpoints": [
+          "b:data0",
+          "s2:workload"
+        ],
+        "primitive": "veth"
+      }
+    },
+    {
+      "dependsOn": [
+        "node/s1",
+        "node/s2"
+      ],
+      "id": "edge/l12",
+      "operation": "prepare-disabled-link",
+      "resource": {
+        "adminUp": false,
+        "edge": "l12",
+        "endpoints": [
+          "s1:p2",
+          "s2:p1"
+        ],
+        "primitive": "veth"
+      }
+    },
+    {
+      "dependsOn": [
+        "preflight"
+      ],
+      "id": "node/s3",
+      "operation": "prepare-ovs-bridge",
+      "resource": {
+        "configuration": {
+          "kind": "ovs-switch",
+          "policy": {
+            "forwarding": "normal",
+            "priority": 4096,
+            "rstp": true
+          },
+          "ports": {
+            "p1": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "trunk": [
+                  100,
+                  200
+                ]
+              }
+            },
+            "p2": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "trunk": [
+                  100,
+                  200
+                ]
+              }
+            },
+            "workload": {
+              "medium": "ethernet",
+              "mtu": 1500,
+              "role": "data",
+              "vlan": {
+                "access": 100
+              }
+            }
+          }
+        },
+        "failureDomain": "host/shared-ovs",
+        "kind": "ovs-switch",
+        "managementAttachments": [],
+        "node": "s3"
+      }
+    },
+    {
+      "dependsOn": [
+        "node/g",
+        "node/s3"
+      ],
+      "id": "edge/g-s",
+      "operation": "prepare-disabled-link",
+      "resource": {
+        "adminUp": false,
+        "edge": "g-s",
+        "endpoints": [
+          "g:data0",
+          "s3:workload"
+        ],
+        "primitive": "tap"
+      }
+    },
+    {
+      "dependsOn": [
+        "node/s2",
+        "node/s3"
+      ],
+      "id": "edge/l23",
+      "operation": "prepare-disabled-link",
+      "resource": {
+        "adminUp": false,
+        "edge": "l23",
+        "endpoints": [
+          "s2:p3",
+          "s3:p2"
+        ],
+        "primitive": "veth"
+      }
+    },
+    {
+      "dependsOn": [
+        "node/s1",
+        "node/s3"
+      ],
+      "id": "edge/l31",
+      "operation": "prepare-disabled-link",
+      "resource": {
+        "adminUp": false,
+        "edge": "l31",
+        "endpoints": [
+          "s3:p1",
+          "s1:p3"
+        ],
+        "primitive": "veth"
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/a-s",
+        "edge/b-s",
+        "edge/g-s",
+        "edge/l12",
+        "edge/l23",
+        "edge/l31",
+        "management/mgmt",
+        "node/a",
+        "node/b",
+        "node/g",
+        "node/s1",
+        "node/s2",
+        "node/s3"
+      ],
+      "id": "policy",
+      "operation": "configure-vlan-and-tree",
+      "resource": {
+        "loopPolicy": "rstp"
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/a-s",
+        "policy"
+      ],
+      "id": "capture/a-s",
+      "operation": "arm-capture",
+      "resource": {
+        "capturePoint": "workload-host-veth",
+        "directionMappingVerified": false,
+        "edge": "a-s",
+        "format": "pcapng",
+        "logicalEndpoint": "a:data0",
+        "runtimeMappingRequired": true
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/b-s",
+        "policy"
+      ],
+      "id": "capture/b-s",
+      "operation": "arm-capture",
+      "resource": {
+        "capturePoint": "workload-host-veth",
+        "directionMappingVerified": false,
+        "edge": "b-s",
+        "format": "pcapng",
+        "logicalEndpoint": "b:data0",
+        "runtimeMappingRequired": true
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/g-s",
+        "policy"
+      ],
+      "id": "capture/g-s",
+      "operation": "arm-capture",
+      "resource": {
+        "capturePoint": "guest-tap",
+        "directionMappingVerified": false,
+        "edge": "g-s",
+        "format": "pcapng",
+        "logicalEndpoint": "g:data0",
+        "runtimeMappingRequired": true
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/l12",
+        "policy"
+      ],
+      "id": "capture/l12",
+      "operation": "arm-capture",
+      "resource": {
+        "capturePoint": "endpoint0-host-veth",
+        "directionMappingVerified": false,
+        "edge": "l12",
+        "format": "pcapng",
+        "logicalEndpoint": "s1:p2",
+        "runtimeMappingRequired": true
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/l23",
+        "policy"
+      ],
+      "id": "capture/l23",
+      "operation": "arm-capture",
+      "resource": {
+        "capturePoint": "endpoint0-host-veth",
+        "directionMappingVerified": false,
+        "edge": "l23",
+        "format": "pcapng",
+        "logicalEndpoint": "s2:p3",
+        "runtimeMappingRequired": true
+      }
+    },
+    {
+      "dependsOn": [
+        "edge/l31",
+        "policy"
+      ],
+      "id": "capture/l31",
+      "operation": "arm-capture",
+      "resource": {
+        "capturePoint": "endpoint0-host-veth",
+        "directionMappingVerified": false,
+        "edge": "l31",
+        "format": "pcapng",
+        "logicalEndpoint": "s3:p1",
+        "runtimeMappingRequired": true
+      }
+    },
+    {
+      "dependsOn": [
+        "node/g",
+        "policy"
+      ],
+      "id": "guest/g/paused",
+      "operation": "prepare-paused-guest",
+      "resource": {
+        "node": "g"
+      }
+    },
+    {
+      "dependsOn": [
+        "capture/a-s",
+        "capture/b-s",
+        "capture/g-s",
+        "capture/l12",
+        "capture/l23",
+        "capture/l31",
+        "guest/g/paused"
+      ],
+      "id": "capture-barrier",
+      "operation": "await-capture-activation",
+      "resource": {
+        "expectedCount": 6,
+        "required": true
+      }
+    },
+    {
+      "dependsOn": [
+        "capture-barrier"
+      ],
+      "id": "enable-data",
+      "operation": "enable-data-links",
+      "resource": {}
+    },
+    {
+      "dependsOn": [
+        "enable-data"
+      ],
+      "id": "converge",
+      "operation": "await-network-policy",
+      "resource": {
+        "loopPolicy": "rstp"
+      }
+    },
+    {
+      "dependsOn": [
+        "converge",
+        "node/a"
+      ],
+      "id": "release/a",
+      "operation": "release-workload",
+      "resource": {}
+    },
+    {
+      "dependsOn": [
+        "release/a"
+      ],
+      "id": "health/a",
+      "operation": "await-workload-readiness",
+      "resource": {
+        "node": "a"
+      }
+    },
+    {
+      "dependsOn": [
+        "converge",
+        "node/b"
+      ],
+      "id": "release/b",
+      "operation": "release-workload",
+      "resource": {}
+    },
+    {
+      "dependsOn": [
+        "release/b"
+      ],
+      "id": "health/b",
+      "operation": "await-workload-readiness",
+      "resource": {
+        "node": "b"
+      }
+    },
+    {
+      "dependsOn": [
+        "converge",
+        "guest/g/paused",
+        "node/g"
+      ],
+      "id": "release/g",
+      "operation": "continue-guest",
+      "resource": {}
+    },
+    {
+      "dependsOn": [
+        "release/g"
+      ],
+      "id": "health/g",
+      "operation": "await-workload-readiness",
+      "resource": {
+        "node": "g"
+      }
+    },
+    {
+      "dependsOn": [
+        "health/a",
+        "health/b",
+        "health/g"
+      ],
+      "id": "ready",
+      "operation": "mark-run-ready",
+      "resource": {}
+    }
+  ],
+  "summary": {
+    "captures": 6,
+    "dataEdges": 6,
+    "nodes": 6
+  },
+  "topologyHash": "sha256:4140c398e56b3bc4d8989a98cb0771c4f11d1a6791780514eb140c47e45a21ec"
+}
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"cli_plan" end time: Sep 21 20:49 EDT
+"cli_plan" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/6 Testing: cli_preflight
+4/6 Test: cli_preflight
+Command: "/tmp/graphlab-m0-source/build/dev/lab" "preflight"
+Directory: /tmp/graphlab-m0-source/build/dev
+"cli_preflight" start time: Sep 21 20:49 EDT
+Output:
+----------------------------------------------------------
+{
+  "apiVersion": "graphlab.preflight/v1",
+  "build": {
+    "compiler": "GNU-13.3.0",
+    "cppStandard": 202100,
+    "expectedFeature": 202211,
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024"
+  },
+  "host": {
+    "architecture": "aarch64",
+    "kernel": "6.8.0-134-generic",
+    "os": "Linux"
+  },
+  "kvmDevicePresent": true,
+  "kvmReadWriteAccess": false,
+  "linuxHost": true,
+  "note": "Paths and device access only. No tool subprocess, daemon request, registry fetch, or network mutation performed.",
+  "readOnly": true,
+  "runtimeQualified": false,
+  "tools": {
+    "c++": "/usr/bin/c++",
+    "cmake": "/tmp/graphlab-m0-build-tools/root/usr/bin/cmake",
+    "docker": "/usr/bin/docker",
+    "ip": "/usr/sbin/ip",
+    "ninja": "/tmp/graphlab-m0-build-tools/root/usr/bin/ninja",
+    "ovs-vsctl": "/usr/bin/ovs-vsctl",
+    "qemu-system-aarch64": "/usr/bin/qemu-system-aarch64",
+    "qemu-system-x86_64": null,
+    "tc": "/usr/sbin/tc"
+  },
+  "version": "0.1.0"
+}
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"cli_preflight" end time: Sep 21 20:49 EDT
+"cli_preflight" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/6 Testing: cli_side_effects
+5/6 Test: cli_side_effects
+Command: "/tmp/graphlab-m0-build-tools/root/usr/bin/cmake" "-DLAB=/tmp/graphlab-m0-source/build/dev/lab" "-DSOURCE=/tmp/graphlab-m0-source" "-DWORK=/tmp/graphlab-m0-source/build/dev/readonly-test" "-P" "/tmp/graphlab-m0-source/tests/readonly.cmake"
+Directory: /tmp/graphlab-m0-source/build/dev
+"cli_side_effects" start time: Sep 21 20:49 EDT
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"cli_side_effects" end time: Sep 21 20:49 EDT
+"cli_side_effects" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/6 Testing: installed_package
+6/6 Test: installed_package
+Command: "/tmp/graphlab-m0-build-tools/root/usr/bin/cmake" "-DBUILD=/tmp/graphlab-m0-source/build/dev" "-DSOURCE=/tmp/graphlab-m0-source" "-DCXX=/usr/bin/c++" "-DGENERATOR=Ninja" "-P" "/tmp/graphlab-m0-source/tests/package.cmake"
+Directory: /tmp/graphlab-m0-source/build/dev
+"installed_package" start time: Sep 21 20:49 EDT
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"installed_package" end time: Sep 21 20:49 EDT
+"installed_package" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 21 20:49 EDT

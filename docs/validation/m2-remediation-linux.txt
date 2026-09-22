@@ -1,0 +1,358 @@
+[0/2] Re-checking globbed directories...
+[1/16] Building CXX object CMakeFiles/lab-agent.dir/cpp/console/agent_main.cpp.o
+[2/16] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[3/16] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/rpc.cpp.o
+[4/16] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[5/16] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/process.cpp.o
+[6/16] Linking CXX static library libgraphlab_runtime.a
+[7/16] Building CXX object CMakeFiles/m2_tests.dir/tests/runtime/m2.cpp.o
+[8/16] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/http.cpp.o
+[9/16] Linking CXX static library libgraphlab_console.a
+[10/16] Linking CXX executable lab
+[11/16] Linking CXX executable m2_tests
+[12/16] Linking CXX executable lab-api
+[13/16] Building CXX object CMakeFiles/m2_linux.dir/tests/runtime/linux_integration.cpp.o
+[14/16] Linking CXX executable lab-agent
+[15/16] Linking CXX executable m1_tests
+[16/16] Linking CXX executable m2_linux
+Test project /tmp/graphlab-m0-source/build/dev
+    Start 1: m1_acceptance
+1/8 Test #1: m1_acceptance ....................   Passed    4.33 sec
+    Start 2: m0_acceptance
+2/8 Test #2: m0_acceptance ....................   Passed    0.23 sec
+    Start 3: cli_validate
+3/8 Test #3: cli_validate .....................   Passed    0.01 sec
+    Start 4: cli_plan
+4/8 Test #4: cli_plan .........................   Passed    0.01 sec
+    Start 5: cli_preflight
+5/8 Test #5: cli_preflight ....................   Passed    0.00 sec
+    Start 6: cli_side_effects
+6/8 Test #6: cli_side_effects .................   Passed    0.03 sec
+    Start 7: installed_package
+7/8 Test #7: installed_package ................   Passed    0.08 sec
+    Start 8: m2_journal
+8/8 Test #8: m2_journal .......................   Passed    0.89 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =   5.57 sec
+Evidence directory: "/tmp/graphlab-m2-live-noFP2R"
+PASS fixture generated from real image identity
+PASS sentinel bridge created
+PASS runtime topology validated
+PASS real Docker/OVS run ready: {"cancelRequested":false,"createdAt":"2026-09-22T02:28:46Z","error":null,"finishedAt":"2026-09-22T02:28:51Z","id":"279a0a0e-c204-4d55-800d-519c376edfe7","operation":"start","revision":"1","runId":"f76c0ebe-95b9-4122-87c2-216a59bbfd80","state":"succeeded"}
+PASS resume rejects mismatched namespace identity
+PASS cleanup rejects mismatched namespace identity
+PASS C++ workload released
+PASS same-VLAN UDP delivered
+PASS management address does not expose data echo
+PASS no capture coverage advertised
+PASS quiesce completes
+PASS held gate denies application probe
+PASS resume completes
+PASS owned resource teardown completes
+PASS unrelated bridge preserved
+PASS container removed
+PASS container removed
+PASS bridge removed
+PASS bridge removed
+PASS bridge removed
+PASS runtime topology validated
+PASS real Docker/OVS run ready: {"cancelRequested":false,"createdAt":"2026-09-22T02:28:52Z","error":null,"finishedAt":"2026-09-22T02:28:56Z","id":"a0ea4da2-2a7c-44ab-8859-9944a3b2795f","operation":"start","revision":"1","runId":"fcc8d531-5d5a-4af0-8782-14443386fa8e","state":"succeeded"}
+PASS resume rejects mismatched namespace identity
+PASS cleanup rejects mismatched namespace identity
+PASS C++ workload released
+PASS cross-VLAN traffic denied
+PASS management address does not expose data echo
+PASS no capture coverage advertised
+PASS quiesce completes
+PASS held gate denies application probe
+PASS resume completes
+PASS owned resource teardown completes
+PASS unrelated bridge preserved
+PASS container removed
+PASS container removed
+PASS bridge removed
+PASS bridge removed
+PASS bridge removed
+PASS abrupt exit at mutation boundary 0 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 0 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 1 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 1 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 2 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 2 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 3 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 3 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 4 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 4 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 5 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 5 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 6 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 6 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 7 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 7 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 8 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 8 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 9 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 9 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 10 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 10 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 11 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 11 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 12 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 12 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 13 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 13 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 14 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 14 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 15 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 15 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 16 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 16 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 17 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 17 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 18 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 18 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 19 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 19 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 20 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 20 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 21 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 21 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 22 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 22 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 23 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 23 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 24 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 24 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 25 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 25 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 26 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 26 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 27 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at mutation boundary 27 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+M2 Linux runtime tests passed

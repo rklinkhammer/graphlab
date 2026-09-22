@@ -1,0 +1,194 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Found SQLite3: /tmp/graphlab-m0-build-tools/root/usr/include (found suitable version "3.45.1", minimum required is "3.24")
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-m0-source/build/dev
+[0/2] Re-checking globbed directories...
+[1/11] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[2/11] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/rpc.cpp.o
+[3/11] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[4/11] Linking CXX static library libgraphlab_runtime.a
+[5/11] Linking CXX static library libgraphlab_console.a
+[6/11] Linking CXX executable m2_tests
+[7/11] Linking CXX executable lab
+[8/11] Linking CXX executable lab-api
+[9/11] Linking CXX executable m2_linux
+[10/11] Linking CXX executable lab-agent
+[11/11] Linking CXX executable m1_tests
+Test project /tmp/graphlab-m0-source/build/dev
+    Start 1: m1_acceptance
+1/8 Test #1: m1_acceptance ....................   Passed    4.39 sec
+    Start 2: m0_acceptance
+2/8 Test #2: m0_acceptance ....................   Passed    0.23 sec
+    Start 3: cli_validate
+3/8 Test #3: cli_validate .....................   Passed    0.01 sec
+    Start 4: cli_plan
+4/8 Test #4: cli_plan .........................   Passed    0.01 sec
+    Start 5: cli_preflight
+5/8 Test #5: cli_preflight ....................   Passed    0.00 sec
+    Start 6: cli_side_effects
+6/8 Test #6: cli_side_effects .................   Passed    0.03 sec
+    Start 7: installed_package
+7/8 Test #7: installed_package ................   Passed    0.32 sec
+    Start 8: m2_journal
+8/8 Test #8: m2_journal .......................   Passed    0.90 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =   5.89 sec
+Evidence directory: "/tmp/graphlab-m2-live-er551D"
+PASS fixture generated from real image identity
+PASS sentinel bridge created
+PASS runtime topology validated
+PASS real Docker/OVS run ready: {"cancelRequested":false,"createdAt":"2026-09-22T02:17:59Z","error":null,"finishedAt":"2026-09-22T02:18:05Z","id":"f29727a9-e846-4c13-8fdc-cd32f9cfe916","operation":"start","revision":"1","runId":"9d976d96-5ac6-454d-8cec-93d8b465f593","state":"succeeded"}
+PASS C++ workload released
+PASS same-VLAN UDP delivered
+PASS management address does not expose data echo
+PASS no capture coverage advertised
+PASS quiesce completes
+PASS held gate denies application probe
+PASS resume completes
+PASS owned resource teardown completes
+PASS unrelated bridge preserved
+PASS container removed
+PASS container removed
+PASS bridge removed
+PASS bridge removed
+PASS bridge removed
+PASS runtime topology validated
+PASS real Docker/OVS run ready: {"cancelRequested":false,"createdAt":"2026-09-22T02:18:06Z","error":null,"finishedAt":"2026-09-22T02:18:10Z","id":"769923ed-3e64-4243-8919-d33a3b3c1cd4","operation":"start","revision":"1","runId":"fb1cdd09-5419-4915-8369-f2a04c76fef3","state":"succeeded"}
+PASS C++ workload released
+PASS cross-VLAN traffic denied
+PASS management address does not expose data echo
+PASS no capture coverage advertised
+PASS quiesce completes
+PASS held gate denies application probe
+PASS resume completes
+PASS owned resource teardown completes
+PASS unrelated bridge preserved
+PASS container removed
+PASS container removed
+PASS bridge removed
+PASS bridge removed
+PASS bridge removed
+PASS abrupt exit at resource boundary 0 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 0 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 1 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 1 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 2 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 2 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 3 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 3 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 4 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 4 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 5 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 5 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 6 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 6 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 7 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 7 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 8 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 8 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 9 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 9 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 10 before
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+PASS abrupt exit at resource boundary 10 after
+PASS interrupted run retained
+PASS interrupted run fenced
+PASS real recovery cleans uncertain resources
+PASS sentinel survives crash recovery
+M2 Linux runtime tests passed

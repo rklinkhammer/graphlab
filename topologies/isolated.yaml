@@ -1,0 +1,37 @@
+---
+apiVersion: graphlab.topology/v2
+artifactLock: sha256:3ec5fba6707505bcd68d5e006cc89bde827aafcb1fb718033e4ecb54cf8f102f
+backend:
+  kind: linux-local
+  switchIsolation: shared-ovs
+capture:
+  format: pcapng
+  required: true
+  scope: all-data-edges
+edges: []
+id: isolated
+management:
+  networks: {}
+managementAttachments: []
+nodes:
+  s1:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports: {}
+  s2:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports: {}
+  s3:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports: {}

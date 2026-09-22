@@ -1,0 +1,13 @@
+{
+  "apiVersion": "graphlab.build-lock/v1",
+  "labSupport": {"version": "1.0.0", "source": "packages/lab-support", "dependencyLock": "packages/lab-support/dependencies.lock.json"},
+  "cmakeMinimum": "3.28",
+  "cxxStandard": 23,
+  "referenceToolchain": "GCC 14 with libstdc++ 14 (linux-gcc14 preset)",
+  "alternativeToolchains": "Require std::expected feature probe and acceptance suite; observed versions recorded separately",
+  "pythonRequired": false,
+  "boost": {"version": "1.92.0", "source": "system headers and CMake package configuration", "components": ["Beast", "Asio"], "qualification": "Exact version enforced by CMake; header-only usage. Package-manager provenance, not a vendored archive lock."},
+  "browser": {"lock": "console/web/package-lock.json", "observedNode": "26.8.1"},
+  "sqlite": {"source": "system C API", "minimumVersion": "3.24", "observedMacOS": "3.54.0", "observedLinux": "3.45.1", "usage": "WAL, synchronous FULL, single agent journal writer"},
+  "dockerEngineAPI": {"minimumVersion": "1.52", "transport": "bounded Boost.Beast HTTP over /var/run/docker.sock; no CLI fallback or registry pull"}
+}

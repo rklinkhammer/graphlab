@@ -1,0 +1,97 @@
+---
+apiVersion: graphlab.topology/v2
+artifactLock: sha256:3ec5fba6707505bcd68d5e006cc89bde827aafcb1fb718033e4ecb54cf8f102f
+backend:
+  kind: linux-local
+  switchIsolation: shared-ovs
+capture:
+  format: pcapng
+  required: true
+  scope: all-data-edges
+edges:
+- endpoints:
+  - s1:p2
+  - s2:p1
+  id: l12
+- endpoints:
+  - s2:p3
+  - s3:p2
+  id: l23
+- endpoints:
+  - s3:p1
+  - s1:p3
+  id: l31
+id: ring
+management:
+  networks: {}
+managementAttachments: []
+nodes:
+  s1:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports:
+      p2:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      p3:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+  s2:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports:
+      p1:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      p3:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+  s3:
+    kind: ovs-switch
+    policy:
+      forwarding: normal
+      priority: 4096
+      rstp: true
+    ports:
+      p1:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
+      p2:
+        medium: ethernet
+        mtu: 1500
+        role: data
+        vlan:
+          trunk:
+          - 100
+          - 200
