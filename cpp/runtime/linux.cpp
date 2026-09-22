@@ -4,6 +4,8 @@
 #include <graphlab/capture.hpp>
 #include <graphlab/qemu.hpp>
 #include <graphlab/runtime.hpp>
+#include <graphlab/telemetry.hpp>
+#include <sstream>
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <unistd.h>
@@ -729,4 +731,200 @@ Json LinuxBackend::observe(const Json &run) {
           {"nodes", nodes},
           {"captureCoverage", "unavailable-development-mode"}};
 }
+namespace {
+Json edge_resource(const Json &run, const std::string &id) {
+  for (const auto &r : run["resources"])
+    if (r["kind"] == "edge" && r["logical"] == id && r.value("state", "") != "removed")
+      return r;
+  throw Failure("edge_not_available", 404);
+}
+Json endpoint_call(const Json &run, const Json &r, int index,
+                   const std::function<Json(const std::vector<std::string> &, const Json &)> &fn,
+                   bool missing = false) {
+  if (!r.contains("identity"))
+    throw Failure("edge_mapping_unavailable");
+  auto expected = r["identity"]["endpoints"][index];
+  auto name = expected["name"].get<std::string>();
+  auto check = [&](const std::vector<std::string> &prefix) {
+    auto found = link(name, prefix);
+    if (found.is_null()) {
+      if (missing)
+        return Json{{"absent", true}};
+      throw Failure("edge_mapping_missing");
+    }
+    check_link(found, owner(run, r), expected);
+    return fn(prefix, found);
+  };
+  if (expected.value("namespace", "") == "host")
+    return check({});
+  auto ep = r["configuration"]["endpoints"][index].get<std::string>();
+  auto nr = node_resource(run, ep.substr(0, ep.find(':')));
+  auto container = inspect_container(run, nr);
+  Namespace ns(container, expected);
+  return check(ns_prefix(ns));
+}
+Json tc_show(const std::vector<std::string> &prefix, const std::string &name) {
+  auto a = prefix;
+  a.insert(a.end(), {"/usr/sbin/tc", "-j", "-s", "qdisc", "show", "dev", name});
+  return Json::parse(command(a));
+}
+void tc(const std::vector<std::string> &prefix, std::vector<std::string> tail) {
+  auto a = prefix;
+  a.push_back("/usr/sbin/tc");
+  a.insert(a.end(), tail.begin(), tail.end());
+  command(a);
+}
+void stringify_numbers(Json &v) {
+  if (v.is_number_integer() || v.is_number_unsigned())
+    v = v.dump();
+  else if (v.is_structured())
+    for (auto &i : v)
+      stringify_numbers(i);
+}
+} // namespace
+Json LinuxBackend::telemetry(const Json &run) {
+  Json out = Json::array(), cache = Json::object(), times = Json::object();
+  if (graphlab::telemetry::monotonic() - tree_time_ >= 2000000000ull) {
+    tree_cache_ = Json::object();
+    try {
+      auto rows = Json::parse(command({"/usr/bin/ovs-vsctl", "--timeout=2", "--format=json",
+                                       "--columns=name,rstp_status", "list", "Port"}));
+      for (const auto &row : rows["data"]) {
+        Json value = Json::object();
+        if (row[1].is_array() && row[1].size() == 2 && row[1][0] == "map")
+          for (const auto &pair : row[1][1])
+            value[pair[0].get<std::string>()] = pair[1];
+        tree_cache_[row[0].get<std::string>()] = value;
+      }
+    } catch (...) {
+      tree_cache_ = Json::object();
+    }
+    tree_time_ = graphlab::telemetry::monotonic();
+  }
+  for (const auto &r : run["resources"])
+    if (r["kind"] == "edge" && r.value("state", "") != "removed") {
+      Json s = {{"edge", r["logical"]}, {"valid", false}, {"source", "rtnetlink/iproute2-stats64"}};
+      try {
+        auto endpoints = r["identity"]["endpoints"];
+        int index = endpoints[0].value("namespace", "") == "host"   ? 0
+                    : endpoints[1].value("namespace", "") == "host" ? 1
+                                                                    : 0;
+        auto point = endpoints[index];
+        bool tap = point.value("kind", "") == "tap";
+        auto ep0 = r["configuration"]["endpoints"][0].get<std::string>();
+        bool forward_rx =
+            tap ? node_resource(run, ep0.substr(0, ep0.find(':')))["kind"] == "qemu" : index == 1;
+        s["forwardMetric"] = forward_rx ? "rx" : "tx";
+        s["endpoints"] = r["configuration"]["endpoints"];
+        s["canonicalEndpoint"] = index;
+        s["mapping"] = point;
+        s["mappingEpoch"] = lab_support::digest(point);
+        endpoint_call(run, r, index, [&](const auto &prefix, const Json &found) {
+          auto key = point.value("namespaceInode", std::string("host"));
+          if (!cache.contains(key)) {
+            auto a = prefix;
+            a.insert(a.end(), {"/usr/sbin/ip", "-j", "-s", "-s", "link", "show"});
+            cache[key] = Json::parse(command(a));
+            times[key] = std::to_string(graphlab::telemetry::monotonic());
+          }
+          s["monotonicNs"] = times[key];
+          Json counters;
+          for (const auto &v : cache[key])
+            if (v["ifindex"] == found["ifindex"])
+              counters = v;
+          if (!counters.contains("stats64"))
+            throw Failure("stats64_unavailable");
+          s["raw"] = Json::object();
+          for (auto dir : {"rx", "tx"})
+            for (auto field : {"bytes", "packets", "errors", "dropped"}) {
+              std::string suffix = field;
+              suffix[0] = std::toupper(suffix[0]);
+              auto value = counters["stats64"][dir][field];
+              if (!value.is_number_unsigned() && !value.is_number_integer())
+                throw Failure("counter_unavailable");
+              s["raw"][std::string(dir) + suffix] = value.dump();
+            }
+          s["adminUp"] =
+              std::find(found["flags"].begin(), found["flags"].end(), "UP") != found["flags"].end();
+          s["carrierUp"] = std::find(found["flags"].begin(), found["flags"].end(), "LOWER_UP") !=
+                           found["flags"].end();
+          s["operstate"] = found.value("operstate", "UNKNOWN");
+          s["qdiscs"] = tc_show(prefix, point["name"]);
+          stringify_numbers(s["qdiscs"]);
+          return Json::object();
+        });
+        s["valid"] = true;
+        s["rstp"] = Json::object();
+        for (const auto &p : endpoints)
+          if (tree_cache_.contains(p["name"].get<std::string>()))
+            s["rstp"][p["name"].get<std::string>()] = tree_cache_[p["name"].get<std::string>()];
+        s["rstpObservedMonotonicNs"] = std::to_string(tree_time_);
+      } catch (const std::exception &e) {
+        s["reason"] = e.what();
+      }
+      out.push_back(s);
+    }
+  return out;
+}
+Json LinuxBackend::fault(const Json &run, const Json &f, const std::string &action) {
+  auto r = edge_resource(run, f["edge"]);
+  int index = f["direction"] == "a-to-b" ? 0 : 1;
+  auto ep = r["configuration"]["endpoints"][index].get<std::string>();
+  auto source = node_resource(run, ep.substr(0, ep.find(':')));
+  // TAP TX is switch-to-guest. Guest-to-switch ingress requires an IFB backend.
+  if (source["kind"] == "qemu")
+    throw Failure("guest_egress_fault_requires_ifb");
+  auto point = r["identity"]["endpoints"][index];
+  auto name = point["name"].get<std::string>();
+  auto h = lab_support::digest(Json::array({run["id"], f["id"]}));
+  auto number = std::stoul(h.substr(7, 4), nullptr, 16);
+  number = 0x1000 + (number % 0xd000);
+  std::ostringstream hex;
+  hex << std::hex << number;
+  std::string handle = hex.str() + ":";
+  Json placement = {{"edge", f["edge"]},    {"direction", f["direction"]},
+                    {"sourceEndpoint", ep}, {"endpointIndex", index},
+                    {"mapping", point},     {"mappingEpoch", lab_support::digest(point)},
+                    {"hook", "egress"},     {"handle", handle}};
+  if (action != "plan" && f.at("placement") != placement)
+    throw Failure("fault_mapping_changed", 409);
+  return endpoint_call(
+      run, r, index,
+      [&](const auto &prefix, const Json &) {
+        auto q = tc_show(prefix, name);
+        bool ours = false;
+        for (const auto &v : q) {
+          if (v.value("root", false) && v.value("kind", "") != "noqueue") {
+            if (v.value("handle", "") == handle && v.value("kind", "") == "netem")
+              ours = true;
+            else
+              throw Failure("foreign_root_qdisc", 409);
+          }
+        }
+        if (action == "plan") {
+          if (ours)
+            throw Failure("qdisc_already_exists", 409);
+          return placement;
+        }
+        if (action == "apply" && !ours)
+          tc(prefix, {"qdisc", "add", "dev", name, "root", "handle", handle, "netem", "limit",
+                      "1000", "delay", std::to_string(f["delayMs"].get<int>()) + "ms", "loss",
+                      std::to_string(f["lossPercent"].get<int>()) + "%"});
+        else if (action == "remove" && ours)
+          tc(prefix, {"qdisc", "del", "dev", name, "root", "handle", handle});
+        auto observed = tc_show(prefix, name);
+        bool present = false;
+        for (const auto &v : observed)
+          if (v.value("handle", "") == handle && v.value("kind", "") == "netem")
+            present = true;
+        if ((action == "apply") != present)
+          throw Failure("fault_readback_failed");
+        return Json{{"placement", placement},
+                    {"active", present},
+                    {"qdiscs", observed},
+                    {"observedAt", console::timestamp()}};
+      },
+      action == "remove");
+}
+
 } // namespace graphlab::runtime

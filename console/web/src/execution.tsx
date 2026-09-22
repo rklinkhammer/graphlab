@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react';
+import {Telemetry} from './telemetry';
 import {RecordedTerminal} from './terminal';
 type Run={id:string;state:string;revision:string;topologyHash:string;captureCoverage?:string};
 type Job={id:string;operation:string;state:string;error:string|null};
@@ -24,5 +25,5 @@ export function Execution({hash,csrf,api,required}:{hash:string;csrf:string;api:
  {job&&<p role="status">Job {job.operation}: {job.state}{job.error?` · ${job.error}`:''}{busy&&job.operation==='start'&&<button onClick={cancel}>Cancel start</button>}</p>}{error&&<p role="alert">{error}</p>}
  <label>Run artifacts <select value={artifactRun} onChange={e=>setArtifactRun(e.target.value)}><option value="">Select a retained run</option>{runs.map(r=><option key={r.id} value={r.id}>{r.id} · {r.state}</option>)}</select></label>
  <ul>{artifacts.map((a,i)=><li key={a.id??i}>{a.edge} · epoch {a.epoch??'?'} · {a.state}{a.id&&a.state==='closed'&&<button disabled={pending} onClick={()=>download(a)}>Download {a.mediaType==='application/x-graphlab-terminal'?'recording':'PCAPNG'} ({a.size} bytes)</button>}</li>)}</ul>
- <small>{runs.length} retained runs · closed segments only · SHA-256 verified on download</small>{(retained??run)&&<RecordedTerminal run={(retained??run)!} csrf={csrf} api={api}/>}</section>;
+ <small>{runs.length} retained runs · closed segments only · SHA-256 verified on download</small>{(retained??run)&&<><Telemetry run={(retained??run)!} csrf={csrf} api={api}/><RecordedTerminal run={(retained??run)!} csrf={csrf} api={api}/></>}</section>;
 }

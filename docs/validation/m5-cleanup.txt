@@ -1,0 +1,8 @@
+2026-09-22, Linux ARM64 qualification VM, after M5 and M3/M4 regressions:
+- systemctl list-units --state=active 'graphlab-vm-*' 'graphlab-terminal-*' 'graphlab-cap-*': no entries
+- docker ps --filter label=graphlab.run: no entries
+- ovs-vsctl list-br: no entries
+- dedicated browser lab-api/lab-agent process check: no entries
+- dedicated browser auth/password files removed by fixture cleanup
+- local build/m5-live-password removed; port 18089 SSH forwarding cancelled
+Preserved qemu-guests templates/artifacts were not changed.

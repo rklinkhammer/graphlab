@@ -1,0 +1,195 @@
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-m0-source/build/dev
+[0/2] Re-checking globbed directories...
+[1/47] Building CXX object CMakeFiles/lab-agent.dir/cpp/console/agent_main.cpp.o
+[2/47] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/rpc.cpp.o
+[3/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[4/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[5/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/process.cpp.o
+[6/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/writer.cpp.o
+[7/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/recording.cpp.o
+[8/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/manager.cpp.o
+[9/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[10/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/qemu/backend.cpp.o
+[11/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/store.cpp.o
+[12/47] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/http.cpp.o
+[13/47] Building CXX object CMakeFiles/lab-capture.dir/cpp/capture/worker.cpp.o
+[14/47] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/engine.cpp.o
+[15/47] Building CXX object CMakeFiles/m3_transport.dir/tests/capture/transport.cpp.o
+[16/47] Building CXX object CMakeFiles/lab-guest-template.dir/qemu-guests/common/template.cpp.o
+[17/47] Linking CXX static library libgraphlab_runtime.a
+[18/47] Building CXX object CMakeFiles/lab-terminal.dir/cpp/terminal/worker.cpp.o
+[19/47] Linking CXX static library libgraphlab_console.a
+[20/47] Linking CXX executable lab-capture
+[21/47] Linking CXX executable lab
+[22/47] Linking CXX executable lab-agent
+[23/47] Linking CXX executable lab-api
+[24/47] Linking CXX executable m1_tests
+[25/47] Linking CXX executable lab-terminal
+[26/47] Linking CXX executable lab-guest-template
+[27/47] Linking CXX executable m3_transport
+[28/47] Building CXX object CMakeFiles/m4_tests.dir/tests/terminal/m4.cpp.o
+[29/47] Linking CXX executable m4_tests
+[30/47] Building CXX object CMakeFiles/m5_tests.dir/tests/telemetry/m5.cpp.o
+[31/47] Building CXX object CMakeFiles/m2_linux.dir/tests/runtime/linux_integration.cpp.o
+[32/47] Building CXX object CMakeFiles/m5_remediation.dir/tests/telemetry/remediation.cpp.o
+[33/47] Linking CXX executable m5_tests
+[34/47] Linking CXX executable m2_linux
+[35/47] Linking CXX executable m5_remediation
+[36/47] Building CXX object CMakeFiles/m2_tests.dir/tests/runtime/m2.cpp.o
+[37/47] Building CXX object CMakeFiles/m4_linux.dir/tests/qemu/linux.cpp.o
+[38/47] Building CXX object CMakeFiles/m3_linux.dir/tests/capture/linux.cpp.o
+[39/47] Linking CXX executable m2_tests
+[40/47] Linking CXX executable m4_linux
+[41/47] Linking CXX executable m3_linux
+[42/47] Building CXX object CMakeFiles/m5_linux.dir/tests/telemetry/linux.cpp.o
+[43/47] Building CXX object CMakeFiles/m3_tests.dir/tests/capture/m3.cpp.o
+[44/47] Building CXX object CMakeFiles/m4_console_linux.dir/tests/terminal/linux.cpp.o
+[45/47] Linking CXX executable m5_linux
+[46/47] Linking CXX executable m3_tests
+[47/47] Linking CXX executable m4_console_linux
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/13 Test  #1: m1_acceptance ....................   Passed    4.40 sec
+      Start  2: m0_acceptance
+ 2/13 Test  #2: m0_acceptance ....................   Passed    0.24 sec
+      Start  3: cli_validate
+ 3/13 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/13 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/13 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/13 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/13 Test  #7: installed_package ................   Passed    0.13 sec
+      Start  8: m2_journal
+ 8/13 Test  #8: m2_journal .......................   Passed    1.08 sec
+      Start  9: m3_capture
+ 9/13 Test  #9: m3_capture .......................   Passed    1.28 sec
+      Start 10: m3_transport
+10/13 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/13 Test #11: m4_terminal ......................   Passed    0.00 sec
+      Start 12: m5_telemetry_faults
+12/13 Test #12: m5_telemetry_faults ..............   Passed    1.78 sec
+      Start 13: m5_remediation
+13/13 Test #13: m5_remediation ...................   Passed    1.10 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =  10.07 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl5-live-53tRpf"
+PASS fixture generated
+PASS direct edge validates
+PASS start: {"cancelRequested":false,"createdAt":"2026-09-22T23:00:23Z","error":null,"finishedAt":"2026-09-22T23:00:24Z","id":"537f8d5b-697f-46cd-8ea1-05ba9ef3135e","operation":"start","revision":"1","runId":"d2c6f252-1e36-4bc8-82e6-12c6f5a137fc","state":"succeeded"}
+PASS one canonical stats64 source per edge: [{"adminUp":true,"canonicalEndpoint":0,"carrierUp":true,"edge":"wire","endpoints":["a:data0","b:data0"],"forwardMetric":"tx","mapping":{"containerId":"e5945495abe0974ba9b0c644f4e18cd5d9c0bb8454545d8fb91aaf812fefd41a","ifindex":5188,"name":"data0","namespaceInode":"4026532342"},"mappingEpoch":"sha256:1a089064bed85c9569cf0f4a7a28922054e2f373e57dfdd18311e282cfce46a3","monotonicNs":"60279450764645","operstate":"UP","qdiscs":[{"backlog":"0","bytes":"0","drops":"0","handle":"0:","kind":"noqueue","options":{},"overlimits":"0","packets":"0","qlen":"0","refcnt":"2","requeues":"0","root":true}],"raw":{"rxBytes":"0","rxDropped":"0","rxErrors":"0","rxPackets":"0","txBytes":"0","txDropped":"0","txErrors":"0","txPackets":"0"},"rstp":{},"rstpObservedMonotonicNs":"60279447811004","source":"rtnetlink/iproute2-stats64","valid":true}]
+PASS owned namespace UDP sender
+PASS known A-to-B traffic delivered
+PASS one-way canonical direction without endpoint doubling
+PASS durable telemetry history available
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-22T23:00:25Z","error":null,"faultId":"492d58994f829cba4d2a3186ecf66ba3","finishedAt":"2026-09-22T23:00:25Z","id":"0aab91bf-9e0a-647a-f167-ecdaaabaf4d7","operation":"fault.apply","revision":"2","runId":"d2c6f252-1e36-4bc8-82e6-12c6f5a137fc","state":"succeeded"}
+PASS owned namespace UDP sender
+PASS netem blocks A-to-B
+PASS owned namespace UDP sender
+PASS reverse B-to-A remains unaffected
+PASS fault expires through serialized executor
+PASS owned namespace UDP sender
+PASS expiry restores packet delivery
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-22T23:00:31Z","error":null,"faultId":"cc4f46484f6a6d51d8b4be44ab1b9661","finishedAt":"2026-09-22T23:00:31Z","id":"293bb2fd-7b42-1747-9b36-444d6807a5a9","operation":"fault.apply","revision":"4","runId":"d2c6f252-1e36-4bc8-82e6-12c6f5a137fc","state":"succeeded"}
+PASS expired fault removed during restart
+PASS owned fault and run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T23:00:32Z","error":null,"finishedAt":"2026-09-22T23:00:32Z","id":"e9585b38-3400-4d7e-8583-5cdec5448b49","operation":"recover","revision":"5","runId":"d2c6f252-1e36-4bc8-82e6-12c6f5a137fc","state":"succeeded"}
+M5 Linux tests passed

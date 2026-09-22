@@ -53,3 +53,5 @@ Hashing uses parsed JSON with lexically sorted object keys, compact serializatio
 `docker-nodes/` now contains independently buildable M2 C++ fixture applications. No separate node Git repositories or published images have been created; local Linux test images were built for qualification.
 
 See [input contract](schemas/README.md), [M0 status and validation](docs/cpp23-status.md), and the [full implementation plan](docs/option-d-console-plan.md).
+
+M5 adds directional telemetry, bounded history, typed netem faults and a correlated timeline. See [operation and supported placements](docs/m5-telemetry-faults.md) and [verification](docs/validation/m5-verification.md).

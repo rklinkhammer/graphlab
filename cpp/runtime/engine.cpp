@@ -1,6 +1,7 @@
 #include <fcntl.h>
 #include <graphlab/capture.hpp>
 #include <graphlab/runtime.hpp>
+#include <graphlab/telemetry.hpp>
 #include <graphlab/terminal.hpp>
 #include <regex>
 #include <sqlite3.h>
@@ -88,6 +89,7 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
     sql(db_,
         "PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON; CREATE TABLE IF "
         "NOT EXISTS state (id INTEGER PRIMARY KEY CHECK(id=1), document TEXT NOT NULL);");
+    telemetry::initialize(db_);
     sqlite3_stmt *query = nullptr;
     if (sqlite3_prepare_v2(db_, "SELECT document FROM state WHERE id=1", -1, &query, nullptr) !=
         SQLITE_OK)
@@ -152,6 +154,7 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
       }
       save();
     }
+    m5_recover();
     worker_ = std::thread([this] { work(); });
   } catch (...) {
     if (db_)
@@ -211,6 +214,8 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
   std::unique_lock guard(mutex_);
   if (stopping_)
     throw Failure("journal_unavailable", 503);
+  if (auto m5 = m5_dispatch(request, principal))
+    return *m5;
   if (method == "terminal") {
     fields(p, {"runId", "node", "sessionId", "operation", "params", "owner"});
     auto runid = string(p, "runId");
@@ -367,7 +372,7 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
     auto &j = state_["jobs"][id];
     if (!pending(j))
       return j;
-    if (j["operation"] != "start")
+    if (j["operation"] != "start" && j["operation"] != "fault.apply")
       throw Failure("cleanup_operations_not_cancellable", 409);
     j["cancelRequested"] = true;
     save();
@@ -500,7 +505,7 @@ void Engine::work() {
     std::string id;
     {
       std::unique_lock guard(mutex_);
-      condition_.wait_for(guard, std::chrono::seconds(2), [&] {
+      condition_.wait_for(guard, std::chrono::seconds(1), [&] {
         if (stopping_)
           return true;
         for (const auto &[key, j] : state_["jobs"].items())
@@ -551,6 +556,15 @@ void Engine::work() {
   }
 }
 void Engine::monitor() {
+  try {
+    m5_monitor();
+  } catch (const std::exception &e) {
+    std::lock_guard guard(mutex_);
+    for (auto &[id, r] : state_["runs"].items())
+      if (r["state"] != "destroyed")
+        r["telemetryError"] = e.what();
+    save();
+  }
   Json run;
   {
     std::lock_guard guard(mutex_);
@@ -613,6 +627,7 @@ void Engine::close_captures(const std::string &id) {
   }
 }
 void Engine::cleanup(const std::string &id) {
+  m5_clear(id);
   close_captures(id);
   Json run;
   {
@@ -644,6 +659,10 @@ void Engine::execute(const std::string &jobid) {
   snapshot();
   auto id = run["id"].get<std::string>();
   auto operation = job["operation"].get<std::string>();
+  if (operation == "fault.apply" || operation == "fault.remove") {
+    m5_execute(jobid);
+    return;
+  }
   auto cancelled = [&] {
     std::lock_guard guard(mutex_);
     if (stopping_)
@@ -753,10 +772,18 @@ void Engine::execute(const std::string &jobid) {
       close_captures(id);
     state("stopped");
   } else if (operation == "resume") {
+    m5_monitor();
+    snapshot();
+    if (run["state"] != "stopped")
+      throw Failure("fault_reconciliation_required");
     arm();
     backend_.activate(run);
     if (recording)
       backend_.capture_control(run, "status");
+    m5_monitor();
+    snapshot();
+    if (run["state"] == "reconciling")
+      throw Failure("fault_reconciliation_required");
     backend_.gate(run, "release");
     state("ready");
   } else {

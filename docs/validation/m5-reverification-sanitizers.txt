@@ -1,0 +1,32 @@
+[0/2] Re-checking globbed directories...
+[1/3] Building CXX object CMakeFiles/m5_remediation.dir/tests/telemetry/remediation.cpp.o
+[2/3] Linking CXX executable m5_remediation
+Test project /Users/rklinkhammer/workspace/graphlab/build/verify
+      Start  1: m1_acceptance
+ 1/12 Test  #1: m1_acceptance ....................   Passed    4.45 sec
+      Start  2: m0_acceptance
+ 2/12 Test  #2: m0_acceptance ....................   Passed    0.97 sec
+      Start  3: cli_validate
+ 3/12 Test  #3: cli_validate .....................   Passed    0.04 sec
+      Start  4: cli_plan
+ 4/12 Test  #4: cli_plan .........................   Passed    0.05 sec
+      Start  5: cli_preflight
+ 5/12 Test  #5: cli_preflight ....................   Passed    0.02 sec
+      Start  6: cli_side_effects
+ 6/12 Test  #6: cli_side_effects .................   Passed    0.16 sec
+      Start  7: m2_journal
+ 7/12 Test  #7: m2_journal .......................   Passed    1.11 sec
+      Start  8: m3_capture
+ 8/12 Test  #8: m3_capture .......................   Passed    1.40 sec
+      Start  9: m3_transport
+ 9/12 Test  #9: m3_transport .....................   Passed    0.73 sec
+      Start 10: m4_terminal
+10/12 Test #10: m4_terminal ......................   Passed    0.02 sec
+      Start 11: m5_telemetry_faults
+11/12 Test #11: m5_telemetry_faults ..............   Passed    1.83 sec
+      Start 12: m5_remediation
+12/12 Test #12: m5_remediation ...................   Passed    1.44 sec
+
+100% tests passed out of 12
+
+Total Test time (real) =  12.21 sec

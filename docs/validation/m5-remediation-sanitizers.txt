@@ -1,0 +1,69 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Using the multi-header code from /Users/rklinkhammer/workspace/graphlab/build/dev/_deps/nlohmann_json-src/include/
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/rklinkhammer/workspace/graphlab/build/verify
+[0/4] Re-checking globbed directories...
+[1/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/recording.cpp.o
+[2/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/writer.cpp.o
+[3/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/manager.cpp.o
+[4/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[5/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[6/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/process.cpp.o
+[7/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[8/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/qemu/backend.cpp.o
+[9/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/store.cpp.o
+[10/36] Building CXX object CMakeFiles/lab-agent.dir/cpp/console/agent_main.cpp.o
+[11/36] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/engine.cpp.o
+[12/36] Building CXX object CMakeFiles/lab-guest-template.dir/qemu-guests/common/template.cpp.o
+[13/36] Linking CXX static library libgraphlab_runtime.a
+[14/36] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/rpc.cpp.o
+[15/36] Linking CXX executable lab-guest-template
+[16/36] Building CXX object CMakeFiles/m3_transport.dir/tests/capture/transport.cpp.o
+[17/36] Linking CXX executable m3_transport
+[18/36] Building CXX object CMakeFiles/m4_tests.dir/tests/terminal/m4.cpp.o
+[19/36] Linking CXX executable m4_tests
+[20/36] Building CXX object CMakeFiles/m5_tests.dir/tests/telemetry/m5.cpp.o
+[21/36] Linking CXX executable m5_tests
+[22/36] Building CXX object CMakeFiles/m5_remediation.dir/tests/telemetry/remediation.cpp.o
+[23/36] Linking CXX executable m5_remediation
+[24/36] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/http.cpp.o
+[25/36] Linking CXX static library libgraphlab_console.a
+[26/36] Linking CXX executable lab-agent
+[27/36] Linking CXX executable lab
+[28/36] Linking CXX executable lab-api
+[29/36] Linking CXX executable m1_tests
+[30/36] Building CXX object CMakeFiles/m2_tests.dir/tests/runtime/m2.cpp.o
+[31/36] Linking CXX executable m2_tests
+[32/36] Building CXX object CMakeFiles/m3_tests.dir/tests/capture/m3.cpp.o
+[33/36] Linking CXX executable m3_tests
+Test project /Users/rklinkhammer/workspace/graphlab/build/verify
+      Start  1: m1_acceptance
+ 1/12 Test  #1: m1_acceptance ....................   Passed    5.50 sec
+      Start  2: m0_acceptance
+ 2/12 Test  #2: m0_acceptance ....................   Passed    0.96 sec
+      Start  3: cli_validate
+ 3/12 Test  #3: cli_validate .....................   Passed    0.24 sec
+      Start  4: cli_plan
+ 4/12 Test  #4: cli_plan .........................   Passed    0.05 sec
+      Start  5: cli_preflight
+ 5/12 Test  #5: cli_preflight ....................   Passed    0.02 sec
+      Start  6: cli_side_effects
+ 6/12 Test  #6: cli_side_effects .................   Passed    0.15 sec
+      Start  7: m2_journal
+ 7/12 Test  #7: m2_journal .......................   Passed    1.70 sec
+      Start  8: m3_capture
+ 8/12 Test  #8: m3_capture .......................   Passed    1.68 sec
+      Start  9: m3_transport
+ 9/12 Test  #9: m3_transport .....................   Passed    0.95 sec
+      Start 10: m4_terminal
+10/12 Test #10: m4_terminal ......................   Passed    0.18 sec
+      Start 11: m5_telemetry_faults
+11/12 Test #11: m5_telemetry_faults ..............   Passed    2.11 sec
+      Start 12: m5_remediation
+12/12 Test #12: m5_remediation ...................   Passed    1.48 sec
+
+100% tests passed out of 12
+
+Total Test time (real) =  15.02 sec

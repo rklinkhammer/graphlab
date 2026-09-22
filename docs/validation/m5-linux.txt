@@ -1,0 +1,56 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/m5_tests.dir/tests/telemetry/m5.cpp.o
+[2/2] Linking CXX executable m5_tests
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/12 Test  #1: m1_acceptance ....................   Passed    4.31 sec
+      Start  2: m0_acceptance
+ 2/12 Test  #2: m0_acceptance ....................   Passed    0.22 sec
+      Start  3: cli_validate
+ 3/12 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/12 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/12 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/12 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/12 Test  #7: installed_package ................   Passed    1.96 sec
+      Start  8: m2_journal
+ 8/12 Test  #8: m2_journal .......................   Passed    1.05 sec
+      Start  9: m3_capture
+ 9/12 Test  #9: m3_capture .......................   Passed    1.26 sec
+      Start 10: m3_transport
+10/12 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/12 Test #11: m4_terminal ......................   Passed    0.01 sec
+      Start 12: m5_telemetry_faults
+12/12 Test #12: m5_telemetry_faults ..............   Passed    1.78 sec
+
+100% tests passed, 0 tests failed out of 12
+
+Total Test time (real) =  10.65 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl5-live-SaRwqT"
+PASS fixture generated
+PASS direct edge validates
+PASS start: {"cancelRequested":false,"createdAt":"2026-09-22T22:29:39Z","error":null,"finishedAt":"2026-09-22T22:29:39Z","id":"fbe2e4d2-1c07-4186-8690-16eca934d7c2","operation":"start","revision":"1","runId":"733fefa5-92c4-4810-85f7-39ce46b4248a","state":"succeeded"}
+PASS one canonical stats64 source per edge: [{"adminUp":true,"canonicalEndpoint":0,"carrierUp":true,"edge":"wire","endpoints":["a:data0","b:data0"],"forwardMetric":"tx","mapping":{"containerId":"31232afbb99cdcf28a2896355a2224fff37f08cea421502ed7fabc348d2c0976","ifindex":5182,"name":"data0","namespaceInode":"4026532342"},"mappingEpoch":"sha256:febf7ecb5a9c774d51e6b0a0e857efc4bf493033d045759a5806f2ee422647b5","monotonicNs":"58434956790998","operstate":"UP","qdiscs":[{"backlog":"0","bytes":"0","drops":"0","handle":"0:","kind":"noqueue","options":{},"overlimits":"0","packets":"0","qlen":"0","refcnt":"2","requeues":"0","root":true}],"raw":{"rxBytes":"0","rxDropped":"0","rxErrors":"0","rxPackets":"0","txBytes":"0","txDropped":"0","txErrors":"0","txPackets":"0"},"rstp":{},"rstpObservedMonotonicNs":"58434953850344","source":"rtnetlink/iproute2-stats64","valid":true}]
+PASS owned namespace UDP sender
+PASS known A-to-B traffic delivered
+PASS one-way canonical direction without endpoint doubling
+PASS durable telemetry history available
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-22T22:29:41Z","error":null,"faultId":"f89aa267e6ea054f4ca21e5c85ba0063","finishedAt":"2026-09-22T22:29:41Z","id":"db2d1bf6-a008-e1c8-2c38-0354b902faa5","operation":"fault.apply","revision":"2","runId":"733fefa5-92c4-4810-85f7-39ce46b4248a","state":"succeeded"}
+PASS owned namespace UDP sender
+PASS netem blocks A-to-B
+PASS owned namespace UDP sender
+PASS reverse B-to-A remains unaffected
+PASS fault expires through serialized executor
+PASS owned namespace UDP sender
+PASS expiry restores packet delivery
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-22T22:29:46Z","error":null,"faultId":"20e66d30f3dff7cb28eecc5389eea88f","finishedAt":"2026-09-22T22:29:46Z","id":"f334a8a3-4103-e70d-27ef-dd80a8b7a3bc","operation":"fault.apply","revision":"4","runId":"733fefa5-92c4-4810-85f7-39ce46b4248a","state":"succeeded"}
+PASS expired fault removed during restart
+PASS owned fault and run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T22:29:47Z","error":null,"finishedAt":"2026-09-22T22:29:48Z","id":"2cd30e95-d533-4bad-891b-a29a1561ab7d","operation":"recover","revision":"5","runId":"733fefa5-92c4-4810-85f7-39ce46b4248a","state":"succeeded"}
+M5 Linux tests passed

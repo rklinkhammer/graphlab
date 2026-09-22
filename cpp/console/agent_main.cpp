@@ -43,6 +43,8 @@ int main(int argc, char **argv) {
       if (method == "capabilities") {
         auto result = catalog.dispatch(request);
         result["readOnly"] = false;
+        result["telemetry"] = true;
+        result["directionalFaults"] = true;
         result["execution"] = true;
         result["runtimeMappings"] = true;
         result["developmentOnly"] = false;

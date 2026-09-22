@@ -68,3 +68,7 @@ Plans print JSON to stdout and never apply resources. See the [README](../README
 ## M3 capture execution
 
 The C++23 implementation now includes independent libpcap/systemd workers, PCAPNG segments and manifests, capture barriers, shared node traffic leases and artifact access. See [M3 operation](m3-captures.md) and [M3 verification](validation/m3-verification.md) for tested scope and remaining qualification limits.
+
+## M5 telemetry and faults
+
+M5 adds shared C++ rate derivation, Linux directional counters, bounded SQLite history, typed netem jobs with expiry/recovery, and browser charts/timeline. See [operations and placement limits](m5-telemetry-faults.md) and [verification](validation/m5-verification.md). Guest-originating TAP faults require an unimplemented IFB backend and are explicitly rejected.

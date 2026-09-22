@@ -3,6 +3,7 @@
 #include <functional>
 #include <graphlab/console.hpp>
 #include <mutex>
+#include <optional>
 #include <thread>
 struct sqlite3;
 namespace graphlab::runtime {
@@ -36,6 +37,10 @@ public:
   virtual Json capture_control(const Json &, const std::string &) {
     throw Failure("capture_backend_unavailable");
   }
+  virtual Json telemetry(const Json &) { return Json::array(); }
+  virtual Json fault(const Json &, const Json &, const std::string &) {
+    throw Failure("fault_backend_unavailable");
+  }
   virtual void preflight(const Json &topology, const Json &artifacts) = 0;
   virtual Json prepare(const Json &run, const Json &resource) = 0;
   virtual void remove(const Json &run, const Json &resource) = 0;
@@ -46,11 +51,18 @@ public:
 class LinuxBackend final : public Backend {
   std::filesystem::path capture_root_;
   std::filesystem::path state_root_;
+  Json tree_cache_ = Json::object();
+  std::uint64_t tree_time_ = 0;
 
 public:
-  void configure(const std::filesystem::path &p) override { capture_root_ = p / "captures"; state_root_ = p; }
+  void configure(const std::filesystem::path &p) override {
+    capture_root_ = p / "captures";
+    state_root_ = p;
+  }
   Json capture_plan(const Json &) override;
   Json capture_control(const Json &, const std::string &) override;
+  Json telemetry(const Json &) override;
+  Json fault(const Json &, const Json &, const std::string &) override;
   void preflight(const Json &, const Json &) override;
   Json prepare(const Json &, const Json &) override;
   void remove(const Json &, const Json &) override;
@@ -75,6 +87,14 @@ class Engine {
   void cleanup(const std::string &run);
   void close_captures(const std::string &id);
   void monitor();
+  std::optional<Json> m5_dispatch(const Json &, uid_t);
+  void m5_monitor();
+  void m5_recover();
+  void m5_fault_failure(const std::string &, const std::string &, const std::string &);
+  void m5_clear(const std::string &);
+  void m5_execute(const std::string &);
+  Json samples_ = Json::object();
+  std::string collector_ = console::random_hex(12);
 
 public:
   Engine(const std::filesystem::path &directory, Backend &, const console::Catalog &);

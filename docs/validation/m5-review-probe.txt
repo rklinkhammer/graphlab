@@ -1,0 +1,7 @@
+PASS REPRO: last-hour query from a browser one second behind is rejected
+PASS probe fixture starts
+PASS probe fault applies
+PASS expiry removal failure is persisted
+PASS REPRO: expiry removal failure does not quiesce traffic
+fault state: "removing"
+PASS probe cleanup

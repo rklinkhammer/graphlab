@@ -206,7 +206,7 @@ Response Router::handle(const Request &r) {
         return error(http::status::method_not_allowed, "read_only");
       Json params = Json::object();
       std::string method;
-      if (r.method() == http::verb::post) {
+      if (r.method() == http::verb::post || r.method() == http::verb::delete_) {
         if (r.count("X-CSRF-Token") != 1 ||
             !equal(std::string(r["X-CSRF-Token"]), session->second.csrf))
           return error(http::status::forbidden, "csrf_denied");
@@ -214,7 +214,24 @@ Response Router::handle(const Request &r) {
         if (!parsed || !Json::accept(r.body()))
           return error(http::status::bad_request, "invalid_json");
         params = *parsed;
-        if (path.starts_with("/api/v1/runs/") && path.ends_with("/terminal")) {
+        if (r.method() == http::verb::delete_ && path.starts_with("/api/v1/runs/") &&
+            path.find("/faults/", 13) != std::string::npos) {
+          auto pos = path.find("/faults/", 13);
+          params["runId"] = path.substr(13, pos - 13);
+          params["faultId"] = path.substr(pos + 8);
+          method = "fault.remove";
+        } else if (r.method() == http::verb::delete_) {
+          return error(http::status::method_not_allowed, "unsupported_method");
+        } else if (path.starts_with("/api/v1/runs/") &&
+                   (path.ends_with("/faults") || path.ends_with("/faults/preview") ||
+                    path.ends_with("/faults/remove") || path.ends_with("/telemetry/query"))) {
+          auto slash = path.find('/', 13);
+          params["runId"] = path.substr(13, slash - 13);
+          method = path.ends_with("/telemetry/query") ? "telemetry"
+                   : path.ends_with("/preview")       ? "fault.preview"
+                   : path.ends_with("/remove")        ? "fault.remove"
+                                                      : "fault.apply";
+        } else if (path.starts_with("/api/v1/runs/") && path.ends_with("/terminal")) {
           method = "terminal";
           params["runId"] = path.substr(13, path.size() - 13 - 9);
           params["owner"] = lab_support::digest(Json(cookie(r)));
@@ -230,7 +247,13 @@ Response Router::handle(const Request &r) {
           return error(http::status::not_found, "not_found");
       } else if (r.method() == http::verb::get) {
         auto artifact = path.find("/artifacts");
-        if (path.starts_with("/api/v1/runs/") && artifact != std::string::npos) {
+        if (path.starts_with("/api/v1/runs/") &&
+            (path.ends_with("/telemetry") || path.ends_with("/timeline") ||
+             path.ends_with("/faults"))) {
+          auto slash = path.find('/', 13);
+          params["runId"] = path.substr(13, slash - 13);
+          method = path.substr(slash + 1);
+        } else if (path.starts_with("/api/v1/runs/") && artifact != std::string::npos) {
           params["runId"] = path.substr(13, artifact - 13);
           if (path.size() == artifact + 10)
             method = "artifacts";
@@ -251,7 +274,9 @@ Response Router::handle(const Request &r) {
       } else
         return error(http::status::method_not_allowed, "unsupported_method");
       auto value = rpc(socket_, agent_uid_, method, params);
-      return response(r.method() == http::verb::post ? http::status::accepted : http::status::ok,
+      return response((r.method() == http::verb::post || r.method() == http::verb::delete_)
+                          ? http::status::accepted
+                          : http::status::ok,
                       value.dump());
     } catch (const runtime::Failure &e) {
       return error(static_cast<http::status>(e.status), e.what());

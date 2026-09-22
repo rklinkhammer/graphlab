@@ -29,3 +29,7 @@ The installed package additionally exports `LabSupport::lifecycle`. Its public `
 Both independently built [Docker nodes](../../docker-nodes/README.md) link this target without sibling source access. See [M2](../../docs/m2-executor.md) for target-ISA builds and runtime boundaries.
 
 M3 adds `release-lease` and `renew-lease` to the shared gate protocol. Leases use a monotonic ten-second deadline; expiry holds the gate and closes the UDP fixture socket. Renewal cannot reopen an expired lease. Existing `release` remains available only for explicitly selected no-capture development runs. See [M3 capture and lease qualification](../../docs/m3-captures.md).
+
+## M5 telemetry package
+
+`LabSupport::telemetry` exports `lab_support/telemetry.hpp`: pure C++23 directional rate and counter-epoch derivation over typed JSON observations. It preserves uint64 counters as decimal strings, uses monotonic deltas, and emits null rates at resets or observation gaps. It links the shared contracts package and contains no Linux collector, SQLite store or privileged fault executor. See [M5 operations](../../docs/m5-telemetry-faults.md) for the observation contract and limits.

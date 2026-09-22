@@ -1,0 +1,136 @@
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/m5_remediation.dir/tests/telemetry/remediation.cpp.o
+[2/2] Linking CXX executable m5_remediation
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/13 Test  #1: m1_acceptance ....................   Passed    4.33 sec
+      Start  2: m0_acceptance
+ 2/13 Test  #2: m0_acceptance ....................   Passed    0.23 sec
+      Start  3: cli_validate
+ 3/13 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/13 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/13 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/13 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/13 Test  #7: installed_package ................   Passed    0.06 sec
+      Start  8: m2_journal
+ 8/13 Test  #8: m2_journal .......................   Passed    1.06 sec
+      Start  9: m3_capture
+ 9/13 Test  #9: m3_capture .......................   Passed    1.28 sec
+      Start 10: m3_transport
+10/13 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/13 Test #11: m4_terminal ......................   Passed    0.01 sec
+      Start 12: m5_telemetry_faults
+12/13 Test #12: m5_telemetry_faults ..............   Passed    1.77 sec
+      Start 13: m5_remediation
+13/13 Test #13: m5_remediation ...................   Passed    1.09 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =   9.88 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl5-live-xm5w8e"
+PASS fixture generated
+PASS direct edge validates
+PASS start: {"cancelRequested":false,"createdAt":"2026-09-22T23:33:58Z","error":null,"finishedAt":"2026-09-22T23:33:58Z","id":"fe2f8ed6-3959-484b-8cf5-e3cb0700713e","operation":"start","revision":"1","runId":"641e4a0c-5d17-4ee7-8038-94b5c5a87bd9","state":"succeeded"}
+PASS one canonical stats64 source per edge: [{"adminUp":true,"canonicalEndpoint":0,"carrierUp":true,"edge":"wire","endpoints":["a:data0","b:data0"],"forwardMetric":"tx","mapping":{"containerId":"8b1888545f3e109dfdb4a44b25b4a22c26ae12370a4b7451fbc3f950a4daa23b","ifindex":5204,"name":"data0","namespaceInode":"4026532342"},"mappingEpoch":"sha256:e3d1f050c2d91b6df6735ade6bf501c28b8caa58a7809f2ffff9029208e9e739","monotonicNs":"62294073135450","operstate":"UP","qdiscs":[{"backlog":"0","bytes":"0","drops":"0","handle":"0:","kind":"noqueue","options":{},"overlimits":"0","packets":"0","qlen":"0","refcnt":"2","requeues":"0","root":true}],"raw":{"rxBytes":"0","rxDropped":"0","rxErrors":"0","rxPackets":"0","txBytes":"0","txDropped":"0","txErrors":"0","txPackets":"0"},"rstp":{},"rstpObservedMonotonicNs":"62294070364273","source":"rtnetlink/iproute2-stats64","valid":true}]
+PASS owned namespace UDP sender
+PASS known A-to-B traffic delivered
+PASS one-way canonical direction without endpoint doubling
+PASS durable telemetry history available
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-22T23:34:00Z","error":null,"faultId":"43b380681e68fec7e1dede7b6ff53c70","finishedAt":"2026-09-22T23:34:00Z","id":"af78377f-a6b8-4cb9-9c15-f6e215a77151","operation":"fault.apply","revision":"2","runId":"641e4a0c-5d17-4ee7-8038-94b5c5a87bd9","state":"succeeded"}
+PASS owned namespace UDP sender
+PASS netem blocks A-to-B
+PASS owned namespace UDP sender
+PASS reverse B-to-A remains unaffected
+PASS fault expires through serialized executor
+PASS owned namespace UDP sender
+PASS expiry restores packet delivery
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-22T23:34:05Z","error":null,"faultId":"e8c688f639f88fa0e715e4acbd50631d","finishedAt":"2026-09-22T23:34:05Z","id":"c02ce4a4-cbde-e827-eafb-14f7122ab98d","operation":"fault.apply","revision":"4","runId":"641e4a0c-5d17-4ee7-8038-94b5c5a87bd9","state":"succeeded"}
+PASS expired fault removed during restart
+PASS owned fault and run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T23:34:06Z","error":null,"finishedAt":"2026-09-22T23:34:07Z","id":"3227a1ac-0b52-4b95-8006-563766cccab5","operation":"recover","revision":"5","runId":"641e4a0c-5d17-4ee7-8038-94b5c5a87bd9","state":"succeeded"}
+M5 Linux tests passed
