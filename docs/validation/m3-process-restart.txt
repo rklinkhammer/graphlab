@@ -1,0 +1,23 @@
+PASS capture run ready before process restarts
+PASS API restart preserves worker invocation identities
+PASS SIGKILL agent restart adopts the same independent workers
+{
+  "priorGeneration": "1",
+  "adoptedGeneration": "2",
+  "priorSourceSeq": "0",
+  "adoptedSourceSeq": "11",
+  "state": "reconciling",
+  "adoptedAt": "2026-09-22T07:43:35Z"
+}
+{
+  "cancelRequested": false,
+  "createdAt": "2026-09-22T07:43:35Z",
+  "error": null,
+  "finishedAt": "2026-09-22T07:43:36Z",
+  "id": "c75877f8-cf6a-4ecf-8d22-0585149b0ead",
+  "operation": "recover",
+  "revision": "2",
+  "runId": "c49ff9eb-8764-4dfc-8331-ac600df3b6e3",
+  "state": "succeeded"
+}
+PASS restarted agent cleans up adopted run

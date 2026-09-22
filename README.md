@@ -4,11 +4,13 @@ M0 implements a C++23 topology validator and deterministic dry-run planner. M1 a
 
 See [M1 console setup and invocation](docs/m1-console.md) for build, login, service startup and browser instructions.
 
-M2 adds opt-in durable Linux execution, Docker/shared-OVS resources, run/job controls and shared C++ gated nodes. See [M2 setup and qualification limits](docs/m2-executor.md). The original agent invocation remains read-only; execution requires explicit state/peer configuration and a no-capture development topology.
+M2 adds opt-in durable Linux execution, Docker/shared-OVS resources, run/job controls and shared C++ gated nodes. See [M2 setup and qualification limits](docs/m2-executor.md). The original agent invocation remains read-only; execution requires explicit state/peer configuration.
+
+M3 adds capture-first runs, independent C++ PCAPNG workers, renewable traffic leases and verified artifact downloads. See [M3 setup and behavior](docs/m3-captures.md) and [verification evidence](docs/validation/m3-verification.md). No-capture development topologies still require explicit acknowledgement.
 
 ## Build and test
 
-Requirements: CMake 3.28+, Ninja, a C++23 compiler/standard library with `std::expected`, Boost 1.92.0 headers/CMake configuration, and OpenSSL 3 development headers/libraries. The build fetches checksum-pinned yaml-cpp 0.8.0 and nlohmann/json 3.12.0 archives. The optional browser build uses Node/npm. Python is not required.
+Requirements: CMake 3.28+, Ninja, a C++23 compiler/standard library with `std::expected`, Boost 1.92.0 headers/CMake configuration, OpenSSL 3 and SQLite 3.24+ development headers/libraries. Linux builds also require libpcap development files; M3 execution requires systemd. The build fetches checksum-pinned yaml-cpp 0.8.0 and nlohmann/json 3.12.0 archives. The optional browser build uses Node/npm. Python is not required.
 
 ```sh
 cmake --preset dev

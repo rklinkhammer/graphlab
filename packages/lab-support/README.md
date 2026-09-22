@@ -27,3 +27,5 @@ Source/API versioning and serialized contract versions are separate. This is the
 The installed package additionally exports `LabSupport::lifecycle`. Its public `lab_support/lifecycle.hpp` provides `run_node(argc, argv, application)` for the C++ fixture gate and data-interface-only UDP echo/probe service. Nodes start held and accept `control status`, `control release`, `control quiesce`, and `control probe IPV4` through a private in-container Unix socket. This is fixture protocol `graphlab.gate/v1`, not a generic application process supervisor or an M3 release lease.
 
 Both independently built [Docker nodes](../../docker-nodes/README.md) link this target without sibling source access. See [M2](../../docs/m2-executor.md) for target-ISA builds and runtime boundaries.
+
+M3 adds `release-lease` and `renew-lease` to the shared gate protocol. Leases use a monotonic ten-second deadline; expiry holds the gate and closes the UDP fixture socket. Renewal cannot reopen an expired lease. Existing `release` remains available only for explicitly selected no-capture development runs. See [M3 capture and lease qualification](../../docs/m3-captures.md).

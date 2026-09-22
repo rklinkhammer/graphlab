@@ -153,6 +153,7 @@ Json Catalog::dispatch(const Json &r) const {
           {"runtimeObservedAt", nullptr},
           {"runtimeFreshness", "unknown"},
           {"run", nullptr},
+          {"capturePolicy", topology["capture"]},
           {"nodes", nodes},
           {"edges", edges},
           {"management", topology["management"]},

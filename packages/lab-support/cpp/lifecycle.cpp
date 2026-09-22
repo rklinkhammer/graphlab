@@ -1,6 +1,8 @@
 #include <arpa/inet.h>
+#include <chrono>
 #include <csignal>
 #include <cstring>
+#include <fcntl.h>
 #include <ifaddrs.h>
 #include <iostream>
 #include <lab_support/lifecycle.hpp>
@@ -45,6 +47,8 @@ sockaddr_in data_address() {
 }
 std::string probe(const std::string &ip) {
   FD socket{::socket(AF_INET, SOCK_DGRAM, 0)};
+  if (socket.value < 0 || fcntl(socket.value, F_SETFL, O_NONBLOCK))
+    throw std::runtime_error("probe_socket");
   auto local = data_address();
   local.sin_port = 0;
   if (bind(socket.value, reinterpret_cast<sockaddr *>(&local), sizeof(local)))
@@ -101,12 +105,26 @@ int run_node(int argc, char **argv, const char *application) {
     if (bind(server.value, reinterpret_cast<sockaddr *>(&a), sizeof(a)) || listen(server.value, 8))
       throw std::runtime_error("gate_bind");
     bool released = false;
+    bool leased = false;
+    auto deadline = std::chrono::steady_clock::time_point::min();
     std::uint64_t packets = 0;
     FD data;
+    auto expire = [&] {
+      if (leased && std::chrono::steady_clock::now() >= deadline) {
+        released = false;
+        leased = false;
+        if (data.value >= 0) {
+          close(data.value);
+          data.value = -1;
+        }
+      }
+    };
     while (!stopped) {
+      expire();
       pollfd p[2] = {{server.value, POLLIN, 0}, {data.value, POLLIN, 0}};
       if (poll(p, 2, 100) < 0)
         continue;
+      expire();
       if (p[1].revents & POLLIN) {
         char buffer[1500];
         sockaddr_in peer{};
@@ -136,13 +154,22 @@ int run_node(int argc, char **argv, const char *application) {
       command.pop_back();
       Json result;
       try {
-        if (command == "release") {
+        expire();
+        if (command == "renew-lease") {
+          if (!released || !leased)
+            throw std::runtime_error("lease_expired_or_not_armed");
+          deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
+        } else if (command == "release" || command == "release-lease") {
+          leased = command == "release-lease";
+          deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
           released = true;
           if (data.value < 0) {
             try {
               auto local = data_address();
               local.sin_port = htons(49000);
               data.value = socket(AF_INET, SOCK_DGRAM, 0);
+              if (data.value < 0 || fcntl(data.value, F_SETFL, O_NONBLOCK))
+                throw std::runtime_error("data_socket");
               if (bind(data.value, reinterpret_cast<sockaddr *>(&local), sizeof(local))) {
                 close(data.value);
                 data.value = -1;
@@ -150,10 +177,15 @@ int run_node(int argc, char **argv, const char *application) {
               }
             } catch (const std::exception
                          &) { /* Isolated nodes have no data address. Gate still functions. */
+              if (data.value >= 0) {
+                close(data.value);
+                data.value = -1;
+              }
             }
           }
         } else if (command == "quiesce") {
           released = false;
+          leased = false;
           if (data.value >= 0) {
             close(data.value);
             data.value = -1;
@@ -172,6 +204,12 @@ int run_node(int argc, char **argv, const char *application) {
       result["application"] = application;
       result["echoPackets"] = std::to_string(packets);
       result["dataReady"] = data.value >= 0;
+      result["leaseActive"] = leased && released;
+      result["leaseMilliseconds"] =
+          leased ? std::max<std::int64_t>(0, std::chrono::duration_cast<std::chrono::milliseconds>(
+                                                 deadline - std::chrono::steady_clock::now())
+                                                 .count())
+                 : 0;
       auto out = result.dump() + "\n";
       send(client.value, out.data(), out.size(), 0);
     }

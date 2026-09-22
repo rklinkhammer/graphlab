@@ -1,0 +1,83 @@
+Evidence: "/tmp/gl3-YfJzt1"
+PASS fixture generated
+PASS capture-first start: {"cancelRequested":false,"createdAt":"2026-09-22T09:42:10Z","error":null,"finishedAt":"2026-09-22T09:42:16Z","id":"0919638a-7482-4ebc-891a-131e12bec505","operation":"start","revision":"1","runId":"b08d5540-36ad-4715-8cec-21fed69346b1","state":"succeeded"}
+PASS all data edges captured
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS first released application probe delivered
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS earliest application payload recorded with valid files for every edge
+PASS artifact listing
+PASS closed artifact available alongside partial stream
+PASS scoped closed artifact download
+PASS quiesce finalizes captures
+PASS worker identity cannot be restarted or overwrite prior evidence
+PASS resume rearms
+PASS new epoch on resume
+PASS owned worker killed
+PASS worker loss degrades coverage and quiesces
+PASS failed worker recovery cleans resources
+PASS second capture run
+PASS independent worker records through agent outage
+PASS restart adopts workers and holds traffic
+PASS stale controller fenced
+PASS adopted worker cleanup
+PASS lease-outage run
+PASS capture lost during agent outage
+PASS node lease bounds outage quiescence to 12 seconds
+PASS external UDP receives no application echo after lease expiry
+PASS outage recovery cleanup
+PASS invalid capture filter fails start
+PASS failed activation never releases live workload
+PASS failed-arm resources cleaned
+PASS quota test run armed
+PASS bounded owned-interface traffic fixture
+PASS real quota exhaustion reports loss and quiesces
+PASS rotation under packet load preserves multiple segments
+PASS quota failure cleanup
+PASS OS write limit prevents capture activation acknowledgement
+PASS write-denied arm holds traffic
+PASS write-denied cleanup
+PASS alternate graph validates
+PASS direct Docker-Docker capture start: {"cancelRequested":false,"createdAt":"2026-09-22T09:43:04Z","error":null,"finishedAt":"2026-09-22T09:43:04Z","id":"6ed1365f-0f85-4f80-82d5-06b11a95c1a5","operation":"start","revision":"1","runId":"7c8491b8-072d-4e88-8a9a-8e3813114cb4","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS direct edge capture uses verified container namespace
+PASS direct Docker-Docker application traffic
+PASS alternate graph cleanup
+PASS alternate graph validates
+PASS isolated capture start: {"cancelRequested":false,"createdAt":"2026-09-22T09:43:05Z","error":null,"finishedAt":"2026-09-22T09:43:05Z","id":"e8d32c88-966c-496d-8e5f-277719bbfb5a","operation":"start","revision":"1","runId":"bc931225-81e4-4147-8e84-1d6f2040e245","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS alternate graph cleanup
+M3 Linux tests passed

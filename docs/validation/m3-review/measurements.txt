@@ -1,0 +1,14 @@
+{
+  "milliseconds": 9923,
+  "status": {
+    "apiVersion": "graphlab.gate/v1",
+    "application": "app-a",
+    "dataReady": false,
+    "echoPackets": "0",
+    "leaseActive": false,
+    "leaseMilliseconds": 0,
+    "state": "held"
+  }
+}{
+  "observedMilliseconds": 2068
+}

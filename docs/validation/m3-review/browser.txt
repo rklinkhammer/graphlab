@@ -1,0 +1,15 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/console.spec.ts
+
+
+Running 4 tests using 1 worker
+
+(node:59870) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/console.spec.ts:21:1 › all graph shapes, parallel edges, management, inspector, reload and logout (1.6s)
+  ✓  2 tests/console.spec.ts:48:1 › layout supports variable sizes, reversed parallel edges and self-links (552ms)
+  ✓  3 tests/console.spec.ts:57:1 › invalidated session returns to login on refresh (835ms)
+  ✓  4 tests/console.spec.ts:62:1 › agent loss clears the graph and exposes an unavailable diagnostic (845ms)
+
+  4 passed (4.3s)

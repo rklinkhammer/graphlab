@@ -62,3 +62,7 @@ build/dev/lab plan topologies/triangle.yaml --lock topologies/artifacts.lock.jso
 ```
 
 Plans print JSON to stdout and never apply resources. See the [README](../README.md) for package use and digest updates. M1 provides the read-only web console; deployment commands remain unimplemented.
+
+## M3 capture execution
+
+The C++23 implementation now includes independent libpcap/systemd workers, PCAPNG segments and manifests, capture barriers, shared node traffic leases and artifact access. See [M3 operation](m3-captures.md) and [M3 verification](validation/m3-verification.md) for tested scope and remaining qualification limits.

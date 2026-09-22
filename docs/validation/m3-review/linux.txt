@@ -1,0 +1,274 @@
+[0/2] Re-checking globbed directories...
+ninja: no work to do.
+Test project /tmp/graphlab-m0-source/build/dev
+    Start 1: m1_acceptance
+1/9 Test #1: m1_acceptance ....................   Passed    4.32 sec
+    Start 2: m0_acceptance
+2/9 Test #2: m0_acceptance ....................   Passed    0.22 sec
+    Start 3: cli_validate
+3/9 Test #3: cli_validate .....................   Passed    0.01 sec
+    Start 4: cli_plan
+4/9 Test #4: cli_plan .........................   Passed    0.01 sec
+    Start 5: cli_preflight
+5/9 Test #5: cli_preflight ....................   Passed    0.00 sec
+    Start 6: cli_side_effects
+6/9 Test #6: cli_side_effects .................   Passed    0.03 sec
+    Start 7: installed_package
+7/9 Test #7: installed_package ................   Passed    0.05 sec
+    Start 8: m2_journal
+8/9 Test #8: m2_journal .......................   Passed    1.03 sec
+    Start 9: m3_capture
+9/9 Test #9: m3_capture .......................   Passed    2.18 sec
+
+100% tests passed, 0 tests failed out of 9
+
+Total Test time (real) =   7.86 sec
+-- Install configuration: "Debug"
+-- Up-to-date: /tmp/graphlab-m3-sdk/include
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/adl_serializer.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/json_fwd.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/ordered_map.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/json.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/macro_unscope.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/hash.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/exceptions.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/value_t.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/string_utils.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/abi_macros.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/output
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/output/output_adapters.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/output/serializer.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/output/binary_writer.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/detected.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/identity_tag.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/void_t.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/std_fs.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/call_std
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/call_std/begin.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/call_std/end.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/is_sax.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/type_traits.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/meta/cpp_future.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/string_escape.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/json_pointer.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/conversions
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/conversions/to_chars.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/conversions/to_json.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/conversions/from_json.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators/internal_iterator.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators/iteration_proxy.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators/iterator_traits.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators/primitive_iterator.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators/iter_impl.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/iterators/json_reverse_iterator.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/string_concat.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/json_ref.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/json_custom_base_class.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/macro_scope.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input/lexer.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input/input_adapters.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input/json_sax.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input/position_t.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input/binary_reader.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/detail/input/parser.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/thirdparty
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/thirdparty/hedley
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/thirdparty/hedley/hedley.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/nlohmann/byte_container_with_subtype.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/share/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/share/cmake/nlohmann_json/nlohmann_jsonTargets.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/share/pkgconfig/nlohmann_json.pc
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/libyaml-cppd.a
+-- Up-to-date: /tmp/graphlab-m3-sdk/include
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/null.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/ostream_wrapper.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/exceptions.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/dll.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/contrib
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/contrib/graphbuilder.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/contrib/anchordict.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/emitfromevents.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/emitter.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/eventhandler.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/yaml.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/mark.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/stlemitter.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/binary.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/traits.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/parser.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/noexcept.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/emitterstyle.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/emittermanip.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/node.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/iterator.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/parse.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/ptr.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/type.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/emit.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/convert.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/impl.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/node_iterator.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/node.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/iterator.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/node_data.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/impl.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/iterator_fwd.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/node_ref.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/node/detail/memory.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/depthguard.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/emitterdef.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/yaml-cpp/anchor.h
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/yaml-cpp/yaml-cpp-targets.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/yaml-cpp/yaml-cpp-targets-debug.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/yaml-cpp/yaml-cpp-config.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/yaml-cpp/yaml-cpp-config-version.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/pkgconfig/yaml-cpp.pc
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/liblab_contracts.a
+-- Up-to-date: /tmp/graphlab-m3-sdk/include
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/._lab_support
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/lab_support
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/lab_support/contracts.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/lab_support/._contracts.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/include/lab_support/lifecycle.hpp
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/LabSupport/LabSupportTargets.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/LabSupport/LabSupportTargets-debug.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/LabSupport/LabSupportConfig.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/cmake/LabSupport/LabSupportConfigVersion.cmake
+-- Up-to-date: /tmp/graphlab-m3-sdk/lib/liblab_lifecycle.a
+-- Up-to-date: /tmp/graphlab-m3-sdk/bin/lab
+-- Up-to-date: /tmp/graphlab-m3-sdk/bin/lab-agent
+-- Up-to-date: /tmp/graphlab-m3-sdk/bin/lab-api
+-- Up-to-date: /tmp/graphlab-m3-sdk/bin/lab-capture
+ninja: no work to do.
+ninja: no work to do.
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.931MB
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/5 : COPY lab-node /usr/local/bin/lab-node
+ ---> Using cache
+ ---> 7475bdb317f9
+Step 4/5 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Using cache
+ ---> 625badf79427
+Step 5/5 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Using cache
+ ---> be5f4184e81e
+Successfully built be5f4184e81e
+Successfully tagged graphlab-m3/app-a:verification
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.931MB
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/5 : COPY lab-node /usr/local/bin/lab-node
+ ---> Using cache
+ ---> d027a9b1c008
+Step 4/5 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Using cache
+ ---> 3395b31ba0b7
+Step 5/5 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Using cache
+ ---> b8e9428c9d62
+Successfully built b8e9428c9d62
+Successfully tagged graphlab-m3/app-b:verification
+Evidence: "/tmp/gl3-eEW0Uz"
+PASS fixture generated
+PASS capture-first start: {"cancelRequested":false,"createdAt":"2026-09-22T09:46:23Z","error":null,"finishedAt":"2026-09-22T09:46:27Z","id":"b2169a0f-bc79-4347-8d86-7b78917d9283","operation":"start","revision":"1","runId":"2a822577-69e6-492a-836a-5d1c60b5156a","state":"succeeded"}
+PASS all data edges captured
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS first released application probe delivered
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS earliest application payload recorded with valid files for every edge
+PASS artifact listing
+PASS closed artifact available alongside partial stream
+PASS scoped closed artifact download
+PASS quiesce finalizes captures
+PASS worker identity cannot be restarted or overwrite prior evidence
+PASS resume rearms
+PASS new epoch on resume
+PASS owned worker killed
+PASS worker loss degrades coverage and quiesces
+PASS failed worker recovery cleans resources
+PASS second capture run
+PASS independent worker records through agent outage
+PASS restart adopts workers and holds traffic
+PASS stale controller fenced
+PASS adopted worker cleanup
+PASS lease-outage run
+PASS capture lost during agent outage
+PASS node lease bounds outage quiescence to 12 seconds
+PASS external UDP receives no application echo after lease expiry
+PASS outage recovery cleanup
+PASS invalid capture filter fails start
+PASS failed activation never releases live workload
+PASS failed-arm resources cleaned
+PASS quota test run armed
+PASS bounded owned-interface traffic fixture
+PASS real quota exhaustion reports loss and quiesces
+PASS rotation under packet load preserves multiple segments
+PASS quota failure cleanup
+PASS OS write limit prevents capture activation acknowledgement
+PASS write-denied arm holds traffic
+PASS write-denied cleanup
+PASS alternate graph validates
+PASS direct Docker-Docker capture start: {"cancelRequested":false,"createdAt":"2026-09-22T09:47:17Z","error":null,"finishedAt":"2026-09-22T09:47:17Z","id":"bcde6a13-7fd0-43aa-8fa2-53374f425f26","operation":"start","revision":"1","runId":"a2e39cba-8dd4-49c0-87c3-adf33fc06b9a","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS direct edge capture uses verified container namespace
+PASS direct Docker-Docker application traffic
+PASS alternate graph cleanup
+PASS alternate graph validates
+PASS isolated capture start: {"cancelRequested":false,"createdAt":"2026-09-22T09:47:17Z","error":null,"finishedAt":"2026-09-22T09:47:18Z","id":"3420b247-fa17-46eb-8caa-9c03f18d4944","operation":"start","revision":"1","runId":"404a861f-4c1a-43d9-82bd-c4d9e6329a9a","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS alternate graph cleanup
+M3 Linux tests passed

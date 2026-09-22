@@ -31,6 +31,11 @@ Json docker_json(const std::string &method, const std::string &path, const Json 
 class Backend {
 public:
   virtual ~Backend() = default;
+  virtual void configure(const std::filesystem::path &) {}
+  virtual Json capture_plan(const Json &) { throw Failure("capture_backend_unavailable"); }
+  virtual Json capture_control(const Json &, const std::string &) {
+    throw Failure("capture_backend_unavailable");
+  }
   virtual void preflight(const Json &topology, const Json &artifacts) = 0;
   virtual Json prepare(const Json &run, const Json &resource) = 0;
   virtual void remove(const Json &run, const Json &resource) = 0;
@@ -39,7 +44,12 @@ public:
   virtual Json observe(const Json &run) = 0;
 };
 class LinuxBackend final : public Backend {
+  std::filesystem::path capture_root_;
+
 public:
+  void configure(const std::filesystem::path &p) override { capture_root_ = p / "captures"; }
+  Json capture_plan(const Json &) override;
+  Json capture_control(const Json &, const std::string &) override;
   void preflight(const Json &, const Json &) override;
   Json prepare(const Json &, const Json &) override;
   void remove(const Json &, const Json &) override;
@@ -61,6 +71,8 @@ class Engine {
   void work();
   void execute(const std::string &job);
   void cleanup(const std::string &run);
+  void close_captures(const std::string &id);
+  void monitor();
 
 public:
   Engine(const std::filesystem::path &directory, Backend &, const console::Catalog &);

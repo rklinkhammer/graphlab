@@ -1,0 +1,6 @@
+{
+  "captureCoverage": "closed-incomplete",
+  "jobState": "succeeded",
+  "runState": "stopped",
+  "stopWorkerResult": "interrupted"
+}

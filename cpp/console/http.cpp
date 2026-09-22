@@ -224,7 +224,20 @@ Response Router::handle(const Request &r) {
         } else
           return error(http::status::not_found, "not_found");
       } else if (r.method() == http::verb::get) {
-        if (path == "/api/v1/runs")
+        auto artifact = path.find("/artifacts");
+        if (path.starts_with("/api/v1/runs/") && artifact != std::string::npos) {
+          params["runId"] = path.substr(13, artifact - 13);
+          if (path.size() == artifact + 10)
+            method = "artifacts";
+          else {
+            auto chunks = path.find("/chunks/", artifact + 11);
+            if (chunks == std::string::npos)
+              return error(http::status::not_found, "not_found");
+            method = "artifact";
+            params["id"] = path.substr(artifact + 11, chunks - artifact - 11);
+            params["offset"] = path.substr(chunks + 8);
+          }
+        } else if (path == "/api/v1/runs")
           method = "runs";
         else {
           method = path.starts_with("/api/v1/jobs/") ? "job" : "run";

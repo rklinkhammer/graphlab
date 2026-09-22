@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <graphlab/capture.hpp>
 #include <graphlab/runtime.hpp>
 #include <regex>
 #include <sqlite3.h>
@@ -64,6 +65,7 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
   if (lstat(directory.c_str(), &info) || !S_ISDIR(info.st_mode) || info.st_uid != geteuid() ||
       (info.st_mode & 0077))
     throw Failure("state_directory_requires_0700");
+  backend_.configure(directory);
   lock_ = open((directory / "agent.lock").c_str(), O_CREAT | O_RDWR | O_CLOEXEC | O_NOFOLLOW, 0600);
   if (lock_ < 0 || flock(lock_, LOCK_EX | LOCK_NB)) {
     if (lock_ >= 0)
@@ -111,6 +113,32 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
         state_["runs"][job["runId"].get<std::string>()]["state"] = "reconciling";
       }
     save();
+    for (auto &[id, run] : state_["runs"].items()) {
+      if (run["state"] == "destroyed" || run["topology"]["capture"]["required"] != true)
+        continue;
+      bool stopped = run["state"] == "stopped";
+      auto coverage = run.value("captureCoverage", "pending");
+      bool closed = coverage.starts_with("closed");
+      run["controllerGeneration"] =
+          std::to_string(std::stoull(run.value("controllerGeneration", "1")) + 1);
+      run["state"] = "reconciling";
+      if (!closed && coverage != "incomplete")
+        run["captureCoverage"] = "interrupted-controller";
+      save();
+      try {
+        if (!closed)
+          run["captureObservations"] = backend_.capture_control(run, "adopt");
+        backend_.gate(run, "quiesce");
+        if (stopped && closed)
+          run["state"] = "stopped";
+        run[closed ? "reconciledAt" : "adoptedAt"] = console::timestamp();
+        // Adoption never silently renews traffic or changes the current capture epoch.
+      } catch (const std::exception &e) {
+        run["captureError"] = e.what();
+        run["captureCoverage"] = "incomplete";
+      }
+      save();
+    }
     worker_ = std::thread([this] { work(); });
   } catch (...) {
     if (db_)
@@ -180,6 +208,23 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
                       {"topologyHash", r["topologyHash"]}});
     return {{"items", runs}};
   }
+  if (method == "artifacts" || method == "artifact") {
+    fields(p, method == "artifacts"
+                  ? std::initializer_list<std::string_view>{"runId"}
+                  : std::initializer_list<std::string_view>{"runId", "id", "offset"});
+    auto id = string(p, "runId");
+    if (!state_["runs"].contains(id))
+      throw Failure("not_found", 404);
+    auto run = state_["runs"][id];
+    guard.unlock();
+    if (method == "artifacts")
+      return capture::artifacts(run);
+    auto offset = string(p, "offset");
+    if (offset.empty() || offset.size() > 16 ||
+        offset.find_first_not_of("0123456789") != std::string::npos)
+      throw Failure("invalid_offset");
+    return capture::download(run, string(p, "id"), std::stoull(offset));
+  }
   if (method == "run" || method == "job") {
     fields(p, {"id"});
     auto id = string(p, "id");
@@ -207,7 +252,7 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
     throw Failure("unsupported_method");
   fields(p, method == "start"
                 ? std::initializer_list<std::string_view>{"topologyHash", "idempotencyKey",
-                                                          "developmentMode"}
+                                                          "developmentMode", "capturePolicy"}
                 : std::initializer_list<std::string_view>{"runId", "operation", "expectedRevision",
                                                           "idempotencyKey"});
   auto key = string(p, "idempotencyKey");
@@ -233,8 +278,6 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
   std::string id, operation;
   Json run;
   if (method == "start") {
-    if (!p.contains("developmentMode") || p["developmentMode"] != true)
-      throw Failure("development_mode_required");
     for (const auto &[other, r] : state_["runs"].items())
       if (r["state"] != "destroyed")
         throw Failure("active_run_exists", 409);
@@ -246,11 +289,33 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
       throw Failure("unknown_topology", 404);
     }
     auto &t = resolved["topology"];
-    if (t["capture"]["required"] != false)
-      throw Failure("capture_barrier_requires_M3");
+    if (t["capture"]["required"] == false && p.value("developmentMode", false) != true)
+      throw Failure("development_mode_required");
+    Json policy = {{"runBytes", 6ull * 1024 * 1024 * 1024},
+                   {"reserveBytes", 5ull * 1024 * 1024 * 1024},
+                   {"rotateBytes", 64ull * 1024 * 1024},
+                   {"rotateSeconds", 60}};
+    if (p.contains("capturePolicy")) {
+      fields(p["capturePolicy"], {"runBytes", "reserveBytes", "rotateBytes", "rotateSeconds"});
+      for (const auto &[k, v] : p["capturePolicy"].items()) {
+        if (!v.is_number_unsigned() && (!v.is_number_integer() || v.get<std::int64_t>() < 0))
+          throw Failure("invalid_capture_policy");
+        policy[k] = v;
+      }
+    }
+    if (policy["runBytes"] < 262144 || policy["runBytes"] > 6ull * 1024 * 1024 * 1024 ||
+        policy["reserveBytes"] < 1024 * 1024 ||
+        policy["reserveBytes"] > 5ull * 1024 * 1024 * 1024 || policy["rotateBytes"] < 4096 ||
+        policy["rotateBytes"] > 64ull * 1024 * 1024 || policy["rotateSeconds"] < 1 ||
+        policy["rotateSeconds"] > 60)
+      throw Failure("invalid_capture_policy");
     for (const auto &[name, node] : t["nodes"].items()) {
       if (node["kind"] == "qemu")
         throw Failure("qemu_requires_M4");
+      if (t["capture"]["required"] == true && node["kind"] == "docker" &&
+          resolved["artifacts"]["workloads"][node["workload"].get<std::string>()]["contract"]
+                  ["lifecycle"]["quiesce"] != "supported")
+        throw Failure("capture_requires_reversible_quiescence");
       for (const auto &[port, v] : node["ports"].items())
         if (port.size() > 15)
           throw Failure("linux_interface_name_too_long");
@@ -265,7 +330,13 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
            {"topology", t},
            {"artifacts", resolved["artifacts"]},
            {"resources", Json::array()},
-           {"captureCoverage", "unavailable-development-mode"},
+           {"captureCoverage",
+            t["capture"]["required"] == true ? "pending" : "unavailable-development-mode"},
+           {"capturePolicy", policy},
+           {"captureEpoch", "0"},
+           {"controllerGeneration", "1"},
+           {"captures", Json::array()},
+           {"captureHistory", Json::array()},
            {"createdAt", console::timestamp()}};
   } else {
     id = string(p, "runId");
@@ -305,7 +376,7 @@ void Engine::work() {
     std::string id;
     {
       std::unique_lock guard(mutex_);
-      condition_.wait(guard, [&] {
+      condition_.wait_for(guard, std::chrono::seconds(2), [&] {
         if (stopping_)
           return true;
         for (const auto &[key, j] : state_["jobs"].items())
@@ -320,6 +391,11 @@ void Engine::work() {
           id = key;
           break;
         }
+      if (id.empty()) {
+        guard.unlock();
+        monitor();
+        continue;
+      }
       state_["jobs"][id]["state"] = "running";
       save();
     }
@@ -341,11 +417,74 @@ void Engine::work() {
       job["error"] = e.what();
       job["finishedAt"] = console::timestamp();
       state_["runs"][job["runId"].get<std::string>()]["state"] = "reconciling";
+      auto &failed = state_["runs"][job["runId"].get<std::string>()];
+      if (failed["topology"]["capture"]["required"] == true) {
+        failed["captureCoverage"] = "incomplete";
+        failed["quiescenceRequestedAt"] = console::timestamp();
+      }
       save();
     }
   }
 }
+void Engine::monitor() {
+  Json run;
+  {
+    std::lock_guard guard(mutex_);
+    for (const auto &[id, r] : state_["runs"].items())
+      if (r["state"] == "ready" && r["topology"]["capture"]["required"] == true) {
+        run = r;
+        break;
+      }
+  }
+  if (run.is_null())
+    return;
+  auto id = run["id"].get<std::string>();
+  try {
+    auto status = backend_.capture_control(run, "status");
+    backend_.gate(run, "renew");
+    std::lock_guard guard(mutex_);
+    state_["runs"][id]["captureObservations"] = status;
+    state_["runs"][id]["lastHealthyAt"] = console::timestamp();
+    save();
+  } catch (const std::exception &e) {
+    auto observed = console::timestamp();
+    bool held = false;
+    try {
+      backend_.gate(run, "quiesce");
+      held = true;
+    } catch (...) {
+    }
+    std::lock_guard guard(mutex_);
+    auto &r = state_["runs"][id];
+    r["state"] = "reconciling";
+    r["captureCoverage"] = "incomplete";
+    r["captureError"] = e.what();
+    r["failureObservedAt"] = observed;
+    r["quiescenceRequestedAt"] = observed;
+    r["quiescenceAcknowledgedAt"] = held ? Json(console::timestamp()) : Json(nullptr);
+    save();
+  }
+}
+void Engine::close_captures(const std::string &id) {
+  Json run;
+  {
+    std::lock_guard guard(mutex_);
+    run = state_["runs"][id];
+  }
+  if (run["topology"]["capture"]["required"] == true) {
+    auto observations = backend_.capture_control(run, "stop");
+    std::lock_guard guard(mutex_);
+    state_["runs"][id]["captureObservations"] = observations;
+    auto coverage = run.value("captureCoverage", "");
+    bool incomplete = coverage == "incomplete" || coverage == "closed-incomplete";
+    for (const auto &s : observations)
+      incomplete = incomplete || s.value("state", "") != "closed";
+    state_["runs"][id]["captureCoverage"] = incomplete ? "closed-incomplete" : "closed";
+    save();
+  }
+}
 void Engine::cleanup(const std::string &id) {
+  close_captures(id);
   Json run;
   {
     std::lock_guard guard(mutex_);
@@ -385,7 +524,45 @@ void Engine::execute(const std::string &jobid) {
     state_["runs"][id]["state"] = value;
     save();
   };
+  bool recording = run["topology"]["capture"]["required"] == true;
+  auto arm = [&] {
+    if (!recording)
+      return;
+    snapshot();
+    if (!run.value("captures", Json::array()).empty())
+      backend_.capture_control(run, "stop");
+    {
+      std::lock_guard guard(mutex_);
+      auto &r = state_["runs"][id];
+      for (const auto &c : r["captures"])
+        r["captureHistory"].push_back(c);
+      r["captures"] = Json::array();
+      r["captureEpoch"] = std::to_string(std::stoull(r["captureEpoch"].get<std::string>()) + 1);
+      save();
+    }
+    snapshot();
+    auto planned = backend_.capture_plan(run);
+    {
+      std::lock_guard guard(mutex_);
+      state_["runs"][id]["captures"] = planned; // durable launch intents before systemd
+      save();
+    }
+    snapshot();
+    auto observed = backend_.capture_control(run, "arm");
+    {
+      std::lock_guard guard(mutex_);
+      auto &r = state_["runs"][id];
+      r["captureObservations"] = observed;
+      r["captureCoverage"] = "armed";
+      r["armedAt"] = console::timestamp();
+      r["state"] = "armed";
+      save();
+    }
+    snapshot();
+  };
   if (operation == "start") {
+    if (recording)
+      (void)backend_.capture_plan(run); // reserve capacity before resource effects
     backend_.preflight(run["topology"], run["artifacts"]);
     bool cancel = cancelled();
     for (auto resource : resources(run)) {
@@ -411,12 +588,15 @@ void Engine::execute(const std::string &jobid) {
     }
     if (!cancel) {
       snapshot();
+      arm();
       state("converging");
       backend_.activate(run);
       cancel = cancelled();
     }
     if (!cancel) {
       snapshot();
+      if (recording)
+        backend_.capture_control(run, "status");
       backend_.gate(run, "release");
       cancel = cancelled();
     }
@@ -438,9 +618,14 @@ void Engine::execute(const std::string &jobid) {
     state("ready");
   } else if (operation == "stop") {
     backend_.gate(run, "quiesce");
+    if (recording)
+      close_captures(id);
     state("stopped");
   } else if (operation == "resume") {
+    arm();
     backend_.activate(run);
+    if (recording)
+      backend_.capture_control(run, "status");
     backend_.gate(run, "release");
     state("ready");
   } else {
@@ -456,6 +641,14 @@ void Engine::execute(const std::string &jobid) {
   Json observation = backend_.observe(run);
   std::lock_guard guard(mutex_);
   state_["runs"][id]["observation"] = observation;
+  if (recording) {
+    state_["runs"][id]["captureCoverage"] =
+        run["state"] == "ready"                                   ? "recording"
+        : run.value("captureCoverage", "") == "closed-incomplete" ? "closed-incomplete"
+                                                                  : "closed";
+    if (run["state"] == "ready")
+      state_["runs"][id]["releasedAt"] = console::timestamp();
+  }
   state_["jobs"][jobid]["state"] = "succeeded";
   state_["jobs"][jobid]["finishedAt"] = console::timestamp();
   save();
@@ -487,7 +680,7 @@ Json Engine::inventory(Json logical) {
                 {"reason", "Agent-owned identity snapshot; no continuous runtime monitor"}};
           }
         if (type == std::string("edges"))
-          item["captureState"] = "unavailable-development-mode";
+          item["captureState"] = run["captureCoverage"];
       }
     break;
   }

@@ -1,6 +1,7 @@
 import type {Node, Edge} from '@xyflow/react';
 export type Runtime = {state: string; observedAt: string | null; mappingEpoch: string | null; identity: unknown; reason: string};
 export type Inventory = {
+  capturePolicy?: {required:boolean};
   topologyHash: string; topologyId: string; generatedAt: string; runtimeObservedAt: string | null; runtimeFreshness: string;
   nodes: {id: string; kind: string; configuration: Record<string, unknown>; runtime: Runtime; failureDomain: string | null}[];
   edges: {id: string; endpoints: [string, string]; runtime: Runtime; adminState: string; carrierState: string; rstpState: string; captureState: string; rates: Record<string, number | null>}[];

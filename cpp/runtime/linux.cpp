@@ -1,12 +1,17 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <fstream>
+#include <graphlab/capture.hpp>
 #include <graphlab/runtime.hpp>
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <unistd.h>
 
 namespace graphlab::runtime {
+Json LinuxBackend::capture_plan(const Json &r) { return capture::plan(r, capture_root_); }
+Json LinuxBackend::capture_control(const Json &r, const std::string &op) {
+  return capture::control(r, op);
+}
 namespace detail {
 Json lookup_link(const ProcessResult &result, const std::string &name) {
   if (result.code)
@@ -291,6 +296,9 @@ void LinuxBackend::preflight(const Json &t, const Json &artifacts) {
         throw Failure("image_architecture_mismatch");
       if (image["Config"]["Labels"].value("graphlab.gate-protocol", "") != "1")
         throw Failure("cpp_gate_image_required");
+      if (t["capture"]["required"] == true &&
+          image["Config"]["Labels"].value("graphlab.traffic-lease", "") != "1")
+        throw Failure("capture_requires_lease_capable_image");
     }
 #endif
 }
@@ -608,9 +616,16 @@ void LinuxBackend::activate(const Json &run) {
 void LinuxBackend::gate(const Json &run, const std::string &action) {
   for (const auto &r : run["resources"])
     if (r["kind"] == "container" && r.value("state", "") != "removed") {
-      auto result = node_exec(run, r, action);
-      if (result["state"] != (action == "release" ? "released" : "held"))
+      bool leased = run["topology"]["capture"]["required"] == true;
+      auto operation = leased && action == "release" ? "release-lease"
+                       : action == "renew"           ? "renew-lease"
+                                                     : action;
+      auto result = node_exec(run, r, operation);
+      if (result["state"] != (action == "release" || action == "renew" ? "released" : "held"))
         throw Failure("gate_acknowledgement_failed");
+      if (leased && (action == "release" || action == "renew") &&
+          !result.value("leaseActive", false))
+        throw Failure("traffic_lease_not_acknowledged");
       const auto &configuration = r["configuration"];
       if (action == "release" && configuration.contains("addresses") &&
           configuration["addresses"].contains("data0") && !result.value("dataReady", false))

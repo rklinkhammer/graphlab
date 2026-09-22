@@ -9,5 +9,8 @@
   "boost": {"version": "1.92.0", "source": "system headers and CMake package configuration", "components": ["Beast", "Asio"], "qualification": "Exact version enforced by CMake; header-only usage. Package-manager provenance, not a vendored archive lock."},
   "browser": {"lock": "console/web/package-lock.json", "observedNode": "26.8.1"},
   "sqlite": {"source": "system C API", "minimumVersion": "3.24", "observedMacOS": "3.54.0", "observedLinux": "3.45.1", "usage": "WAL, synchronous FULL, single agent journal writer"},
-  "dockerEngineAPI": {"minimumVersion": "1.52", "transport": "bounded Boost.Beast HTTP over /var/run/docker.sock; no CLI fallback or registry pull"}
+  "dockerEngineAPI": {"minimumVersion": "1.52", "transport": "bounded Boost.Beast HTTP over /var/run/docker.sock; no CLI fallback or registry pull"},
+  "libpcap": {"source": "Linux system C API", "observedVersion": "1.10.4", "developmentPackage": "libpcap0.8-dev 1.10.4-4.1ubuntu3", "qualification": "Observed version, not an exact version enforced by CMake"},
+  "captureSupervisor": {"kind": "systemd transient independent services", "observedVersion": "255"},
+  "pcapng": {"formatReference": "draft-ietf-opsawg-pcapng-05", "writer": "C++ little endian SHB/IDB/EPB/ISB; microsecond resolution"}
 }

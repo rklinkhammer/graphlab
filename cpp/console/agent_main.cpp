@@ -45,8 +45,11 @@ int main(int argc, char **argv) {
         result["readOnly"] = false;
         result["execution"] = true;
         result["runtimeMappings"] = true;
-        result["developmentOnly"] = true;
-        result["captureCoverage"] = "unavailable";
+        result["developmentOnly"] = false;
+        result["captureCoverage"] = "capture-first-with-traffic-lease";
+        result["captureArtifacts"] = true;
+        result["captures"] = true;
+        result["trafficLeaseMilliseconds"] = 10000;
         return result;
       }
       if (method == "inventory")
