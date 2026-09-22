@@ -6,3 +6,4 @@ CMakeUserPresets.json
 /console/web/dist/
 /console/web/test-results/
 /console/web/playwright-report/
+/qemu-guests/*/artifacts/

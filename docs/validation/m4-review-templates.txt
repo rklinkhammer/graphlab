@@ -1,0 +1,26 @@
+artifacts/kernel: OK
+artifacts/firmware: OK
+artifacts/initrd.gz: OK
+artifacts/disk.raw: OK
+artifacts/known_hosts: OK
+artifacts/modules.tar.gz: OK
+{
+  "artifactVerification": "local contract and lock integrity; referenced binaries not fetched",
+  "edges": 1,
+  "nodes": 2,
+  "topologyHash": "sha256:6310f4697b5faac44435c6f28d7fecaa68338b44ddc76f03bef8f63c41d1ea97",
+  "valid": true
+}
+artifacts/kernel: OK
+artifacts/firmware: OK
+artifacts/initrd.gz: OK
+artifacts/disk.raw: OK
+artifacts/known_hosts: OK
+artifacts/modules.tar.gz: OK
+{
+  "artifactVerification": "local contract and lock integrity; referenced binaries not fetched",
+  "edges": 1,
+  "nodes": 2,
+  "topologyHash": "sha256:43d8f83bb11f684b92c537725bf0fec3d7692abe1632008f9874d3cbd9c1b9da",
+  "valid": true
+}

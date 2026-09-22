@@ -1,0 +1,57 @@
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/11 Test  #1: m1_acceptance ....................   Passed    4.35 sec
+      Start  2: m0_acceptance
+ 2/11 Test  #2: m0_acceptance ....................   Passed    0.21 sec
+      Start  3: cli_validate
+ 3/11 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/11 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/11 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/11 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/11 Test  #7: installed_package ................   Passed    0.05 sec
+      Start  8: m2_journal
+ 8/11 Test  #8: m2_journal .......................   Passed    0.86 sec
+      Start  9: m3_capture
+ 9/11 Test  #9: m3_capture .......................   Passed    2.28 sec
+      Start 10: m3_transport
+10/11 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/11 Test #11: m4_terminal ......................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) =   7.79 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl4c-y1hdsV"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T12:59:36Z","error":null,"finishedAt":"2026-09-22T13:00:02Z","id":"4e2dc315-7ab1-4302-8e27-54e7eb3f1af0","operation":"start","revision":"1","runId":"bc9002dd-dc05-458c-85a2-a68cf0ee3d7b","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS scoped shell closed
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T13:00:05Z","error":null,"finishedAt":"2026-09-22T13:00:05Z","id":"2e1f6ae8-3ffe-40b1-8bea-97a218367a62","operation":"recover","revision":"2","runId":"bc9002dd-dc05-458c-85a2-a68cf0ee3d7b","state":"succeeded"}
+M4 Docker console tests passed
+Evidence: "/tmp/gl4c-SjH2Yw"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T13:00:08Z","error":null,"finishedAt":"2026-09-22T13:00:11Z","id":"2d1ac571-61fa-4958-88ee-0eb4c447fb8d","operation":"start","revision":"1","runId":"3c04a9d6-07b9-493e-8b2c-3e2d8ae6b428","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS stop recorder independently
+OBS recorder unit absent=1
+OBS exec running before close=true
+OBS exec running after successful close=1
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T13:00:14Z","error":null,"finishedAt":"2026-09-22T13:00:14Z","id":"d9a02416-b519-49f1-82bb-b3a86d2ee6ab","operation":"recover","revision":"2","runId":"3c04a9d6-07b9-493e-8b2c-3e2d8ae6b428","state":"succeeded"}
+closed recorder must not leave Docker exec alive

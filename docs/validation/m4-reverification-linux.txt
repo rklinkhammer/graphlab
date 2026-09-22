@@ -1,0 +1,119 @@
+[0/2] Re-checking globbed directories...
+ninja: no work to do.
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/11 Test  #1: m1_acceptance ....................   Passed    4.32 sec
+      Start  2: m0_acceptance
+ 2/11 Test  #2: m0_acceptance ....................   Passed    0.22 sec
+      Start  3: cli_validate
+ 3/11 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/11 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/11 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/11 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/11 Test  #7: installed_package ................   Passed    0.06 sec
+      Start  8: m2_journal
+ 8/11 Test  #8: m2_journal .......................   Passed    1.00 sec
+      Start  9: m3_capture
+ 9/11 Test  #9: m3_capture .......................   Passed    2.27 sec
+      Start 10: m3_transport
+10/11 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/11 Test #11: m4_terminal ......................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) =   7.93 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl4c-vzHBpT"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T21:59:23Z","error":null,"finishedAt":"2026-09-22T21:59:27Z","id":"0ed3fd8e-1582-4e5a-82b9-bf360b88723b","operation":"start","revision":"1","runId":"841c90ed-40dd-4878-8fe5-9e557d443377","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS terminate recorder independently
+OBS recorder unit absent=1
+OBS exec running after successful close=0
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T21:59:30Z","error":null,"finishedAt":"2026-09-22T21:59:30Z","id":"002851d5-9d67-4488-8656-10e661655cec","operation":"recover","revision":"2","runId":"841c90ed-40dd-4878-8fe5-9e557d443377","state":"succeeded"}
+PASS recorder exit hook terminates Docker exec before explicit close
+PASS explicit close cleans orphan exec with absent recorder unit
+PASS orphan fixture was running before explicit close
+PASS exec cleanup preserves parent workload
+PASS closed recorder must not leave Docker exec alive
+M4 Docker console tests passed
+Evidence: "/tmp/gl4c-wC0sZI"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T21:59:30Z","error":null,"finishedAt":"2026-09-22T21:59:34Z","id":"88a6a254-f64e-4644-8144-2b0541a1a102","operation":"start","revision":"1","runId":"944c24c5-01de-4a1f-856c-3dcba81502f4","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS terminate recorder independently
+OBS recorder unit absent=0
+OBS exec running after successful close=0
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T21:59:37Z","error":null,"finishedAt":"2026-09-22T21:59:37Z","id":"d3ec69f1-c63f-4168-8e40-1dcc1b5ebf07","operation":"recover","revision":"2","runId":"944c24c5-01de-4a1f-856c-3dcba81502f4","state":"succeeded"}
+PASS recorder exit hook terminates Docker exec before explicit close
+PASS explicit close cleans orphan exec with absent recorder unit
+PASS orphan fixture was running before explicit close
+PASS exec cleanup preserves parent workload
+PASS closed recorder must not leave Docker exec alive
+M4 Docker console tests passed
+Evidence: "/tmp/gl4-Or5pS8"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T21:59:38Z","error":null,"finishedAt":"2026-09-22T21:59:41Z","id":"91cfffcf-2b88-4522-8193-be46c18bf69d","operation":"start","revision":"1","runId":"5eeb014d-a4fe-4476-89f2-4fd5e8acdf13","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T22:00:02Z","error":null,"finishedAt":"2026-09-22T22:00:02Z","id":"4b0a30d1-ee59-4fd0-8da1-7ba71c7d5dd1","operation":"recover","revision":"2","runId":"5eeb014d-a4fe-4476-89f2-4fd5e8acdf13","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS serial artifact finalized
+PASS guest SSH is unavailable on the data interface
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+Evidence: "/tmp/gl4-7jK1RA"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T22:00:13Z","error":null,"finishedAt":"2026-09-22T22:00:16Z","id":"e6a4b7f3-2726-4727-84b9-f5b9fbe6c70f","operation":"start","revision":"1","runId":"795ba59a-3cbc-4377-82cc-b3da004ea4cc","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS inject abrupt VM supervisor shutdown
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T22:00:39Z","error":null,"finishedAt":"2026-09-22T22:00:39Z","id":"b0c07955-af26-454e-8b83-b718b1648821","operation":"recover","revision":"2","runId":"795ba59a-3cbc-4377-82cc-b3da004ea4cc","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS abrupt shutdown preserves partial recording
+PASS guest SSH is unavailable on the data interface
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+M4 Linux QEMU tests passed

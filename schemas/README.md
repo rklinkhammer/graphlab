@@ -27,7 +27,7 @@ Supported edge primitives: switch–switch, Docker–switch and Docker–Docker 
 
 ## Workload: `graphlab.workload/v2`
 
-Required: `apiVersion`, `id`, `kind` (`docker`/`qemu`), unique nonempty `platforms` (`linux/amd64`, `linux/arm64`), `interfaces`, `lifecycle`, `labSupport`, `resources`.
+Required: `apiVersion`, `id`, `kind` (`docker`/`qemu`), unique nonempty `platforms` (`linux/amd64`, `linux/arm64`; QEMU also supports `linux/ppc64le`), `interfaces`, `lifecycle`, `labSupport`, `resources`.
 
 - `interfaces`: names map to `{role, required: boolean, medium: ethernet, mtuRange: [min,max]}`. Bounds 576..9216.
 - `lifecycle`: `{gateUntilRelease: true, quiesce: supported|restart-required}`.
@@ -45,7 +45,7 @@ Required `apiVersion` and `workloads` mapping workload IDs to:
 - `contractSha256`: digest of that exact parsed contract (object keys sorted; arrays retain order).
 - `platform`: one of the contract's advertised platforms.
 - Docker: `image` with immutable `name@sha256:...`; no VM fields.
-- QEMU: `diskSha256` and `vm` containing versioned `machine` (e.g. `virt-8.2`), `firmwareSha256`, and `accelerator: kvm`; no image field.
+- QEMU: `diskSha256` and `vm` containing versioned `machine` (e.g. `virt-8.2`), `firmwareSha256`, and `accelerator: kvm|tcg`; no image field.
 
 M0 does not resolve registry manifests, retrieve disk images, prove KVM compatibility, or allocate host resources. Local hash integrity does not prove those artifacts exist or have been authenticated. Examples use clearly synthetic identities and are for validation/planning only.
 
@@ -54,3 +54,5 @@ M0 does not resolve registry manifests, retrieve disk images, prove KVM compatib
 `mode: dry-run`, `executable: false`, `topologyHash`, `artifactLockHash`, `canonicalTopology`, `summary`, dependency-ordered `steps`, reverse dependency `resourceTeardownOrder`, and `deferredChecks`.
 
 Each step has `id`, `operation`, sorted unique `dependsOn`, and logical `resource` metadata. Deterministic Kahn ordering uses lexical ready-step IDs. Node/edge creation precedes policy, each edge capture precedes the capture barrier, then link enablement/convergence precede workload release/readiness. Teardown order describes resource order only; actual stop/compensation and runtime ownership require later milestones. Runtime names and directions are explicitly unresolved/unverified.
+
+M4 guest lock metadata accepts explicit `kvm` or `tcg` acceleration, a versioned machine and firmware hash. Optional `kernelSha256`/`initrdSha256` and `sshUser`/`knownHostsSha256` must each be supplied as a pair. Actual binary and credential checks occur on the Linux executor; schema validation remains read-only. See [guest templates](../qemu-guests/README.md).

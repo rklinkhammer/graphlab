@@ -1,0 +1,18 @@
+{
+  "schema": "graphlab.example-inputs/v1",
+  "dropbear": {
+    "version": "2025.88",
+    "url": "https://dropbear.nl/mirror/releases/dropbear-2025.88.tar.bz2",
+    "sha256": "783f50ea27b17c16da89578fafdb6decfa44bb8f6590e5698a4e4d3672dc53d4"
+  },
+  "ppcKernel": {
+    "release": "6.1.0-50-powerpc64le",
+    "url": "https://deb.debian.org/debian/dists/bookworm/main/installer-ppc64el/current/images/netboot/debian-installer/ppc64el/vmlinux",
+    "modulesArchive": "https://deb.debian.org/debian/dists/bookworm/main/installer-ppc64el/current/images/netboot/debian-installer/ppc64el/initrd.gz",
+    "note": "The current URL can move; use the preserved kernel and per-template SHA256SUMS to reproduce this instance. Match modules to the pinned kernel."
+  },
+  "armKernel": { "release": "6.8.0-134-generic", "source": "Ubuntu lab host /boot/vmlinuz-6.8.0-134-generic" },
+  "qemu": { "version": "8.2.2", "ubuntuPackage": "1:8.2.2+ds-0ubuntu1.18" },
+  "armFirmware": { "package": "qemu-efi-aarch64", "version": "2024.02-2ubuntu0.9", "path": "/usr/share/AAVMF/AAVMF_CODE.fd" },
+  "ppcFirmware": { "path": "/usr/share/qemu/slof.bin", "note": "Exact content hash is in the PowerPC template lock." }
+}

@@ -1,0 +1,60 @@
+{
+  "apiVersion": "graphlab.artifacts/v1",
+  "workloads": {
+    "guest-linux": {
+      "contract": {
+        "apiVersion": "graphlab.workload/v2",
+        "id": "guest-linux",
+        "interfaces": {
+          "data0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "data"
+          },
+          "mgmt0": {
+            "medium": "ethernet",
+            "mtuRange": [
+              1280,
+              9000
+            ],
+            "required": true,
+            "role": "management"
+          }
+        },
+        "kind": "qemu",
+        "labSupport": {
+          "language": "cpp23",
+          "packageSha256": "sha256:d1a93d82157d3cb5ccd6915e1e9aec5823609bd46a0a6b4437a95a726a42ba83",
+          "version": "1.0.0"
+        },
+        "lifecycle": {
+          "gateUntilRelease": true,
+          "quiesce": "supported"
+        },
+        "platforms": [
+          "linux/ppc64le"
+        ],
+        "resources": {
+          "cpus": 1,
+          "memoryMiB": 512
+        }
+      },
+      "contractSha256": "sha256:d3a22a777f49f820aecae1997fc0ab54a80e28f143d0b05523940f761e6c3839",
+      "diskSha256": "sha256:080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e",
+      "platform": "linux/ppc64le",
+      "vm": {
+        "accelerator": "tcg",
+        "firmwareSha256": "sha256:9cf8a9b1ef21b40b84175e4e3e126720b2a8882af9c877c30fe56b4c11bbf15b",
+        "initrdSha256": "sha256:d1a93d82157d3cb5ccd6915e1e9aec5823609bd46a0a6b4437a95a726a42ba83",
+        "kernelSha256": "sha256:66992858584dc89cec6fcacf6c3e225de8d437cab07493d904a2c09334cac636",
+        "knownHostsSha256": "sha256:bc60f9a64326024a1feaf3f09f6f0d41b7d5bd4cb17eed6f133781c72e6ee6c2",
+        "machine": "pseries-8.2",
+        "sshUser": "root"
+      }
+    }
+  }
+}

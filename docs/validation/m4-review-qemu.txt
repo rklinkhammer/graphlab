@@ -1,0 +1,23 @@
+Evidence: "/tmp/gl4-IT10Eh"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T13:06:42Z","error":null,"finishedAt":"2026-09-22T13:06:45Z","id":"ad54bf92-5aea-4e9a-87d6-ff7a8167d434","operation":"start","revision":"1","runId":"d9dc6fd9-30df-4454-8473-7a1cf32cb46c","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+OBS guest SSH accessible on data address=1
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS inject abrupt VM supervisor shutdown
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T13:07:07Z","error":null,"finishedAt":"2026-09-22T13:07:08Z","id":"9a3b00d7-82b3-4db1-87b0-aa92027d5240","operation":"recover","revision":"2","runId":"d9dc6fd9-30df-4454-8473-7a1cf32cb46c","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS abrupt shutdown preserves partial recording
+guest SSH must be management-only

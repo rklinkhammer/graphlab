@@ -1,0 +1,96 @@
+--- a/tests/terminal/linux.cpp
++++ b/tests/terminal/linux.cpp
+@@ -137,16 +137,28 @@
+       }
+       check(out.find("SURVIVED_AGENT") != std::string::npos,
+             "output continues and replays through controller restart");
+-      base["operation"] = "close";
++auto descriptor = run["sessions"][0];
++auto exec = console::load(std::filesystem::path(descriptor["directory"].get<std::string>()) / "exec.json");
++auto execpath = "/v1.52/exec/" + exec["id"].get<std::string>() + "/json";
++check(runtime::process({"/usr/bin/systemctl", "stop", descriptor["unit"]}).code == 0, "stop recorder independently");
++std::this_thread::sleep_for(std::chrono::milliseconds(500));
++auto units = runtime::process({"/usr/bin/systemctl", "list-units", "--all", "--no-legend", descriptor["unit"]});
++std::cout << "OBS recorder unit absent=" << units.output.empty() << std::endl;
++std::cout << "OBS exec running before close=" << runtime::docker_json("GET", execpath)["Running"] << std::endl;
++base["operation"] = "close";
++
+       base["params"] = Json::object();
+       call(e, "terminal", base);
+-      check(true, "scoped shell closed");
++bool leaked = runtime::docker_json("GET", execpath)["Running"];
++std::cout << "OBS exec running after successful close=" << leaked << std::endl;
++
+       auto job = wait(e, call(e, "operate",
+                               {{"runId", run["id"]},
+                                {"expectedRevision", run["revision"]},
+                                {"operation", "recover"},
+                                {"idempotencyKey", "m4-console-cleanup"}}));
+       check(job["state"] == "succeeded", "console run cleanup: " + job.dump());
++      check(!leaked, "closed recorder must not leave Docker exec alive");
+     }
+     std::cout << "M4 Docker console tests passed\n";
+     return 0;
+--- a/tests/qemu/linux.cpp
++++ b/tests/qemu/linux.cpp
+@@ -70,7 +70,8 @@
+   if (lock < 0 || flock(lock, LOCK_EX | LOCK_NB))
+     return 2;
+   try {
+-    for (int profile = 0; profile < 2; ++profile) {
++    bool exposed = false;
++    for (int profile = 1; profile < 2; ++profile) {
+       char p[] = "/tmp/gl4-XXXXXX";
+       auto root = std::filesystem::path(mkdtemp(p));
+       auto state = root / "state";
+@@ -192,7 +193,11 @@
+         }
+         check(ssh_output.find("GRAPHLAB_CONSOLE") != std::string::npos,
+               "guest SSH host key pinned and authenticated");
+-        auto access = terminal("acquire");
++auto scan = runtime::process({"/usr/bin/ssh-keyscan", "-T", "3", "-t", "ed25519", "10.233.17.2"}, 10);
++exposed = scan.output.find("ssh-ed25519") != std::string::npos;
++std::cout << "OBS guest SSH accessible on data address=" << exposed << std::endl;
++auto access = terminal("acquire");
++
+         terminal("resize", {{"token", access["token"]}, {"rows", 32}, {"columns", 90}});
+         terminal("input",
+                  {{"token", access["token"]}, {"base64", terminal::encode("echo M4_SSH_OK\n")}});
+@@ -267,36 +272,7 @@
+                                     (profile == 0 ? "output.glterm" : "output.partial")),
+             profile == 0 ? "serial artifact finalized"
+                          : "abrupt shutdown preserves partial recording");
+-      // A digest-valid but unloadable firmware blob must not leave running VM resources.
+-      auto bad = state / "bad-firmware";
+-      {
+-        std::ofstream image(bad);
+-        image.seekp(128 * 1024 * 1024);
+-        image.put(0);
+-      }
+-      auto badHash = capture::file_hash(bad);
+-      std::filesystem::rename(bad, state / "artifacts" / badHash.substr(7));
+-      chmod((state / "artifacts" / badHash.substr(7)).c_str(), 0400);
+-      artifacts["workloads"]["guest-linux"]["vm"]["firmwareSha256"] = badHash;
+-      t["artifactLock"] = lab_support::digest(artifacts);
+-      write(root / "artifacts.lock.json", artifacts);
+-      write(root / "topology.yaml", t);
+-      console::Catalog failureCatalog(root, root / "artifacts.lock.json");
+-      {
+-        runtime::Engine e(state, backend, failureCatalog);
+-        auto a = call(e, "start",
+-                      {{"topologyHash", lab_support::validate(t, artifacts)->hash},
+-                       {"idempotencyKey", "m4-invalid-firmware"}});
+-        auto j = wait(e, a);
+-        check(j["state"] == "failed", "invalid firmware fails guest start");
+-        auto failed = call(e, "run", {{"id", a["runId"]}});
+-        auto cleanup = wait(e, call(e, "operate",
+-                                    {{"runId", failed["id"]},
+-                                     {"expectedRevision", failed["revision"]},
+-                                     {"operation", "recover"},
+-                                     {"idempotencyKey", "m4-boot-cleanup"}}));
+-        check(cleanup["state"] == "succeeded", "failed-boot owned resource cleanup");
+-      }
++      check(!exposed, "guest SSH must be management-only");
+     }
+     std::cout << "M4 Linux QEMU tests passed\n";
+     return 0;

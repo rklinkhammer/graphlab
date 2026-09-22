@@ -4,6 +4,7 @@
 #include <fstream>
 #include <graphlab/console.hpp>
 #include <graphlab/runtime.hpp>
+#include <graphlab/terminal.hpp>
 #include <iostream>
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
@@ -213,7 +214,11 @@ Response Router::handle(const Request &r) {
         if (!parsed || !Json::accept(r.body()))
           return error(http::status::bad_request, "invalid_json");
         params = *parsed;
-        if (path == "/api/v1/runs")
+        if (path.starts_with("/api/v1/runs/") && path.ends_with("/terminal")) {
+          method = "terminal";
+          params["runId"] = path.substr(13, path.size() - 13 - 9);
+          params["owner"] = lab_support::digest(Json(cookie(r)));
+        } else if (path == "/api/v1/runs")
           method = "start";
         else if (path.starts_with("/api/v1/runs/") && path.ends_with("/operations")) {
           method = "operate";
@@ -284,6 +289,118 @@ Response Router::handle(const Request &r) {
   }
 }
 namespace {
+struct TerminalSocket : std::enable_shared_from_this<TerminalSocket> {
+  boost::beast::websocket::stream<boost::beast::tcp_stream> socket;
+  boost::beast::flat_buffer buffer;
+  Router &router;
+  Request credentials;
+  std::shared_ptr<std::size_t> active;
+  std::vector<std::pair<bool, std::string>> output;
+  std::size_t sent = 0, frames = 0;
+  std::chrono::steady_clock::time_point window = std::chrono::steady_clock::now();
+  TerminalSocket(boost::beast::tcp_stream stream, Router &r, Request request,
+                 std::shared_ptr<std::size_t> a)
+      : socket(std::move(stream)), router(r), credentials(std::move(request)),
+        active(std::move(a)) {
+    ++*active;
+  }
+  ~TerminalSocket() { --*active; }
+  void start() {
+    socket.next_layer().expires_never();
+    socket.set_option(boost::beast::websocket::stream_base::timeout{
+        std::chrono::seconds(3), std::chrono::seconds(20), true});
+    socket.read_message_max(4096);
+    socket.set_option(boost::beast::websocket::stream_base::decorator(
+        [](boost::beast::websocket::response_type &r) {
+          r.set(http::field::sec_websocket_protocol, "graphlab.terminal.v1");
+        }));
+    auto self = shared_from_this();
+    socket.async_accept(credentials, [self](auto ec) {
+      if (!ec)
+        self->read();
+    });
+  }
+  void read() {
+    auto self = shared_from_this();
+    socket.async_read(buffer, [self](auto ec, auto) {
+      if (ec)
+        return;
+      auto now = std::chrono::steady_clock::now();
+      if (now - self->window >= std::chrono::seconds(1)) {
+        self->window = now;
+        self->frames = 0;
+      }
+      if (++self->frames > 64)
+        return self->close();
+      self->output.clear();
+      self->sent = 0;
+      try {
+        if (!self->socket.got_text())
+          throw std::runtime_error("control_frame_required");
+        auto message = Json::parse(boost::beast::buffers_to_string(self->buffer.data()));
+        auto id = message.at("runId").get<std::string>();
+        if (id.size() != 36 || id.find_first_not_of("0123456789abcdef-") != std::string::npos)
+          throw std::runtime_error("invalid_run");
+        Request request = self->credentials;
+        request.erase(http::field::upgrade);
+        request.method(http::verb::post);
+        request.target("/api/v1/runs/" + id + "/terminal");
+        request.set("X-CSRF-Token", message.at("csrf").get<std::string>());
+        message.erase("csrf");
+        message.erase("runId");
+        request.body() = message.dump();
+        auto result = self->router.handle(request);
+        auto body = Json::parse(result.body());
+        if (result.result() == http::status::accepted && body.contains("records")) {
+          // Each binary frame is sequence:u64, outputOffset:u64, type:u32, payloadLength:u32 (big
+          // endian), then opaque payload.
+          for (const auto &r : body["records"]) {
+            std::string frame;
+            auto put = [&](std::uint64_t n, int width) {
+              for (int i = width - 1; i >= 0; --i)
+                frame.push_back(char(n >> (8 * i)));
+            };
+            auto bytes = terminal::decode(r["base64"]);
+            put(std::stoull(r["sequence"].get<std::string>()), 8);
+            put(std::stoull(r["offset"].get<std::string>()), 8);
+            put(r["type"], 4);
+            put(bytes.size(), 4);
+            frame += bytes;
+            self->output.emplace_back(false, std::move(frame));
+          }
+          body.erase("records");
+        }
+        self->output.emplace_back(true,
+                                  Json{{"status", result.result_int()}, {"result", body}}.dump());
+      } catch (...) {
+        self->output.emplace_back(true, "{\"status\":400,\"error\":\"invalid_terminal_frame\"}");
+      }
+      self->buffer.consume(self->buffer.size());
+      std::size_t size = 0;
+      for (const auto &f : self->output)
+        size += f.second.size();
+      if (size > 1024 * 1024)
+        return self->close();
+      self->write();
+    });
+  }
+  void write() {
+    if (sent == output.size())
+      return read();
+    socket.text(output[sent].first);
+    auto self = shared_from_this();
+    socket.async_write(asio::buffer(output[sent].second), [self](auto ec, auto) {
+      if (ec)
+        return;
+      ++self->sent;
+      self->write();
+    });
+  }
+  void close() {
+    boost::system::error_code ec;
+    socket.next_layer().socket().close(ec);
+  }
+};
 struct HttpConnection : std::enable_shared_from_this<HttpConnection> {
   boost::beast::tcp_stream stream;
   boost::beast::flat_buffer buffer;
@@ -305,7 +422,24 @@ struct HttpConnection : std::enable_shared_from_this<HttpConnection> {
       if (ec)
         return;
       try {
-        self->output = self->router.handle(self->parser.get());
+        if (boost::beast::websocket::is_upgrade(self->parser.get()) &&
+            self->parser.get().target() == "/api/v1/terminal") {
+          auto request = self->parser.get();
+          auto authorized = request;
+          authorized.erase(http::field::upgrade);
+          authorized.target("/api/v1/session");
+          self->output = self->router.handle(authorized);
+          if (request[http::field::origin].empty() ||
+              request[http::field::sec_websocket_protocol] != "graphlab.terminal.v1")
+            self->output = error(http::status::forbidden, "terminal_origin_or_protocol_denied");
+          if (self->output.result() == http::status::ok) {
+            std::make_shared<TerminalSocket>(std::move(self->stream), self->router,
+                                             std::move(request), self->active)
+                ->start();
+            return;
+          }
+        } else
+          self->output = self->router.handle(self->parser.get());
       } catch (...) {
         self->output = error(http::status::internal_server_error, "internal_error");
       }

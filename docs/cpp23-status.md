@@ -6,6 +6,8 @@ M1 implementation is now available: [console setup](m1-console.md), [M1 verifica
 
 M2 adds the opt-in Linux executor and C++ fixture nodes: [setup and scope](m2-executor.md), [verification](validation/m2-verification.md).
 
+M3 adds capture-first execution; M4 adds QEMU and recorded consoles. See [M4 operations](m4-qemu-consoles.md), [guest templates](../qemu-guests/README.md) and [M4 verification](validation/m4-verification.md). The historical M0-only scope below is unchanged.
+
 ## Implemented
 
 - CMake/Ninja C++23 build, `std::expected` feature probe, development and reference GCC 14 presets, checksum-pinned YAML/JSON dependencies, system OpenSSL 3 hashing.

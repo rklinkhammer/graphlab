@@ -8,6 +8,8 @@ M2 adds opt-in durable Linux execution, Docker/shared-OVS resources, run/job con
 
 M3 adds capture-first runs, independent C++ PCAPNG workers, renewable traffic leases and verified artifact downloads. See [M3 setup and behavior](docs/m3-captures.md) and [verification evidence](docs/validation/m3-verification.md). No-capture development topologies still require explicit acknowledgement.
 
+M4 adds QEMU guests and recorded Docker/SSH/serial consoles. See [operations](docs/m4-qemu-consoles.md), [preserved PowerPC/TCG and ARM64/KVM templates](qemu-guests/README.md), and [verification](docs/validation/m4-verification.md).
+
 ## Build and test
 
 Requirements: CMake 3.28+, Ninja, a C++23 compiler/standard library with `std::expected`, Boost 1.92.0 headers/CMake configuration, OpenSSL 3 and SQLite 3.24+ development headers/libraries. Linux builds also require libpcap development files; M3 execution requires systemd. The build fetches checksum-pinned yaml-cpp 0.8.0 and nlohmann/json 3.12.0 archives. The optional browser build uses Node/npm. Python is not required.

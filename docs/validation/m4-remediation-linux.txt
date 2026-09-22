@@ -1,0 +1,87 @@
+[0/2] Re-checking globbed directories...
+[1/18] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[2/18] Linking CXX static library libgraphlab_runtime.a
+[3/18] Linking CXX executable lab-capture
+[4/18] Linking CXX executable lab
+[5/18] Linking CXX executable lab-terminal
+[6/18] Linking CXX executable lab-guest-template
+[7/18] Linking CXX executable lab-api
+[8/18] Linking CXX executable lab-agent
+[9/18] Linking CXX executable m1_tests
+[10/18] Linking CXX executable m4_tests
+[11/18] Linking CXX executable m3_transport
+[12/18] Linking CXX executable m4_linux
+[13/18] Linking CXX executable m2_linux
+[14/18] Linking CXX executable m2_tests
+[15/18] Linking CXX executable m3_linux
+[16/18] Linking CXX executable m3_tests
+[17/18] Building CXX object CMakeFiles/m4_console_linux.dir/tests/terminal/linux.cpp.o
+[18/18] Linking CXX executable m4_console_linux
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/11 Test  #1: m1_acceptance ....................   Passed    4.34 sec
+      Start  2: m0_acceptance
+ 2/11 Test  #2: m0_acceptance ....................   Passed    0.24 sec
+      Start  3: cli_validate
+ 3/11 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/11 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/11 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/11 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/11 Test  #7: installed_package ................   Passed    0.16 sec
+      Start  8: m2_journal
+ 8/11 Test  #8: m2_journal .......................   Passed    1.03 sec
+      Start  9: m3_capture
+ 9/11 Test  #9: m3_capture .......................   Passed    2.28 sec
+      Start 10: m3_transport
+10/11 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/11 Test #11: m4_terminal ......................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) =   8.11 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl4c-cnQest"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T21:57:08Z","error":null,"finishedAt":"2026-09-22T21:57:12Z","id":"f5843ee9-8943-43ce-81b8-b1e201879f86","operation":"start","revision":"1","runId":"a09a6640-ea89-4e3d-8f7e-990818ac3bc1","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS terminate recorder independently
+OBS recorder unit absent=1
+OBS exec running after successful close=0
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T21:57:15Z","error":null,"finishedAt":"2026-09-22T21:57:15Z","id":"3460b1dd-3106-45f1-8ed3-f320e85440e6","operation":"recover","revision":"2","runId":"a09a6640-ea89-4e3d-8f7e-990818ac3bc1","state":"succeeded"}
+PASS recorder exit hook terminates Docker exec before explicit close
+PASS explicit close cleans orphan exec with absent recorder unit
+PASS orphan fixture was running before explicit close
+PASS exec cleanup preserves parent workload
+PASS closed recorder must not leave Docker exec alive
+M4 Docker console tests passed
+Evidence: "/tmp/gl4c-pOR1fD"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T21:57:15Z","error":null,"finishedAt":"2026-09-22T21:57:19Z","id":"26702f7d-def0-4761-86a6-8b7c8b8ab313","operation":"start","revision":"1","runId":"c3b45055-f6d7-4efe-8cb0-c6761f2b5130","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS terminate recorder independently
+OBS recorder unit absent=0
+OBS exec running after successful close=0
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T21:57:22Z","error":null,"finishedAt":"2026-09-22T21:57:22Z","id":"538871d1-c124-4556-8747-1389b87aad73","operation":"recover","revision":"2","runId":"c3b45055-f6d7-4efe-8cb0-c6761f2b5130","state":"succeeded"}
+PASS recorder exit hook terminates Docker exec before explicit close
+PASS explicit close cleans orphan exec with absent recorder unit
+PASS orphan fixture was running before explicit close
+PASS exec cleanup preserves parent workload
+PASS closed recorder must not leave Docker exec alive
+M4 Docker console tests passed

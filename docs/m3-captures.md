@@ -17,7 +17,7 @@ npm run build --prefix console/web
 
 Rebuild app-a and app-b independently against the installed common package as documented in M2, then build new immutable images. M3 images advertise `graphlab.gate-protocol=1` and `graphlab.traffic-lease=1`. Required-capture admission rejects older images without lease support. Labels are declarations by trusted workload publishers, not image attestation. Existing synthetic workload/package metadata in the fixture generator remain test metadata, not a published supply chain.
 
-Agent/API launch flags are unchanged. A topology with `capture.required: true` opts into M3; `capture.required: false` still requires explicit `developmentMode: true`. QEMU remains rejected until M4. The CLI uses `lab control --socket ... --agent-uid 0 start start.json`:
+Agent/API launch flags are unchanged. A topology with `capture.required: true` opts into M3; `capture.required: false` still requires explicit `developmentMode: true`. QEMU execution is now provided by [M4](m4-qemu-consoles.md); the M3 qualification below remains Docker-specific. The CLI uses `lab control --socket ... --agent-uid 0 start start.json`:
 
 ```json
 {

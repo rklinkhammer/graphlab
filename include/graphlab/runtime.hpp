@@ -45,9 +45,10 @@ public:
 };
 class LinuxBackend final : public Backend {
   std::filesystem::path capture_root_;
+  std::filesystem::path state_root_;
 
 public:
-  void configure(const std::filesystem::path &p) override { capture_root_ = p / "captures"; }
+  void configure(const std::filesystem::path &p) override { capture_root_ = p / "captures"; state_root_ = p; }
   Json capture_plan(const Json &) override;
   Json capture_control(const Json &, const std::string &) override;
   void preflight(const Json &, const Json &) override;
@@ -62,6 +63,7 @@ class Engine {
   int lock_ = -1;
   Backend &backend_;
   const console::Catalog &catalog_;
+  std::filesystem::path directory_;
   Json state_;
   std::mutex mutex_;
   std::condition_variable condition_;

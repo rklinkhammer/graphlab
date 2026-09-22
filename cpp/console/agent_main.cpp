@@ -50,6 +50,9 @@ int main(int argc, char **argv) {
         result["captureArtifacts"] = true;
         result["captures"] = true;
         result["trafficLeaseMilliseconds"] = 10000;
+        result["qemu"] = true;
+        result["recordedTerminals"] = true;
+        result["serialCoverage"] = "from-attachment";
         return result;
       }
       if (method == "inventory")

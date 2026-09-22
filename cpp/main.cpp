@@ -31,7 +31,7 @@ Json preflight() {
   uname(&host);
   Json tools = Json::object();
   for (const auto *tool : {"cmake", "ninja", "c++", "docker", "ovs-vsctl", "ip", "tc",
-                           "qemu-system-aarch64", "qemu-system-x86_64"}) {
+                           "qemu-system-aarch64", "qemu-system-x86_64", "qemu-system-ppc64"}) {
     tools[tool] = nullptr;
     std::istringstream paths(std::getenv("PATH") ? std::getenv("PATH") : "");
     std::string dir;

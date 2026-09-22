@@ -9,3 +9,5 @@ Build each node on the target Linux ISA, copy its executable into a small Docker
 See [M2 build and invocation](../docs/m2-executor.md) and [shared package](../packages/lab-support/README.md). Future independent application repositories belong under their own directories here; OVS infrastructure and QEMU definitions remain outside `docker-nodes/`.
 
 M3 rebuilds advertise `graphlab.traffic-lease=1` and use the common ten-second traffic lease. Required-capture runs use lease release/renewal instead of the M2 indefinite development release. An expired lease holds the application gate until a new capture barrier authorizes release. See [M3 behavior and measured limits](../docs/m3-captures.md).
+
+M4 adds recorded Docker exec consoles without passing the Docker socket to a node or console worker. Shared C++ QEMU guest examples are kept separately under [qemu-guests/](../qemu-guests/README.md).

@@ -1,0 +1,24 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+test('M4 recorded shell, WebSocket replay, writer and reconnect',async({page})=>{
+ test.skip(!process.env.GRAPHLAB_M4_LIVE,'Requires dedicated Linux M4 services and tunnel');test.setTimeout(120000);
+ const root=resolve(import.meta.dirname,'../../..');let frames='';
+ page.on('websocket',socket=>socket.on('framereceived',event=>{if(Buffer.isBuffer(event.payload))frames+=event.payload.subarray(24).toString();}));
+ await page.goto('http://127.0.0.1:18089/');
+ expect(await page.evaluate(()=>new Promise<boolean>(resolve=>{const ws=new WebSocket(`ws://${location.host}/api/v1/terminal`,'graphlab.terminal.v1');ws.onopen=()=>{ws.close();resolve(false);};ws.onerror=()=>resolve(true);}))).toBe(true);
+ await page.getByLabel('Operator credential').fill(readFileSync(resolve(root,'build/m4-live-password'),'utf8').trim());await page.getByRole('button',{name:'Sign in',exact:true}).click();
+ await page.getByLabel('I accept running without capture coverage.').check();await page.getByRole('button',{name:'Start selected topology'}).click();await expect(page.getByRole('status')).toContainText('start: succeeded',{timeout:60000});
+ await page.getByRole('combobox',{name:'Workload',exact:true}).selectOption('a');await page.getByRole('button',{name:'Open recorded session'}).click();
+ await expect(page.getByRole('button',{name:'Acquire writer'})).toBeVisible({timeout:15000});await page.getByRole('button',{name:'Acquire writer'}).click();await expect(page.getByText(/Writer lease active/)).toBeVisible();
+ await page.locator('.xterm-helper-textarea').focus();await page.keyboard.type("printf 'M4_BROWSER_OK\\n'");await page.keyboard.press('Enter');
+ await expect.poll(()=>frames,{timeout:15000}).toContain('M4_BROWSER_OK');frames='';
+ await page.getByRole('button',{name:'Reconnect and replay'}).click();await expect.poll(()=>frames,{timeout:15000}).toContain('M4_BROWSER_OK');
+ await page.screenshot({path:resolve(root,'docs/validation/m4-console.png'),fullPage:true});
+ await page.getByRole('button',{name:'Close shell',exact:true}).click();
+ await page.getByRole('button',{name:'Destroy run',exact:true}).click();await expect(page.getByRole('status')).toContainText('destroy: succeeded',{timeout:30000});
+ const downloadEvent=page.waitForEvent('download');
+ await page.getByRole('button',{name:/Download recording/}).first().click();
+ const download=await downloadEvent;expect(download.suggestedFilename()).toMatch(/\.glterm$/);expect(await download.failure()).toBeNull();
+ expect(await page.evaluate(async()=>{const list=await (await fetch('/api/v1/runs')).json();return new Promise<number>(resolve=>{const ws=new WebSocket(`ws://${location.host}/api/v1/terminal`,'graphlab.terminal.v1');ws.onopen=()=>ws.send(JSON.stringify({runId:list.items[0].id,operation:'list',csrf:'invalid',params:{}}));ws.onmessage=e=>{if(typeof e.data==='string'){const r=JSON.parse(e.data);ws.close();resolve(r.status);}};});})).toBe(403);
+});

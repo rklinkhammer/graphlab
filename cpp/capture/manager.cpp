@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <fstream>
 #include <graphlab/capture.hpp>
+#include <graphlab/terminal.hpp>
 #include <openssl/evp.h>
 #include <poll.h>
 #include <set>
@@ -41,7 +42,8 @@ void verify(const Json &c, const Json &s) {
     throw runtime::Failure("capture_unit_changed", 409);
 }
 } // namespace
-Json worker_call(const Json &c, const std::string &operation, const std::string &generation) {
+Json worker_call(const Json &c, const std::string &operation, const std::string &generation,
+                 const Json &params) {
   auto path =
       (std::filesystem::path(c.at("directory").get<std::string>()) / "control.sock").string();
   if (path.size() >= sizeof(sockaddr_un::sun_path))
@@ -72,8 +74,12 @@ Json worker_call(const Json &c, const std::string &operation, const std::string 
   if (getsockopt(fd, SOL_SOCKET, SO_PEERCRED, &peer, &len) || peer.uid != 0)
     throw runtime::Failure("capture_peer_denied");
 #endif
-  auto body =
-      Json{{"nonce", c.at("nonce")}, {"generation", generation}, {"operation", operation}}.dump();
+  auto body = Json{
+      {"nonce", c.at("nonce")},
+      {"generation", generation},
+      {"operation", operation},
+      {"params",
+       params}}.dump();
   int send_flags = 0;
 #ifdef MSG_NOSIGNAL
   send_flags = MSG_NOSIGNAL;
@@ -128,10 +134,13 @@ Json plan(const Json &run, const std::filesystem::path &root) {
     throw runtime::Failure("capture_budget_per_edge");
   std::uint64_t memory_mib = edges * 64, available_kib = 0;
   for (const auto &[id, n] : run["topology"]["nodes"].items())
-    if (n["kind"] == "docker")
+    if (n["kind"] == "docker" || n["kind"] == "qemu") {
       memory_mib += run["artifacts"]["workloads"][n["workload"].get<std::string>()]["contract"]
                        ["resources"]["memoryMiB"]
                            .get<std::uint64_t>();
+      if (n["kind"] == "qemu")
+        memory_mib += 512;
+    }
   std::ifstream memory("/proc/meminfo");
   std::string line;
   while (std::getline(memory, line))
@@ -367,9 +376,13 @@ Json artifacts(const Json &run) {
           {{"captureId", c["id"]}, {"edge", c["edge"]}, {"state", "unavailable-or-partial"}});
     }
   }
+  for (auto &artifact : terminal::artifacts(run))
+    result.push_back(std::move(artifact));
   return {{"items", result}};
 }
 Json download(const Json &run, const std::string &id, std::uint64_t offset) {
+  if (id.starts_with("terminal-"))
+    return terminal::download(run, id, offset);
   auto captures = run.value("captureHistory", Json::array());
   for (const auto &c : run.value("captures", Json::array()))
     captures.push_back(c);

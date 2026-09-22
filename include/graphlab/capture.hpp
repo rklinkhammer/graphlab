@@ -24,7 +24,8 @@ public:
   std::uint64_t bytes() const { return bytes_; }
   std::uint64_t total() const { return total_ + bytes_; }
 };
-Json worker_call(const Json &capture, const std::string &operation, const std::string &generation);
+Json worker_call(const Json &capture, const std::string &operation, const std::string &generation,
+                 const Json &params = Json::object());
 Json plan(const Json &run, const std::filesystem::path &root);
 Json control(const Json &run, const std::string &operation);
 Json artifacts(const Json &run);

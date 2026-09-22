@@ -103,7 +103,7 @@ Json workload(const Json &c) {
   std::set<std::string> seen;
   for (const auto &v : platforms) {
     auto s = str(v, p + ".platforms");
-    if (s != "linux/amd64" && s != "linux/arm64")
+    if (s != "linux/amd64" && s != "linux/arm64" && !(kind == "qemu" && s == "linux/ppc64le"))
       fail(p + ".platforms", "unsupported platform");
     if (!seen.insert(s).second)
       fail(p + ".platforms", "duplicate platform");
@@ -186,13 +186,23 @@ void validate_lock(const Json &lock) {
         fail(p, "QEMU artifact cannot have container image");
       hash(getstr(e, "diskSha256", p), p + ".diskSha256");
       const auto &vm = need(e, "vm", p);
-      fields(vm, p + ".vm", {"machine", "firmwareSha256", "accelerator"});
+      fields(vm, p + ".vm",
+             {"machine", "firmwareSha256", "accelerator", "kernelSha256", "initrdSha256", "sshUser",
+              "knownHostsSha256"});
+      if (vm.contains("sshUser") || vm.contains("knownHostsSha256")) {
+        id(getstr(vm, "sshUser", p), p + ".vm.sshUser");
+        hash(getstr(vm, "knownHostsSha256", p), p + ".vm.knownHostsSha256");
+      }
+      if (vm.contains("kernelSha256") || vm.contains("initrdSha256")) {
+        hash(getstr(vm, "kernelSha256", p), p + ".vm.kernelSha256");
+        hash(getstr(vm, "initrdSha256", p), p + ".vm.initrdSha256");
+      }
       static const std::regex machine("[A-Za-z0-9_-]+-[0-9]+\\.[0-9]+(\\.[0-9]+)?");
       if (!std::regex_match(getstr(vm, "machine", p), machine))
         fail(p + ".vm.machine", "versioned QEMU machine required");
       hash(getstr(vm, "firmwareSha256", p), p + ".vm.firmwareSha256");
-      if (getstr(vm, "accelerator", p) != "kvm")
-        fail(p + ".vm.accelerator", "only explicit KVM profile is planned");
+      if (getstr(vm, "accelerator", p) != "kvm" && getstr(vm, "accelerator", p) != "tcg")
+        fail(p + ".vm.accelerator", "explicit kvm or tcg accelerator required");
     }
   }
 }

@@ -1,0 +1,62 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/m4_linux.dir/tests/qemu/linux.cpp.o
+[2/2] Linking CXX executable m4_linux
+Evidence: "/tmp/gl4-KV1UCx"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T11:59:32Z","error":null,"finishedAt":"2026-09-22T11:59:36Z","id":"65709acc-9451-40d5-84ae-63acc9fa0b80","operation":"start","revision":"1","runId":"665c0f33-971f-4987-830a-b75faff7bce9","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T11:59:58Z","error":null,"finishedAt":"2026-09-22T11:59:58Z","id":"be864988-0424-4c61-8919-8b4db52777e3","operation":"recover","revision":"2","runId":"665c0f33-971f-4987-830a-b75faff7bce9","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS serial artifact finalized
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+Evidence: "/tmp/gl4-1U8ELq"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T12:00:10Z","error":null,"finishedAt":"2026-09-22T12:00:13Z","id":"575a96a5-7007-4288-82aa-2e063b3dce9e","operation":"start","revision":"1","runId":"aef6c1d3-d8cc-4934-8043-665a339f1405","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS inject abrupt VM supervisor shutdown
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T12:00:37Z","error":null,"finishedAt":"2026-09-22T12:00:37Z","id":"92b8c625-3694-4e47-87d5-01797b0f0384","operation":"recover","revision":"2","runId":"aef6c1d3-d8cc-4934-8043-665a339f1405","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS abrupt shutdown preserves partial recording
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+M4 Linux QEMU tests passed
+Evidence: "/tmp/gl4c-bxpGJb"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T12:07:35Z","error":null,"finishedAt":"2026-09-22T12:07:39Z","id":"50c1f27f-88a1-40c8-8840-e03a5228008d","operation":"start","revision":"1","runId":"2fe12b53-da2d-49d5-8fad-8aea4d652e44","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS scoped shell closed
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T12:07:41Z","error":null,"finishedAt":"2026-09-22T12:07:42Z","id":"54dc766f-7bd1-45dd-8c76-6ff5419d82a6","operation":"recover","revision":"2","runId":"2fe12b53-da2d-49d5-8fad-8aea4d652e44","state":"succeeded"}
+M4 Docker console tests passed

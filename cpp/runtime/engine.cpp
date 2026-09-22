@@ -1,6 +1,7 @@
 #include <fcntl.h>
 #include <graphlab/capture.hpp>
 #include <graphlab/runtime.hpp>
+#include <graphlab/terminal.hpp>
 #include <regex>
 #include <sqlite3.h>
 #include <sys/file.h>
@@ -48,7 +49,9 @@ std::vector<Json> resources(const Json &run) {
         {{"key", "management/" + id}, {"kind", "network"}, {"logical", id}, {"configuration", n}});
   for (const auto &[id, n] : t["nodes"].items())
     result.push_back({{"key", "node/" + id},
-                      {"kind", n["kind"] == "ovs-switch" ? "bridge" : "container"},
+                      {"kind", n["kind"] == "ovs-switch" ? "bridge"
+                               : n["kind"] == "qemu"     ? "qemu"
+                                                         : "container"},
                       {"logical", id},
                       {"configuration", n}});
   for (const auto &e : t["edges"])
@@ -60,7 +63,7 @@ std::vector<Json> resources(const Json &run) {
 }
 Engine::Engine(const std::filesystem::path &directory, Backend &backend,
                const console::Catalog &catalog)
-    : backend_(backend), catalog_(catalog) {
+    : backend_(backend), catalog_(catalog), directory_(directory) {
   struct stat info{};
   if (lstat(directory.c_str(), &info) || !S_ISDIR(info.st_mode) || info.st_uid != geteuid() ||
       (info.st_mode & 0077))
@@ -114,7 +117,10 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
       }
     save();
     for (auto &[id, run] : state_["runs"].items()) {
-      if (run["state"] == "destroyed" || run["topology"]["capture"]["required"] != true)
+      bool has_vm = std::any_of(run["resources"].begin(), run["resources"].end(),
+                                [](const Json &r) { return r["kind"] == "qemu"; });
+      if (run["state"] == "destroyed" || (run["topology"]["capture"]["required"] != true &&
+                                          !has_vm && run.value("sessions", Json::array()).empty()))
         continue;
       bool stopped = run["state"] == "stopped";
       auto coverage = run.value("captureCoverage", "pending");
@@ -129,6 +135,13 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
         if (!closed)
           run["captureObservations"] = backend_.capture_control(run, "adopt");
         backend_.gate(run, "quiesce");
+        for (const auto &s : run.value("sessions", Json::array())) {
+          try {
+            terminal::request(s, "adopt", run["controllerGeneration"]);
+          } catch (...) {
+            run["terminalRecoveryRequired"] = true;
+          }
+        }
         if (stopped && closed)
           run["state"] = "stopped";
         run[closed ? "reconciledAt" : "adoptedAt"] = console::timestamp();
@@ -198,6 +211,119 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
   std::unique_lock guard(mutex_);
   if (stopping_)
     throw Failure("journal_unavailable", 503);
+  if (method == "terminal") {
+    fields(p, {"runId", "node", "sessionId", "operation", "params", "owner"});
+    auto runid = string(p, "runId");
+    if (!state_["runs"].contains(runid))
+      throw Failure("not_found", 404);
+    auto &run = state_["runs"][runid];
+    auto operation = string(p, "operation");
+    auto args = p.value("params", Json::object());
+    const auto owner = std::to_string(principal) + ":" + p.value("owner", std::string("cli"));
+    args["owner"] = owner;
+    if (operation == "list") {
+      Json items = Json::array();
+      for (const auto &r : run["resources"])
+        if (r["kind"] == "qemu" && r.contains("identity"))
+          items.push_back(
+              {{"id", r["identity"]["id"]}, {"node", r["logical"]}, {"kind", "serial"}});
+      for (const auto &s : run.value("sessions", Json::array()))
+        items.push_back({{"id", s["id"]},
+                         {"node", s["node"]},
+                         {"kind", s["kind"]},
+                         {"recordInput", s.value("recordInput", false)}});
+      return {{"items", items}};
+    }
+    if (operation == "open") {
+      if (run["state"] != "ready" && run["state"] != "stopped")
+        throw Failure("terminal_run_not_available", 409);
+      for (const auto &[id, j] : state_["jobs"].items())
+        if (pending(j))
+          throw Failure("operation_in_progress", 409);
+      if (!run.contains("sessions"))
+        run["sessions"] = Json::array();
+      if (run["sessions"].size() >= 16)
+        throw Failure("terminal_session_limit");
+      auto node = string(p, "node");
+      Json resource;
+      for (const auto &r : run["resources"])
+        if (r["logical"] == node && (r["kind"] == "container" || r["kind"] == "qemu"))
+          resource = r;
+      if (resource.is_null())
+        throw Failure("terminal_capability_unavailable");
+      auto d =
+          resource["kind"] == "qemu"
+              ? terminal::ssh_session(run, resource, directory_, args.value("recordInput", false))
+              : terminal::docker_session(run, resource, directory_ / "sessions",
+                                         args.value("recordInput", false));
+      run["sessions"].push_back(d);
+      save();
+      try {
+        terminal::launch(d);
+        if (d["kind"] == "docker")
+          terminal::docker_attach(d, run["controllerGeneration"]);
+        bool ready = false;
+        for (int i = 0; i < 100; ++i) {
+          try {
+            auto status = terminal::request(d, "status", run["controllerGeneration"]);
+            if (status["state"] == "active") {
+              ready = true;
+              break;
+            }
+          } catch (...) {
+          }
+          std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        }
+        if (!ready)
+          throw Failure("terminal_worker_not_ready");
+      } catch (...) {
+        try {
+          terminal::stop(d, run["controllerGeneration"]);
+        } catch (...) {
+          run["terminalRecoveryRequired"] = true;
+          save();
+        }
+        throw;
+      }
+      return {{"id", d["id"]}, {"recordInput", d["recordInput"]}};
+    }
+    Json d;
+    auto sid = string(p, "sessionId");
+    for (const auto &s : run.value("sessions", Json::array()))
+      if (s["id"] == sid)
+        d = s;
+    for (const auto &r : run["resources"])
+      if (r["kind"] == "qemu" && r.contains("identity") && r["identity"]["id"] == sid)
+        d = r["identity"];
+    if (d.is_null())
+      throw Failure("session_not_found", 404);
+    auto dir = std::filesystem::path(d["directory"].get<std::string>());
+    if (operation == "replay") {
+      auto seq = args.value("sequence", std::string("0"));
+      if (seq.empty() || seq.size() > 16 ||
+          seq.find_first_not_of("0123456789") != std::string::npos)
+        throw Failure("invalid_replay_sequence");
+      guard.unlock();
+      return terminal::replay(dir / (std::filesystem::exists(dir / "output.glterm")
+                                         ? "output.glterm"
+                                         : "output.partial"),
+                              std::stoull(seq));
+    }
+    if (operation != "status" && operation != "acquire" && operation != "renew-writer" &&
+        operation != "input" && operation != "resize" && operation != "revoke" &&
+        operation != "close")
+      throw Failure("unsupported_terminal_operation");
+    if (operation == "close") {
+      if (d["kind"] == "qemu")
+        throw Failure("serial_lifetime_is_run");
+      terminal::stop(d, run["controllerGeneration"]);
+      return Json::object();
+    }
+    auto result = terminal::request(d, operation, run["controllerGeneration"], args);
+    if (operation == "resize" && d["kind"] == "docker")
+      terminal::docker_resize(d, args.at("rows"), args.at("columns"));
+    return result;
+  }
   if (method == "runs") {
     fields(p, {});
     Json runs = Json::array();
@@ -310,8 +436,6 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
         policy["rotateSeconds"] > 60)
       throw Failure("invalid_capture_policy");
     for (const auto &[name, node] : t["nodes"].items()) {
-      if (node["kind"] == "qemu")
-        throw Failure("qemu_requires_M4");
       if (t["capture"]["required"] == true && node["kind"] == "docker" &&
           resolved["artifacts"]["workloads"][node["workload"].get<std::string>()]["contract"]
                   ["lifecycle"]["quiesce"] != "supported")
@@ -431,7 +555,10 @@ void Engine::monitor() {
   {
     std::lock_guard guard(mutex_);
     for (const auto &[id, r] : state_["runs"].items())
-      if (r["state"] == "ready" && r["topology"]["capture"]["required"] == true) {
+      if (r["state"] == "ready" &&
+          (r["topology"]["capture"]["required"] == true ||
+           std::any_of(r["resources"].begin(), r["resources"].end(),
+                       [](const Json &n) { return n["kind"] == "qemu"; }))) {
         run = r;
         break;
       }
@@ -440,7 +567,9 @@ void Engine::monitor() {
     return;
   auto id = run["id"].get<std::string>();
   try {
-    auto status = backend_.capture_control(run, "status");
+    auto status = run["topology"]["capture"]["required"] == true
+                      ? backend_.capture_control(run, "status")
+                      : Json::array();
     backend_.gate(run, "renew");
     std::lock_guard guard(mutex_);
     state_["runs"][id]["captureObservations"] = status;
@@ -490,6 +619,8 @@ void Engine::cleanup(const std::string &id) {
     std::lock_guard guard(mutex_);
     run = state_["runs"][id];
   }
+  for (const auto &s : run.value("sessions", Json::array()))
+    terminal::stop(s, run["controllerGeneration"]);
   // Every resource has a durable intent even if its creation never returned.
   for (std::size_t index = run["resources"].size(); index > 0; --index) {
     auto resource = run["resources"][index - 1];

@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <fstream>
 #include <graphlab/capture.hpp>
+#include <graphlab/qemu.hpp>
 #include <graphlab/runtime.hpp>
 #include <sys/stat.h>
 #include <sys/utsname.h>
@@ -91,6 +92,15 @@ Json node_resource(const Json &run, const std::string &node) {
     if (r["key"] == "node/" + node)
       return r;
   throw Failure("missing_node_resource");
+}
+std::string physical(const Json &run, const Json &r, int index) {
+  for (const auto &e : r["configuration"]["endpoints"]) {
+    auto endpoint = e.get<std::string>();
+    auto colon = endpoint.find(':');
+    if (node_resource(run, endpoint.substr(0, colon))["kind"] == "qemu")
+      return qemu::tap_name(run, endpoint.substr(0, colon), endpoint.substr(colon + 1));
+  }
+  return resource_name(run, text(r, "key") + "/" + std::to_string(index));
 }
 struct Namespace {
   int fd = -1;
@@ -221,6 +231,7 @@ void LinuxBackend::preflight(const Json &t, const Json &artifacts) {
 #else
   if (geteuid() != 0)
     throw Failure("root_agent_required");
+  qemu::preflight(t, artifacts, state_root_);
   auto version = docker_json("GET", "/version");
   if (version.value("ApiVersion", "") < "1.52")
     throw Failure("docker_api_1_52_required");
@@ -240,9 +251,11 @@ void LinuxBackend::preflight(const Json &t, const Json &artifacts) {
   std::string platform = std::string(host.machine) == "aarch64" ? "linux/arm64" : "linux/amd64";
   std::uint64_t memory_mib = 0, cpus = 0;
   for (const auto &[id, n] : t["nodes"].items())
-    if (n["kind"] == "docker") {
+    if (n["kind"] == "docker" || n["kind"] == "qemu") {
       const auto &limits = artifacts["workloads"][text(n, "workload")]["contract"]["resources"];
       memory_mib += limits["memoryMiB"].get<std::uint64_t>();
+      if (n["kind"] == "qemu")
+        memory_mib += 512;
       cpus += limits["cpus"].get<std::uint64_t>();
     }
   std::ifstream memory("/proc/meminfo");
@@ -305,6 +318,8 @@ void LinuxBackend::preflight(const Json &t, const Json &artifacts) {
 Json LinuxBackend::prepare(const Json &run, const Json &r) {
   auto kind = text(r, "kind"), name = resource_name(run, text(r, "key"));
   const auto &config = r["configuration"];
+  if (kind == "qemu")
+    return qemu::prepare(run, r, state_root_);
   if (kind == "network") {
     auto prior = docker_request("GET", std::string(api) + "/networks/" + name);
     if (prior.status != 404)
@@ -403,6 +418,54 @@ Json LinuxBackend::prepare(const Json &run, const Json &r) {
     return {{"id", id}, {"pid", current["State"]["Pid"]}, {"gate", "held"}};
   }
   auto endpoints = config["endpoints"];
+  for (int i = 0; i < 2; ++i) {
+    auto ep = endpoints[i].get<std::string>();
+    auto colon = ep.find(':');
+    auto guest = node_resource(run, ep.substr(0, colon));
+    if (guest["kind"] != "qemu")
+      continue;
+    auto other = endpoints[1 - i].get<std::string>();
+    auto split = other.find(':');
+    auto bridge = node_resource(run, other.substr(0, split));
+    if (bridge["kind"] != "bridge")
+      throw Failure("unsupported_guest_attachment");
+    verify_bridge(run, bridge);
+    auto tap = qemu::tap_name(run, ep.substr(0, colon), ep.substr(colon + 1));
+    auto observed = link(tap);
+    check_link(observed, owner(run, r));
+    if (observed.is_null())
+      throw Failure("tap_missing");
+    ip({"link", "set", tap, "mtu",
+        std::to_string(guest["configuration"]["ports"][ep.substr(colon + 1)]["mtu"].get<int>())});
+    auto vlan = bridge["configuration"]["ports"][other.substr(split + 1)]["vlan"];
+    std::vector<std::string> args = {"/usr/bin/ovs-vsctl",
+                                     "--timeout=5",
+                                     "add-port",
+                                     resource_name(run, text(bridge, "key")),
+                                     tap,
+                                     "--",
+                                     "set",
+                                     "Port",
+                                     tap,
+                                     "external_ids:graphlab-owner=" + owner(run, r)};
+    if (vlan.contains("access")) {
+      args.push_back("vlan_mode=access");
+      args.push_back("tag=" + std::to_string(vlan["access"].get<int>()));
+    } else {
+      args.push_back("vlan_mode=trunk");
+      std::string trunks = "trunks=";
+      for (const auto &v : vlan["trunk"]) {
+        if (trunks.back() != '=')
+          trunks += ',';
+        trunks += std::to_string(v.get<int>());
+      }
+      args.push_back(trunks);
+    }
+    command(args);
+    Json endpoint = {
+        {"name", tap}, {"ifindex", observed["ifindex"]}, {"namespace", "host"}, {"kind", "tap"}};
+    return {{"endpoints", Json::array({endpoint, endpoint})}};
+  }
   std::string names[2] = {resource_name(run, text(r, "key") + "/0"),
                           resource_name(run, text(r, "key") + "/1")};
   if (!link(names[0]).is_null() || !link(names[1]).is_null())
@@ -482,6 +545,10 @@ Json LinuxBackend::prepare(const Json &run, const Json &r) {
 }
 void LinuxBackend::remove(const Json &run, const Json &r) {
   auto kind = text(r, "kind"), name = resource_name(run, text(r, "key"));
+  if (kind == "qemu") {
+    qemu::remove(run, r, state_root_);
+    return;
+  }
   if (kind == "container") {
     auto c = inspect_container(run, r, true);
     if (!c.is_null())
@@ -521,7 +588,7 @@ void LinuxBackend::remove(const Json &run, const Json &r) {
     auto colon = endpoint.find(':');
     auto node = endpoint.substr(0, colon), port = endpoint.substr(colon + 1);
     auto nr = node_resource(run, node);
-    auto physical = resource_name(run, text(r, "key") + "/" + std::to_string(index));
+    auto physical = ::graphlab::runtime::physical(run, r, index);
     auto expected = r.contains("identity") ? r["identity"]["endpoints"][index] : Json(nullptr);
     if (nr["kind"] == "bridge") {
       auto found = link(physical);
@@ -535,7 +602,7 @@ void LinuxBackend::remove(const Json &run, const Json &r) {
       }
       if (!found.is_null())
         ip({"link", "delete", "dev", physical});
-    } else {
+    } else if (nr["kind"] != "qemu") {
       auto c = inspect_container(run, nr, true);
       if (!c.is_null() && c["State"]["Running"] == true) {
         Namespace ns(c, expected);
@@ -570,9 +637,9 @@ void LinuxBackend::activate(const Json &run) {
       auto colon = endpoint.find(':');
       auto nr = node_resource(run, endpoint.substr(0, colon));
       auto port = endpoint.substr(colon + 1);
-      auto physical = resource_name(run, text(r, "key") + "/" + std::to_string(index));
+      auto physical = ::graphlab::runtime::physical(run, r, index);
       auto expected = r["identity"]["endpoints"][index];
-      if (nr["kind"] == "bridge") {
+      if (nr["kind"] == "bridge" || nr["kind"] == "qemu") {
         check_link(link(physical), owner(run, r), expected);
         ip({"link", "set", "dev", physical, "up"});
       } else {
@@ -597,8 +664,7 @@ void LinuxBackend::activate(const Json &run) {
           if (nr["kind"] != "bridge" || nr["configuration"]["policy"]["rstp"] != true)
             continue;
           auto status = command({"/usr/bin/ovs-vsctl", "--timeout=5", "get", "Port",
-                                 resource_name(run, text(r, "key") + "/" + std::to_string(index)),
-                                 "rstp_status"});
+                                 physical(run, r, index), "rstp_status"});
           std::transform(status.begin(), status.end(), status.begin(),
                          [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
           ready = ready && (status.find("forwarding") != std::string::npos ||
@@ -615,8 +681,23 @@ void LinuxBackend::activate(const Json &run) {
 }
 void LinuxBackend::gate(const Json &run, const std::string &action) {
   for (const auto &r : run["resources"])
+    if (r["kind"] == "qemu" && r.value("state", "") != "removed" && r.contains("identity")) {
+      if (action == "quiesce") {
+        try {
+          qemu::command(run, r, action);
+        } catch (...) {
+          auto adopted = qemu::command(run, r, "adopt");
+          (void)adopted;
+          qemu::command(run, r, action);
+        }
+      } else
+        qemu::command(run, r, action);
+    }
+  for (const auto &r : run["resources"])
     if (r["kind"] == "container" && r.value("state", "") != "removed") {
       bool leased = run["topology"]["capture"]["required"] == true;
+      if (action == "renew" && !leased)
+        continue;
       auto operation = leased && action == "release" ? "release-lease"
                        : action == "renew"           ? "renew-lease"
                                                      : action;
@@ -634,6 +715,10 @@ void LinuxBackend::gate(const Json &run, const std::string &action) {
 }
 Json LinuxBackend::observe(const Json &run) {
   Json nodes = Json::array();
+  if (run["state"] != "destroyed")
+    for (const auto &r : run["resources"])
+      if (r["kind"] == "qemu" && r.contains("identity"))
+        nodes.push_back({{"id", r["logical"]}, {"guest", qemu::command(run, r, "status")}});
   if (run["state"] != "destroyed")
     for (const auto &r : run["resources"])
       if (r["kind"] == "container")

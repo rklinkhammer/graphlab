@@ -1,0 +1,76 @@
+{
+  "apiVersion": "graphlab.topology/v2",
+  "artifactLock": "sha256:18fd8d36f0dd13809017ae6b183b8f29e03a5020a057044e3aa328d8f750dfed",
+  "backend": {
+    "kind": "linux-local",
+    "switchIsolation": "shared-ovs"
+  },
+  "capture": {
+    "format": "pcapng",
+    "required": true,
+    "scope": "all-data-edges"
+  },
+  "edges": [
+    {
+      "endpoints": [
+        "guest:data0",
+        "s1:p1"
+      ],
+      "id": "guest-link"
+    }
+  ],
+  "id": "arm64-kvm",
+  "management": {
+    "networks": {
+      "control": {
+        "dynamicPool": "172.31.243.128/25",
+        "externalAccess": false,
+        "gateway": "172.31.243.1",
+        "subnet": "172.31.243.0/24"
+      }
+    }
+  },
+  "managementAttachments": [
+    {
+      "address": "172.31.243.10/24",
+      "endpoint": "guest:mgmt0",
+      "network": "control"
+    }
+  ],
+  "nodes": {
+    "guest": {
+      "kind": "qemu",
+      "ports": {
+        "data0": {
+          "medium": "ethernet",
+          "mtu": 1500,
+          "role": "data"
+        },
+        "mgmt0": {
+          "medium": "ethernet",
+          "mtu": 1500,
+          "role": "management"
+        }
+      },
+      "workload": "guest-linux"
+    },
+    "s1": {
+      "kind": "ovs-switch",
+      "policy": {
+        "forwarding": "normal",
+        "priority": 4096,
+        "rstp": true
+      },
+      "ports": {
+        "p1": {
+          "medium": "ethernet",
+          "mtu": 1500,
+          "role": "data",
+          "vlan": {
+            "access": 100
+          }
+        }
+      }
+    }
+  }
+}
