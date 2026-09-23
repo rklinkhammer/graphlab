@@ -8,6 +8,50 @@
 #include <sys/prctl.h>
 #endif
 namespace graphlab::runtime {
+void detail::reap_stopped_unit(const std::string &unit) {
+  if ((!unit.starts_with("graphlab-cap-") && !unit.starts_with("graphlab-terminal-") &&
+       !unit.starts_with("graphlab-vm-")) ||
+      !unit.ends_with(".service"))
+    throw Failure("invalid_worker_unit");
+  auto absent = [&] {
+    auto listed = process({"/usr/bin/systemctl", "list-units", "--all", "--no-legend", unit});
+    if (listed.code)
+      throw Failure("worker_supervisor_unavailable");
+    return listed.output.empty();
+  };
+  if (absent())
+    return;
+  auto state = process({"/usr/bin/systemctl", "show", unit, "--property=ActiveState", "--value"});
+  if (state.code && absent())
+    return;
+  if (state.code || (state.output != "inactive\n" && state.output != "failed\n"))
+    throw Failure("worker_stop_not_observed");
+  // systemctl stop does not erase a failed unit's failure record. Reset only
+  // this verified, stopped unit so systemd can garbage-collect its transient definition.
+  (void)process({"/usr/bin/systemctl", "reset-failed", unit});
+  for (int i = 0; i < 50; ++i) {
+    auto remaining = process({"/usr/bin/systemctl", "list-units", "--all", "--no-legend", unit});
+    if (remaining.code)
+      throw Failure("worker_supervisor_unavailable");
+    if (remaining.output.empty())
+      return;
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+  }
+  throw Failure("worker_unit_not_collected");
+}
+void detail::checkpoint(const std::string &name) {
+#ifdef GRAPHLAB_TEST_CHECKPOINTS
+  const char *selected = std::getenv("GRAPHLAB_CRASH_AT");
+  if (selected && name == selected) {
+    auto message = "CHECKPOINT SIGKILL " + name + "\n";
+    (void)::write(STDERR_FILENO, message.data(), message.size());
+    kill(getpid(), SIGKILL);
+    _exit(137);
+  }
+#else
+  (void)name;
+#endif
+}
 ProcessResult process(const std::vector<std::string> &args, int timeout_seconds) {
   if (args.empty() || args[0].empty() || args[0][0] != '/')
     throw Failure("invalid_process_path");

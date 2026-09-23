@@ -18,6 +18,10 @@ struct ProcessResult {
 };
 ProcessResult process(const std::vector<std::string> &argv, int timeout_seconds = 10);
 namespace detail {
+// No-op in deployment builds. Qualification builds may SIGKILL at an exact named boundary.
+void checkpoint(const std::string &);
+// Caller must first verify the owned worker descriptor and stop the unit.
+void reap_stopped_unit(const std::string &unit);
 Json lookup_link(const ProcessResult &, const std::string &name);
 bool lookup_present(const ProcessResult &);
 void verify_namespace(const Json &expected, const Json &container, std::uint64_t inode);

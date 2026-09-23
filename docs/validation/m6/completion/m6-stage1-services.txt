@@ -1,0 +1,50 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/m6-services-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:41597) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "error": {
+    "code": "internal_error",
+    "message": "idempotency_conflict",
+    "path": "$"
+  }
+}
+{
+  "error": {
+    "code": "internal_error",
+    "message": "stale_revision",
+    "path": "$"
+  }
+}
+Running as unit: graphlab-m6-api.service; invocation ID: 328738b0e198493095814fe2fdd1421c
+Running as unit: graphlab-m6-agent.service; invocation ID: 71b0e087c99b4461a729efd7cee12546
+{
+  "error": {
+    "code": "internal_error",
+    "message": "agent_unavailable",
+    "path": "$"
+  }
+}
+{
+  "error": {
+    "code": "internal_error",
+    "message": "writer_lease_expired",
+    "path": "$"
+  }
+}
+Running as unit: graphlab-m6-agent.service; invocation ID: 6864d8b06da94440b933233c27b4812f
+{
+  "error": {
+    "code": "internal_error",
+    "message": "agent_unavailable",
+    "path": "$"
+  }
+}
+  ✓  1 tests/m6-services-live.spec.ts:14:1 › M6 real CLI/UI faults and independent API/agent restarts while recording (13.7s)
+
+  1 passed (14.1s)

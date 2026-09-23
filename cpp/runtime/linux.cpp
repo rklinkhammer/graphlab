@@ -682,6 +682,15 @@ void LinuxBackend::activate(const Json &run) {
   }
 }
 void LinuxBackend::gate(const Json &run, const std::string &action) {
+  // Inspect every Docker peer before releasing any node (including QEMU).
+  // Image labels are a preflight hint, not proof of the live wire protocol.
+  if (action == "release")
+    for (const auto &r : run["resources"])
+      if (r["kind"] == "container" && r.value("state", "") != "removed") {
+        auto version = lab_support::gate_protocol_minor(node_exec(run, r, "status"));
+        if (!version)
+          throw Failure(version.error().code);
+      }
   for (const auto &r : run["resources"])
     if (r["kind"] == "qemu" && r.value("state", "") != "removed" && r.contains("identity")) {
       if (action == "quiesce") {
@@ -704,6 +713,11 @@ void LinuxBackend::gate(const Json &run, const std::string &action) {
                        : action == "renew"           ? "renew-lease"
                                                      : action;
       auto result = node_exec(run, r, operation);
+      if (action == "release" || action == "renew") {
+        auto version = lab_support::gate_protocol_minor(result);
+        if (!version)
+          throw Failure(version.error().code);
+      }
       if (result["state"] != (action == "release" || action == "renew" ? "released" : "held"))
         throw Failure("gate_acknowledgement_failed");
       if (leased && (action == "release" || action == "renew") &&
@@ -912,6 +926,7 @@ Json LinuxBackend::fault(const Json &run, const Json &f, const std::string &acti
                       std::to_string(f["lossPercent"].get<int>()) + "%"});
         else if (action == "remove" && ours)
           tc(prefix, {"qdisc", "del", "dev", name, "root", "handle", handle});
+        detail::checkpoint("fault." + action + ".created");
         auto observed = tc_show(prefix, name);
         bool present = false;
         for (const auto &v : observed)

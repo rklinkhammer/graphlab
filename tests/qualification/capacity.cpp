@@ -37,7 +37,8 @@ std::uint64_t bytes(const std::filesystem::path &dir) {
       n += p.file_size();
   return n;
 }
-Json traffic(int pid, int rate, int seconds, const std::filesystem::path &output) {
+Json traffic(int pid, int rate, int seconds, const std::filesystem::path &output,
+             const std::function<void()> &monitor = {}) {
   auto child = fork();
   if (child < 0)
     throw std::runtime_error("traffic fork");
@@ -116,7 +117,26 @@ Json traffic(int pid, int rate, int seconds, const std::filesystem::path &output
     _exit(0);
   }
   int status;
-  waitpid(child, &status, 0);
+  auto deadline = Clock::now() + std::chrono::seconds(seconds + 15);
+  auto next = Clock::now();
+  try {
+    for (;;) {
+      auto result = waitpid(child, &status, WNOHANG);
+      if (result == child)
+        break;
+      if (result < 0 || Clock::now() > deadline)
+        throw std::runtime_error("traffic deadline");
+      if (monitor && Clock::now() >= next) {
+        monitor();
+        next = Clock::now() + std::chrono::seconds(1);
+      }
+      std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+  } catch (...) {
+    kill(child, SIGKILL);
+    waitpid(child, nullptr, 0);
+    throw;
+  }
   if (status != 0)
     throw std::runtime_error("traffic child failed");
   std::ifstream result(output);
@@ -132,6 +152,9 @@ int main(int argc, char **argv) {
     return 2;
   try {
     int seconds = std::stoi(argv[4]);
+    const bool sustained = std::getenv("GRAPHLAB_CAPACITY_SUSTAINED") != nullptr;
+    if (sustained && seconds != 300)
+      throw std::runtime_error("sustained qualification requires 300-second samples");
     if (seconds < 5 || seconds > 300)
       throw std::runtime_error("sample seconds must be 5..300");
     const auto root = std::filesystem::absolute(argv[3]);
@@ -145,7 +168,10 @@ int main(int argc, char **argv) {
     const bool triangle = std::getenv("GRAPHLAB_CAPACITY_TRIANGLE") != nullptr;
     const int budget_mib = std::getenv("GRAPHLAB_CAPACITY_BUDGET_MIB")
                                ? std::stoi(std::getenv("GRAPHLAB_CAPACITY_BUDGET_MIB"))
-                               : 256;
+                           : sustained ? 6144
+                                       : 256;
+    if (sustained && budget_mib != 6144)
+      throw std::runtime_error("sustained qualification requires declared 6 GiB budget");
     if (budget_mib < 256 || budget_mib > 6144)
       throw std::runtime_error("capture budget must be 256..6144 MiB");
     const std::uint64_t budget = std::uint64_t(budget_mib) * 1024 * 1024;
@@ -161,6 +187,17 @@ int main(int argc, char **argv) {
                     "controller sample, not aggregate container/capture RSS"},
                    {"qualification", "bounded samples, not an extrapolated saturation limit"},
                    {"samples", Json::array()}};
+    report["mode"] = sustained ? "sustained-m6" : "bounded-sweep";
+    report["criteria"] = {{"maxLossFraction", .001},
+                          {"minAchievedFraction", .99},
+                          {"maxRttP95Us", 20000},
+                          {"maxHostCpuPercent", 25},
+                          {"minAvailableMemoryKiB", 2097152},
+                          {"maxControllerRssGrowthKiB", 65536},
+                          {"maxCaptureSourceDropIncrement", 0}};
+    if (sustained)
+      report["qualification"] = "declared ten-minute per-profile envelope; no extrapolation";
+    bool qualified = true;
     for (auto profile : {"baseline", "telemetry", "capture"}) {
       auto folder = root / profile;
       std::filesystem::create_directory(folder);
@@ -237,12 +274,40 @@ int main(int argc, char **argv) {
         if (apid <= 0)
           throw std::runtime_error("missing sender");
         std::this_thread::sleep_for(std::chrono::seconds(2));
+        auto profileRss = host()["VmRSS:"].get<std::uint64_t>();
         for (int repetition = 0; repetition < 2; ++repetition)
-          for (int rate : {250, 1000, 4000}) {
+          for (int rate : sustained ? std::vector<int>{1000} : std::vector<int>{250, 1000, 4000}) {
             auto before = host();
             auto size = bytes(state);
             auto began = Clock::now();
-            auto sample = traffic(apid, rate, seconds, folder / "traffic.json");
+            Json observations = Json::array();
+            Json initial = capture ? backend.capture_control(run, "status") : Json::array();
+            auto observe = [&] {
+              auto current = call(engine, "run", {{"id", run["id"]}});
+              Json compact = Json::array();
+              for (const auto &c : current.value("captureObservations", Json::array()))
+                compact.push_back({{"id", c.value("id", "")},
+                                   {"invocationId", c.value("invocationId", "")},
+                                   {"state", c.value("state", "unknown")},
+                                   {"statistics", c.value("statistics", Json(nullptr))}});
+              observations.push_back(
+                  {{"elapsedSeconds", std::chrono::duration<double>(Clock::now() - began).count()},
+                   {"host", host()},
+                   {"state", current["state"]},
+                   {"captureCoverage", current["captureCoverage"]},
+                   {"workers", compact}});
+              if (observations.size() % 30 == 0) {
+                std::ofstream(folder / ("monitor-" + std::to_string(repetition) + ".json"))
+                    << observations.dump(2);
+                std::cout << "PROGRESS " << profile << " repeat=" << repetition
+                          << " seconds=" << observations.back()["elapsedSeconds"] << std::endl;
+              }
+            };
+            auto sample =
+                traffic(apid, rate, seconds, folder / "traffic.json",
+                        sustained ? std::function<void()>(observe) : std::function<void()>{});
+            if (sustained)
+              observe();
             auto after = host();
             const double elapsed = std::chrono::duration<double>(Clock::now() - began).count();
             auto delta = [&](const char *key) {
@@ -266,7 +331,65 @@ int main(int argc, char **argv) {
             sample["withinSampleEnvelope"] =
                 current["state"] == "ready" && sample["lossFraction"].get<double>() <= .01 &&
                 sample["receivedRequestsPerSecond"].get<double>() >= rate * .95;
+            if (sustained) {
+              bool health = !observations.empty(), drops = true;
+              std::uint64_t minMemory = before["MemAvailable:"], maxRss = before["VmRSS:"];
+              auto validWorkers = [&](const Json &workers) {
+                if (!capture)
+                  return true;
+                if (!workers.is_array() || workers.size() != initial.size() ||
+                    initial.size() != t["edges"].size())
+                  return false;
+                for (const auto &c : workers) {
+                  auto old = std::find_if(initial.begin(), initial.end(),
+                                          [&](const Json &v) { return v["id"] == c["id"]; });
+                  if (old == initial.end() || c["state"] != "active" ||
+                      c["invocationId"] != (*old)["invocationId"] || !c["statistics"].is_object() ||
+                      !c["statistics"].contains("dropped") ||
+                      !c["statistics"]["dropped"].is_number() ||
+                      !(*old)["statistics"]["dropped"].is_number() ||
+                      c["statistics"]["dropped"] != (*old)["statistics"]["dropped"])
+                    return false;
+                }
+                return true;
+              };
+              for (const auto &o : observations) {
+                health = health && o["state"] == "ready" &&
+                         (!capture || o["captureCoverage"] == "recording");
+                drops = drops && validWorkers(o["workers"]);
+                minMemory = std::min(minMemory, o["host"]["MemAvailable:"].get<std::uint64_t>());
+                maxRss = std::max(maxRss, o["host"]["VmRSS:"].get<std::uint64_t>());
+              }
+              drops = drops && (!capture || validWorkers(sample["captureObservation"]));
+              auto growth = maxRss > profileRss ? maxRss - profileRss : 0;
+              sample["captureBefore"] = initial;
+              auto monitorName =
+                  std::string(profile) + "/monitor-" + std::to_string(repetition) + ".json";
+              std::ofstream(root / monitorName) << observations.dump(2);
+              sample["monitorFile"] = monitorName;
+              sample["monitorCount"] = observations.size();
+              sample["checks"] = {
+                  {"readyThroughout", health},
+                  {"workerContinuityAndZeroSourceDrops", drops},
+                  {"deliveryLoss", sample["lossFraction"].get<double>() <= .001},
+                  {"achievedRate", sample["receivedRequestsPerSecond"].get<double>() >= rate * .99},
+                  {"rtt",
+                   sample["rttP95Us"].is_number() && sample["rttP95Us"].get<double>() <= 20000},
+                  {"hostCpu", sample["hostCpuBusyPercent"].get<double>() <= 25},
+                  {"availableMemory", minMemory >= 2097152},
+                  {"controllerRssGrowth", growth <= 65536}};
+              sample["hostMemAvailableMinKiB"] = minMemory;
+              sample["controllerRssMaxKiB"] = maxRss;
+              sample["controllerRssGrowthFromProfileStartKiB"] = growth;
+              bool passed = true;
+              for (const auto &v : sample["checks"])
+                passed = passed && v.get<bool>();
+              sample["withinSampleEnvelope"] = passed;
+              qualified = qualified && passed;
+            }
             report["samples"].push_back(sample);
+            if (sustained)
+              report["withinDeclaredEnvelope"] = qualified;
             std::ofstream(root / "capacity.json") << report.dump(2);
             std::cout << "MEASURE " << profile << " " << rate << " "
                       << sample["withinSampleEnvelope"] << std::endl;
@@ -282,7 +405,7 @@ int main(int argc, char **argv) {
       }
     }
     std::cout << "Capacity report: " << root / "capacity.json" << '\n';
-    return 0;
+    return qualified ? 0 : 1;
   } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
     return 1;

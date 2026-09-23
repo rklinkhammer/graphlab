@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
 project(IndependentNode LANGUAGES CXX)
-find_package(LabSupport 1.0.0 EXACT CONFIG REQUIRED)
+find_package(LabSupport 1.1.0 EXACT CONFIG REQUIRED)
 add_executable(node main.cpp)
 target_link_libraries(node PRIVATE LabSupport::contracts LabSupport::telemetry)

@@ -4,6 +4,8 @@ M6 adds an executable qualification workflow, rather than treating earlier miles
 
 The [remediation report](validation/m6/remediation.md) tracks subsequent fixes and additional qualification fixtures separately from the immutable initial evidence bundle.
 
+The [completion report](validation/m6/completion.md) records the staged closure of the eight remaining gates, including live services/PTYs, 45 crash cases, the one-hour capacity matrix and independent protocol-minor releases. Its separate bundle retains the original evidence and identifies which historical checks were reused. Qualification is scoped to the selected Linux ARM64 runtime and declared capacity envelope.
+
 ## Implemented tooling
 
 - `lab-qualify`: C++23 streaming SHA-256 hashing, evidence manifest creation and strict integrity/coverage verification. Required runtime, source, workload and capacity artifacts must be retained and hash-bound; gate evidence must refer to those files. Exit 1 means an intact but incomplete qualification; exit 2 means invalid or changed evidence. The verifier does not manufacture experimental proof from arbitrary operator-supplied claims.

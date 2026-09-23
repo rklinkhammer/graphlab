@@ -200,6 +200,8 @@ int run_node(int argc, char **argv, const char *application) {
         result["error"] = e.what();
       }
       result["apiVersion"] = "graphlab.gate/v1";
+      result["protocolMinor"] = node_gate_minor;
+      result["capabilities"] = Json::array({"quiesce", "traffic-lease"});
       result["state"] = released ? "released" : "held";
       result["application"] = application;
       result["echoPackets"] = std::to_string(packets);

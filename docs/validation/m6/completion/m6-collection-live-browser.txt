@@ -1,0 +1,58 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/m6-services-live.spec.ts tests/m6-terminal-live.spec.ts
+
+
+Running 2 tests using 1 worker
+
+(node:5697) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "error": {
+    "code": "internal_error",
+    "message": "idempotency_conflict",
+    "path": "$"
+  }
+}
+{
+  "error": {
+    "code": "internal_error",
+    "message": "stale_revision",
+    "path": "$"
+  }
+}
+Running as unit: graphlab-m6-api.service; invocation ID: 4ce003714ca34b9ab9a7338b0ff8c3db
+Running as unit: graphlab-m6-agent.service; invocation ID: 9b0a6eb9a31f421886d20c502e470338
+{
+  "error": {
+    "code": "internal_error",
+    "message": "agent_unavailable",
+    "path": "$"
+  }
+}
+{
+  "error": {
+    "code": "internal_error",
+    "message": "agent_unavailable",
+    "path": "$"
+  }
+}
+{
+  "error": {
+    "code": "internal_error",
+    "message": "writer_lease_expired",
+    "path": "$"
+  }
+}
+Running as unit: graphlab-m6-agent.service; invocation ID: 3f33824a20af41a4ba91dfffbfad0516
+{
+  "error": {
+    "code": "internal_error",
+    "message": "agent_unavailable",
+    "path": "$"
+  }
+}
+  ✓  1 tests/m6-services-live.spec.ts:14:1 › M6 real CLI/UI faults and independent API/agent restarts while recording (15.3s)
+  ✓  2 tests/m6-terminal-live.spec.ts:47:1 › M6 paused TCP viewer does not block recording or independent exact replay (23.4s)
+
+  2 passed (39.0s)

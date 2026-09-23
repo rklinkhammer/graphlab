@@ -263,8 +263,10 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
                                          args.value("recordInput", false));
       run["sessions"].push_back(d);
       save();
+      detail::checkpoint("terminal.intent");
       try {
         terminal::launch(d);
+        detail::checkpoint("terminal.worker");
         if (d["kind"] == "docker")
           terminal::docker_attach(d, run["controllerGeneration"]);
         bool ready = false;
@@ -281,6 +283,7 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
         }
         if (!ready)
           throw Failure("terminal_worker_not_ready");
+        detail::checkpoint("terminal.readback");
       } catch (...) {
         try {
           terminal::stop(d, run["controllerGeneration"]);
@@ -290,6 +293,7 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
         }
         throw;
       }
+      detail::checkpoint("terminal.completion");
       return {{"id", d["id"]}, {"recordInput", d["recordInput"]}};
     }
     Json d;
@@ -730,7 +734,11 @@ void Engine::execute(const std::string &jobid) {
         save();
       }
       snapshot();
+      if (resource["kind"] == "qemu")
+        detail::checkpoint("qemu.intent");
       auto identity = backend_.prepare(run, resource);
+      if (resource["kind"] == "qemu")
+        detail::checkpoint("qemu.readback");
       {
         std::lock_guard guard(mutex_);
         auto &saved = state_["runs"][id]["resources"].back();
@@ -739,6 +747,8 @@ void Engine::execute(const std::string &jobid) {
         saved["state"] = "prepared";
         save();
       }
+      if (resource["kind"] == "qemu")
+        detail::checkpoint("qemu.completion");
       cancel = cancelled();
     }
     if (!cancel) {

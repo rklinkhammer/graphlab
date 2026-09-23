@@ -1,0 +1,632 @@
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using the multi-header code from /var/tmp/gl6-releases-v2/sdk-1.0-build/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at /var/tmp/gl6-releases-v2/sdk-1.0-build/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (1.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl6-releases-v2/sdk-1.0-build
+[0/2] Re-checking globbed directories...
+[1/39] Building CXX object CMakeFiles/lab_telemetry.dir/cpp/telemetry.cpp.o
+[2/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/contrib/graphbuilder.cpp.o
+[3/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/contrib/graphbuilderadapter.cpp.o
+[4/39] Building CXX object CMakeFiles/lab_contracts.dir/cpp/document.cpp.o
+[5/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/binary.cpp.o
+[6/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/depthguard.cpp.o
+[7/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/directives.cpp.o
+[8/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/convert.cpp.o
+[9/39] Building CXX object CMakeFiles/lab_lifecycle.dir/cpp/lifecycle.cpp.o
+[10/39] Linking CXX static library liblab_lifecycle.a
+[11/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emit.cpp.o
+[12/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitfromevents.cpp.o
+[13/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitter.cpp.o
+[14/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitterstate.cpp.o
+[15/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/exceptions.cpp.o
+[16/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/exp.cpp.o
+[17/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/memory.cpp.o
+[18/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/node.cpp.o
+[19/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/node_data.cpp.o
+[20/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/nodebuilder.cpp.o
+[21/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/null.cpp.o
+[22/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/nodeevents.cpp.o
+[23/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitterutils.cpp.o
+[24/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/ostream_wrapper.cpp.o
+[25/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/regex_yaml.cpp.o
+[26/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/parse.cpp.o
+[27/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/parser.cpp.o
+[28/39] Building CXX object CMakeFiles/lab_contracts.dir/cpp/contracts.cpp.o
+[29/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scanscalar.cpp.o
+[30/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scantag.cpp.o
+[31/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/simplekey.cpp.o
+[32/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scanner.cpp.o
+[33/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/stream.cpp.o
+[34/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/tag.cpp.o
+[35/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/singledocparser.cpp.o
+[36/39] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scantoken.cpp.o
+[37/39] Linking CXX static library _deps/yaml-cpp-build/libyaml-cpp.a
+[38/39] Linking CXX static library liblab_contracts.a
+[39/39] Linking CXX static library liblab_telemetry.a
+-- Install configuration: "Release"
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/adl_serializer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/json_fwd.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/ordered_map.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/json.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/macro_unscope.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/hash.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/exceptions.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/value_t.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/string_utils.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/abi_macros.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/output
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/output/output_adapters.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/output/serializer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/output/binary_writer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/detected.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/identity_tag.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/void_t.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/std_fs.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/call_std
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/call_std/begin.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/call_std/end.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/is_sax.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/type_traits.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/meta/cpp_future.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/string_escape.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/json_pointer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/conversions
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/conversions/to_chars.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/conversions/to_json.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/conversions/from_json.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators/internal_iterator.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators/iteration_proxy.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators/iterator_traits.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators/primitive_iterator.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators/iter_impl.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/iterators/json_reverse_iterator.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/string_concat.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/json_ref.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/json_custom_base_class.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/macro_scope.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input/lexer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input/input_adapters.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input/json_sax.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input/position_t.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input/binary_reader.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/detail/input/parser.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/thirdparty
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/thirdparty/hedley
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/thirdparty/hedley/hedley.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/nlohmann/byte_container_with_subtype.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/share/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/share/cmake/nlohmann_json/nlohmann_jsonTargets.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/share/pkgconfig/nlohmann_json.pc
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/libyaml-cpp.a
+-- Up-to-date: /var/tmp/gl6-releases-v2/sdk-1.0/include
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/null.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/ostream_wrapper.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/exceptions.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/dll.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/contrib
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/contrib/graphbuilder.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/contrib/anchordict.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/emitfromevents.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/emitter.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/eventhandler.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/yaml.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/mark.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/stlemitter.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/binary.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/traits.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/parser.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/noexcept.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/emitterstyle.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/emittermanip.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/node.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/iterator.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/parse.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/ptr.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/type.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/emit.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/convert.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/impl.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/node_iterator.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/node.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/iterator.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/node_data.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/impl.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/iterator_fwd.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/node_ref.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/node/detail/memory.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/depthguard.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/emitterdef.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/yaml-cpp/anchor.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/yaml-cpp/yaml-cpp-targets.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/yaml-cpp/yaml-cpp-targets-release.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/yaml-cpp/yaml-cpp-config.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/yaml-cpp/yaml-cpp-config-version.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/pkgconfig/yaml-cpp.pc
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/liblab_contracts.a
+-- Up-to-date: /var/tmp/gl6-releases-v2/sdk-1.0/include
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/lab_support
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/lab_support/contracts.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/lab_support/telemetry.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/include/lab_support/lifecycle.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/LabSupport/LabSupportTargets.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/LabSupport/LabSupportTargets-release.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/LabSupport/LabSupportConfig.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/cmake/LabSupport/LabSupportConfigVersion.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/liblab_lifecycle.a
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.0/lib/liblab_telemetry.a
+-- Install configuration: "Debug"
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/adl_serializer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/json_fwd.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/ordered_map.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/json.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/macro_unscope.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/hash.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/exceptions.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/value_t.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/string_utils.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/abi_macros.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/output
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/output/output_adapters.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/output/serializer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/output/binary_writer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/detected.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/identity_tag.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/void_t.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/std_fs.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/call_std
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/call_std/begin.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/call_std/end.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/is_sax.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/type_traits.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/meta/cpp_future.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/string_escape.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/json_pointer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/conversions
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/conversions/to_chars.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/conversions/to_json.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/conversions/from_json.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators/internal_iterator.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators/iteration_proxy.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators/iterator_traits.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators/primitive_iterator.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators/iter_impl.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/iterators/json_reverse_iterator.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/string_concat.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/json_ref.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/json_custom_base_class.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/macro_scope.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input/lexer.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input/input_adapters.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input/json_sax.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input/position_t.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input/binary_reader.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/detail/input/parser.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/thirdparty
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/thirdparty/hedley
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/thirdparty/hedley/hedley.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/nlohmann/byte_container_with_subtype.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/share/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/share/cmake/nlohmann_json/nlohmann_jsonTargets.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/share/pkgconfig/nlohmann_json.pc
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/libyaml-cppd.a
+-- Up-to-date: /var/tmp/gl6-releases-v2/sdk-1.1/include
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/null.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/ostream_wrapper.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/exceptions.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/dll.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/contrib
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/contrib/graphbuilder.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/contrib/anchordict.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/emitfromevents.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/emitter.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/eventhandler.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/yaml.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/mark.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/stlemitter.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/binary.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/traits.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/parser.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/noexcept.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/emitterstyle.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/emittermanip.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/node.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/iterator.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/parse.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/ptr.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/type.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/emit.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/convert.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/impl.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/node_iterator.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/node.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/iterator.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/node_data.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/impl.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/iterator_fwd.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/node_ref.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/node/detail/memory.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/depthguard.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/emitterdef.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/yaml-cpp/anchor.h
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/yaml-cpp/yaml-cpp-targets.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/yaml-cpp/yaml-cpp-targets-debug.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/yaml-cpp/yaml-cpp-config.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/yaml-cpp/yaml-cpp-config-version.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/pkgconfig/yaml-cpp.pc
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/liblab_contracts.a
+-- Up-to-date: /var/tmp/gl6-releases-v2/sdk-1.1/include
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/._lab_support
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support/contracts.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support/telemetry.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support/._lifecycle.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support/._telemetry.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support/._contracts.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/include/lab_support/lifecycle.hpp
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/LabSupport/LabSupportTargets.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/LabSupport/LabSupportTargets-debug.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/LabSupport/LabSupportConfig.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/cmake/LabSupport/LabSupportConfigVersion.cmake
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/liblab_lifecycle.a
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/lib/liblab_telemetry.a
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab-agent
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab-api
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab-capture
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab-terminal
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab-guest-template
+-- Installing: /var/tmp/gl6-releases-v2/sdk-1.1/bin/lab-qualify
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /var/tmp/gl6-releases-v2/sdk-1.0/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl6-releases-v2/1.0-app-a/build
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  1.767MB
+Step 1/7 : ARG BASE_IMAGE
+Step 2/7 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/7 : COPY lab-node /usr/local/bin/lab-node
+ ---> a691c0ac7b18
+Step 4/7 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Running in dde86f80232b
+ ---> Removed intermediate container dde86f80232b
+ ---> f79f0b2898ad
+Step 5/7 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Running in ece1cca9ef25
+ ---> Removed intermediate container ece1cca9ef25
+ ---> ddf8775f47b8
+Step 6/7 : LABEL graphlab.lab-support.sha256=sha256:bfb4429358360b3920da38c29abe26b77b89ee33fb9fc4f308b905b213ae7472
+ ---> Running in 15df3d46b9cc
+ ---> Removed intermediate container 15df3d46b9cc
+ ---> 90aca0f0e37b
+Step 7/7 : LABEL graphlab.lab-support.version=1.0.0
+ ---> Running in ae95bf93d1a7
+ ---> Removed intermediate container ae95bf93d1a7
+ ---> 1906c9982dcd
+Successfully built 1906c9982dcd
+Successfully tagged graphlab-m6/app-a:protocol-1.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /var/tmp/gl6-releases-v2/sdk-1.0/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl6-releases-v2/1.0-app-b/build
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  1.767MB
+Step 1/7 : ARG BASE_IMAGE
+Step 2/7 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/7 : COPY lab-node /usr/local/bin/lab-node
+ ---> 48fcc5c168b7
+Step 4/7 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Running in 2149ee1dcdd2
+ ---> Removed intermediate container 2149ee1dcdd2
+ ---> 4f5756d6efe9
+Step 5/7 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Running in 967fec8af509
+ ---> Removed intermediate container 967fec8af509
+ ---> 3516342fe13b
+Step 6/7 : LABEL graphlab.lab-support.sha256=sha256:bfb4429358360b3920da38c29abe26b77b89ee33fb9fc4f308b905b213ae7472
+ ---> Running in 52f62e121fc7
+ ---> Removed intermediate container 52f62e121fc7
+ ---> d5631aee5abf
+Step 7/7 : LABEL graphlab.lab-support.version=1.0.0
+ ---> Running in 758da620d292
+ ---> Removed intermediate container 758da620d292
+ ---> 3ac729818a7e
+Successfully built 3ac729818a7e
+Successfully tagged graphlab-m6/app-b:protocol-1.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /var/tmp/gl6-releases-v2/sdk-1.1/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl6-releases-v2/1.1-app-a/build
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  4.198MB
+Step 1/7 : ARG BASE_IMAGE
+Step 2/7 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/7 : COPY lab-node /usr/local/bin/lab-node
+ ---> 53f392207da3
+Step 4/7 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Running in ec70ccd7755f
+ ---> Removed intermediate container ec70ccd7755f
+ ---> 74eda238da24
+Step 5/7 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Running in bf846809e9bc
+ ---> Removed intermediate container bf846809e9bc
+ ---> f99346c235b7
+Step 6/7 : LABEL graphlab.lab-support.sha256=sha256:741022cb2b1c0e9aef2ef9103bf7003235924107867fc72e5c838c754a4c4f02
+ ---> Running in 04e024d09dc1
+ ---> Removed intermediate container 04e024d09dc1
+ ---> 6ce52855ed57
+Step 7/7 : LABEL graphlab.lab-support.version=1.1.0
+ ---> Running in 549940eb18dc
+ ---> Removed intermediate container 549940eb18dc
+ ---> e3cd8d0ce38c
+Successfully built e3cd8d0ce38c
+Successfully tagged graphlab-m6/app-a:protocol-1.1
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /var/tmp/gl6-releases-v2/sdk-1.1/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl6-releases-v2/1.1-app-b/build
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  4.198MB
+Step 1/7 : ARG BASE_IMAGE
+Step 2/7 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/7 : COPY lab-node /usr/local/bin/lab-node
+ ---> aec76be4a2bf
+Step 4/7 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Running in 6b9ae17163ca
+ ---> Removed intermediate container 6b9ae17163ca
+ ---> 2ae9b837e339
+Step 5/7 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Running in 46a44ee33cbd
+ ---> Removed intermediate container 46a44ee33cbd
+ ---> 9623d949af4a
+Step 6/7 : LABEL graphlab.lab-support.sha256=sha256:741022cb2b1c0e9aef2ef9103bf7003235924107867fc72e5c838c754a4c4f02
+ ---> Running in 89920548005f
+ ---> Removed intermediate container 89920548005f
+ ---> e528cbdecb4e
+Step 7/7 : LABEL graphlab.lab-support.version=1.1.0
+ ---> Running in d8a537ce831d
+ ---> Removed intermediate container d8a537ce831d
+ ---> 679efd9e285d
+Successfully built 679efd9e285d
+Successfully tagged graphlab-m6/app-b:protocol-1.1
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  1.612MB
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/5 : COPY lab-node /usr/local/bin/lab-node
+ ---> f40f0f18690b
+Step 4/5 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Running in 68bed0b83060
+ ---> Removed intermediate container 68bed0b83060
+ ---> 2e10862f3512
+Step 5/5 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Running in 005921cc2fe9
+ ---> Removed intermediate container 005921cc2fe9
+ ---> 8222997add5c
+Successfully built 8222997add5c
+Successfully tagged graphlab-m6/incompatible:protocol-2
+Evidence: "/tmp/gl6-proto-U7WK62"
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:20Z","error":null,"finishedAt":"2026-09-23T03:21:22Z","id":"f9cb0fb1-97cb-44fb-86d7-a2b199be180d","operation":"start","revision":"1","runId":"027dfc38-4a93-47cf-807e-35949c2006b1","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:24Z","error":null,"finishedAt":"2026-09-23T03:21:26Z","id":"84a70060-ae93-4f5e-816c-1bda616e17f4","operation":"start","revision":"1","runId":"21cd2efd-2a6a-43ec-88d1-6e9957b44e8a","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:28Z","error":null,"finishedAt":"2026-09-23T03:21:30Z","id":"885039f3-dc9b-48c4-879f-14896ceeae89","operation":"start","revision":"1","runId":"4486992c-b234-45da-82a9-744cab884c70","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:32Z","error":null,"finishedAt":"2026-09-23T03:21:34Z","id":"b3c185ae-9de5-4452-84dc-601c44c40a4c","operation":"start","revision":"1","runId":"6e89e136-127b-4ae8-82db-69d0fddb2ee0","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+T19 legacy controller passed 4 combinations
+Evidence: "/tmp/gl6-proto-2Jdg4A"
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:37Z","error":null,"finishedAt":"2026-09-23T03:21:39Z","id":"b773375f-f9fd-4fd3-81c2-1ac070077a37","operation":"start","revision":"1","runId":"5fab7ff0-e518-4b74-8411-6d8c29e06ec1","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:41Z","error":null,"finishedAt":"2026-09-23T03:21:43Z","id":"db2f470f-ecea-45d1-8702-70823c3a662e","operation":"start","revision":"1","runId":"8945e5b8-bc3f-44ea-8d4b-f2bae0b724fa","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:45Z","error":null,"finishedAt":"2026-09-23T03:21:47Z","id":"227bee0f-0821-4f46-85f2-debad5a06cf8","operation":"start","revision":"1","runId":"7ca8cb3d-6e8f-4edd-87d9-26532af591c0","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS mixed-version run starts: {"cancelRequested":false,"createdAt":"2026-09-23T03:21:50Z","error":null,"finishedAt":"2026-09-23T03:21:52Z","id":"b4e5ebe0-4ebf-42f9-8b92-b8772b012552","operation":"start","revision":"1","runId":"8bc13793-9c08-4e96-87c0-b6a2618770d8","state":"succeeded"}
+PASS actual expected protocol minors observed
+PASS independent applications identified
+PASS both-direction data interoperability
+PASS compatible quiesce controls
+PASS both versions held after stop
+PASS protocol fixture cleanup
+PASS independent version fixture
+PASS pinned package contracts validate
+PASS unsupported workload contract major rejected
+PASS unsupported wire major rejected before release
+PASS no node released before all protocol checks pass
+PASS protocol fixture cleanup
+T19 current controller passed 5 combinations

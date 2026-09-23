@@ -1,0 +1,797 @@
+{
+  "apiVersion": "graphlab.qualification/v1",
+  "artifacts": [
+    {
+      "path": "m6-stage5-build.txt",
+      "sha256": "sha256:03a1cd0f6125a093657f495d86f0139eff4903a279d02584247854e371947e01"
+    },
+    {
+      "path": "interim-live.txt",
+      "sha256": "sha256:37a6ab544b6e176f9f611320f18c94e75bc9d7fabe24e32d3c1605764f0bdd25"
+    },
+    {
+      "path": "stage2-artifacts.tar.gz",
+      "sha256": "sha256:a18f8da2e95df9ab6fb181528e10d3039eb381044578f0dbb9ef97904c3f01f2"
+    },
+    {
+      "path": "m6-stage5-incomplete-sdk.txt",
+      "sha256": "sha256:61e8372513c866a3eeb25474be80bd91112ef497afefad7a19dec018a5b72055"
+    },
+    {
+      "path": "m6-stage1-console-regression.txt",
+      "sha256": "sha256:82096127f7097b20701a829c1f889074eb1a55f9eb67d7534847b8db0b68ff32"
+    },
+    {
+      "path": "m6-terminal-ws-proof.json",
+      "sha256": "sha256:853c1e387129af22bfdbb91be841da9f3414259eee927d60f5f8444b997172fd"
+    },
+    {
+      "path": "capacity-source.tar.gz",
+      "sha256": "sha256:6d36487f870d3f3f18de637ade3b4ce3af590be11b041e934b165c5e7ab1b937"
+    },
+    {
+      "path": "prior-remediation-source.tar.gz",
+      "sha256": "sha256:fbf7048d1c59a996e2040b0934aaf37e1c2246e3be838f9fbeb339220cdac8c3"
+    },
+    {
+      "path": "capacity-direct-source.cpp",
+      "sha256": "sha256:0fcc600adcbfe26a1133734f7d8fae3c2c200fba61a655197f07aefe06fa50ad"
+    },
+    {
+      "path": "cleanup.txt",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "protocol-minor-matrix.md",
+      "sha256": "sha256:10803c1cc5e705863f8f52f0812fc4e180291cc2ba3649e826b52ae92880cbf0"
+    },
+    {
+      "path": "protocol-images.tar.gz",
+      "sha256": "sha256:acf977d3c78ef00d5b6259e922e2b1e12f01a7d45dfc44e6998a850be88c510a"
+    },
+    {
+      "path": "interim-capacity.json",
+      "sha256": "sha256:1d0867a34b1599081dbcf7e837465aefbcf2782e7d4768cc893c47143f517cfe"
+    },
+    {
+      "path": "m6-collection-macos-tests.txt",
+      "sha256": "sha256:c4ebcb7d6221e72436a97c46bbbe79cf7dae2e526bec3f1d51e5fe1c421ed453"
+    },
+    {
+      "path": "initial-capacity-direct.md",
+      "sha256": "sha256:31a0bd6ecf435391e48b352487f3a393878c644375f0297f3d365fe9c146ee7f"
+    },
+    {
+      "path": "collection-terminal-ws-proof.json",
+      "sha256": "sha256:7bc0416b587cea0b70ce23dee2eab02c85a5d660a013fa43b53abb82eccfa8b8"
+    },
+    {
+      "path": "m6-final-macos-build2.txt",
+      "sha256": "sha256:6fd4f23604bb992bacc64cf8271e97867873c5c0d2df34e290108d77c9c348b3"
+    },
+    {
+      "path": "sustained-direct.json",
+      "sha256": "sha256:b0d730ad5907972ae7ced7d3a222149ad1d8f8b371be9fab985f688e923da8ca"
+    },
+    {
+      "path": "workload-build.txt",
+      "sha256": "sha256:8698c064b4ea83e6de7607c0d13fb8ac55f3668d34bd4b90a195cc66a68ec43b"
+    },
+    {
+      "path": "m6-collection-linux-ctest.txt",
+      "sha256": "sha256:2b9564c7f503f2e5658767d25ec86cd0aa645f6ae671ddaeac7e8a334a2d0ce0"
+    },
+    {
+      "path": "sustained-direct-original-summary.md",
+      "sha256": "sha256:d1ca40d8558a8d7c07e41e59ac9c5322934290aed6eae5247baceec37bd5a9ed"
+    },
+    {
+      "path": "post-reboot.txt",
+      "sha256": "sha256:ecdf8deff59f91e6c047f96731bed8579acf8d0622b19c46999344c49d763d8f"
+    },
+    {
+      "path": "m6-stage3-retained-cleanup.txt",
+      "sha256": "sha256:9b1bfe945b334820a6f366a8b573cf7cf83b671132eadf4a2049aa5fc61920ff"
+    },
+    {
+      "path": "m6-remediation-integrity.json",
+      "sha256": "sha256:b663fa8de395bf531d3875eb4e6d7b2e549521cf947e39fbad36e66cab116cd5"
+    },
+    {
+      "path": "runtime-lock.json",
+      "sha256": "sha256:37465c958c3b57f599bf7172db5aa702a1aaa17935ac9469f2fee1a125a3c9a1"
+    },
+    {
+      "path": "runtime-post-reboot.txt",
+      "sha256": "sha256:08dc2ea4035dacbd897378204d9b6679648223ca1b44dc16055a3eeebd2114bf"
+    },
+    {
+      "path": "m6-final-macos-build.txt",
+      "sha256": "sha256:e5252c64253b276b3060b071a2a7556778d50e15f3e62fe1ef41846946299566"
+    },
+    {
+      "path": "m4-guests.txt",
+      "sha256": "sha256:ee709852498c39657e6c6a65ae76984b0a04052556948f4de2d738cab8906b4c"
+    },
+    {
+      "path": "remediation-browser.txt",
+      "sha256": "sha256:83c28f07ca605957fc9892fe8ac52dcebd6d604d76e0d9882369b51e909a6bee"
+    },
+    {
+      "path": "ctest.txt",
+      "sha256": "sha256:44b057322b27b3b6403ead4589d510aca407e60df1f513a00036d9ddff319c18"
+    },
+    {
+      "path": "m2.txt",
+      "sha256": "sha256:c003242bbe1390a2fef27eb8188472df8480aff515edb5eea2abeb8b72b6dd68"
+    },
+    {
+      "path": "collection-service-proof.json",
+      "sha256": "sha256:6cf5eb8f113066c15c17bc12184a42cc48658e5f95cc463b21a57432a615afb7"
+    },
+    {
+      "path": "sustained-triangle.md",
+      "sha256": "sha256:1db633e68df6ac945d678501e332e267816a44f2dc7bbc7fda73f8075e8cf70e"
+    },
+    {
+      "path": "stage3-artifacts.tar.gz",
+      "sha256": "sha256:e8dd4d0d72bf6ae7224b127fda76bf77fb791989e4833ff50d71a4ff9bd50ab0"
+    },
+    {
+      "path": "m3.txt",
+      "sha256": "sha256:b2015daa7778763958eda7a4402fa7e2e781400ec6b239947f020cb21bce3127"
+    },
+    {
+      "path": "final-live-artifacts.tar.gz",
+      "sha256": "sha256:ed5593a7d6131488b47c6f5625343deb4cd8c137900acc6e8adec06acc8ed369"
+    },
+    {
+      "path": "runtime.txt",
+      "sha256": "sha256:558c04a4e61330b3a6f173ae5f43e039522ca4ca13c4a2ef1f95d96aaf58d6c3"
+    },
+    {
+      "path": "m6-stage2-sentinel-cleanup.txt",
+      "sha256": "sha256:0ef986358d084d4cc82635e48bd0d9c55e9274ca7a1f8447ed31757faa63f6f5"
+    },
+    {
+      "path": "reboot-artifacts.tar.gz",
+      "sha256": "sha256:f6ce34721c8eefb6fcb93c6fcdf6199772f719e454d9dc97072047cf859497db"
+    },
+    {
+      "path": "m6-scoped-unit-collection.txt",
+      "sha256": "sha256:cd073a92209f40039345c3803e53e396d3a845f8a0c0848ccf6b51c352625525"
+    },
+    {
+      "path": "prior-runtime-lock.json",
+      "sha256": "sha256:161d796d38bdc7f958fcc634f825e893b1857bf149541f3546f1e9f270c2b743"
+    },
+    {
+      "path": "source.tar.gz",
+      "sha256": "sha256:3fbbee1f1280e51cf76febbaa9761fef24bbc8e5e053d0d80b4d02695533cd02"
+    },
+    {
+      "path": "m6-stage3-pty.txt",
+      "sha256": "sha256:f9a648e93ac4e4fbc75b49b9037b3b599e809040a4eb3cbfe6ca2ac9c2cf902e"
+    },
+    {
+      "path": "initial-capacity-triangle.json",
+      "sha256": "sha256:dd5ff5af34825c55372f7d37e4837b4bcbe3e6d224947d7a4c332c47185d6725"
+    },
+    {
+      "path": "direction-artifacts.tar.gz",
+      "sha256": "sha256:dcb1cb2fd00b97cb913ef8c799a2a6fce83ad94fb50f6ea16b0f3f5e7d55d154"
+    },
+    {
+      "path": "capacity.json",
+      "sha256": "sha256:48da60964d39b291e4d6f3d383e505865cb7eec0ecc7008c21027f700141f38d"
+    },
+    {
+      "path": "reboot-initial.txt",
+      "sha256": "sha256:51073cefced0b7e6d85f3a09da6fc79e220fe90ee1348d05f0cc04c96a61d829"
+    },
+    {
+      "path": "production-regression-artifacts.tar.gz",
+      "sha256": "sha256:87bead0d89f8ecee10c1aeab34001edeeaf7247c893e06703911052519b53220"
+    },
+    {
+      "path": "m6-final-cleanup.txt",
+      "sha256": "sha256:189cce6562b9cd759d0c4319a20e62a2d3ba85a044f3162a025c7b16fa6d7b17"
+    },
+    {
+      "path": "m6-stage3-services.txt",
+      "sha256": "sha256:fbb82ecddd877a0c6efd4e0cb9b222e60617b68f796e6206ee2303fab38655b1"
+    },
+    {
+      "path": "sanitizers.txt",
+      "sha256": "sha256:12b996e4906dcb8c3349618d5c2e5a816d45f902c1858564ea998d36a09d771b"
+    },
+    {
+      "path": "m5.txt",
+      "sha256": "sha256:2c47cdeb460622d0a20da23f78df099e55c633ca404e8a28f9590c355f3ef087"
+    },
+    {
+      "path": "capacity-direct-binary.sha256",
+      "sha256": "sha256:07e46072dedabb5545f8f862b58c0fb8f5395cd80bd71a67c3c2f5e40ace3dcd"
+    },
+    {
+      "path": "triangle-equal-priority.json",
+      "sha256": "sha256:f2034cd677e6d2b22fee4d7fbad22da6c9d21f7f12c0039a1288281ec156bdc6"
+    },
+    {
+      "path": "m6-stage2-build.txt",
+      "sha256": "sha256:8f1746dfee06d125f94c3e015dd8b5f35aa03c8cdc21da65fb38ba3f2b0fab5b"
+    },
+    {
+      "path": "triangle-equal-priority.md",
+      "sha256": "sha256:6abc71a68ae524b48f2e372d7dd60e924e57c32e966218d000650d95b49ea926"
+    },
+    {
+      "path": "m6-cleanup-verified.txt",
+      "sha256": "sha256:679d7e7739334b3543925e00926892e5b073df3e26e97ada5fead6e19035370e"
+    },
+    {
+      "path": "reboot.txt",
+      "sha256": "sha256:e015a86e702edbc0e50aa31476eccaa4195834c58c5b98a61436f1bacc803ba4"
+    },
+    {
+      "path": "m6-final-macos-tests.txt",
+      "sha256": "sha256:5583bcc8f33df234a107269351072dd46d3fad1fcc60a4c5e8b95ee89bda6fe8"
+    },
+    {
+      "path": "sustained-direct.md",
+      "sha256": "sha256:d1ca40d8558a8d7c07e41e59ac9c5322934290aed6eae5247baceec37bd5a9ed"
+    },
+    {
+      "path": "m4-console.txt",
+      "sha256": "sha256:02fef8dbc91f9b680dddb1d93e46e07871b2420c6788591d97bb0a7ce4303b88"
+    },
+    {
+      "path": "terminal-corpus.txt",
+      "sha256": "sha256:fbb8430d6aae85607c67eec767542794076c8af133e7509c700c3e1dd74bee12"
+    },
+    {
+      "path": "workloads.tar.gz",
+      "sha256": "sha256:9ed683e98e3cc412d90361dcc2a92b0bb46f74259e239c1a4f7893e5fa0225aa"
+    },
+    {
+      "path": "m6-runtime-final.txt",
+      "sha256": "sha256:ea7fea62407fed5406ce25bb9f9def1cc5d8c0f55bf672d57526a1eeca52d5d7"
+    },
+    {
+      "path": "protocol-releases.json",
+      "sha256": "sha256:9525dc72d6745ce92fe27d1ff910606216a3664ac669d35a7737dc56542fc6dd"
+    },
+    {
+      "path": "remediation-sanitizers.txt",
+      "sha256": "sha256:6fd35598899fdd07f86fd86c4b39e5135bd648f394f13887267f518272339b97"
+    },
+    {
+      "path": "capacity-triangle-quota.json",
+      "sha256": "sha256:f8a4f5ba75c550a2252bbb1d45cd4c01dd312bc4f575a64af7334f66ff1d637b"
+    },
+    {
+      "path": "browser.txt",
+      "sha256": "sha256:38234c5d4b59c035568f1a4d1a06d4a80861ba5c4f39f265d5d17393dd04c366"
+    },
+    {
+      "path": "m6-final-live-browser.txt",
+      "sha256": "sha256:b764bbffa47483b283825899c46407bf8997bc46593f1d0c182f9300e5479a1a"
+    },
+    {
+      "path": "m6-stage2-crash-attempt2.txt",
+      "sha256": "sha256:64bb5811c2839eaecc11248106edaf3ccb77e2763029c7a6431ba6820b72fbf3"
+    },
+    {
+      "path": "m6-stage1-services.txt",
+      "sha256": "sha256:78c6a881d987599a915399c55ebc42c228f849a59fcdf2ac156f56184d1c0d3e"
+    },
+    {
+      "path": "remediation-measurement.txt",
+      "sha256": "sha256:29993f2a27c314db2bbba83b8c8efaf2044bf333a6b5f4dcd626264347aebc93"
+    },
+    {
+      "path": "m6-cleanup-audit.sh",
+      "sha256": "sha256:2957679eae84694961c8ba799ed61d4d33c202aa35fb599ee669da0c026e3110"
+    },
+    {
+      "path": "m6-collection-live-browser.txt",
+      "sha256": "sha256:c3d1cadf3b82b805e4e5ab2df6a1fb10fdbaeaad823d1a3dc9b3fbf357c61c25"
+    },
+    {
+      "path": "protocol-1.0-source.tar.gz",
+      "sha256": "sha256:7a9dd851cc58d311a304f9b9d146e52b98aefae70e6fc6729a49542ce73030f5"
+    },
+    {
+      "path": "m6-collection-linux.txt",
+      "sha256": "sha256:0f9fbc43f54c6c307f01aa758708bf6b023b3d1b80230251c7fa4681eba8e315"
+    },
+    {
+      "path": "m6-stage2-fd-audit.txt",
+      "sha256": "sha256:383b62e9c7751703c2a902282d993b5e7a4cbd286b5efb0ceb9c5fb95932bbbf"
+    },
+    {
+      "path": "cleanup-post-reboot.txt",
+      "sha256": "sha256:54c0509cd473bd19b7cfbcb0df051c97f135b2cf29cb17d3db14a7abbbc44c61"
+    },
+    {
+      "path": "guest-artifacts.txt",
+      "sha256": "sha256:1edaaa4ff3c1670b71bca44294f96f5e26918c0a4b647afb41c2361ea1fe41ec"
+    },
+    {
+      "path": "m6-final-live-services.txt",
+      "sha256": "sha256:b192fde402983e5220e4ec3479ad3f53b511cab8ddaf3d29ab7baed76e664336"
+    },
+    {
+      "path": "capacity-initial.txt",
+      "sha256": "sha256:7f1e562c72bd16756261443986d4cd9b93c1276ab8192abcb544eb7ada3dd116"
+    },
+    {
+      "path": "m6-final-inventory.sh",
+      "sha256": "sha256:caa08b3114ac8611f4db5f3d111ab0bd3867b9ab1e5bfdb0628828a4ca2833d8"
+    },
+    {
+      "path": "final-terminal-ws-proof.json",
+      "sha256": "sha256:4e202f8e5df8dcc30ee3d5e7ee49a76b5664deebb404cee41cd6d747e9671574"
+    },
+    {
+      "path": "m6-stage2-crash-attempt1.txt",
+      "sha256": "sha256:58d5c2e6974cb47f45e5f9ea620861763545665c3a8ec87d76bc36ceb6b491fa"
+    },
+    {
+      "path": "initial-capacity.json",
+      "sha256": "sha256:80643a651f8c891f86dd5ce57bdb4e79f60efae0c66b832e7ac8ee4c2e19e003"
+    },
+    {
+      "path": "stage4-artifacts.tar.gz",
+      "sha256": "sha256:46f88d4294c1286f7110b05a6b62e8d26e078411635ceaaff505f78b160b00d6"
+    },
+    {
+      "path": "initial-source.tar.gz",
+      "sha256": "sha256:46a844dc89dcdda52e09e685cb68a55d1a8322d3fc8efb109db5984195285ef7"
+    },
+    {
+      "path": "final-service-proof.json",
+      "sha256": "sha256:8c32052a4346ae5d7b6330cbf51165987de6a3b90a58f6e2f7a8c9868f2360bf"
+    },
+    {
+      "path": "capacity-direct.md",
+      "sha256": "sha256:9975a1c5168837a6d24906babcd0069c830981d396f542eeb8cf5ea66a796420"
+    },
+    {
+      "path": "m6-stage5-compatibility.txt",
+      "sha256": "sha256:6d571a08d18fabb00b16f2a8271a116538d58680cb25ba89b08e2133ecf5943b"
+    },
+    {
+      "path": "matrix.json",
+      "sha256": "sha256:a14a6235b5b78728a4e39f9a0b145ce0c4baabd7bcdeaad23825d991675b0c63"
+    },
+    {
+      "path": "capacity-initial-rerun.txt",
+      "sha256": "sha256:8a8de5af78af5771e6beaf61330e56b38fdaf2aec890fba93981ba2689f53008"
+    },
+    {
+      "path": "m6-final-sanitizer-build.txt",
+      "sha256": "sha256:53d77085622f64e4a36e92fe43999957737e2539df0cd4a221e5da7940dd6ed8"
+    },
+    {
+      "path": "remediation-cleanup.txt",
+      "sha256": "sha256:2cdffcd4bff5bd853209f7d90e639333e592bd46c30cab30e908860b78d75307"
+    },
+    {
+      "path": "m6-production-regressions.txt",
+      "sha256": "sha256:2f5adee0780d603da6eeca6523e2e2fcbc728ed595d1cbad1cd1248e1f3b9f73"
+    },
+    {
+      "path": "m6-stage2-crash-before-idempotency-fix.txt",
+      "sha256": "sha256:4455800702a97b9b09b49abbb889af3250eed67d4df257c5ab5c2d9acb480b9d"
+    },
+    {
+      "path": "collection-regression-artifacts.tar.gz",
+      "sha256": "sha256:11947f98fe91d0e3abeb1b170429aa67404c39e49d55a1032f257d821c581b9e"
+    },
+    {
+      "path": "capacity-triangle.md",
+      "sha256": "sha256:da9709fc7ac233a4bce3529381af9bb0ab9b8320eac29e41631a486719d94e64"
+    },
+    {
+      "path": "m6-runtime-collected.txt",
+      "sha256": "sha256:f6f49a6d4fc5400d23dc24cc8df9fe7ccfbd9bd13050bc1eade86d5d627b01bf"
+    },
+    {
+      "path": "failed-unit-audit-before-fix.txt",
+      "sha256": "sha256:189cce6562b9cd759d0c4319a20e62a2d3ba85a044f3162a025c7b16fa6d7b17"
+    },
+    {
+      "path": "m6-stage1-barrier-final.txt",
+      "sha256": "sha256:da6de915735006173ed72dfcef8144e8d126db1f827484c0cb9e494595ee9c54"
+    },
+    {
+      "path": "measurement-boot-id.txt",
+      "sha256": "sha256:f70797fc62663a633d57c4377a943c7a6ab9f61e9e07e2ca467621d46a2d8cc0"
+    },
+    {
+      "path": "m6-final-linux.txt",
+      "sha256": "sha256:a63921c08346e98c3537ff40ae87e9e730ef03973ed751ae269f974f733670dc"
+    },
+    {
+      "path": "node-sources.tar.gz",
+      "sha256": "sha256:88b9e2f7c16fd058c4f097106b3aa5b12508bf7864c5859058ed98cdab5959cf"
+    },
+    {
+      "path": "m6-portable-tests.txt",
+      "sha256": "sha256:0fb8c5cc13907adf6f26946bbce6b24d8cb4fce67980d5edd25ec5b76d050fda"
+    },
+    {
+      "path": "m6-stage3-ws.txt",
+      "sha256": "sha256:ea40ef3c4a172768bad1a136b263efd92aad1e76ab0c51cb8bce53ea9e146153"
+    },
+    {
+      "path": "initial-capacity-triangle.md",
+      "sha256": "sha256:8acd6a02e72e5bd193a1ffe591d23ffee7ae2ddd7e2b32e165607e51c5b26750"
+    },
+    {
+      "path": "m6-collection-transport.txt",
+      "sha256": "sha256:3f24b40ac3edcb8197f6b04e528085f8caa7c7c6ecf8b49259c7d41afd75cfb9"
+    },
+    {
+      "path": "sustained-triangle.json",
+      "sha256": "sha256:5052af1a15b30ca49dbf7afc1b793d21f61433f0d024b66be63635c2daa9ad3f"
+    },
+    {
+      "path": "m6-stage1-services-before-fix.txt",
+      "sha256": "sha256:d2c9ff26c03d68a7d5bfb3061745a1ca3f4666ca8e856d1982c12c9d115d2e32"
+    },
+    {
+      "path": "capacity-triangle.json",
+      "sha256": "sha256:3f64ad040a255ffb17d74878c076b89f3b2112aa868df69d868e976383d830ab"
+    },
+    {
+      "path": "transport.txt",
+      "sha256": "sha256:95696fef0e3f07f61cc6e96b5e7878b9008ff72286af272e598486828ccbc60c"
+    },
+    {
+      "path": "stage1-artifacts.tar.gz",
+      "sha256": "sha256:ea40e358eacd8e885fdd8943c99a87ce8a4efb4c6ebdb440e4b886cba56b9221"
+    },
+    {
+      "path": "m5-browser-prior.txt",
+      "sha256": "sha256:c2c26b58fdd27812f67ee3c9fb0b7d7598c3d637b01b16018e6802851c5806c7"
+    },
+    {
+      "path": "m6-stage5-sdk-toolchain-attempt.txt",
+      "sha256": "sha256:5d6b7803eafaeb67bee6b05e9ba7cd12a22f55b44ac69d60b481cc84a477e337"
+    },
+    {
+      "path": "m6-service-proof.json",
+      "sha256": "sha256:dc49fdacf9991feedb107fd4fc3c0f0baace3ed9ec51a81f1154b8fd4e840b36"
+    },
+    {
+      "path": "capacity-triangle.txt",
+      "sha256": "sha256:4bb302e00ef0fa6af70cc6e14bc500eb769273da4f04ce22520cfd1b6c9da5c3"
+    },
+    {
+      "path": "m6-stage5-freeze.txt",
+      "sha256": "sha256:d5c29e9fdb13eb57f78221a033e67d9dacc35edef407a6936cd227534c96d250"
+    },
+    {
+      "path": "declared-criteria.md",
+      "sha256": "sha256:01a45063e31fc3978502ce371bf419b97fb8fec6198decd441521e0d9153996b"
+    },
+    {
+      "path": "remediation-runtime-lock.txt",
+      "sha256": "sha256:2abc66b459029d12e1e1c52706535cfa4b5727be8c2aec386a85a43c2900a452"
+    },
+    {
+      "path": "m6-stage2-crash.txt",
+      "sha256": "sha256:061e7d08a28d2b565a796e1d609fa8806751bd12ae8cde93335c1fc0788ae954"
+    },
+    {
+      "path": "triangle-fixed-root.txt",
+      "sha256": "sha256:cb38afa07642cd70f5f2c673ffb5d597c49fa106ac5a641f1f5b8323968dd878"
+    },
+    {
+      "path": "initial-exits.txt",
+      "sha256": "sha256:206449a3c729b0dfc61cd5cccf4baa594b1036cc0172ec0223229d3d03a02ad7"
+    },
+    {
+      "path": "m6-stage4-sustained.txt",
+      "sha256": "sha256:1e2c806a6a40fc56e7d3abcde5117e41cbad49845a23512538619fb621be9b44"
+    },
+    {
+      "path": "macos.txt",
+      "sha256": "sha256:8e91187ddc9964ff8311af6a96d2b7bd30f6201008e3af94ddecd6c3f5ed75a4"
+    },
+    {
+      "path": "stage5-artifacts.tar.gz",
+      "sha256": "sha256:b13c79eb4208056dd821c5d8c28aeb35415104cce0e8a7e02e99c8ee05ea9083"
+    },
+    {
+      "path": "remediation-runtime.txt",
+      "sha256": "sha256:877eba00e537b238dfd7f43bf34551a0f1d7d83e2dbe3af375da5cc5667b4eb4"
+    },
+    {
+      "path": "network-post-reboot.txt",
+      "sha256": "sha256:3e2769fecd08d03f547fe64330d991b2b7128dd31342337b220c6467f05bd3eb"
+    },
+    {
+      "path": "m6-stage2-crash-before-capture-stop-fix.txt",
+      "sha256": "sha256:e1794696deae30ffd23395b69da280d6babdeb0bf2458c48c1e542f54a5c82ab"
+    },
+    {
+      "path": "m6-capacity-summary-test.txt",
+      "sha256": "sha256:39c13b895eaa81f5c549d7b5f8c40593921de15ac80444387437c8fb1a7d8ac3"
+    },
+    {
+      "path": "m6-final-sanitizers.txt",
+      "sha256": "sha256:eabac476ae966b2cb52888a88595b8aa2c3d36397dbc92648bdf10b5211be846"
+    },
+    {
+      "path": "m6-final-browser.txt",
+      "sha256": "sha256:a2fa89df0c9c1e502741ea24d0610c34c9f9d1974197e60da7fc152cd4fae071"
+    },
+    {
+      "path": "remediation-macos.txt",
+      "sha256": "sha256:e50b10f05ce4c842774134cbe43145efa321aadfa40b02e62061da914ae13cc4"
+    },
+    {
+      "path": "m6-collection-sanitizers.txt",
+      "sha256": "sha256:18cc5adba6ae5562b0fb05dc053d418063124df2c4bdf1f8ef7cf0fcbc852140"
+    },
+    {
+      "path": "m6-original-integrity.json",
+      "sha256": "sha256:bcd099911ba92766fdddb26cf654f5a5e8f0bd6ed206a643645b081c1786bac0"
+    },
+    {
+      "path": "m6-production-linux-tests.txt",
+      "sha256": "sha256:ec2d44c05ca62c05ee4da818e6bb6342e908a49b970e05438470096fcce70f4c"
+    },
+    {
+      "path": "common-package.tar.gz",
+      "sha256": "sha256:a3047d14debcf6427f2a0f2bf66b3140d55d82e8756c5b31b2c5ae589de711ea"
+    },
+    {
+      "path": "network-artifacts.tar.gz",
+      "sha256": "sha256:72d52da16f5bedf08b0a037b14cbc655bd5dfb2980a7983c9793bc67d6878b76"
+    }
+  ],
+  "capacityReport": "sustained-direct.json",
+  "gates": [
+    {
+      "evidence": [
+        "ctest.txt",
+        "browser.txt",
+        "m3.txt"
+      ],
+      "id": "T01",
+      "reason": "Named chain/star/ring/mesh/disconnected/isolated/parallel/triangle fixtures and variable-sized/self-link graphs pass parser/planner and browser counts; generated graph plans and alternate capture counts are derived from graph data.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "ctest.txt"
+      ],
+      "id": "T02",
+      "reason": "Malformed contracts/topologies are rejected by portable acceptance before runtime side effects.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m2.txt",
+        "remediation-runtime.txt",
+        "network-artifacts.tar.gz"
+      ],
+      "id": "T03",
+      "reason": "Real same/cross-VLAN and management controls plus independent VLAN 100 trunk packet readback, observed RSTP roles, and delivery restoration within a predeclared 15000 ms bound after cutting the forwarding trunk.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m3.txt",
+        "m6-stage1-barrier-final.txt",
+        "stage1-artifacts.tar.gz",
+        "m6-final-linux.txt"
+      ],
+      "id": "T04",
+      "reason": "All nine named shapes including multi-NIC retain independently read PCAPNG sequence-zero markers at every declared capture point; monotonic release proofs require all workers active before release. Every failed-arm variant holds senders. These are capture-point injection tests, not end-to-end delivery tests.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "remediation-runtime.txt",
+        "direction-artifacts.tar.gz"
+      ],
+      "id": "T05",
+      "reason": "Numbered UDP datagrams observed at both Docker endpoints under asymmetric 80 ms delay and 100% loss with kernel-verified GRO/GSO on and off. Endpoint delivery, capture source counters and qdisc telemetry are retained separately; no delivered-loss inference from PCAP.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "remediation-measurement.txt"
+      ],
+      "id": "T06",
+      "reason": "Capture worker loss, quota exhaustion, rotation under load, partial files and measured bounded quiescence pass.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m3.txt",
+        "m4-console.txt",
+        "m6-stage1-services.txt",
+        "stage1-artifacts.tar.gz",
+        "m6-collection-live-browser.txt",
+        "collection-regression-artifacts.tar.gz"
+      ],
+      "id": "T07",
+      "reason": "Real API and agent services restarted independently during recorded Docker PTY output and all-edge capture. Capture identities/invocations persist, session imports are unique, writer token is fenced, all 60 output lines replay; subsequent actual worker loss explicitly marks coverage incomplete.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "reboot.txt",
+        "reboot-initial.txt",
+        "post-reboot.txt",
+        "reboot-artifacts.tar.gz"
+      ],
+      "id": "T08",
+      "reason": "Actual VM reboot rejects prior capture and terminal handles, changes boot/controller generation, indexes five readable retained capture segments and completes scoped recovery. Prior-boot Docker exec cleanup regression fixed; same-boot console cleanup retested.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "ctest.txt",
+        "m5.txt",
+        "m6-stage1-services.txt",
+        "stage1-artifacts.tar.gz",
+        "m6-collection-live-browser.txt",
+        "collection-regression-artifacts.tar.gz"
+      ],
+      "id": "T09",
+      "reason": "Real browser/API and independent CLI concurrent fault submission admit exactly one request; same-key replay returns the same job, conflicting body and stale revision fail.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m2.txt",
+        "m6-stage2-crash.txt",
+        "m6-stage2-fd-audit.txt",
+        "stage2-artifacts.tar.gz"
+      ],
+      "id": "T10",
+      "reason": "The retained M2 crash suite is supplemented by 45 fresh SIGKILL cases covering intent/effect/readback/completion for PPC/TCG and ARM64/KVM, first/second TAP ownership and management, Docker/SSH terminal creation, and netem apply/remove. Teardown cancellation is denied while recovery proceeds; two recoveries per case succeed and unrelated sentinels survive.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "ctest.txt",
+        "m5.txt",
+        "m5-browser-prior.txt"
+      ],
+      "id": "T11",
+      "reason": "Fresh known one-way kernel traffic, identity rejection and collector/counter epoch tests pass. Browser clock-skew/stale refresh behavior uses the prior M5 live-browser regression on unchanged UI sources, explicitly retained as historical evidence.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "ctest.txt",
+        "m4-console.txt",
+        "transport.txt",
+        "remediation-macos.txt",
+        "remediation-sanitizers.txt",
+        "terminal-corpus.txt",
+        "m6-stage3-pty.txt",
+        "m6-stage3-ws.txt",
+        "m6-terminal-ws-proof.json",
+        "stage3-artifacts.tar.gz",
+        "m6-collection-live-browser.txt",
+        "collection-regression-artifacts.tar.gz",
+        "collection-terminal-ws-proof.json",
+        "m6-collection-linux.txt"
+      ],
+      "id": "T12",
+      "reason": "Real Docker PTYs prove one-writer fencing, applied/retained resize, exact independent replay, default secret-byte exclusion and opt-in input recording. A paused TCP WebSocket viewer with 200 queued replay requests does not block a second viewer or 4 MiB live output; reconnect/late replay match 1100 records exactly, with 324 KiB observed API RSS growth. Quota exhaustion explicitly marks a bounded preserved prefix incomplete and the artifact partial; recovery preserves its digest.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m4-guests.txt",
+        "remediation-runtime.txt"
+      ],
+      "id": "T13",
+      "reason": "PowerPC/TCG and ARM64/KVM readiness, paused launch and recording checks pass; unsupported first-byte serial guarantee remains explicitly disabled.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "remediation-runtime.txt",
+        "remediation-macos.txt",
+        "remediation-sanitizers.txt",
+        "remediation-browser.txt",
+        "transport.txt",
+        "terminal-corpus.txt"
+      ],
+      "id": "T14",
+      "reason": "Auth/Origin/CSRF and scoped path checks pass; malformed RPC corpus yields bounded errors without echoing secrets. 512 seeded malformed recordings stay bounded. Browser corpus covers HTML, clipboard/title/link escapes and 256 seeded control sequences without script execution or attacker requests.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m3.txt",
+        "m4-guests.txt",
+        "remediation-runtime.txt"
+      ],
+      "id": "T15",
+      "reason": "Real capture loss during controller outage triggers scoped node/VM lease enforcement and measured cessation.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m5.txt",
+        "m3.txt"
+      ],
+      "id": "T16",
+      "reason": "Expired fault restart removal, stale controller fencing and worker identity rejection pass.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "m2.txt",
+        "m3.txt",
+        "m4-guests.txt",
+        "cleanup.txt",
+        "cleanup-post-reboot.txt",
+        "network-post-reboot.txt",
+        "remediation-cleanup.txt",
+        "m6-stage2-crash.txt",
+        "m6-stage2-fd-audit.txt",
+        "stage2-artifacts.tar.gz",
+        "m6-collection-live-browser.txt",
+        "collection-regression-artifacts.tar.gz",
+        "failed-unit-audit-before-fix.txt",
+        "m6-scoped-unit-collection.txt",
+        "m6-collection-linux.txt",
+        "m6-cleanup-verified.txt",
+        "m6-cleanup-audit.sh"
+      ],
+      "id": "T17",
+      "reason": "45 SIGKILL cases recover twice and retain no owned runtime resources, including process/namespace-FD audits and unrelated sentinels. Final failure injection exposed stopped systemd failure records; verified stopped-unit collection is fixed, historical descriptors are scoped-cleaned, and fresh capture, terminal-quota, PPC/TCG, ARM64/KVM and live-service regressions leave no units or worker processes. Final Docker/network/OVS inventories are clean; recordings and overlays are intentionally retained.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "capacity.json",
+        "capacity-triangle.json",
+        "capacity-direct.md",
+        "capacity-triangle.md",
+        "remediation-measurement.txt",
+        "triangle-fixed-root.txt",
+        "sustained-direct.json",
+        "sustained-triangle.json",
+        "stage4-artifacts.tar.gz",
+        "m6-stage4-sustained.txt",
+        "declared-criteria.md"
+      ],
+      "id": "T18",
+      "reason": "Twelve 300-second samples complete the predeclared one-hour direct/fixed-root-triangle matrix at 1000 numbered 256-byte requests/s. All fixed loss, achieved-rate, RTT, CPU, memory, RSS-growth, readiness and worker/source-drop checks pass; both scoped cleanups succeed. This qualifies two Docker endpoints on these 1/5-edge graphs for the measured duration, not arbitrary scale or all ISA/runtime combinations. Unknown interface-drop counters remain unknown.",
+      "status": "passed"
+    },
+    {
+      "evidence": [
+        "workload-build.txt",
+        "ctest.txt",
+        "m6-stage5-compatibility.txt",
+        "protocol-releases.json",
+        "protocol-minor-matrix.md",
+        "stage5-artifacts.tar.gz",
+        "protocol-1.0-source.tar.gz",
+        "m6-collection-linux-ctest.txt",
+        "m6-collection-macos-tests.txt"
+      ],
+      "id": "T19",
+      "reason": "Complete pinned SDK 1.0.0/1.1.0 archives build app-a/app-b in four independent node-only contexts with no Python. All four same/mixed gate-minor pairings pass real bidirectional probes, quiesce and cleanup under frozen legacy and current controllers. Unsupported workload major is rejected; the current controller additionally rejects an actual wire major 2 before releasing either node despite its false v1 image label. SDKs, sources, frozen binaries and image IDs are retained as local qualification releases.",
+      "status": "passed"
+    }
+  ],
+  "runtimeLock": "runtime-lock.json",
+  "sourceArchive": "source.tar.gz",
+  "workloadArchive": "protocol-images.tar.gz"
+}

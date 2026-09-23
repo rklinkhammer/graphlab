@@ -1,0 +1,12 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/m6-terminal-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:53943) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/m6-terminal-live.spec.ts:47:1 › M6 paused TCP viewer does not block recording or independent exact replay (18.7s)
+
+  1 passed (19.1s)

@@ -1,4 +1,4 @@
-# LabSupport 1.0.0
+# LabSupport 1.1.0
 
 C++23 contracts, bounded YAML/JSON parsing, workload validation, topology validation, and SHA-256 canonical document identity. No subprocesses, Docker API, runtime mutation, or environment-owned wiring are included.
 
@@ -11,7 +11,7 @@ cmake --install build/support --prefix "$PWD/build/support-install"
 Independent consumers use:
 
 ```cmake
-find_package(LabSupport 1.0.0 EXACT CONFIG REQUIRED)
+find_package(LabSupport 1.1.0 EXACT CONFIG REQUIRED)
 target_link_libraries(my_node PRIVATE LabSupport::contracts)
 ```
 
@@ -34,4 +34,8 @@ M3 adds `release-lease` and `renew-lease` to the shared gate protocol. Leases us
 
 `LabSupport::telemetry` exports `lab_support/telemetry.hpp`: pure C++23 directional rate and counter-epoch derivation over typed JSON observations. It preserves uint64 counters as decimal strings, uses monotonic deltas, and emits null rates at resets or observation gaps. It links the shared contracts package and contains no Linux collector, SQLite store or privileged fault executor. See [M5 operations](../../docs/m5-telemetry-faults.md) for the observation contract and limits.
 
-The M6 qualification bundle retains the installed common package alongside independently compiled node images and source contexts. The [qualification manifest](../../qualification/README.md) binds actual archive bytes; package version `1.0.0` alone is not a substitute for that artifact identity.
+The M6 qualification bundle retains installed 1.0.0 and 1.1.0 packages alongside independently compiled node images and source contexts. The [qualification manifest](../../qualification/README.md) binds actual archive bytes; a version alone is not a substitute for artifact identity.
+
+## Gate protocol minors
+
+SDK 1.1.0 adds optional `protocolMinor: 1` and `capabilities` metadata to `graphlab.gate/v1`; the existing commands and fields are unchanged. SDK 1.0.0 omits the minor, which means 0. `gate_protocol_minor()` accepts the qualified minors 0 and 1, ignores optional additions and rejects unsupported majors, minors or required features. The controller checks every Docker peer before releasing any node and validates release/renew acknowledgements. See the [declared compatibility matrix](../../qualification/protocol-minor-matrix.md). These are retained local qualification releases, not published registry artifacts or a cross-compiler ABI promise.

@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
       auto report = Json::parse(*input);
       if (report.at("apiVersion") != "graphlab.capacity/v1")
         throw std::runtime_error("unsupported capacity report");
+      const bool sustained = report.value("mode", "") == "sustained-m6";
       struct Totals {
         double cpu = 0, rtt = 0, rate = 0, loss = 0, storage = 0, read = 0, write = 0;
         std::uint64_t rss = 0, drops = 0;
@@ -63,6 +64,9 @@ int main(int argc, char **argv) {
       std::set<std::string> unknown_drops;
       bool previous_capture_complete = true;
       for (const auto &s : report.at("samples")) {
+        if (sustained && (s.at("durationSeconds") != 300 || !s.at("checks").is_object() ||
+                          s.at("checks").size() != 8 || s.at("monitorCount") < 200))
+          throw std::runtime_error("incomplete sustained observation");
         auto &a = groups[{s.at("targetRequestsPerSecond").get<int>(),
                           s.at("profile").get<std::string>()}];
         ++a.count;
@@ -76,7 +80,8 @@ int main(int argc, char **argv) {
         a.storage += s.at("captureBytesPerSecond").get<double>();
         a.read += s.at("hostPagingReadKiBPerSecond").get<double>();
         a.write += s.at("hostPagingWriteKiBPerSecond").get<double>();
-        a.rss = std::max(a.rss, s.at("controllerRssKiB").get<std::uint64_t>());
+        a.rss = std::max(
+            a.rss, s.value("controllerRssMaxKiB", s.at("controllerRssKiB").get<std::uint64_t>()));
         a.envelope = a.envelope && s.at("withinSampleEnvelope").get<bool>();
         std::uint64_t interval_drops = 0;
         if (s.at("profile") == "capture" && !previous_capture_complete)
@@ -114,11 +119,11 @@ int main(int argc, char **argv) {
           previous_capture_complete = capture_complete;
         a.drops = std::max(a.drops, interval_drops);
       }
-      for (int rate : {250, 1000, 4000})
+      for (int rate : sustained ? std::vector<int>{1000} : std::vector<int>{250, 1000, 4000})
         for (const auto profile : {"baseline", "telemetry", "capture"})
           if (!groups.contains({rate, profile}) || groups.at({rate, profile}).count != 2)
             throw std::runtime_error("incomplete capacity matrix");
-      if (groups.size() != 9)
+      if (groups.size() != (sustained ? 3 : 9))
         throw std::runtime_error("unexpected capacity matrix");
       std::cout
           << "# Capacity measurements\n\n"
@@ -163,6 +168,12 @@ int main(int argc, char **argv) {
                    "previous observation (first since activation), separate "
                    "from delivery loss. A passing envelope applies only to the sampled duration "
                    "and topology; no long-duration saturation bound is inferred.\n";
+      if (sustained)
+        std::cout << "\nSustained mode: two 300-second samples per profile at 1,000 requests/s. "
+                     "The envelope column includes the declared CPU, memory, RTT, continuity and "
+                     "source-drop checks. "
+                     "Unavailable interface-drop counters remain unknown. Raw reports retain "
+                     "one-second health samples.\n";
       return 0;
     }
     if (argc == 4 && std::string(argv[1]) == "record") {

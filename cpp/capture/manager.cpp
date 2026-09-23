@@ -299,6 +299,25 @@ Json control(const Json &run, const std::string &operation) {
         if (manifest(c).value("state", "") != "closed")
           throw runtime::Failure("capture_finalize_timeout");
       }
+      // Reap a stopped/failed unit before removing its stale control endpoint.
+      if (!listed.empty()) {
+        auto stopped = runtime::process({"/usr/bin/systemctl", "stop", c.at("unit")});
+        if (stopped.code && !command({"/usr/bin/systemctl", "list-units", "--all", "--no-legend",
+                                      "--plain", c.at("unit")})
+                                 .empty())
+          throw runtime::Failure("capture_stop_failed");
+        runtime::detail::reap_stopped_unit(c.at("unit"));
+      }
+      auto stored = console::load(directory / "config.json");
+      if (stored.at("id") != c.at("id") || stored.at("nonce") != c.at("nonce"))
+        throw runtime::Failure("capture_ownership_conflict");
+      auto socket = directory / "control.sock";
+      struct stat socket_info{};
+      if (lstat(socket.c_str(), &socket_info) == 0) {
+        if (!S_ISSOCK(socket_info.st_mode) || socket_info.st_uid != 0 || unlink(socket.c_str()))
+          throw runtime::Failure("capture_socket_cleanup_failed");
+      } else if (errno != ENOENT)
+        throw runtime::Failure("capture_socket_inspection_failed");
       if (std::filesystem::exists(directory / "manifest.json")) {
         auto m = manifest(c);
         if (m.value("state", "") != "closed") {

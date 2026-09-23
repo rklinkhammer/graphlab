@@ -76,3 +76,5 @@ M5 adds shared C++ rate derivation, Linux directional counters, bounded SQLite h
 ## M6 operational qualification
 
 C++ qualification manifest verification, Linux capacity/reboot fixtures and the reproducible integration runner are described in [M6 operations](m6-qualification.md). Consult the measured evidence and matrix there before claiming full runtime qualification; a skipped or partial required gate is not a pass.
+
+The [M6 completion report](validation/m6/completion.md) documents the additional eight-gate acceptance fixtures, cleanup fixes, sustained direct/triangle envelope and shared SDK 1.0.0/1.1.0 compatibility evidence. It preserves the original and remediation bundles as historical evidence.

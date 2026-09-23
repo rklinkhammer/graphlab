@@ -17,6 +17,8 @@ Result<Json> parse_document(std::string_view text);
 Result<std::string> read_document(const std::string &path);
 std::string digest(const Json &value);
 std::string crypto_version();
+// Gate v1: absent optional minor is legacy 0; locally qualified minors are 0 and 1.
+Result<unsigned> gate_protocol_minor(const Json &response);
 struct Port {
   std::string role, medium;
   int mtu;

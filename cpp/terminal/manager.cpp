@@ -143,7 +143,14 @@ void cleanup_docker(const Json &d) {
   if (d["kind"] == "docker" && std::filesystem::exists(dir / "exec.json")) {
     auto exec = console::load(dir / "exec.json");
     auto path = "/v1.52/exec/" + exec["id"].get<std::string>() + "/json";
-    auto info = runtime::docker_json("GET", path);
+    auto response = runtime::docker_request("GET", path);
+    // Removing the parent container retires its exec IDs. Confirmed absence is
+    // already-clean, including a second recovery after interrupted creation.
+    if (response.status == 404)
+      return;
+    if (response.status != 200)
+      throw runtime::Failure("exec_inspection_failed");
+    auto info = Json::parse(response.body);
     if (info["ContainerID"] != d["containerId"])
       throw runtime::Failure("exec_identity_changed");
     if (info["Running"] == true) {
@@ -191,29 +198,75 @@ void stop(const Json &d, const std::string &g) {
   auto stored = console::load(dir / "config.json");
   if (stored["id"] != d["id"] || stored["nonce"] != d["nonce"])
     throw runtime::Failure("session_ownership_conflict");
+  auto unlink_sockets = [&] {
+    for (auto name : {"control.sock", "attach.sock", "serial.sock", "qmp.sock"}) {
+      auto path = dir / name;
+      struct stat st{};
+      if (lstat(path.c_str(), &st)) {
+        if (errno == ENOENT)
+          continue;
+        throw runtime::Failure("session_socket_inspection_failed");
+      }
+      if (!S_ISSOCK(st.st_mode) || st.st_uid != 0 || unlink(path.c_str()))
+        throw runtime::Failure("session_socket_cleanup_failed");
+    }
+  };
   cleanup_docker(d);
   auto listed =
       runtime::process({"/usr/bin/systemctl", "list-units", "--all", "--no-legend", d["unit"]});
   if (listed.code)
     throw runtime::Failure("session_supervisor_unavailable");
-  if (listed.output.empty())
+  if (listed.output.empty()) {
+    unlink_sockets();
     return;
+  }
 
-  try {
-    request(d, "close", g);
-  } catch (...) {
-    auto r = runtime::process(
-        {"/usr/bin/systemctl", "show", d["unit"], "--property=ActiveState", "--value"});
-    if (r.code)
-      throw;
-    if (r.output != "inactive\n" && r.output != "failed\n") {
-      request(d, "adopt", g);
+  // Closing the Docker exec can make its recorder exit between the supervisor
+  // observation and the control request. Wait for that exit instead of trying
+  // to adopt an already-closing socket once and stranding recovery.
+  bool closed = false;
+  const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
+  while (!closed && std::chrono::steady_clock::now() < deadline) {
+    try {
       request(d, "close", g);
+      closed = true;
+    } catch (...) {
+      auto r = runtime::process(
+          {"/usr/bin/systemctl", "show", d["unit"], "--property=ActiveState", "--value"});
+      if (r.code)
+        throw runtime::Failure("session_supervisor_unavailable");
+      if (r.output == "inactive\n" || r.output == "failed\n") {
+        closed = true;
+        break;
+      }
+      try {
+        request(d, "adopt", g);
+        request(d, "close", g);
+        closed = true;
+      } catch (...) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+      }
     }
   }
+  if (!closed)
+    throw runtime::Failure("session_close_not_observed");
+  listed =
+      runtime::process({"/usr/bin/systemctl", "list-units", "--all", "--no-legend", d["unit"]});
+  if (listed.code)
+    throw runtime::Failure("session_supervisor_unavailable");
+  if (listed.output.empty()) {
+    unlink_sockets();
+    return;
+  }
   auto r = runtime::process({"/usr/bin/systemctl", "stop", d["unit"]});
-  if (r.code)
-    throw runtime::Failure("session_stop_failed");
+  if (r.code) {
+    auto remaining =
+        runtime::process({"/usr/bin/systemctl", "list-units", "--all", "--no-legend", d["unit"]});
+    if (remaining.code || !remaining.output.empty())
+      throw runtime::Failure("session_stop_failed");
+  }
+  runtime::detail::reap_stopped_unit(d["unit"]);
+  unlink_sockets();
 }
 Json docker_session(const Json &r, const Json &resource, const std::filesystem::path &root,
                     bool input) {
@@ -272,8 +325,10 @@ void docker_attach(const Json &d, const std::string &generation) {
        {"Tty", true},
        {"Cmd", Json::array({"/bin/sh"})}});
   auto exec = created["Id"].get<std::string>();
+  runtime::detail::checkpoint("terminal.exec-created");
   auto dir = std::filesystem::path(d["directory"].get<std::string>());
   capture::atomic_json(dir / "exec.json", {{"id", exec}, {"containerId", d["containerId"]}});
+  runtime::detail::checkpoint("terminal.exec-intent");
   int fd = connect_unix("/var/run/docker.sock");
   auto body = Json{{"Detach", false}, {"Tty", true}}.dump();
   auto wire = "POST /v1.52/exec/" + exec +
@@ -297,6 +352,7 @@ void docker_attach(const Json &d, const std::string &generation) {
     close(fd);
     throw runtime::Failure("exec_upgrade_failed");
   }
+  runtime::detail::checkpoint("terminal.created");
   int peer = -1;
   for (int i = 0; i < 100; ++i) {
     try {

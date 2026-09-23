@@ -4,6 +4,12 @@
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <unistd.h>
+#ifdef __linux__
+#include <fcntl.h>
+#include <linux/if_tun.h>
+#include <net/if.h>
+#include <sys/ioctl.h>
+#endif
 namespace graphlab::qemu {
 namespace {
 std::string cmd(std::vector<std::string> a) {
@@ -197,10 +203,36 @@ Json prepare(const Json &r, const Json &n, const std::filesystem::path &root) {
     throw runtime::Failure("vm_directory_conflict");
   chmod(dir.c_str(), 0700);
   capture::atomic_json(dir / "config.json", c);
+  runtime::detail::checkpoint("qemu.config");
   for (const auto &nic : c["nics"]) {
     auto tap = nic["tap"].get<std::string>();
-    cmd({"/usr/sbin/ip", "tuntap", "add", "dev", tap, "mode", "tap"});
+#ifdef __linux__
+    // A nonpersistent TAP disappears if the executor dies before ownership is
+    // attached. Only make it persistent after its alias is visible to recovery.
+    int fd = open("/dev/net/tun", O_RDWR | O_CLOEXEC);
+    if (fd < 0)
+      throw runtime::Failure("tap_open_failed");
+    struct Guard {
+      int fd;
+      ~Guard() { close(fd); }
+    } guard{fd};
+    ifreq request{};
+    if (tap.size() >= IFNAMSIZ)
+      throw runtime::Failure("tap_name_limit");
+    std::copy(tap.begin(), tap.end(), request.ifr_name);
+    request.ifr_flags = static_cast<short>(IFF_TAP | IFF_NO_PI | IFF_TUN_EXCL);
+    if (ioctl(fd, TUNSETIFF, &request))
+      throw runtime::Failure("tap_create_failed");
+    runtime::detail::checkpoint("qemu.tap-created");
+    runtime::detail::checkpoint("qemu.tap-created." + nic["port"].get<std::string>());
     cmd({"/usr/sbin/ip", "link", "set", "dev", tap, "alias", nic["owner"]});
+    if (ioctl(fd, TUNSETPERSIST, 1))
+      throw runtime::Failure("tap_persist_failed");
+    runtime::detail::checkpoint("qemu.tap-owned");
+    runtime::detail::checkpoint("qemu.tap-owned." + nic["port"].get<std::string>());
+#else
+    throw runtime::Failure("qemu_requires_linux");
+#endif
   }
   for (const auto &a : r["topology"]["managementAttachments"]) {
     auto ep = a["endpoint"].get<std::string>();
@@ -213,13 +245,16 @@ Json prepare(const Json &r, const Json &n, const std::filesystem::path &root) {
     auto tap = tap_name(r, n["logical"], ep.substr(ep.find(':') + 1));
     cmd({"/usr/sbin/ip", "link", "set", tap, "master", bridge});
     cmd({"/usr/sbin/ip", "link", "set", tap, "up"});
+    runtime::detail::checkpoint("qemu.management");
   }
   cmd({"/usr/bin/qemu-img", "create", "-f", "qcow2", "-F", "raw", "-b", c["base"],
        (dir / "overlay.qcow2").string()});
+  runtime::detail::checkpoint("qemu.overlay");
   // launch() normally creates a fresh directory. This VM config was durably created before TAP
   // effects.
   c["preparedDirectory"] = true;
   terminal::launch(c);
+  runtime::detail::checkpoint("qemu.created");
   for (int i = 0; i < 100; ++i) {
     try {
       auto s = terminal::request(c, "status", r["controllerGeneration"]);

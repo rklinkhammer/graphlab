@@ -1,0 +1,259 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/m6_barrier.dir/tests/qualification/barrier.cpp.o
+[2/2] Linking CXX executable m6_barrier
+Evidence: "/tmp/gl6-bar-OVHW2T"
+PASS fixtures generated
+PASS chain validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS chain ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:05:42Z","error":null,"finishedAt":"2026-09-23T01:05:42Z","id":"8aa79907-b398-462d-868e-7160d1f2ca3c","operation":"start","revision":"1","runId":"dbac4441-d81c-4243-8185-00930ca55db9","state":"succeeded"}
+PASS chain per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS chain sequence zero captured at l12
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS chain sequence zero captured at l23
+PASS chain cleanup
+PASS chain validates
+PASS chain failed arm never opens sender gate
+PASS chain cleanup
+PASS star validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS star ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:05:44Z","error":null,"finishedAt":"2026-09-23T01:05:44Z","id":"08345183-128d-4187-8a3b-3585fa2a049a","operation":"start","revision":"1","runId":"1f6706d9-e9a9-462e-87f0-dad94a275212","state":"succeeded"}
+PASS star per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS star sequence zero captured at l12
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS star sequence zero captured at l13
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS star sequence zero captured at l14
+PASS star cleanup
+PASS star validates
+PASS star failed arm never opens sender gate
+PASS star cleanup
+PASS ring validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS ring ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:05:46Z","error":null,"finishedAt":"2026-09-23T01:05:50Z","id":"0888c908-ff12-4b9a-8f04-81f0e513f6aa","operation":"start","revision":"1","runId":"178544fb-7b47-48d4-8a48-90fdf168c36f","state":"succeeded"}
+PASS ring per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS ring sequence zero captured at l12
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS ring sequence zero captured at l23
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS ring sequence zero captured at l31
+PASS ring cleanup
+PASS ring validates
+PASS ring failed arm never opens sender gate
+PASS ring cleanup
+PASS mesh validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS mesh ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:05:52Z","error":null,"finishedAt":"2026-09-23T01:05:55Z","id":"4378ef78-395a-46f4-8d27-dba5cb164af0","operation":"start","revision":"1","runId":"1323be2e-5cf2-4120-847b-d8b56587861b","state":"succeeded"}
+PASS mesh per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS mesh sequence zero captured at l12
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS mesh sequence zero captured at l13
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS mesh sequence zero captured at l14
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS mesh sequence zero captured at l23
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS mesh sequence zero captured at l24
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS mesh sequence zero captured at l34
+PASS mesh cleanup
+PASS mesh validates
+PASS mesh failed arm never opens sender gate
+PASS mesh cleanup
+PASS disconnected validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS disconnected ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:05:59Z","error":null,"finishedAt":"2026-09-23T01:06:00Z","id":"d5182db7-d930-4e58-888c-eda90f35001f","operation":"start","revision":"1","runId":"ca69ff4f-c25f-4a17-857c-b2f43139bc31","state":"succeeded"}
+PASS disconnected per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS disconnected sequence zero captured at l12
+PASS disconnected cleanup
+PASS disconnected validates
+PASS disconnected failed arm never opens sender gate
+PASS disconnected cleanup
+PASS isolated validates
+PASS every capture acknowledged before release
+PASS isolated ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:06:01Z","error":null,"finishedAt":"2026-09-23T01:06:01Z","id":"4feac3cc-9984-4b06-8fdb-f9261bf11646","operation":"start","revision":"1","runId":"bf5d867d-2b14-4d3a-818b-ff5b6b6d54ba","state":"succeeded"}
+PASS isolated per-edge release proof
+PASS isolated cleanup
+PASS isolated validates
+PASS isolated failed arm never opens sender gate
+PASS isolated cleanup
+PASS parallel validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS parallel ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:06:01Z","error":null,"finishedAt":"2026-09-23T01:06:05Z","id":"7624258c-468d-450b-80fc-7677a85789e3","operation":"start","revision":"1","runId":"7b4cb236-2cb3-4194-8e23-3951cfca3582","state":"succeeded"}
+PASS parallel per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS parallel sequence zero captured at l12
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS parallel sequence zero captured at l12b
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS parallel sequence zero captured at l23
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS parallel sequence zero captured at l31
+PASS parallel cleanup
+PASS parallel validates
+PASS parallel failed arm never opens sender gate
+PASS parallel cleanup
+PASS triangle validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS triangle ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:06:07Z","error":null,"finishedAt":"2026-09-23T01:06:11Z","id":"ee6fc523-2203-4a14-8893-dd953f66cde7","operation":"start","revision":"1","runId":"f2c2cf15-2702-44c7-809b-3a10a9dd2f05","state":"succeeded"}
+PASS triangle per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS triangle sequence zero captured at a-s
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS triangle sequence zero captured at b-s
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS triangle sequence zero captured at l12
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS triangle sequence zero captured at l23
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS triangle sequence zero captured at l31
+PASS triangle cleanup
+PASS triangle validates
+PASS triangle failed arm never opens sender gate
+PASS triangle cleanup
+PASS multi-nic validates
+PASS every capture acknowledged before release
+PASS worker active before sender release
+PASS worker active before sender release
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS sender timestamp received
+PASS first numbered frame within 250ms of release
+PASS gated sender exited cleanly
+PASS multi-nic ready: {"cancelRequested":false,"createdAt":"2026-09-23T01:06:15Z","error":null,"finishedAt":"2026-09-23T01:06:15Z","id":"6e48cb34-ccf1-4c99-8788-653f72715fd3","operation":"start","revision":"1","runId":"5f98d7e0-59ff-42b5-82de-341926a341ad","state":"succeeded"}
+PASS multi-nic per-edge release proof
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS multi-nic sequence zero captured at first
+PASS independent reader opens segment
+PASS clean independent EOF
+PASS multi-nic sequence zero captured at second
+PASS multi-nic cleanup
+PASS multi-nic validates
+PASS multi-nic failed arm never opens sender gate
+PASS multi-nic cleanup

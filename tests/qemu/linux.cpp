@@ -64,7 +64,7 @@ std::size_t guest_packets(const Json &run) {
   return count;
 }
 int main(int argc, char **argv) {
-  if (argc != 4 || geteuid() != 0)
+  if ((argc != 4 && !(argc == 5 && std::string(argv[4]) == "--fixtures")) || geteuid() != 0)
     return 2;
   int lock = open("/run/graphlab-executor.lock", O_CREAT | O_RDWR | O_CLOEXEC, 0600);
   if (lock < 0 || flock(lock, LOCK_EX | LOCK_NB))
@@ -141,6 +141,8 @@ int main(int argc, char **argv) {
       write(root / "topology.yaml", t);
       auto valid = lab_support::validate(t, artifacts);
       check(bool(valid), "guest topology validates");
+      if (argc == 5)
+        continue;
       console::Catalog catalog(root, root / "artifacts.lock.json");
       Backend backend;
       Json run, desc;

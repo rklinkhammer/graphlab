@@ -180,7 +180,9 @@ void Engine::m5_execute(const std::string &jid) {
     run = r;
     f = fault;
   }
+  detail::checkpoint(op + ".intent");
   auto observed = backend_.fault(run, f, op == "fault.apply" ? "apply" : "remove");
+  detail::checkpoint(op + ".readback");
   bool cancel = false;
   {
     std::lock_guard lock(mutex_);
@@ -204,6 +206,7 @@ void Engine::m5_execute(const std::string &jid) {
   j["finishedAt"] = console::timestamp();
   event(r, "fault-" + saved["state"].get<std::string>(),
         {{"faultId", fid}, {"placement", saved["placement"]}});
+  detail::checkpoint(op + ".completion");
   save();
 }
 void Engine::m5_clear(const std::string &id) {
