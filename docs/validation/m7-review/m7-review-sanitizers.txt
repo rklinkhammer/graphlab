@@ -1,0 +1,39 @@
+Test project /Users/rklinkhammer/workspace/graphlab/build/verify
+      Start  1: m6_protocol_contract
+ 1/17 Test  #1: m6_protocol_contract .............   Passed    0.04 sec
+      Start  2: m1_acceptance
+ 2/17 Test  #2: m1_acceptance ....................   Passed    4.47 sec
+      Start  3: m0_acceptance
+ 3/17 Test  #3: m0_acceptance ....................   Passed    0.98 sec
+      Start  4: cli_validate
+ 4/17 Test  #4: cli_validate .....................   Passed    0.04 sec
+      Start  5: cli_plan
+ 5/17 Test  #5: cli_plan .........................   Passed    0.04 sec
+      Start  6: cli_preflight
+ 6/17 Test  #6: cli_preflight ....................   Passed    0.02 sec
+      Start  7: cli_side_effects
+ 7/17 Test  #7: cli_side_effects .................   Passed    0.15 sec
+      Start  8: m2_journal
+ 8/17 Test  #8: m2_journal .......................   Passed    1.14 sec
+      Start  9: m3_capture
+ 9/17 Test  #9: m3_capture .......................   Passed    2.50 sec
+      Start 10: m3_transport
+10/17 Test #10: m3_transport .....................   Passed    0.72 sec
+      Start 11: m4_terminal
+11/17 Test #11: m4_terminal ......................   Passed    0.02 sec
+      Start 12: m5_telemetry_faults
+12/17 Test #12: m5_telemetry_faults ..............   Passed    1.83 sec
+      Start 13: m5_remediation
+13/17 Test #13: m5_remediation ...................   Passed    1.15 sec
+      Start 14: m6_qualification_manifest
+14/17 Test #14: m6_qualification_manifest ........   Passed    0.16 sec
+      Start 15: m6_capacity_summary
+15/17 Test #15: m6_capacity_summary ..............   Passed    0.15 sec
+      Start 16: m6_runner_exit
+16/17 Test #16: m6_runner_exit ...................   Passed    0.49 sec
+      Start 17: m6_terminal_corpus
+17/17 Test #17: m6_terminal_corpus ...............   Passed    0.14 sec
+
+100% tests passed out of 17
+
+Total Test time (real) =  14.04 sec

@@ -122,25 +122,27 @@ int main(int argc, char **argv) {
     bool leased = false;
     auto deadline = terminal::Clock::time_point::min();
     if (vm) {
-      auto args = qemu::arguments(c);
-      child = fork();
-      if (child < 0)
-        throw runtime::Failure("qemu_fork_failed");
-      if (child == 0) {
-        prctl(PR_SET_PDEATHSIG, SIGKILL);
-        if (getppid() == 1)
+      if (!c.contains("runnerImage")) {
+        auto args = qemu::arguments(c);
+        child = fork();
+        if (child < 0)
+          throw runtime::Failure("qemu_fork_failed");
+        if (child == 0) {
+          prctl(PR_SET_PDEATHSIG, SIGKILL);
+          if (getppid() == 1)
+            _exit(127);
+          int log = open((dir / "qemu.log").c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
+          dup2(log, 1);
+          dup2(log, 2);
+          int input = open("/dev/null", O_RDONLY);
+          dup2(input, 0);
+          std::vector<char *> av;
+          for (auto &s : args)
+            av.push_back(s.data());
+          av.push_back(nullptr);
+          execv(av[0], av.data());
           _exit(127);
-        int log = open((dir / "qemu.log").c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
-        dup2(log, 1);
-        dup2(log, 2);
-        int input = open("/dev/null", O_RDONLY);
-        dup2(input, 0);
-        std::vector<char *> av;
-        for (auto &s : args)
-          av.push_back(s.data());
-        av.push_back(nullptr);
-        execv(av[0], av.data());
-        _exit(127);
+        }
       }
       for (int i = 0; i < 100; ++i) {
         try {
@@ -157,7 +159,10 @@ int main(int argc, char **argv) {
         throw runtime::Failure("qemu_serial_not_ready");
       state["serialReady"] = true;
       state["vmState"] = "paused";
-      state["qemuPid"] = child;
+      if (c.contains("runnerImage"))
+        state["runnerId"] = c.at("runnerId");
+      else
+        state["qemuPid"] = child;
       state["qemuVersion"] = qemu::qmp(dir / "qmp.sock", "query-version");
     } else if (c["kind"] == "ssh") {
       winsize size{24, 80, 0, 0};
@@ -213,8 +218,21 @@ int main(int argc, char **argv) {
       state["vmState"] = "paused";
       recording->append(3, "paused");
     };
+    auto heartbeat_at = terminal::Clock::time_point::min();
     while (!finishing) {
       auto now = terminal::Clock::now();
+      if (vm && c.contains("runnerImage") &&
+          (heartbeat_at == terminal::Clock::time_point::min() ||
+           now - heartbeat_at > std::chrono::seconds(1))) {
+        auto path = dir / "runner-heartbeat.next";
+        std::ofstream out(path);
+        out << std::chrono::duration_cast<std::chrono::nanoseconds>(now.time_since_epoch()).count();
+        out.close();
+        if (!out)
+          throw runtime::Failure("runner_heartbeat_failed");
+        std::filesystem::rename(path, dir / "runner-heartbeat");
+        heartbeat_at = now;
+      }
       if (vm && leased && now >= deadline) {
         pause();
         state["leaseExpiredAt"] = console::timestamp();
@@ -260,6 +278,8 @@ int main(int argc, char **argv) {
           if (readiness.size() > 256)
             readiness.erase(0, readiness.size() - 256);
         } else if (n == 0) {
+          if (vm && c.contains("runnerImage"))
+            throw runtime::Failure("qemu_runner_exited");
           finishing = 1;
           break;
         }

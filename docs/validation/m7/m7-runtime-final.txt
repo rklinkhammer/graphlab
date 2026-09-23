@@ -1,0 +1,62 @@
+Wed Sep 23 13:25:38 UTC 2026
+Linux lima-graphlab 6.8.0-139-generic #139-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 03:32:48 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+f7d0f192-8bfe-47df-85f6-ef28f63c96db
+c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+cmake version 3.28.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+Client:
+ Version:           29.1.3
+ API version:       1.52
+ Go version:        go1.24.4
+ Git commit:        29.1.3-0ubuntu3~24.04.2
+ Built:             Wed Apr 29 16:41:06 2026
+ OS/Arch:           linux/arm64
+ Context:           default
+
+Server:
+ Engine:
+  Version:          29.1.3
+  API version:      1.52 (minimum version 1.44)
+  Go version:       go1.24.4
+  Git commit:       29.1.3-0ubuntu3~24.04.2
+  Built:            Wed Apr 29 16:41:06 2026
+  OS/Arch:          linux/arm64
+  Experimental:     false
+ containerd:
+  Version:          2.2.1
+  GitCommit:        
+ runc:
+  Version:          1.3.4-0ubuntu1~24.04.1
+  GitCommit:        
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        
+ovs-vsctl (Open vSwitch) 3.3.9
+DB Schema 8.5.1
+QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+GRAPHLAB_TEST_CHECKPOINTS:BOOL=OFF
+2baedd5f02be8838eb71818b4d149db3a1eaeb41d1c2d12506312cd67bf03ee4  build/dev/lab-agent
+b96f596505819e80d3dfd5af913905c9e9a39444f33002d9f948a3d56844fd86  build/dev/lab-api
+ad301ecff5a4f98105a8beb0e0a9ae709c2a0b30fadee936b365709e8dde7a1a  build/dev/lab-capture
+a5be2957b5f95671d8c5c6306dcc68517f0370bae8e30753028b036476b6516b  build/dev/lab-terminal
+c3b0b9b023732e41a43393a2875664ee4423fa42310475ce7d65de1420ad472e  build/dev/lab-qemu-runner
+a3571bdfeff12e2adbdf203c871f146330408216ee63d36353bab1f42cf44b4f  build/dev/m7_linux
+266c411c9aa1e5d3a27f4ed0ed21c55163ebb2c50821e72b3813dd09e40f4480  build/dev/m7_isolation
+sha256:802b24b4b25003369e0369e6a9c08ace37bd0d3c098f63b5972f13f7acff7a5c
+c3b0b9b023732e41a43393a2875664ee4423fa42310475ce7d65de1420ad472e  /var/tmp/gl7-runner-v2/root/usr/local/bin/lab-qemu-runner
+66992858584dc89cec6fcacf6c3e225de8d437cab07493d904a2c09334cac636  kernel
+9cf8a9b1ef21b40b84175e4e3e126720b2a8882af9c877c30fe56b4c11bbf15b  firmware
+645c85cfaa57520be1be16fb16ef19eeda4a319c2d1cd944903885d525ddde75  initrd.gz
+080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e  disk.raw
+6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694  kernel
+4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12  firmware
+d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706  initrd.gz
+080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e  disk.raw

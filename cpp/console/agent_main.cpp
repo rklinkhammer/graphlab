@@ -53,6 +53,14 @@ int main(int argc, char **argv) {
         result["captures"] = true;
         result["trafficLeaseMilliseconds"] = 10000;
         result["qemu"] = true;
+        result["optionalBackends"] = {
+            {"directGuestEdges", {{"available", true}, {"primitive", "owned-two-port-attachment"}}},
+            {"qemuContainer",
+             {{"available", true},
+              {"requires", "immutable-native-runner-image"},
+              {"networkIsolation", false}}},
+            {"isolatedOvs",
+             {{"available", false}, {"reason", "independent-datapath-ownership-not-qualified"}}}};
         result["recordedTerminals"] = true;
         result["serialCoverage"] = "from-attachment";
         return result;

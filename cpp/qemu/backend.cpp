@@ -1,5 +1,6 @@
 #include <fstream>
 #include <graphlab/qemu.hpp>
+#include <set>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/utsname.h>
@@ -86,46 +87,6 @@ Json qmp(const std::filesystem::path &path, const std::string &op) {
 std::string tap_name(const Json &r, const std::string &node, const std::string &port) {
   return runtime::resource_name(r, "tap/" + node + "/" + port);
 }
-std::vector<std::string> arguments(const Json &c) {
-  auto dir = c["directory"].get<std::string>(), arch = c["platform"].get<std::string>();
-  auto binary = arch == "linux/ppc64le" ? "/usr/bin/qemu-system-ppc64"
-                : arch == "linux/arm64" ? "/usr/bin/qemu-system-aarch64"
-                                        : "/usr/bin/qemu-system-x86_64";
-  std::vector<std::string> a = {
-      binary,        "-S",
-      "-nodefaults", "-no-reboot",
-      "-display",    "none",
-      "-monitor",    "none",
-      "-machine",    c["machine"],
-      "-accel",      c["accelerator"],
-      "-m",          std::to_string(c["guestMemoryMiB"].get<int>()),
-      "-smp",        std::to_string(c["cpus"].get<int>()),
-      "-qmp",        "unix:" + dir + "/qmp.sock,server=on,wait=off",
-      "-chardev",    "socket,id=serial,path=" + dir + "/serial.sock,server=on,wait=off",
-      "-serial",     "chardev:serial",
-      "-bios",       c["firmware"],
-      "-drive",      "file=" + dir + "/overlay.qcow2,if=none,id=disk,format=qcow2",
-      "-device",     "virtio-blk-pci,drive=disk"};
-  a.insert(a.end(), {"-cpu", arch == "linux/ppc64le"     ? "power9"
-                             : c["accelerator"] == "kvm" ? "host"
-                                                         : "max"});
-  if (c.contains("kernel")) {
-    a.insert(a.end(), {"-kernel", c["kernel"], "-initrd", c["initrd"], "-append",
-                       arch == "linux/ppc64le" ? "console=hvc0 rdinit=/init panic=-1"
-                       : arch == "linux/arm64" ? "console=ttyAMA0 rdinit=/init panic=-1"
-                                               : "console=ttyS0 rdinit=/init panic=-1"});
-  }
-  int i = 0;
-  for (const auto &nic : c["nics"]) {
-    auto id = "net" + std::to_string(i++);
-    a.insert(
-        a.end(),
-        {"-netdev",
-         "tap,id=" + id + ",ifname=" + nic["tap"].get<std::string>() + ",script=no,downscript=no",
-         "-device", "virtio-net-pci,netdev=" + id + ",mac=" + nic["mac"].get<std::string>()});
-  }
-  return a;
-}
 void preflight(const Json &t, const Json &lock, const std::filesystem::path &root) {
   for (const auto &n : t["nodes"]) {
     if (n["kind"] != "qemu")
@@ -152,6 +113,14 @@ void preflight(const Json &t, const Json &lock, const std::filesystem::path &roo
     if (cmd({binary, "-machine", "help"}).find(v["machine"].get<std::string>()) ==
         std::string::npos)
       throw runtime::Failure("pinned_machine_unavailable");
+    if (v.contains("runnerImage")) {
+      auto image = runtime::docker_json("GET", "/v1.52/images/" +
+                                                   v["runnerImage"].get<std::string>() + "/json");
+      auto native = std::string(host.machine) == "aarch64" ? "arm64" : "amd64";
+      if (image["Id"] != v["runnerImage"] || image.value("Architecture", "") != native ||
+          image["Config"]["Labels"].value("graphlab.qemu-runner", "") != "1")
+        throw runtime::Failure("qemu_runner_image_mismatch");
+    }
     auto disk = artifact(root, w["diskSha256"]);
     auto info = Json::parse(cmd({"/usr/bin/qemu-img", "info", "--output=json", disk.string()}));
     if (info["format"] != "raw")
@@ -172,6 +141,10 @@ Json prepare(const Json &r, const Json &n, const std::filesystem::path &root) {
   c["platform"] = w["platform"];
   c["machine"] = v["machine"];
   c["accelerator"] = v["accelerator"];
+  if (v.contains("runnerImage")) {
+    c["runnerImage"] = v["runnerImage"];
+    c["runnerName"] = runtime::resource_name(r, n["key"].get<std::string>() + "/runner");
+  }
   c["firmware"] = artifact(root, v["firmwareSha256"]).string();
   c["base"] = artifact(root, w["diskSha256"]).string();
   c["guestMemoryMiB"] = w["contract"]["resources"]["memoryMiB"];
@@ -180,6 +153,12 @@ Json prepare(const Json &r, const Json &n, const std::filesystem::path &root) {
   if (v.contains("kernelSha256")) {
     c["kernel"] = artifact(root, v["kernelSha256"]).string();
     c["initrd"] = artifact(root, v["initrdSha256"]).string();
+  }
+  c["guestAddresses"] = n["configuration"].value("addresses", Json::object());
+  for (const auto &a : r["topology"]["managementAttachments"]) {
+    auto ep = a["endpoint"].get<std::string>();
+    if (ep.starts_with(n["logical"].get<std::string>() + ":"))
+      c["guestAddresses"][ep.substr(ep.find(':') + 1)] = a["address"];
   }
   c["nics"] = Json::array();
   for (const auto &[port, p] : n["configuration"]["ports"].items()) {
@@ -253,6 +232,57 @@ Json prepare(const Json &r, const Json &n, const std::filesystem::path &root) {
   // launch() normally creates a fresh directory. This VM config was durably created before TAP
   // effects.
   c["preparedDirectory"] = true;
+  if (c.contains("runnerImage")) {
+    auto name = c["runnerName"].get<std::string>();
+    if (runtime::docker_request("GET", "/v1.52/containers/" + name + "/json").status != 404)
+      throw runtime::Failure("qemu_runner_name_conflict");
+    Json mounts = Json::array({{{"Type", "bind"},
+                                {"Source", dir.string()},
+                                {"Target", dir.string()},
+                                {"ReadOnly", false}}});
+    std::set<std::string> paths;
+    for (auto key : {"base", "firmware", "kernel", "initrd"})
+      if (c.contains(key))
+        paths.insert(c[key]);
+    for (const auto &path : paths)
+      mounts.push_back({{"Type", "bind"}, {"Source", path}, {"Target", path}, {"ReadOnly", true}});
+    Json devices = Json::array({{{"PathOnHost", "/dev/net/tun"},
+                                 {"PathInContainer", "/dev/net/tun"},
+                                 {"CgroupPermissions", "rw"}}});
+    if (c["accelerator"] == "kvm")
+      devices.push_back({{"PathOnHost", "/dev/kvm"},
+                         {"PathInContainer", "/dev/kvm"},
+                         {"CgroupPermissions", "rw"}});
+    auto created =
+        runtime::docker_json("POST", "/v1.52/containers/create?name=" + name,
+                             {{"Image", c["runnerImage"]},
+                              {"User", "0:0"},
+                              {"Entrypoint", Json::array({"/usr/local/bin/lab-qemu-runner"})},
+                              {"Cmd", Json::array({"--config", (dir / "config.json").string()})},
+                              {"Labels",
+                               {{"graphlab.run", r["id"]},
+                                {"graphlab.resource", n["key"]},
+                                {"graphlab.generation", r["generation"]},
+                                {"graphlab.runner", "qemu"}}},
+                              {"HostConfig",
+                               {{"NetworkMode", "host"},
+                                {"ReadonlyRootfs", true},
+                                {"CapDrop", Json::array({"ALL"})},
+                                {"CapAdd", Json::array({"NET_ADMIN"})},
+                                {"SecurityOpt", Json::array({"no-new-privileges:true"})},
+                                {"Memory", c["memoryMiB"].get<std::int64_t>() * 1024 * 1024},
+                                {"PidsLimit", 64},
+                                {"NanoCpus", c["cpus"].get<std::int64_t>() * 1000000000},
+                                {"Mounts", mounts},
+                                {"Devices", devices},
+                                {"Tmpfs", {{"/tmp", "rw,nosuid,nodev,noexec,size=16m"}}}}}});
+    runtime::detail::checkpoint("qemu.runner-created");
+    c["runnerId"] = created["Id"];
+    capture::atomic_json(dir / "config.json", c);
+    runtime::docker_json("POST",
+                         "/v1.52/containers/" + created["Id"].get<std::string>() + "/start");
+    runtime::detail::checkpoint("qemu.runner-started");
+  }
   terminal::launch(c);
   runtime::detail::checkpoint("qemu.created");
   for (int i = 0; i < 100; ++i) {
@@ -275,6 +305,26 @@ void remove(const Json &r, const Json &n, const std::filesystem::path &root) {
     return;
   auto c = config(r, n, root);
   terminal::stop(c, r["controllerGeneration"]);
+  if (c.contains("runnerImage")) {
+    auto response = runtime::docker_request(
+        "GET", "/v1.52/containers/" + c["runnerName"].get<std::string>() + "/json");
+    if (response.status != 404) {
+      if (response.status != 200)
+        throw runtime::Failure("qemu_runner_unavailable");
+      auto container = Json::parse(response.body);
+      auto labels = container["Config"]["Labels"];
+      if (labels["graphlab.run"] != r["id"] || labels["graphlab.resource"] != n["key"] ||
+          labels["graphlab.generation"] != r["generation"] || labels["graphlab.runner"] != "qemu" ||
+          (c.contains("runnerId") && c["runnerId"] != container["Id"]))
+        throw runtime::Failure("qemu_runner_ownership_conflict");
+      runtime::docker_json("DELETE", "/v1.52/containers/" + container["Id"].get<std::string>() +
+                                         "?force=true");
+    }
+  }
+  // A just-started container may have bound sockets after the first worker-stop
+  // check. Docker removal has now reaped it, so no process can recreate them.
+  if (c.contains("runnerImage"))
+    terminal::stop(c, r["controllerGeneration"]);
   for (const auto &nic : c["nics"]) {
     auto name = nic["tap"].get<std::string>();
     auto found = runtime::detail::lookup_link(

@@ -1,0 +1,7 @@
+{
+  "apiVersion": "graphlab.qualification-result/v1",
+  "incompleteGates": [],
+  "integrityVerified": true,
+  "manifestSha256": "sha256:4ad7ce394637388577bca7d41b0536832d273646fdcba7bd602ca65b261a778b",
+  "qualified": true
+}

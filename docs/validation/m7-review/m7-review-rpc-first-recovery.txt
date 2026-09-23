@@ -1,0 +1,47 @@
+PASS retained fixture recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/credentials
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/state.sqlite-shm
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures/af1383c19909e9accee4f376
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures/af1383c19909e9accee4f376/manifest.json
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures/af1383c19909e9accee4f376/worker.started
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures/af1383c19909e9accee4f376/1.pcapng
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures/af1383c19909e9accee4f376/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/captures/af1383c19909e9accee4f376/0.pcapng
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/artifacts
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0/manifest.json
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0/worker.started
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0/output.glterm
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl049a7a4203c0/qemu.log
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74/manifest.json
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74/worker.started
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74/output.glterm
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/vms/gl313c6a4f0f74/qemu.log
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/state.sqlite
+PASS no stale worker socket: /tmp/gl7-3ZOBvt/1/state/state.sqlite-wal

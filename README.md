@@ -10,6 +10,8 @@ M3 adds capture-first runs, independent C++ PCAPNG workers, renewable traffic le
 
 M4 adds QEMU guests and recorded Docker/SSH/serial consoles. See [operations](docs/m4-qemu-consoles.md), [preserved PowerPC/TCG and ARM64/KVM templates](qemu-guests/README.md), and [verification](docs/validation/m4-verification.md).
 
+M7 adds [direct guest edges and an optional C++ QEMU container runner](docs/m7-backends.md). Experimental namespace OVS remains rejected until independent ownership and failure boundaries are qualified.
+
 ## Build and test
 
 Requirements: CMake 3.28+, Ninja, a C++23 compiler/standard library with `std::expected`, Boost 1.92.0 headers/CMake configuration, OpenSSL 3 and SQLite 3.24+ development headers/libraries. Linux builds also require libpcap development files; M3 execution requires systemd. The build fetches checksum-pinned yaml-cpp 0.8.0 and nlohmann/json 3.12.0 archives. The optional browser build uses Node/npm. Python is not required.

@@ -1,0 +1,482 @@
+PASS guest fixtures generated
+PASS two guest architecture inputs
+Evidence: "/tmp/gl7-XmZha0"
+PASS unrelated sentinel bridge created
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=0 container=0 pair=0 {"cancelRequested":false,"createdAt":"2026-09-23T13:33:01Z","error":null,"finishedAt":"2026-09-23T13:33:01Z","id":"1fd4b29b-728f-4e49-823d-fc270ffd19d7","operation":"start","revision":"1","runId":"ba7c7d4e-90a7-43ea-8902-4638c19e5456","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS Docker to guest and guest reply delivered independently of capture
+PASS 100 percent Docker-to-guest loss at declared egress
+PASS delivery restored after fault removal
+PASS 100 percent guest-to-Docker loss at opposite host egress
+PASS reverse delivery restored after fault removal
+PASS direct link telemetry mapped
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:33:14Z","error":null,"finishedAt":"2026-09-23T13:33:14Z","id":"f4c6f0db-a6da-411f-8b3a-fee8b30449e7","operation":"recover","revision":"2","runId":"ba7c7d4e-90a7-43ea-8902-4638c19e5456","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/captures/1be206d76f45ab0585045297
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/captures/1be206d76f45ab0585045297/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/captures/1be206d76f45ab0585045297/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/captures/1be206d76f45ab0585045297/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/captures/1be206d76f45ab0585045297/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/artifacts/66992858584dc89cec6fcacf6c3e225de8d437cab07493d904a2c09334cac636
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/artifacts/bc60f9a64326024a1feaf3f09f6f0d41b7d5bd4cb17eed6f133781c72e6ee6c2
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/artifacts/9cf8a9b1ef21b40b84175e4e3e126720b2a8882af9c877c30fe56b4c11bbf15b
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/artifacts/645c85cfaa57520be1be16fb16ef19eeda4a319c2d1cd944903885d525ddde75
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/vms/glf48e84895490/qemu.log
+PASS no stale worker socket: /tmp/gl7-XmZha0/0/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=0 container=0 pair=1 {"cancelRequested":false,"createdAt":"2026-09-23T13:33:14Z","error":null,"finishedAt":"2026-09-23T13:33:15Z","id":"14d923b1-923e-45ce-8fa1-b6a95882f28e","operation":"start","revision":"1","runId":"2df12e13-722a-46be-859f-a3ad7253eb2c","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS actual guest network readiness
+PASS each guest independently reports received data packets
+PASS each guest independently reports received data packets
+PASS direct link telemetry mapped
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:33:25Z","error":null,"finishedAt":"2026-09-23T13:33:25Z","id":"33021251-c27f-4377-88bd-7ca9e1fd7e1a","operation":"recover","revision":"2","runId":"2df12e13-722a-46be-859f-a3ad7253eb2c","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/captures/e28bc21ec0e35eb94175623b
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/captures/e28bc21ec0e35eb94175623b/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/captures/e28bc21ec0e35eb94175623b/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/captures/e28bc21ec0e35eb94175623b/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/captures/e28bc21ec0e35eb94175623b/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/artifacts/66992858584dc89cec6fcacf6c3e225de8d437cab07493d904a2c09334cac636
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/artifacts/bc60f9a64326024a1feaf3f09f6f0d41b7d5bd4cb17eed6f133781c72e6ee6c2
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/artifacts/9cf8a9b1ef21b40b84175e4e3e126720b2a8882af9c877c30fe56b4c11bbf15b
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/artifacts/645c85cfaa57520be1be16fb16ef19eeda4a319c2d1cd944903885d525ddde75
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gl77a4ccbf0bce/qemu.log
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/vms/gld058053189a3/qemu.log
+PASS no stale worker socket: /tmp/gl7-XmZha0/1/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=0 container=1 pair=0 {"cancelRequested":false,"createdAt":"2026-09-23T13:33:25Z","error":null,"finishedAt":"2026-09-23T13:33:26Z","id":"d07aa0f2-23a7-46ce-8538-bbc32e70c81d","operation":"start","revision":"1","runId":"737d2ebf-e897-47d6-86f3-8bbb92faae90","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS Docker to guest and guest reply delivered independently of capture
+PASS 100 percent Docker-to-guest loss at declared egress
+PASS delivery restored after fault removal
+PASS 100 percent guest-to-Docker loss at opposite host egress
+PASS reverse delivery restored after fault removal
+PASS direct link telemetry mapped
+PASS runner has explicit shared-network boundary and constrained rootfs
+PASS terminal supervisor killed
+PASS independent container watchdog kills orphan QEMU within eight seconds
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:33:43Z","error":null,"finishedAt":"2026-09-23T13:33:44Z","id":"5e976821-f5ea-4455-8377-60124f9f4316","operation":"recover","revision":"2","runId":"737d2ebf-e897-47d6-86f3-8bbb92faae90","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/captures/1703c33384d5b0e50708a770
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/captures/1703c33384d5b0e50708a770/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/captures/1703c33384d5b0e50708a770/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/captures/1703c33384d5b0e50708a770/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/captures/1703c33384d5b0e50708a770/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/artifacts/66992858584dc89cec6fcacf6c3e225de8d437cab07493d904a2c09334cac636
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/artifacts/bc60f9a64326024a1feaf3f09f6f0d41b7d5bd4cb17eed6f133781c72e6ee6c2
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/artifacts/9cf8a9b1ef21b40b84175e4e3e126720b2a8882af9c877c30fe56b4c11bbf15b
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/artifacts/645c85cfaa57520be1be16fb16ef19eeda4a319c2d1cd944903885d525ddde75
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb/output.partial
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb/runner-heartbeat
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/vms/glf1d2b880daeb/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/2/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=0 container=1 pair=1 {"cancelRequested":false,"createdAt":"2026-09-23T13:33:44Z","error":null,"finishedAt":"2026-09-23T13:33:44Z","id":"e3bd7e68-e1d9-4008-8829-e1e42f34b736","operation":"start","revision":"1","runId":"aa28627d-5fab-4a2e-8025-4d4e3092f57a","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS actual guest network readiness
+PASS each guest independently reports received data packets
+PASS each guest independently reports received data packets
+PASS direct link telemetry mapped
+PASS runner has explicit shared-network boundary and constrained rootfs
+PASS terminal supervisor killed
+PASS independent container watchdog kills orphan QEMU within eight seconds
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:33:59Z","error":null,"finishedAt":"2026-09-23T13:34:00Z","id":"e30e7719-5c30-4c53-8c73-c12669cdcfba","operation":"recover","revision":"2","runId":"aa28627d-5fab-4a2e-8025-4d4e3092f57a","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/captures/896d3ff146fd7b2428582cab
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/captures/896d3ff146fd7b2428582cab/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/captures/896d3ff146fd7b2428582cab/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/captures/896d3ff146fd7b2428582cab/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/captures/896d3ff146fd7b2428582cab/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/artifacts/66992858584dc89cec6fcacf6c3e225de8d437cab07493d904a2c09334cac636
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/artifacts/bc60f9a64326024a1feaf3f09f6f0d41b7d5bd4cb17eed6f133781c72e6ee6c2
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/artifacts/9cf8a9b1ef21b40b84175e4e3e126720b2a8882af9c877c30fe56b4c11bbf15b
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/artifacts/645c85cfaa57520be1be16fb16ef19eeda4a319c2d1cd944903885d525ddde75
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92/output.partial
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92/runner-heartbeat
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl514fbd523f92/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676/runner-heartbeat
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/vms/gl8056b3d9b676/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/3/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=1 container=0 pair=0 {"cancelRequested":false,"createdAt":"2026-09-23T13:34:00Z","error":null,"finishedAt":"2026-09-23T13:34:01Z","id":"a86af44e-b03e-4393-84df-545dc7cb5fa6","operation":"start","revision":"1","runId":"d8c9dc8a-cbc5-45ce-84cd-3ce0c63c07a4","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS Docker to guest and guest reply delivered independently of capture
+PASS 100 percent Docker-to-guest loss at declared egress
+PASS delivery restored after fault removal
+PASS 100 percent guest-to-Docker loss at opposite host egress
+PASS reverse delivery restored after fault removal
+PASS direct link telemetry mapped
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:34:13Z","error":null,"finishedAt":"2026-09-23T13:34:14Z","id":"b32824e5-664d-4a42-8380-f8e8ebf80605","operation":"recover","revision":"2","runId":"d8c9dc8a-cbc5-45ce-84cd-3ce0c63c07a4","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/captures/2b7f1e3a8c30b443a62a1397
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/captures/2b7f1e3a8c30b443a62a1397/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/captures/2b7f1e3a8c30b443a62a1397/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/captures/2b7f1e3a8c30b443a62a1397/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/captures/2b7f1e3a8c30b443a62a1397/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/vms/gl235250ca0bfb/qemu.log
+PASS no stale worker socket: /tmp/gl7-XmZha0/4/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=1 container=0 pair=1 {"cancelRequested":false,"createdAt":"2026-09-23T13:34:14Z","error":null,"finishedAt":"2026-09-23T13:34:15Z","id":"58d0775c-71c3-44bb-8b05-7dd185fd1804","operation":"start","revision":"1","runId":"c971fbee-8117-4990-8936-71cf2feefd77","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS actual guest network readiness
+PASS each guest independently reports received data packets
+PASS each guest independently reports received data packets
+PASS direct link telemetry mapped
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:34:29Z","error":null,"finishedAt":"2026-09-23T13:34:30Z","id":"077fd133-ef26-49bf-89d4-9276d03ad7ff","operation":"recover","revision":"2","runId":"c971fbee-8117-4990-8936-71cf2feefd77","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/captures/b035fc7461f8d1f41dbd4db4
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/captures/b035fc7461f8d1f41dbd4db4/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/captures/b035fc7461f8d1f41dbd4db4/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/captures/b035fc7461f8d1f41dbd4db4/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/captures/b035fc7461f8d1f41dbd4db4/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/glb845f20a2dd3/qemu.log
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/vms/gl11091dca7967/qemu.log
+PASS no stale worker socket: /tmp/gl7-XmZha0/5/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=1 container=1 pair=0 {"cancelRequested":false,"createdAt":"2026-09-23T13:34:30Z","error":null,"finishedAt":"2026-09-23T13:34:31Z","id":"d605f11f-0981-45cc-8ad7-aaa69ffd9232","operation":"start","revision":"1","runId":"1ca5efee-75d6-442e-8ae7-5245c34925b0","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS Docker to guest and guest reply delivered independently of capture
+PASS 100 percent Docker-to-guest loss at declared egress
+PASS delivery restored after fault removal
+PASS 100 percent guest-to-Docker loss at opposite host egress
+PASS reverse delivery restored after fault removal
+PASS direct link telemetry mapped
+PASS runner has explicit shared-network boundary and constrained rootfs
+PASS terminal supervisor killed
+PASS independent container watchdog kills orphan QEMU within eight seconds
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:34:49Z","error":null,"finishedAt":"2026-09-23T13:34:49Z","id":"b01fef91-2507-4ddd-80a8-56ae734be5f1","operation":"recover","revision":"2","runId":"1ca5efee-75d6-442e-8ae7-5245c34925b0","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/captures/6f51d85aaf4815749aa4e351
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/captures/6f51d85aaf4815749aa4e351/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/captures/6f51d85aaf4815749aa4e351/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/captures/6f51d85aaf4815749aa4e351/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/captures/6f51d85aaf4815749aa4e351/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f/output.partial
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f/runner-heartbeat
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/vms/glc497b63e798f/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/6/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=1 container=1 pair=1 {"cancelRequested":false,"createdAt":"2026-09-23T13:34:49Z","error":null,"finishedAt":"2026-09-23T13:34:50Z","id":"fa9314de-cd17-4997-88d9-d100271dd7eb","operation":"start","revision":"1","runId":"b9272bbc-3941-490d-805a-a9f3f83f45de","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS actual guest network readiness
+PASS each guest independently reports received data packets
+PASS each guest independently reports received data packets
+PASS direct link telemetry mapped
+PASS runner has explicit shared-network boundary and constrained rootfs
+PASS terminal supervisor killed
+PASS independent container watchdog kills orphan QEMU within eight seconds
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:35:10Z","error":null,"finishedAt":"2026-09-23T13:35:11Z","id":"c1617ba6-3981-4e60-82dc-de27331cbe6f","operation":"recover","revision":"2","runId":"b9272bbc-3941-490d-805a-a9f3f83f45de","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/credentials
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/captures
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/captures/56f2c410f57a52eb13d43018
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/captures/56f2c410f57a52eb13d43018/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/captures/56f2c410f57a52eb13d43018/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/captures/56f2c410f57a52eb13d43018/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/captures/56f2c410f57a52eb13d43018/0.pcapng
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/artifacts
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c/output.glterm
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c/runner-heartbeat
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gle1608745ad7c/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10/manifest.json
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10/worker.started
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10/output.partial
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10/runner-heartbeat
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/vms/gl312f37cc1a10/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-XmZha0/7/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS test sentinel removed explicitly
+M7 Linux backend tests passed

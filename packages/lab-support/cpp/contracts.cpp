@@ -188,7 +188,9 @@ void validate_lock(const Json &lock) {
       const auto &vm = need(e, "vm", p);
       fields(vm, p + ".vm",
              {"machine", "firmwareSha256", "accelerator", "kernelSha256", "initrdSha256", "sshUser",
-              "knownHostsSha256"});
+              "knownHostsSha256", "runnerImage"});
+      if (vm.contains("runnerImage"))
+        hash(getstr(vm, "runnerImage", p), p + ".vm.runnerImage");
       if (vm.contains("sshUser") || vm.contains("knownHostsSha256")) {
         id(getstr(vm, "sshUser", p), p + ".vm.sshUser");
         hash(getstr(vm, "knownHostsSha256", p), p + ".vm.knownHostsSha256");
@@ -392,9 +394,7 @@ Result<ValidatedTopology> validate(const Json &t, const Json &lock) {
           ap->mtu != bp->mtu)
         fail(p, "incompatible endpoint roles, media or MTUs");
       const auto &ak = out.nodes.at(a).kind;
-      const auto &bk = out.nodes.at(b).kind;
-      if ((ak == "qemu" && bk != "ovs-switch") || (bk == "qemu" && ak != "ovs-switch"))
-        fail(p, "direct guest-to-workload links await attachment backend", "unsupported_backend");
+      // Direct guest edges use a scoped attachment bridge, not a modeled switch.
       if (a == b && (ak != "ovs-switch" || loop != "unprotected"))
         fail(p, "self-links require switch ports and explicit unprotected loopPolicy");
       out.edges.push_back({key, first, second});

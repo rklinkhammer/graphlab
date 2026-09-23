@@ -96,8 +96,13 @@ Json node_resource(const Json &run, const std::string &node) {
   throw Failure("missing_node_resource");
 }
 std::string physical(const Json &run, const Json &r, int index) {
-  for (const auto &e : r["configuration"]["endpoints"]) {
-    auto endpoint = e.get<std::string>();
+  auto endpoints = r["configuration"]["endpoints"];
+  for (int i = 0; i < 2; ++i) {
+    auto endpoint = endpoints[i].get<std::string>();
+    auto requested = endpoints[index].get<std::string>();
+    auto requested_kind = node_resource(run, requested.substr(0, requested.find(':')))["kind"];
+    if (i != index && requested_kind != "bridge")
+      continue;
     auto colon = endpoint.find(':');
     if (node_resource(run, endpoint.substr(0, colon))["kind"] == "qemu")
       return qemu::tap_name(run, endpoint.substr(0, colon), endpoint.substr(colon + 1));
@@ -194,6 +199,18 @@ void check_link(const Json &found, const std::string &marker, const Json &expect
       found["ifindex"] != expected["ifindex"])
     throw Failure("link_identity_changed", 409);
 }
+bool direct_guest(const Json &run, const Json &r) {
+  bool guest = false;
+  for (const auto &ep : r["configuration"]["endpoints"]) {
+    auto text = ep.get<std::string>();
+    auto kind = node_resource(run, text.substr(0, text.find(':')))["kind"];
+    if (kind == "bridge")
+      return false;
+    guest = guest || kind == "qemu";
+  }
+  return guest;
+}
+Json attachment_resource(const Json &r) { return {{"key", text(r, "key") + "/attachment"}}; }
 Json node_exec(const Json &run, const Json &r, const std::string &action) {
   auto c = inspect_container(run, r);
   auto created =
@@ -420,6 +437,134 @@ Json LinuxBackend::prepare(const Json &run, const Json &r) {
     return {{"id", id}, {"pid", current["State"]["Pid"]}, {"gate", "held"}};
   }
   auto endpoints = config["endpoints"];
+  if (direct_guest(run, r)) {
+    auto attachment = attachment_resource(r);
+    auto bridge = resource_name(run, text(attachment, "key"));
+    if (bridge_present(bridge) || !link(bridge).is_null())
+      throw Failure("attachment_name_conflict");
+    command({"/usr/bin/ovs-vsctl", "--timeout=5", "add-br", bridge, "--", "set", "Bridge", bridge,
+             "external_ids:graphlab-owner=" + owner(run, attachment),
+             "external_ids:graphlab-role=attachment", "rstp_enable=false", "fail_mode=standalone"});
+    detail::checkpoint("attachment.bridge");
+    verify_bridge(run, attachment);
+    disable_ipv6(bridge);
+    ip({"link", "set", bridge, "up"});
+    Json result = {{"endpoints", Json::array()},
+                   {"attachment",
+                    {{"name", bridge},
+                     {"uuid", command({"/usr/bin/ovs-vsctl", "get", "Bridge", bridge, "_uuid"})},
+                     {"mode", "two-port-shared-ovs"},
+                     {"ports", Json::array()}}}};
+    for (int index = 0; index < 2; ++index) {
+      auto ep = endpoints[index].get<std::string>();
+      auto colon = ep.find(':');
+      auto node = node_resource(run, ep.substr(0, colon));
+      auto port = ep.substr(colon + 1);
+      auto name = physical(run, r, index);
+      auto mtu = std::to_string(node["configuration"]["ports"][port]["mtu"].get<int>());
+      Json endpoint;
+      if (node["kind"] == "qemu") {
+        auto observed = link(name);
+        check_link(observed, owner(run, r));
+        if (observed.is_null())
+          throw Failure("tap_missing");
+        endpoint = {{"name", name},
+                    {"ifindex", observed["ifindex"]},
+                    {"namespace", "host"},
+                    {"kind", "tap"}};
+      } else {
+        auto peer = resource_name(run, text(r, "key") + "/peer/" + std::to_string(index));
+        if (!link(name).is_null() || !link(peer).is_null())
+          throw Failure("link_name_conflict");
+        ip({"link", "add", "name", name, "address", mac(run, r, index), "type", "veth", "peer",
+            "name", peer, "address", mac(run, r, 2 + index)});
+        detail::checkpoint("attachment.veth-created");
+        ip({"link", "set", name, "alias", owner(run, r)});
+        ip({"link", "set", peer, "alias", owner(run, r)});
+        disable_ipv6(name);
+        disable_ipv6(peer);
+        auto container = inspect_container(run, node);
+        Namespace ns(container);
+        auto prefix = ns_prefix(ns);
+        if (!link(port, prefix).is_null())
+          throw Failure("container_port_conflict");
+        if (inspect_container(run, node)["State"]["Pid"] != container["State"]["Pid"])
+          throw Failure("namespace_identity_changed");
+        ip({"link", "set", peer, "netns", "/proc/self/fd/" + std::to_string(ns.fd)});
+        detail::checkpoint("attachment.veth-moved");
+        ip({"link", "set", peer, "name", port}, prefix);
+        ip({"link", "set", port, "mtu", mtu}, prefix);
+        auto nc = node["configuration"];
+        if (nc.contains("addresses") && nc["addresses"].contains(port))
+          ip({"address", "add", nc["addresses"][port], "dev", port}, prefix);
+        auto observed = link(port, prefix);
+        struct stat st{};
+        if (fstat(ns.fd, &st))
+          throw Failure("namespace_unavailable");
+        endpoint = {{"name", port},
+                    {"ifindex", observed["ifindex"]},
+                    {"namespaceInode", std::to_string(st.st_ino)},
+                    {"containerId", container["Id"]}};
+      }
+      ip({"link", "set", name, "mtu", mtu});
+      auto qos = command({"/usr/bin/ovs-vsctl", "--timeout=5", "--", "--id=@q", "create", "QoS",
+                          "type=linux-noop", "external_ids:graphlab-owner=" + owner(run, r), "--",
+                          "add-port", bridge, name, "--", "set", "Port", name,
+                          "external_ids:graphlab-owner=" + owner(run, r), "qos=@q"});
+      detail::checkpoint("attachment.qos." + std::to_string(index));
+      if (node["kind"] == "qemu") {
+        // Install an owned parent on a fresh TAP. Faults attach beneath it,
+        // rather than replacing the kernel default or an unrelated root qdisc.
+        command({"/usr/sbin/tc",
+                 "qdisc",
+                 "add",
+                 "dev",
+                 name,
+                 "root",
+                 "handle",
+                 "7:",
+                 "prio",
+                 "bands",
+                 "3",
+                 "priomap",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0",
+                 "0"});
+      }
+
+      if (node["kind"] == "qemu")
+        command({"/usr/sbin/tc", "qdisc", "replace", "dev", name, "parent", "7:1", "handle",
+                 "8:", "pfifo", "limit", "1000"});
+      auto host = link(name);
+      result["attachment"]["ports"].push_back(
+          {{"name", name},
+           {"ifindex", host["ifindex"]},
+           {"namespace", "host"},
+           {"qosUuid", qos},
+           {"kind", node["kind"] == "qemu" ? "tap" : "attachment-veth"}});
+      if (node["kind"] == "qemu") {
+        result["attachment"]["ports"].back()["faultParent"] = "7:1";
+        result["attachment"]["ports"].back()["faultRoot"] = "7:";
+        result["attachment"]["ports"].back()["faultNeutral"] = "8:";
+      }
+      result["endpoints"].push_back(endpoint);
+      detail::checkpoint("attachment.port." + std::to_string(index));
+    }
+    return result;
+  }
   for (int i = 0; i < 2; ++i) {
     auto ep = endpoints[i].get<std::string>();
     auto colon = ep.find(':');
@@ -585,6 +730,59 @@ void LinuxBackend::remove(const Json &run, const Json &r) {
     return;
   }
   verify_edge_namespaces(run, r, true);
+  if (direct_guest(run, r)) {
+    auto attachment = attachment_resource(r);
+    auto bridge = resource_name(run, text(attachment, "key"));
+    verify_bridge(run, attachment, true);
+    if (bridge_present(bridge) && r.contains("identity") &&
+        command({"/usr/bin/ovs-vsctl", "get", "Bridge", bridge, "_uuid"}) !=
+            r["identity"]["attachment"]["uuid"].get<std::string>())
+      throw Failure("attachment_identity_changed");
+    if (bridge_present(bridge)) {
+      std::istringstream ports(command({"/usr/bin/ovs-vsctl", "list-ports", bridge}));
+      std::string port;
+      while (ports >> port) {
+        if ((port != physical(run, r, 0) && port != physical(run, r, 1)) ||
+            command({"/usr/bin/ovs-vsctl", "get", "Port", port, "external_ids:graphlab-owner"}) !=
+                owner(run, r))
+          throw Failure("attachment_port_ownership_conflict");
+        auto qos = command({"/usr/bin/ovs-vsctl", "get", "Port", port, "qos"});
+        if (command({"/usr/bin/ovs-vsctl", "get", "QoS", qos, "external_ids:graphlab-owner"}) !=
+            owner(run, r))
+          throw Failure("attachment_qos_ownership_conflict");
+        if (r.contains("identity"))
+          for (const auto &expected : r["identity"]["attachment"]["ports"])
+            if (expected["name"] == port && expected["qosUuid"] != qos)
+              throw Failure("attachment_qos_identity_changed");
+      }
+    }
+    for (int i = 0; i < 2; ++i) {
+      auto ep = r["configuration"]["endpoints"][i].get<std::string>();
+      auto nr = node_resource(run, ep.substr(0, ep.find(':')));
+      auto name = physical(run, r, i);
+      auto found = link(name);
+      auto expected =
+          r.contains("identity") ? r["identity"]["attachment"]["ports"][i] : Json(nullptr);
+      check_link(found, owner(run, r), expected, nr["kind"] == "container" ? mac(run, r, i) : "");
+      if (nr["kind"] == "container" && !found.is_null())
+        ip({"link", "delete", name});
+    }
+    if (bridge_present(bridge))
+      command({"/usr/bin/ovs-vsctl", "--timeout=5", "del-br", bridge});
+    auto rows =
+        command({"/usr/bin/ovs-vsctl", "--data=bare", "--no-heading", "--columns=_uuid", "find",
+                 "QoS", "external_ids:graphlab-owner=" + Json(owner(run, r)).dump()});
+    std::istringstream ids(rows);
+    std::string id;
+    while (ids >> id) {
+      if (!command({"/usr/bin/ovs-vsctl", "--data=bare", "--no-heading", "--columns=name", "find",
+                    "Port", "qos=" + id})
+               .empty())
+        throw Failure("attachment_qos_still_referenced");
+      command({"/usr/bin/ovs-vsctl", "destroy", "QoS", id});
+    }
+    return; // TAP lifetime belongs to the guest node, after attachment teardown.
+  }
   for (int index = 0; index < 2; ++index) {
     auto endpoint = r["configuration"]["endpoints"][index].get<std::string>();
     auto colon = endpoint.find(':');
@@ -641,6 +839,13 @@ void LinuxBackend::activate(const Json &run) {
       auto port = endpoint.substr(colon + 1);
       auto physical = ::graphlab::runtime::physical(run, r, index);
       auto expected = r["identity"]["endpoints"][index];
+      if (direct_guest(run, r) && nr["kind"] == "container") {
+        auto found = link(physical);
+        if (found.is_null())
+          throw Failure("attachment_link_missing");
+        check_link(found, owner(run, r));
+        ip({"link", "set", physical, "up"});
+      }
       if (nr["kind"] == "bridge" || nr["kind"] == "qemu") {
         check_link(link(physical), owner(run, r), expected);
         ip({"link", "set", "dev", physical, "up"});
@@ -885,9 +1090,15 @@ Json LinuxBackend::fault(const Json &run, const Json &f, const std::string &acti
   int index = f["direction"] == "a-to-b" ? 0 : 1;
   auto ep = r["configuration"]["endpoints"][index].get<std::string>();
   auto source = node_resource(run, ep.substr(0, ep.find(':')));
-  // TAP TX is switch-to-guest. Guest-to-switch ingress requires an IFB backend.
-  if (source["kind"] == "qemu")
-    throw Failure("guest_egress_fault_requires_ifb");
+  // Direct links can shape delivery on the opposite host attachment egress.
+  // Shared switch-to-guest TAPs still need IFB for the reverse direction.
+  if (source["kind"] == "qemu") {
+    if (direct_guest(run, r)) {
+      index = 1 - index;
+      r["identity"]["endpoints"][index] = r["identity"]["attachment"]["ports"][index];
+    } else
+      throw Failure("guest_egress_fault_requires_ifb");
+  }
   auto point = r["identity"]["endpoints"][index];
   auto name = point["name"].get<std::string>();
   auto h = lab_support::digest(Json::array({run["id"], f["id"]}));
@@ -906,8 +1117,27 @@ Json LinuxBackend::fault(const Json &run, const Json &f, const std::string &acti
       run, r, index,
       [&](const auto &prefix, const Json &) {
         auto q = tc_show(prefix, name);
-        bool ours = false;
+        bool ours = false, parent_seen = false, neutral_seen = false;
+        bool child = point.contains("faultParent");
         for (const auto &v : q) {
+          if (child) {
+            if (v.value("root", false)) {
+              if (v.value("kind", "") != "prio" || v["handle"] != point["faultRoot"] ||
+                  v["options"]["bands"] != 3 ||
+                  v["options"]["priomap"] !=
+                      Json::array({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}))
+                throw Failure("foreign_root_qdisc", 409);
+              parent_seen = true;
+            } else if (v.value("handle", "") == handle && v.value("kind", "") == "netem" &&
+                       v["parent"] == point["faultParent"])
+              ours = true;
+            else if (v.value("kind", "") == "pfifo" && v["handle"] == point["faultNeutral"] &&
+                     v["parent"] == point["faultParent"] && v["options"]["limit"] == 1000)
+              neutral_seen = true;
+            else
+              throw Failure("foreign_child_qdisc", 409);
+            continue;
+          }
           if (v.value("root", false) && v.value("kind", "") != "noqueue") {
             if (v.value("handle", "") == handle && v.value("kind", "") == "netem")
               ours = true;
@@ -915,24 +1145,45 @@ Json LinuxBackend::fault(const Json &run, const Json &f, const std::string &acti
               throw Failure("foreign_root_qdisc", 409);
           }
         }
+        if (child && (!parent_seen || (!ours && !neutral_seen)))
+          throw Failure("fault_parent_missing");
         if (action == "plan") {
           if (ours)
             throw Failure("qdisc_already_exists", 409);
           return placement;
         }
-        if (action == "apply" && !ours)
-          tc(prefix, {"qdisc", "add", "dev", name, "root", "handle", handle, "netem", "limit",
-                      "1000", "delay", std::to_string(f["delayMs"].get<int>()) + "ms", "loss",
-                      std::to_string(f["lossPercent"].get<int>()) + "%"});
-        else if (action == "remove" && ours)
-          tc(prefix, {"qdisc", "del", "dev", name, "root", "handle", handle});
+        if ((action == "apply" && !ours) || (action == "remove" && ours)) {
+          std::vector<std::string> args = {"qdisc",
+                                           child               ? "replace"
+                                           : action == "apply" ? "add"
+                                                               : "del",
+                                           "dev", name};
+          if (child)
+            args.insert(args.end(), {"parent", point["faultParent"]});
+          else
+            args.push_back("root");
+          args.insert(args.end(), {"handle", child && action == "remove"
+                                                 ? point["faultNeutral"].get<std::string>()
+                                                 : handle});
+          if (child && action == "remove")
+            args.insert(args.end(), {"pfifo", "limit", "1000"});
+          if (action == "apply")
+            args.insert(args.end(), {"netem", "limit", "1000", "delay",
+                                     std::to_string(f["delayMs"].get<int>()) + "ms", "loss",
+                                     std::to_string(f["lossPercent"].get<int>()) + "%"});
+          tc(prefix, args);
+        }
         detail::checkpoint("fault." + action + ".created");
         auto observed = tc_show(prefix, name);
-        bool present = false;
-        for (const auto &v : observed)
+        bool present = false, restored = false;
+        for (const auto &v : observed) {
           if (v.value("handle", "") == handle && v.value("kind", "") == "netem")
             present = true;
-        if ((action == "apply") != present)
+          if (child && v.value("kind", "") == "pfifo" && v["handle"] == point["faultNeutral"] &&
+              v["parent"] == point["faultParent"] && v["options"]["limit"] == 1000)
+            restored = true;
+        }
+        if ((action == "apply") != present || (child && action == "remove" && !restored))
           throw Failure("fault_readback_failed");
         return Json{{"placement", placement},
                     {"active", present},

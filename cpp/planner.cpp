@@ -50,11 +50,16 @@ Result<Json> plan(const Json &topology, const Json &artifacts) {
   for (const auto &e : t.edges) {
     auto a = e.first.substr(0, e.first.find(':')), b = e.second.substr(0, e.second.find(':'));
     bool tap = t.nodes.at(a).kind == "qemu" || t.nodes.at(b).kind == "qemu";
+    bool attachment =
+        tap && t.nodes.at(a).kind != "ovs-switch" && t.nodes.at(b).kind != "ovs-switch";
     auto key = "edge/" + e.id;
     add(key, "prepare-disabled-link", {"node/" + a, "node/" + b},
         {{"edge", e.id},
          {"endpoints", Json::array({e.first, e.second})},
-         {"primitive", tap ? "tap" : "veth"},
+         {"primitive", attachment ? "attachment-bridge"
+                       : tap      ? "tap"
+                                  : "veth"},
+         {"internalAttachment", attachment},
          {"adminUp", false}});
     preparation.push_back(key);
   }

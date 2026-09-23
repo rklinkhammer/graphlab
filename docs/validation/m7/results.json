@@ -1,0 +1,63 @@
+{
+  "apiVersion": "graphlab.m7-validation/v1",
+  "baselineCommit": "e71d3f3",
+  "status": "implemented-and-verified-with-explicit-isolation-rejection",
+  "selectedRuntime": "Linux ARM64, Ubuntu 24.04, kernel 6.8.0-139, Docker API 1.52, OVS 3.3.9, QEMU 8.2.2",
+  "capabilities": {
+    "directGuestEdges": {
+      "status": "passed",
+      "normalCases": 8,
+      "ownershipCases": 2,
+      "directionalCycles": 4,
+      "evidence": [
+        "m7-neutral-backends.txt",
+        "m7-neutral-verification.txt"
+      ]
+    },
+    "qemuContainer": {
+      "status": "passed",
+      "hostArchitecture": "arm64",
+      "guests": [
+        "ppc64le/tcg",
+        "arm64/kvm"
+      ],
+      "image": "sha256:802b24b4b25003369e0369e6a9c08ace37bd0d3c098f63b5972f13f7acff7a5c",
+      "watchdogBoundSeconds": 8,
+      "evidence": [
+        "m7-neutral-backends.txt"
+      ]
+    },
+    "interruptedRecovery": {
+      "status": "passed",
+      "checkpoints": 9,
+      "evidence": [
+        "m7-neutral-crash.txt",
+        "m7-cleanup-final.txt"
+      ]
+    },
+    "experimentalSwitchIsolation": {
+      "status": "rejected",
+      "exposed": false,
+      "reason": "Distinct network namespaces still use the default shared OVS database/daemon; independent datapath and failure-domain ownership is not qualified.",
+      "evidence": [
+        "m7-isolation-final.txt"
+      ]
+    }
+  },
+  "regressions": {
+    "macos": "18/18 CTest passed",
+    "sanitizers": "17/17 ASan/UBSan passed; installed consumer excluded",
+    "linux": "17 passed and root transport skipped unprivileged; separate privileged transport passed",
+    "sharedBackend": "M2/M3/M4/M5 Linux suites passed; M5 repeated after final direct-queue fix",
+    "sdk": "1.2.0 installed package and both independent node applications build; gate wire minor remains 1"
+  },
+  "limits": [
+    "1500-byte-MTU links and small UDP probes; no new sustained-capacity qualification",
+    "Shared host network/kernel for QEMU container runner; not a security isolation claim",
+    "Experimental independent OVS remains unavailable",
+    "Large private artifacts are Git-ignored and must be retained separately"
+  ],
+  "source": "source.tar.gz",
+  "integrity": "SHA256SUMS",
+  "previousM6ManifestUnchanged": "sha256:4ad7ce394637388577bca7d41b0536832d273646fdcba7bd602ca65b261a778b"
+}

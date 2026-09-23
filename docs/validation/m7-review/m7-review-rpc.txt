@@ -1,0 +1,151 @@
+PASS guest fixtures generated
+PASS two guest architecture inputs
+Evidence: "/tmp/gl7-Evmlzy"
+PASS unrelated sentinel bridge created
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=1 container=0 pair=0 {"cancelRequested":false,"createdAt":"2026-09-23T13:37:50Z","error":null,"finishedAt":"2026-09-23T13:37:51Z","id":"825be424-7edf-48d3-81d5-ab949feee786","operation":"start","revision":"1","runId":"46d87272-7988-43cb-8300-a432ddb96ecc","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS Docker to guest and guest reply delivered independently of capture
+PASS RPC fault apply journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:37:58Z","error":null,"faultId":"c27b562483a5191d21a496155625a64b","finishedAt":"2026-09-23T13:37:58Z","id":"8f807180-409f-e326-2922-eda5036f595d","operation":"fault.apply","revision":"2","runId":"46d87272-7988-43cb-8300-a432ddb96ecc","state":"succeeded"}
+PASS 100 percent Docker-to-guest loss at declared egress
+PASS RPC fault removal journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:01Z","error":null,"faultId":"c27b562483a5191d21a496155625a64b","finishedAt":"2026-09-23T13:38:01Z","id":"1916b650-e0d4-4e71-592c-2746fb563334","operation":"fault.remove","revision":"3","runId":"46d87272-7988-43cb-8300-a432ddb96ecc","state":"succeeded"}
+PASS delivery restored after fault removal
+PASS RPC fault apply journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:01Z","error":null,"faultId":"38592c846bf9ab278d10643eca46cc77","finishedAt":"2026-09-23T13:38:01Z","id":"41e89bae-d98a-3cb0-d84d-94d79079d5ac","operation":"fault.apply","revision":"4","runId":"46d87272-7988-43cb-8300-a432ddb96ecc","state":"succeeded"}
+PASS 100 percent guest-to-Docker loss at opposite host egress
+PASS RPC fault removal journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:04Z","error":null,"faultId":"38592c846bf9ab278d10643eca46cc77","finishedAt":"2026-09-23T13:38:04Z","id":"15746b38-358f-d2db-e902-c64f7e071e9c","operation":"fault.remove","revision":"5","runId":"46d87272-7988-43cb-8300-a432ddb96ecc","state":"succeeded"}
+PASS reverse delivery restored after fault removal
+PASS direct link telemetry mapped
+PASS foreign port fixture created
+PASS foreign port injected into owned attachment
+PASS foreign attachment port blocks deletion and reports residuals
+PASS foreign port survives cleanup refusal
+PASS test removes only injected foreign port
+PASS test removes its foreign dummy
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:05Z","error":null,"finishedAt":"2026-09-23T13:38:05Z","id":"092c50c2-b4fb-4715-8455-713202c16cb5","operation":"recover","revision":"7","runId":"46d87272-7988-43cb-8300-a432ddb96ecc","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/credentials
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/captures
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/captures/88d6299e95ac5756f24bd832
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/captures/88d6299e95ac5756f24bd832/manifest.json
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/captures/88d6299e95ac5756f24bd832/worker.started
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/captures/88d6299e95ac5756f24bd832/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/captures/88d6299e95ac5756f24bd832/0.pcapng
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/artifacts
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55/manifest.json
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55/worker.started
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55/output.glterm
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/vms/gl78a50c7f8f55/qemu.log
+PASS no stale worker socket: /tmp/gl7-Evmlzy/0/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+PASS direct start arch=1 container=0 pair=1 {"cancelRequested":false,"createdAt":"2026-09-23T13:38:05Z","error":null,"finishedAt":"2026-09-23T13:38:06Z","id":"e611ad9d-f861-4a86-8704-13c68c672aa2","operation":"start","revision":"1","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS one modeled edge yields one required capture
+PASS capture selects guest TAP in either endpoint order
+PASS attachment separately inventoried from logical switches
+PASS attachment has no host IP
+PASS actual guest network readiness
+PASS actual guest network readiness
+PASS each guest independently reports received data packets
+PASS each guest independently reports received data packets
+PASS RPC fault apply journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:28Z","error":null,"faultId":"b14b3b90ef953d718ca13a03e5fa7dff","finishedAt":"2026-09-23T13:38:28Z","id":"a5f0f68c-fa75-6e8d-25bc-e4c89b619808","operation":"fault.apply","revision":"2","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair loss is directional at opposite TAP TX
+PASS RPC fault removal journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:43Z","error":null,"faultId":"b14b3b90ef953d718ca13a03e5fa7dff","finishedAt":"2026-09-23T13:38:43Z","id":"cddd4870-3309-2dd5-9165-a7db95b4c4d2","operation":"fault.remove","revision":"3","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair directional delivery restored
+PASS RPC fault apply journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:38:47Z","error":null,"faultId":"5f31fe7581c773f8a428f17228c97a4f","finishedAt":"2026-09-23T13:38:47Z","id":"f6da348a-caee-dd06-bd59-8c4938fe1e72","operation":"fault.apply","revision":"4","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair loss is directional at opposite TAP TX
+PASS RPC fault removal journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:39:02Z","error":null,"faultId":"5f31fe7581c773f8a428f17228c97a4f","finishedAt":"2026-09-23T13:39:02Z","id":"894de54f-4fc7-08f4-e0f8-f096662a2b99","operation":"fault.remove","revision":"5","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair directional delivery restored
+PASS RPC fault apply journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:39:06Z","error":null,"faultId":"68e24155d5c2527c0905d568b1c2e42e","finishedAt":"2026-09-23T13:39:06Z","id":"e239310f-154b-b1ef-94d8-8fe75315724e","operation":"fault.apply","revision":"6","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair loss is directional at opposite TAP TX
+PASS RPC fault removal journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:39:21Z","error":null,"faultId":"68e24155d5c2527c0905d568b1c2e42e","finishedAt":"2026-09-23T13:39:21Z","id":"333267c6-dc73-cc31-1e76-6325ef9a07fb","operation":"fault.remove","revision":"7","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair directional delivery restored
+PASS RPC fault apply journal: {"cancelRequested":false,"createdAt":"2026-09-23T13:39:25Z","error":null,"faultId":"955481ff911ca65e707a94c3757dd75a","finishedAt":"2026-09-23T13:39:25Z","id":"facd173d-a292-ae10-4b0f-f0ad639902c8","operation":"fault.apply","revision":"8","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS guest-pair loss is directional at opposite TAP TX
+PASS RPC direct guest fault expires and journals removal
+PASS guest-pair directional delivery restored
+PASS direct link telemetry mapped
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:40:26Z","error":null,"finishedAt":"2026-09-23T13:40:26Z","id":"51544ba8-1ff9-41df-800b-5f217fed7267","operation":"recover","revision":"10","runId":"16030d05-d44b-47e8-886b-637a8d4d4b2e","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/credentials
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures/7aa92217a7903ba6e9bd01e1
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures/7aa92217a7903ba6e9bd01e1/manifest.json
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures/7aa92217a7903ba6e9bd01e1/worker.started
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures/7aa92217a7903ba6e9bd01e1/1.pcapng
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures/7aa92217a7903ba6e9bd01e1/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/captures/7aa92217a7903ba6e9bd01e1/0.pcapng
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/artifacts
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb/manifest.json
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb/worker.started
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb/output.glterm
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/glf3f9ce8962bb/qemu.log
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240/manifest.json
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240/worker.started
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240/output.glterm
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/vms/gl1c2803409240/qemu.log
+PASS no stale worker socket: /tmp/gl7-Evmlzy/1/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS independent reader accepts direct edge PCAPNG
+PASS independent packet read reaches clean EOF
+PASS earliest numbered guest traffic retained at declared capture point
+PASS test sentinel removed explicitly
+M7 Linux backend tests passed

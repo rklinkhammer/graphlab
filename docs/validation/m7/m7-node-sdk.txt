@@ -1,0 +1,35 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /tmp/graphlab-m0-source/build/dev/package-test/install/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl7-sdk/build-app-a
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+44afb4791714314b9e37f16ae9bb4816870c4104c9c899e10201303be3c40006  /var/tmp/gl7-sdk/build-app-a/lab-node
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /tmp/graphlab-m0-source/build/dev/package-test/install/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /var/tmp/graphlab-m6-tools/root/usr/lib/aarch64-linux-gnu/libcrypto.a (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /var/tmp/gl7-sdk/build-app-b
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+96d057c0c9d61bf945446c82f575ee01b06b642c79695b60b8d330d8d8008d06  /var/tmp/gl7-sdk/build-app-b/lab-node
+af9609f373f61fc51c58219be6bb283041618922e460b0929be5758ddc6334c6  /var/tmp/gl7-sdk/lab-support-1.2.0.tar.gz

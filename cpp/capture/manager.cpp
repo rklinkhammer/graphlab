@@ -178,29 +178,33 @@ Json plan(const Json &run, const std::filesystem::path &root) {
           throw runtime::Failure("capture_namespace");
         inode = std::to_string(identity.st_ino);
       }
-      Json config = {{"id", id},
-                     {"runId", run["id"]},
-                     {"edge", r["logical"]},
-                     {"epoch", run["captureEpoch"]},
-                     {"mapping", r["identity"]},
-                     {"canonicalEndpoint", r["configuration"]["endpoints"][selected]},
-                     {"direction", "RX: opposite endpoint to selected endpoint; TX: selected "
-                                   "endpoint to opposite; individual packet direction unknown"},
-                     {"namespacePath", ns},
-                     {"namespaceInode", inode},
-                     {"interface", endpoint["name"]},
-                     {"ifindex", endpoint["ifindex"]},
-                     {"bootId", boot()},
-                     {"nonce", console::random_hex(32)},
-                     {"generation", run["controllerGeneration"]},
-                     {"directory", directory.string()},
-                     {"unit", "graphlab-cap-" + id + ".service"},
-                     {"snaplen", 65535},
-                     {"filter", ""},
-                     {"rotateBytes", policy["rotateBytes"]},
-                     {"rotateSeconds", policy["rotateSeconds"]},
-                     {"byteBudget", per},
-                     {"reserveBytes", reserve}};
+      Json config = {
+          {"id", id},
+          {"runId", run["id"]},
+          {"edge", r["logical"]},
+          {"epoch", run["captureEpoch"]},
+          {"mapping", r["identity"]},
+          {"canonicalEndpoint", r["configuration"]["endpoints"][selected]},
+          {"direction", endpoint.value("kind", "") == "tap"
+                            ? "TAP RX: guest to opposite endpoint; TAP TX: opposite endpoint to "
+                              "guest; individual packet direction unknown"
+                            : "RX: opposite endpoint to selected endpoint; TX: selected endpoint "
+                              "to opposite; individual packet direction unknown"},
+          {"namespacePath", ns},
+          {"namespaceInode", inode},
+          {"interface", endpoint["name"]},
+          {"ifindex", endpoint["ifindex"]},
+          {"bootId", boot()},
+          {"nonce", console::random_hex(32)},
+          {"generation", run["controllerGeneration"]},
+          {"directory", directory.string()},
+          {"unit", "graphlab-cap-" + id + ".service"},
+          {"snaplen", 65535},
+          {"filter", ""},
+          {"rotateBytes", policy["rotateBytes"]},
+          {"rotateSeconds", policy["rotateSeconds"]},
+          {"byteBudget", per},
+          {"reserveBytes", reserve}};
       result.push_back(config);
     }
   return result;

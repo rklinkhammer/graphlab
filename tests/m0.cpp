@@ -305,13 +305,27 @@ int main(int argc, char **argv) {
       s["nodes"]["s1"]["policy"]["rstp"] = false;
       check(validate(s, lock).has_value(), "explicit loop rejected");
     });
-    test("guest to guest capability rejection", [&] {
+    test("guest to guest attachment planning", [&] {
       auto s = base(lock);
       for (auto id : {"g", "h"})
         s["nodes"][id] = t["nodes"]["g"];
       edge(s, "guest", "g", "data0", "h", "data0");
       auto result = validate(s, lock);
-      check(!result && result.error().code == "unsupported_backend", "wrong capability result");
+      check(result.has_value(), "direct guest graph rejected");
+      auto planned = graphlab::plan(s, lock);
+      check(planned.has_value(), "direct guest plan rejected");
+      bool attachment = false;
+      for (const auto &step : (*planned)["steps"])
+        if (step["id"] == "edge/guest")
+          attachment = step["resource"]["primitive"] == "attachment-bridge";
+      check(attachment && (*planned)["summary"]["captures"] == 1, "attachment plan/capture count");
+      auto l = lock;
+      l["workloads"]["guest-linux"]["vm"]["runnerImage"] = fakehash('e');
+      s["artifactLock"] = digest(l);
+      check(validate(s, l).has_value(), "immutable runner rejected");
+      l["workloads"]["guest-linux"]["vm"]["runnerImage"] = "runner:latest";
+      s["artifactLock"] = digest(l);
+      check(!validate(s, l), "mutable runner image accepted");
     });
     test("tampered contract", [&] {
       auto l = lock;

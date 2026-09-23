@@ -1,0 +1,21 @@
+Evidence: "/tmp/gl5-live-AaGOy3"
+PASS fixture generated
+PASS direct edge validates
+PASS start: {"cancelRequested":false,"createdAt":"2026-09-23T12:59:50Z","error":null,"finishedAt":"2026-09-23T12:59:51Z","id":"3f27a411-c9c8-45aa-80bb-b1fc4c27f2e4","operation":"start","revision":"1","runId":"b8bc6799-d5d2-4ec2-8eb2-c98e20566547","state":"succeeded"}
+PASS one canonical stats64 source per edge: [{"adminUp":true,"canonicalEndpoint":0,"carrierUp":true,"edge":"wire","endpoints":["a:data0","b:data0"],"forwardMetric":"tx","mapping":{"containerId":"dd33ef7ad8437ce240e8712f04d0ee843537fa56f3545cbf1d330297c9d1f941","ifindex":3266,"name":"data0","namespaceInode":"4026532337"},"mappingEpoch":"sha256:838630a301d44e7089a021be26b36ba42791e15c66bf4b50c710a6570419c5a2","monotonicNs":"37115777833314","operstate":"UP","qdiscs":[{"backlog":"0","bytes":"0","drops":"0","handle":"0:","kind":"noqueue","options":{},"overlimits":"0","packets":"0","qlen":"0","refcnt":"2","requeues":"0","root":true}],"raw":{"rxBytes":"0","rxDropped":"0","rxErrors":"0","rxPackets":"0","txBytes":"0","txDropped":"0","txErrors":"0","txPackets":"0"},"rstp":{},"rstpObservedMonotonicNs":"37115775158179","source":"rtnetlink/iproute2-stats64","valid":true}]
+PASS owned namespace UDP sender
+PASS known A-to-B traffic delivered
+PASS one-way canonical direction without endpoint doubling
+PASS durable telemetry history available
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-23T12:59:52Z","error":null,"faultId":"749a4614ee69acb90f92e90a0a27b98b","finishedAt":"2026-09-23T12:59:52Z","id":"dd28c9b1-e01b-469c-343e-f21f5c5c6a7e","operation":"fault.apply","revision":"2","runId":"b8bc6799-d5d2-4ec2-8eb2-c98e20566547","state":"succeeded"}
+PASS owned namespace UDP sender
+PASS netem blocks A-to-B
+PASS owned namespace UDP sender
+PASS reverse B-to-A remains unaffected
+PASS fault expires through serialized executor
+PASS owned namespace UDP sender
+PASS expiry restores packet delivery
+PASS netem apply: {"cancelRequested":false,"createdAt":"2026-09-23T12:59:58Z","error":null,"faultId":"026c902c149e49755bd39f681a389572","finishedAt":"2026-09-23T12:59:58Z","id":"6c65fe75-28f4-46c2-288f-632c3ddd31a8","operation":"fault.apply","revision":"4","runId":"b8bc6799-d5d2-4ec2-8eb2-c98e20566547","state":"succeeded"}
+PASS expired fault removed during restart
+PASS owned fault and run cleanup: {"cancelRequested":false,"createdAt":"2026-09-23T12:59:59Z","error":null,"finishedAt":"2026-09-23T12:59:59Z","id":"2e4b1169-5bcf-4333-8516-6db826d35012","operation":"recover","revision":"5","runId":"b8bc6799-d5d2-4ec2-8eb2-c98e20566547","state":"succeeded"}
+M5 Linux tests passed

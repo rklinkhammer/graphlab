@@ -1,0 +1,92 @@
+Evidence: "/tmp/gl3-1A8Af7"
+PASS root worker disconnects cannot terminate controller with SIGPIPE
+PASS fixture generated
+PASS capture-first start: {"cancelRequested":false,"createdAt":"2026-09-23T12:57:37Z","error":null,"finishedAt":"2026-09-23T12:57:43Z","id":"262b7af3-7036-4c06-839f-869900811054","operation":"start","revision":"1","runId":"eae06728-c7ba-4ccb-8f71-1c1a3487fda8","state":"succeeded"}
+PASS all data edges captured
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS first released application probe delivered
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS earliest application payload recorded with valid files for every edge
+PASS artifact listing
+PASS closed artifact available alongside partial stream
+PASS scoped closed artifact download
+PASS quiesce finalizes captures
+PASS worker identity cannot be restarted or overwrite prior evidence
+PASS resume rearms
+PASS new epoch on resume
+PASS owned worker killed
+PASS worker loss degrades coverage and quiesces
+PASS failed worker recovery cleans resources
+PASS second capture run
+PASS independent worker records through agent outage
+PASS restart adopts workers and holds traffic
+PASS stale controller fenced
+PASS adopted worker cleanup
+PASS lease-outage run
+PASS capture lost during agent outage
+PASS node lease bounds outage quiescence to 12 seconds
+PASS external UDP receives no application echo after lease expiry
+PASS outage recovery cleanup
+PASS stop-race run armed
+PASS kill owned capture immediately before finalization
+PASS killed capture is inactive before finalization
+PASS stop accounts for killed worker
+PASS real stop race persists coverage gap and interrupted observation
+PASS stop-race workload remains held
+PASS stop-race cleanup
+PASS repeated real cleanup preserves incomplete coverage
+PASS invalid capture filter fails start
+PASS failed activation never releases live workload
+PASS failed-arm resources cleaned
+PASS quota test run armed
+PASS bounded owned-interface traffic fixture
+PASS real quota exhaustion reports loss and quiesces
+PASS rotation under packet load preserves multiple segments
+PASS quota failure cleanup
+PASS OS write limit prevents capture activation acknowledgement
+PASS write-denied arm holds traffic
+PASS write-denied cleanup
+PASS alternate graph validates
+PASS direct Docker-Docker capture start: {"cancelRequested":false,"createdAt":"2026-09-23T12:58:36Z","error":null,"finishedAt":"2026-09-23T12:58:36Z","id":"406f524a-32c6-4aa2-8462-c515dfff3929","operation":"start","revision":"1","runId":"49969e1c-9be0-4062-87a2-3f125e5354ff","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS direct edge capture uses verified container namespace
+PASS direct Docker-Docker application traffic
+PASS alternate graph cleanup
+PASS alternate graph validates
+PASS isolated capture start: {"cancelRequested":false,"createdAt":"2026-09-23T12:58:36Z","error":null,"finishedAt":"2026-09-23T12:58:37Z","id":"39a90265-7fde-4515-8114-f41f11c2b95e","operation":"start","revision":"1","runId":"3b36aaaf-c796-45c7-8325-b8ae45420bbe","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS alternate graph cleanup
+M3 Linux tests passed

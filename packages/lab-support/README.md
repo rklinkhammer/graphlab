@@ -1,4 +1,4 @@
-# LabSupport 1.1.0
+# LabSupport 1.2.0
 
 C++23 contracts, bounded YAML/JSON parsing, workload validation, topology validation, and SHA-256 canonical document identity. No subprocesses, Docker API, runtime mutation, or environment-owned wiring are included.
 
@@ -11,7 +11,7 @@ cmake --install build/support --prefix "$PWD/build/support-install"
 Independent consumers use:
 
 ```cmake
-find_package(LabSupport 1.1.0 EXACT CONFIG REQUIRED)
+find_package(LabSupport 1.2.0 EXACT CONFIG REQUIRED)
 target_link_libraries(my_node PRIVATE LabSupport::contracts)
 ```
 
@@ -39,3 +39,5 @@ The M6 qualification bundle retains installed 1.0.0 and 1.1.0 packages alongside
 ## Gate protocol minors
 
 SDK 1.1.0 adds optional `protocolMinor: 1` and `capabilities` metadata to `graphlab.gate/v1`; the existing commands and fields are unchanged. SDK 1.0.0 omits the minor, which means 0. `gate_protocol_minor()` accepts the qualified minors 0 and 1, ignores optional additions and rejects unsupported majors, minors or required features. The controller checks every Docker peer before releasing any node and validates release/renew acknowledgements. See the [declared compatibility matrix](../../qualification/protocol-minor-matrix.md). These are retained local qualification releases, not published registry artifacts or a cross-compiler ABI promise.
+
+SDK 1.2.0 adds validation of immutable QEMU `vm.runnerImage` IDs and direct guest attachment graphs for M7. The gate wire protocol remains 1.1. Frozen M6 SDK/image archives are unchanged.

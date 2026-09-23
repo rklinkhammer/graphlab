@@ -1,0 +1,4 @@
+namespace=gl7-isolation-b7410cf0-0 inode=4026532328 observes same host OVS database
+namespace=gl7-isolation-b7410cf0-1 inode=4026532398 observes same host OVS database
+REJECT namespace-ovs: distinct network namespaces do not isolate the default OVS database/daemon; no independent datapath/failure boundary qualified
+PASS scoped namespace cleanup; shared daemon was not restarted

@@ -5,9 +5,11 @@
 #include <cstring>
 #include <fcntl.h>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <net/if.h>
 #include <poll.h>
+#include <sstream>
 #include <sys/ioctl.h>
 #include <sys/mount.h>
 #include <sys/socket.h>
@@ -19,6 +21,7 @@ int main() {
   const bool init = getpid() == 1;
   int socket = -1;
   bool network = false;
+  std::string data_address = "10.233.17.2", management_address = "172.31.243.10";
   if (init) {
     mkdir("/proc", 0755);
     mkdir("/sys", 0755);
@@ -38,6 +41,24 @@ int main() {
             close(fd);
           }
         }
+    std::ifstream command_line("/proc/cmdline");
+    std::string argument;
+    while (command_line >> argument) {
+      for (auto entry : {std::pair{"graphlab.data0=", &data_address},
+                         std::pair{"graphlab.mgmt0=", &management_address}})
+        if (argument.starts_with(entry.first)) {
+          auto address = argument.substr(std::strlen(entry.first));
+          auto slash = address.find('/');
+          // This minimal example implements /24 only; full guests configure their own network.
+          if (slash != std::string::npos && address.substr(slash) != "/24")
+            return 2;
+          address = address.substr(0, slash);
+          in_addr parsed{};
+          if (inet_pton(AF_INET, address.c_str(), &parsed) != 1)
+            return 2;
+          *entry.second = address;
+        }
+    }
     socket = ::socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
     for (int i = 0; i < 2; ++i) {
       ifreq r{};
@@ -49,7 +70,7 @@ int main() {
         continue;
       sockaddr_in ip{};
       ip.sin_family = AF_INET;
-      inet_pton(AF_INET, i == 0 ? "10.233.17.2" : "172.31.243.10", &ip.sin_addr);
+      inet_pton(AF_INET, i == 0 ? data_address.c_str() : management_address.c_str(), &ip.sin_addr);
       std::memcpy(&r.ifr_addr, &ip, sizeof(ip));
       if (ioctl(socket, SIOCSIFADDR, &r))
         continue;
@@ -60,9 +81,16 @@ int main() {
       if (i == 0)
         network = true;
     }
+    setsockopt(socket, SOL_SOCKET, SO_BINDTODEVICE, "eth0", 5);
+    sockaddr_in local{};
+    local.sin_family = AF_INET;
+    local.sin_port = htons(49000);
+    inet_pton(AF_INET, data_address.c_str(), &local.sin_addr);
+    if (bind(socket, reinterpret_cast<sockaddr *>(&local), sizeof(local)))
+      network = false;
     if (access("/usr/sbin/dropbear", X_OK) == 0 && fork() == 0) {
-      execl("/usr/sbin/dropbear", "dropbear", "-F", "-p", "172.31.243.10:22", "-r",
-            "/etc/dropbear/dropbear_ed25519_host_key", nullptr);
+      execl("/usr/sbin/dropbear", "dropbear", "-F", "-p", (management_address + ":22").c_str(),
+            "-r", "/etc/dropbear/dropbear_ed25519_host_key", nullptr);
       _exit(127);
     }
   }
@@ -75,7 +103,7 @@ int main() {
             << std::flush;
   auto next = std::chrono::steady_clock::now();
   std::string line;
-  unsigned sequence = 0;
+  unsigned sequence = 0, received = 0;
   for (;;) {
     pollfd p{0, POLLIN, 0};
     poll(&p, 1, 50);
@@ -87,7 +115,8 @@ int main() {
       for (int i = 0; i < n; ++i) {
         if (b[i] == '\r' || b[i] == '\n') {
           if (line == "status")
-            std::cout << "guest=" << u.machine << " packets=" << sequence << '\n';
+            std::cout << "guest=" << u.machine << " packets=" << sequence
+                      << " received=" << received << '\n';
           else if (line.starts_with("echo "))
             std::cout << line.substr(5) << '\n';
           else if (line == "exit" && !init)
@@ -100,12 +129,29 @@ int main() {
           line += b[i];
       }
     }
+    if (init) {
+      char bytes[512];
+      sockaddr_in sender{};
+      socklen_t size = sizeof(sender);
+      auto n =
+          recvfrom(socket, bytes, sizeof(bytes), 0, reinterpret_cast<sockaddr *>(&sender), &size);
+      if (n > 0) {
+        ++received;
+        std::string message(bytes, n);
+        if (message.starts_with("graphlab-guest-") || message.starts_with("M7-")) {
+          auto reply = "reply:" + message;
+          sendto(socket, reply.data(), reply.size(), 0, reinterpret_cast<sockaddr *>(&sender),
+                 size);
+        }
+      }
+    }
     if (init && std::chrono::steady_clock::now() >= next) {
       auto b = "graphlab-guest-" + std::to_string(sequence++);
       sockaddr_in dest{};
       dest.sin_family = AF_INET;
       dest.sin_port = htons(49000);
-      inet_pton(AF_INET, "10.233.17.1", &dest.sin_addr);
+      inet_pton(AF_INET, data_address == "10.233.17.1" ? "10.233.17.2" : "10.233.17.1",
+                &dest.sin_addr);
       sendto(socket, b.data(), b.size(), 0, reinterpret_cast<sockaddr *>(&dest), sizeof(dest));
       next = std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
     }

@@ -76,3 +76,5 @@ build/dev/lab-guest-template arm64-kvm path/to/example/artifacts path/to/example
 The generator hashes real inputs and validates its output through the shared contract package. It overwrites the generated topology/lock, so apply your graph-specific changes afterwards and update `artifactLock` with `lab hash` if the lock changes. Rebuilds are content-pinned after generation; byte-for-byte reproducibility across toolchain versions is not claimed.
 
 See [M4 operations](../docs/m4-qemu-consoles.md) and [verification](../docs/validation/m4-verification.md).
+
+M7 adds direct guest–Docker/guest–guest attachment examples and an optional container runner; see [M7 backends](../docs/m7-backends.md). The C++ minimal init accepts validated `graphlab.data0=IPv4/24` and `graphlab.mgmt0=IPv4/24` kernel parameters, binds its UDP fixture to the data NIC, and reports received packet counts over the recorded console. Rebuild into new artifact directories to preserve earlier template images.

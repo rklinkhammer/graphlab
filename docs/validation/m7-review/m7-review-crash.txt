@@ -1,0 +1,322 @@
+PASS guest fixtures generated
+PASS two guest architecture inputs
+Evidence: "/tmp/gl7-5GzBrL"
+PASS unrelated sentinel bridge created
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.bridge
+PASS executor killed at attachment.bridge
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:20Z","error":null,"finishedAt":"2026-09-23T13:45:20Z","id":"e0155914-4486-43f7-803c-29383f015bb2","operation":"recover","revision":"2","runId":"747af4d0-0119-4c6b-8800-095de1d36515","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/vms/gl229b2571271c/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/0/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.veth-created
+PASS executor killed at attachment.veth-created
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:21Z","error":null,"finishedAt":"2026-09-23T13:45:22Z","id":"eb371db1-6900-4712-85d5-6f6fb613e0d4","operation":"recover","revision":"2","runId":"68e34c66-8ddc-4cbe-839e-183a7fdb691a","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/vms/glaf847c305f54/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/1/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.veth-moved
+PASS executor killed at attachment.veth-moved
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:22Z","error":null,"finishedAt":"2026-09-23T13:45:23Z","id":"9b0f5704-603e-4b34-878e-f42736637b4f","operation":"recover","revision":"2","runId":"2706984a-0fa4-42f4-8ee7-8f78524e1be8","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/vms/gld619f3ea681c/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/2/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.port.0
+PASS executor killed at attachment.port.0
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:23Z","error":null,"finishedAt":"2026-09-23T13:45:24Z","id":"2efa512d-72b3-4aac-8b99-1024bcb45361","operation":"recover","revision":"2","runId":"427e0685-f18f-4460-89cb-575535446f25","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/vms/glef9029a4d30a/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/3/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.port.1
+PASS executor killed at attachment.port.1
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:25Z","error":null,"finishedAt":"2026-09-23T13:45:25Z","id":"685974e4-4f21-4038-891a-8c614dad75bf","operation":"recover","revision":"2","runId":"e0aa57ad-30b8-4738-85e8-a77811dd397c","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/vms/gla94a7cb1bf42/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/4/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.qos.0
+PASS executor killed at attachment.qos.0
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:26Z","error":null,"finishedAt":"2026-09-23T13:45:26Z","id":"981c961b-3f5f-44eb-8fef-7755cd7f3485","operation":"recover","revision":"2","runId":"9186719c-ab68-4eea-8664-95eeaff37e42","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/vms/glecbc1639756b/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/5/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL attachment.qos.1
+PASS executor killed at attachment.qos.1
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:27Z","error":null,"finishedAt":"2026-09-23T13:45:27Z","id":"6112f5b5-e29b-4917-8273-cd67e9ddb4cb","operation":"recover","revision":"2","runId":"b9fe2d58-a01f-415d-8c7c-f31727248c89","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160/manifest.json
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160/worker.started
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160/output.glterm
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/vms/gl0a3158d72160/qemu.log
+PASS no stale worker socket: /tmp/gl7-5GzBrL/6/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL qemu.runner-created
+PASS executor killed at qemu.runner-created
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:28Z","error":null,"finishedAt":"2026-09-23T13:45:28Z","id":"b760c2cc-3f96-437f-8ad7-198e3b49cab2","operation":"recover","revision":"2","runId":"dc4660a3-192c-44d9-8129-3d10c6ec8fe6","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/vms/gl09d8ad745080
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/vms/gl09d8ad745080/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/vms/gl09d8ad745080/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/7/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS direct topology validates
+PASS unqualified switch isolation rejected before effects
+CHECKPOINT SIGKILL qemu.runner-started
+PASS executor killed at qemu.runner-started
+PASS scoped recovery: {"cancelRequested":false,"createdAt":"2026-09-23T13:45:28Z","error":null,"finishedAt":"2026-09-23T13:45:29Z","id":"08e02390-9ee3-447b-8a77-28303611efc1","operation":"recover","revision":"2","runId":"e9209bc9-96dc-4bcd-81f5-c5d5b868d191","state":"succeeded"}
+PASS repeated recovery
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned link remains
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no owned OVS rows remain
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/credentials
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/credentials/guest-linux.key
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/agent.lock
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/captures
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/artifacts
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/artifacts/16134ea8c0183795f7b5d6520828e49654c5c01097c3a32b9d5a43c29177d756
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/artifacts/4a4cb7f6d8106bb2a7dd8c763fab14b1810152136fc4304e5b728f0043e84f12
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/artifacts/080acf35a507ac9849cfcba47dc2ad83e01b75663a516279c8b9d243b719643e
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/artifacts/6ec862ae1d4ae54f90ef1d01cfded4c873ed1c9838ef2ef20bab82cf8a0ac694
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/artifacts/d3ced50cf9110fbcded5004a2ed495ccf65ad14c858ee54dfa01925f98e71706
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/vms
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/vms/gl6710f8745472
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/vms/gl6710f8745472/overlay.qcow2
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/vms/gl6710f8745472/config.json
+PASS worker unit collected
+PASS no stale worker socket: /tmp/gl7-5GzBrL/8/state/state.sqlite
+PASS unrelated sentinel survives repeated recovery
+PASS test sentinel removed explicitly
+M7 Linux backend tests passed

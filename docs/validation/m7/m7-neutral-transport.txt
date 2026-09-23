@@ -1,0 +1,2 @@
+failed writes handled=6
+caller_signal=0
