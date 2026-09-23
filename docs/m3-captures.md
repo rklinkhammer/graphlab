@@ -74,6 +74,8 @@ Authenticated routes:
 
 Clients supply artifact IDs, never filesystem paths. Existing session, Origin and peer checks apply. The browser reconstructs a closed file and verifies its SHA-256 before downloading it. Artifacts remain accessible for destroyed runs. There is no automatic retention deletion, pinning UI, live partial export, or additional ad-hoc capture endpoint in this milestone.
 
+The later [packet-history increment](packet-history.md) adds a separate bounded metadata index of finalized segments. It verifies source size/SHA-256 before decoding and exposes exact artifact/packet/block references; capture workers, original bytes, coverage guarantees and download checks remain unchanged. Index retention is separate from capture retention.
+
 ## Verification
 
 See [M3 verification](validation/m3-verification.md). The explicit root/Linux suite is:

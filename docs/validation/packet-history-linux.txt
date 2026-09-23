@@ -1,0 +1,52 @@
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at /tmp/graphlab-m0-source/build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-packets-20260923/build/dev
+[0/2] Re-checking globbed directories...
+[1/9] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/packet_history.cpp.o
+[2/9] Linking CXX static library libgraphlab_runtime.a
+[3/9] Linking CXX executable lab-capture
+[4/9] Linking CXX executable lab
+[5/9] Linking CXX executable lab-api
+[6/9] Linking CXX executable lab-agent
+[7/9] Linking CXX executable packet_history_tests
+[8/9] Linking CXX executable lab-terminal
+[9/9] Linking CXX executable m2_tests
+PASS EPB timestamp and packet count exact
+PASS UDP headers decoded without inferred direction
+PASS per-segment record bound reports omissions
+PASS TCP headers decoded
+PASS fragments never supply guessed ports
+PASS IPv6 UDP decoded
+PASS snapshot truncation and short headers explicit
+PASS VLAN header offset respected
+PASS incomplete block rejected
+PASS unsupported byte order rejected
+PASS invalid block length rejected
+PASS manifested checksum-verified segment indexed
+PASS newest index ordering
+PASS node filter uses incident edge endpoints
+PASS edge filter isolation
+PASS query limit enforced
+PASS cursor bound to filters
+PASS subsequent finalized segment indexed once
+PASS stable cursor excludes new segments
+PASS restart preserves rows and cursor identity
+PASS run isolation
+PASS cross-run cursor denied
+PASS checksum failure visible without publishing packets
+PASS active partial never indexed
+PASS retention invalidates old cursor explicitly
+PASS expired index rows not rebuilt from retained segments
+PASS capacity fixtures inserted
+PASS global packet record ceiling enforced
+PASS record byte ceiling enforced independently of count
+Packet history tests passed

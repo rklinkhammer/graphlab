@@ -1,0 +1,27 @@
+Run inventory (all destroyed):
+{
+  "items": [
+    {
+      "id": "177dab9a-fe21-42b0-8183-63afa7905550",
+      "revision": "3",
+      "state": "destroyed",
+      "topologyHash": "sha256:10b5c54821f52baeba0270075be7eb16cff264e3447a4a4ed3a3766b4227625a"
+    },
+    {
+      "id": "180383af-80b2-4b7a-8b09-663f5e33b996",
+      "revision": "3",
+      "state": "destroyed",
+      "topologyHash": "sha256:10b5c54821f52baeba0270075be7eb16cff264e3447a4a4ed3a3766b4227625a"
+    },
+    {
+      "id": "8f3c04e4-ce17-4e75-8dea-1c75ad13f318",
+      "revision": "3",
+      "state": "destroyed",
+      "topologyHash": "sha256:10b5c54821f52baeba0270075be7eb16cff264e3447a4a4ed3a3766b4227625a"
+    }
+  ]
+}
+
+Service status (API, agent), followed by running Docker names and OVS bridges:
+inactive
+inactive

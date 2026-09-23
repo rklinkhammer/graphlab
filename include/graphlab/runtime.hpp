@@ -2,10 +2,14 @@
 #include <condition_variable>
 #include <functional>
 #include <graphlab/console.hpp>
+#include <memory>
 #include <mutex>
 #include <optional>
 #include <thread>
 struct sqlite3;
+namespace graphlab::packets {
+class History;
+}
 namespace graphlab::runtime {
 using lab_support::Json;
 struct Failure : std::runtime_error {
@@ -101,6 +105,7 @@ class Engine {
   void m5_execute(const std::string &);
   Json samples_ = Json::object();
   std::string collector_ = console::random_hex(12);
+  std::unique_ptr<packets::History> packet_history_;
 
 public:
   Engine(const std::filesystem::path &directory, Backend &, const console::Catalog &);

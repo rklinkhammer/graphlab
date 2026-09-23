@@ -28,6 +28,8 @@ The console connects topology selection to serial/SSH/container sessions, search
 
 [Application telemetry v1](docs/application-telemetry.md) adds optional workload message/payload rates, errors, rejection/backpressure counters and explicitly defined local service-time histograms. The instrumented C++ `app-a` fixture reports through the existing gate; bounded agent history and authenticated console views remain separate from interface counters. Uninstrumented workloads remain supported.
 
+[Packet history v1](docs/packet-history.md) indexes finalized, checksum-verified PCAPNG segments in a bounded, persistent metadata store. The console filters by selected node/edge and protocol, freezes older pages, and links each packet to its exact capture artifact and block offset. Active files, inferred packet direction and application-message correlation are excluded.
+
 Install the exact frontend and Playwright versions from the lockfile, install the matching Chromium build, and build the current console:
 
 ```sh

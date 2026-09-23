@@ -145,6 +145,8 @@ async function setup(page: any) {
     else if (path === "runs/r1") value = run;
     else if (path === "runs/foreign")
       value = { ...run, id: "foreign", topologyHash: "h2" };
+    else if (path.endsWith("/packet-history/query"))
+      value = {items: [], segments: [], nextCursor: null};
     else if (path.endsWith("/application-telemetry/query"))
       value = {
         current: [],
@@ -224,6 +226,40 @@ async function setup(page: any) {
     },
   };
 }
+test("packet history freezes older pages, filters selection and exposes capture references", async ({page}) => {
+  await setup(page);
+  let queries: any[] = [];
+  const packet = (id: string) => ({id, artifactId: "cap-0", artifactSha256: "sha256:verified", packetIndex: id, blockOffset: "128", timestampUnixMicros: "1700000000000001", edge: "link", interface: "data0", direction: "unknown", capturedLength: 42, originalLength: 80, truncated: true, headers: {protocol: "udp", decodeStatus: "complete", sourceAddress: "10.0.0.1", destinationAddress: "10.0.0.2", sourcePort: 1234, destinationPort: 7777}});
+  await page.route("**/packet-history/query", async route => {
+    const p = route.request().postDataJSON(); queries.push(p);
+    await route.fulfill({json: {items: [packet(p.cursor ? "11" : "22")], segments: [{artifactId: "cap-0", state: "record-limit", indexedRecords: 2000, omittedRecords: "40"}], nextCursor: p.cursor ? null : "cursor-one", captureCoverage: "closed", retainedRecords: 2000, retainedRecordBytes: 10000, generation: "0"}});
+  });
+  const panel = page.getByRole("region", {name: "Packet history"});
+  await panel.getByRole("button", {name: "Return to newest packets"}).click();
+  await expect(panel).toContainText("Packet #22");
+  await expect(panel).toContainText("Direction: unknown");
+  await expect(panel).toContainText("42 / 80 bytes · truncated");
+  await panel.getByRole("button", {name: "Older packets"}).click();
+  await expect(panel).toContainText("Packet #11");
+  const calls = queries.length;
+  await page.waitForTimeout(5500);
+  expect(queries.length).toBe(calls);
+  await expect(panel).toContainText("Older page frozen");
+  await panel.getByLabel("Packet protocol").selectOption("udp");
+  await expect(panel).toContainText("Packet #22");
+  expect(queries.at(-1).cursor).toBeUndefined();
+  expect(queries.at(-1).protocol).toBe("udp");
+  await page.getByText("Accessible inventory · all nodes and data edges").click();
+  await page.getByRole("button", {name: /^link: guest/}).click();
+  await expect.poll(() => queries.at(-1).edge).toBe("link");
+  await panel.getByText("Segment indexing and omissions (1)").click();
+  await expect(panel).toContainText("omitted 40");
+  await panel.getByText("Exact observation").click();
+  await expect(panel).toContainText("sha256:verified");
+  await page.route("**/packet-history/query", route => route.fulfill({status: 409, json: {error: {code: "packet_history_expired"}}}));
+  await panel.getByRole("button", {name: "Older packets"}).click();
+  await expect(panel.getByRole("alert")).toContainText("packet history expired");
+});
 test("topology-scoped run, selected serial, logs, lease release and retained sessions", async ({
   page,
 }) => {

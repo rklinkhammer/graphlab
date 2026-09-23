@@ -1,0 +1,15 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/packet-history-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:58718) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+reading from file /var/tmp/gl6-packets-20260923/state/captures/dd620997544e1563a969db8f/0.pcapng, link-type EN10MB (Ethernet), snapshot length 65535
+Running as unit: graphlab-packets-agent.service; invocation ID: 649ce49988f848be88a573e2b0050031
+{"runId":"180383af-80b2-4b7a-8b09-663f5e33b996","edge":"a-s","udpPackets":20,"tcpdumpUdpPackets":20,"artifact":"dd620997544e1563a969db8f-0","sha256":"sha256:1e38d822c27e478259ea0198f04f3502899a910fabff4649112e9f7293a7c18f","exactOffsetsAndTimestamps":true,"restartCursorPreserved":true,"segments":[{"artifactId":"4a9f88ce1a98bf38c7a60cf9-0","edge":"b-s","indexedRecords":25,"omittedRecords":"0","packetCount":"25","sha256":"sha256:2b126cf0a1182203df1497023d71641ceb9c3b3d48dfc4ed380c971139ec5fec","size":"2444","state":"indexed"},{"artifactId":"8f9a394de8df596ff9e5acc4-0","edge":"l23","indexedRecords":9,"omittedRecords":"0","packetCount":"9","sha256":"sha256:90b5ecaa6aed3c88dee0ce56ce20e212a99ae47e0eb0e1501b398a16c6b69a6d","size":"972","state":"indexed"},{"artifactId":"aaaf23a212ddb3f22a4df1f8-0","edge":"l12","indexedRecords":30,"omittedRecords":"0","packetCount":"30","sha256":"sha256:d9248681c85a3cc50efe9fc59aaaf07f2ae273cedaba985b5425fab8fba9f570","size":"2972","state":"indexed"},{"artifactId":"c8b6ceb3f4652896b9e664bf-0","edge":"l31","indexedRecords":5,"omittedRecords":"0","packetCount":"5","sha256":"sha256:d7b1b819ffed830ff7c6f3ee57a84d758d7f8e31bc49b2a12876e16585aa1efe","size":"620","state":"indexed"},{"artifactId":"dd620997544e1563a969db8f-0","edge":"a-s","indexedRecords":26,"omittedRecords":"0","packetCount":"26","sha256":"sha256:1e38d822c27e478259ea0198f04f3502899a910fabff4649112e9f7293a7c18f","size":"2532","state":"indexed"}]}
+  ✓  1 tests/packet-history-live.spec.ts:7:1 › finalized Linux PCAPNG to authenticated packet history and browser (10.1s)
+
+  1 passed (10.4s)

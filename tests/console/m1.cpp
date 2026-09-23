@@ -233,6 +233,8 @@ int main(int argc, char **argv) {
         request(port, http::verb::get, "/api/v1/runs/unknown/application-telemetry").result_int() ==
             401,
         "application telemetry requires authenticated session");
+    check(request(port, http::verb::get, "/api/v1/runs/unknown/packet-history").result_int() == 401,
+          "packet history requires authenticated session");
     check(request(port, http::verb::get, "/api/v1/topologies").result_int() == 401,
           "unauthenticated API denied");
     check(request(port, http::verb::get, "/", "", "", "http://hostile.invalid").result_int() == 403,
@@ -258,6 +260,9 @@ int main(int argc, char **argv) {
               set_cookie.find("SameSite=Strict") != std::string::npos,
           "session cookie policy");
     auto csrf = Json::parse(login.body())["csrf"].get<std::string>();
+    check(request(port, http::verb::post, "/api/v1/runs/unknown/packet-history/query", "{}", cookie)
+                  .result_int() == 405,
+          "read-only agent rejects packet history query route");
     check(request(port, http::verb::get, "/api/v1/topologies", "", cookie).result_int() == 200,
           "authenticated catalog through HTTP and agent");
     auto hash = listing["items"][0]["hash"].get<std::string>();

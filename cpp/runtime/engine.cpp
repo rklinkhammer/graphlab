@@ -1,6 +1,7 @@
 #include <fcntl.h>
 #include <graphlab/application_telemetry.hpp>
 #include <graphlab/capture.hpp>
+#include <graphlab/packet_history.hpp>
 #include <graphlab/runtime.hpp>
 #include <graphlab/telemetry.hpp>
 #include <graphlab/terminal.hpp>
@@ -92,6 +93,11 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
         "NOT EXISTS state (id INTEGER PRIMARY KEY CHECK(id=1), document TEXT NOT NULL);");
     telemetry::initialize(db_);
     application_telemetry::initialize(db_);
+    // Optional derived index failure must not prevent capture or legacy execution.
+    try {
+      packet_history_ = std::make_unique<packets::History>(directory_ / "packet-history.sqlite");
+    } catch (const std::exception &) {
+    }
     sqlite3_stmt *query = nullptr;
     if (sqlite3_prepare_v2(db_, "SELECT document FROM state WHERE id=1", -1, &query, nullptr) !=
         SQLITE_OK)
@@ -173,6 +179,7 @@ Engine::~Engine() {
   }
   if (worker_.joinable())
     worker_.join();
+  packet_history_.reset();
   sqlite3_close(db_);
   if (lock_ >= 0)
     close(lock_);
@@ -356,6 +363,14 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
                       {"revision", r["revision"]},
                       {"topologyHash", r["topologyHash"]}});
     return {{"items", runs}};
+  }
+  if (method == "packet-history") {
+    auto id = string(p, "runId");
+    if (!state_["runs"].contains(id))
+      throw Failure("not_found", 404);
+    if (!packet_history_)
+      throw Failure("packet_history_unavailable", 503);
+    return packet_history_->query(state_["runs"][id], p);
   }
   if (method == "artifacts" || method == "artifact") {
     fields(p, method == "artifacts"

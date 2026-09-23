@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ApplicationTelemetry } from "./application-telemetry";
+import { PacketHistory } from "./packet-history";
 import { Telemetry } from "./telemetry";
 import { RecordedTerminal } from "./terminal";
 type Run = {
@@ -393,7 +394,8 @@ export function Execution({
               a.mediaType === "application/x-graphlab-terminal",
           )
           .map((a, i) => (
-            <li key={a.id ?? i}>
+            <li key={a.id ?? i} id={a.id ? `artifact-${a.id}` : undefined} tabIndex={-1}>
+              {a.id && <small>{a.id} · </small>}
               {a.edge} · {a.mediaType ?? "application/x-pcapng"} ·{" "}
               {a.size ?? "unknown"} bytes · epoch {a.epoch ?? "?"} · {a.state}
               {a.id && a.state === "closed" && (
@@ -422,6 +424,14 @@ export function Execution({
             selectedEdge={selectedEdge}
             onEdge={onEdge}
             onRates={onRates}
+          />
+          <PacketHistory
+            key={`packets-${inspected!.id}`}
+            runId={inspected!.id} node={selectedNode} edge={selectedEdge} csrf={csrf} api={api}
+            onArtifact={(id, edge) => {
+              onEdge(edge);
+              setTimeout(() => { const item = document.getElementById(`artifact-${id}`); item?.scrollIntoView({behavior: "smooth"}); item?.focus(); }, 0);
+            }}
           />
           <ApplicationTelemetry
             key={`application-${inspected!.id}`}

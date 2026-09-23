@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graphlab.packet-observation/v1",
+  "title": "Graphlab finalized-capture packet observation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "runId": {
+      "type": "string"
+    },
+    "artifactId": {
+      "type": "string"
+    },
+    "captureId": {
+      "type": "string"
+    },
+    "captureEpoch": {
+      "type": "string"
+    },
+    "edge": {
+      "type": "string"
+    },
+    "interface": {
+      "type": "string"
+    },
+    "captureEndpoint": {
+      "type": "string"
+    },
+    "apiVersion": {
+      "const": "graphlab.packet-observation/v1"
+    },
+    "artifactSha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "timestampSource": {
+      "const": "pcapng-epb-host-realtime-microseconds"
+    },
+    "direction": {
+      "const": "unknown"
+    },
+    "interfaceId": {
+      "const": "0"
+    },
+    "linkType": {
+      "const": 1
+    },
+    "capturedLength": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "originalLength": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "packetIndex": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "blockOffset": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "timestampUnixMicros": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "headers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "decodeStatus"
+      ],
+      "properties": {
+        "protocol": {
+          "enum": [
+            "tcp",
+            "udp",
+            "arp",
+            "icmp",
+            "icmpv6",
+            "ipv4",
+            "ipv6",
+            "other"
+          ]
+        },
+        "decodeStatus": {
+          "enum": [
+            "complete",
+            "truncated-header",
+            "malformed-header",
+            "unsupported-ipv6-extension",
+            "fragment-no-reassembly",
+            "unsupported-ethertype"
+          ]
+        },
+        "etherType": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "ipProtocol": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "fragmented": {
+          "type": "boolean"
+        },
+        "sourceAddress": {
+          "type": "string"
+        },
+        "destinationAddress": {
+          "type": "string"
+        },
+        "sourcePort": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "destinationPort": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      }
+    }
+  },
+  "required": [
+    "runId",
+    "artifactId",
+    "captureId",
+    "captureEpoch",
+    "edge",
+    "interface",
+    "captureEndpoint",
+    "apiVersion",
+    "artifactSha256",
+    "timestampSource",
+    "direction",
+    "interfaceId",
+    "linkType",
+    "capturedLength",
+    "originalLength",
+    "truncated",
+    "packetIndex",
+    "blockOffset",
+    "timestampUnixMicros",
+    "headers"
+  ],
+  "$comment": "Decimal strings preserve exact integers. packetIndex is zero based; blockOffset identifies the EPB in the checksum-verified source artifact. Direction is unknown. No payload or application-message identity is indexed. Header completeness does not imply checksum validity, delivery, reassembly, or full payload availability."
+}
