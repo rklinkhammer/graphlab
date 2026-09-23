@@ -383,7 +383,8 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
     throw Failure("unsupported_method");
   fields(p, method == "start"
                 ? std::initializer_list<std::string_view>{"topologyHash", "idempotencyKey",
-                                                          "developmentMode", "capturePolicy"}
+                                                          "developmentMode", "capturePolicy",
+                                                          "observationProfile"}
                 : std::initializer_list<std::string_view>{"runId", "operation", "expectedRevision",
                                                           "idempotencyKey"});
   auto key = string(p, "idempotencyKey");
@@ -409,6 +410,9 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
   std::string id, operation;
   Json run;
   if (method == "start") {
+    const auto profile = p.value("observationProfile", std::string("full"));
+    if (profile != "full" && profile != "minimal")
+      throw Failure("invalid_observation_profile");
     for (const auto &[other, r] : state_["runs"].items())
       if (r["state"] != "destroyed")
         throw Failure("active_run_exists", 409);
@@ -452,6 +456,7 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
     id = uuid();
     operation = "start";
     run = {{"id", id},
+           {"observationProfile", profile},
            {"generation", "1"},
            {"revision", "1"},
            {"state", "preparing"},

@@ -46,6 +46,7 @@ std::optional<Json> Engine::m5_dispatch(const Json &request, uid_t principal) {
     result["health"] = r.value("health", Json(nullptr));
     result["healthMonotonicNs"] = r.value("healthMonotonicNs", Json(nullptr));
     result["samplingIntervalSeconds"] = 1;
+    result["observationProfile"] = r.value("observationProfile", "full");
     result["lastCollectionDurationNs"] = r.value("collectionDurationNs", Json(nullptr));
     result["collectorError"] = r.value("telemetryError", Json(nullptr));
     return result;
@@ -306,7 +307,8 @@ void Engine::m5_monitor() {
           run["state"] = "reconciling";
         }
       }
-    if (run["state"] != "ready" && run["state"] != "stopped")
+    if ((run["state"] != "ready" && run["state"] != "stopped") ||
+        run.value("observationProfile", "full") == "minimal")
       continue;
     auto began = telemetry::monotonic();
     Json values;

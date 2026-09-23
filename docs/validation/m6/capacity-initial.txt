@@ -1,0 +1,16 @@
+PASS capacity fixture
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+PASS capacity fixture
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+PASS capacity fixture
+{"cancelRequested":false,"createdAt":"2026-09-22T23:57:12Z","error":"capture_arm_failed","finishedAt":"2026-09-22T23:57:17Z","id":"75add622-4132-4ce9-8c38-86e5300f38dd","operation":"start","revision":"1","runId":"b28988f1-bc57-4251-816e-c27a142a2961","state":"failed"}

@@ -88,59 +88,63 @@ int main(int argc, char **argv) {
     auto hash =
         lab_support::validate(topology, graphlab::console::load(dir / "artifacts.lock.json"))->hash;
     auto admission = Json{{"topologyHash", hash}, {"idempotencyKey", "m3-start-key"}};
-    for (bool failure : {true, false}) {
-      auto state = dir / (failure ? "failed" : "healthy");
-      std::filesystem::create_directory(state);
-      chmod(state.c_str(), 0700);
-      Fake backend;
-      backend.fail_arm = failure;
-      Json run;
-      {
-        Engine engine(state, backend, catalog);
-        auto a = call(engine, "start", admission);
-        auto j = wait(engine, a);
-        run = call(engine, "run", {{"id", a["runId"]}});
-        if (failure) {
-          check(j["state"] == "failed" && backend.released == 0,
-                "failed arm never releases traffic");
-          continue;
-        }
-        check(j["state"] == "succeeded" && run["captureCoverage"] == "recording",
-              "capture-first run succeeds");
-        check(run["captures"].size() == topology["edges"].size(), "one capture per declared edge");
-        auto op = [&](std::string action, std::string key) {
+    for (const auto profile : {"full", "minimal"})
+      for (bool failure : {true, false}) {
+        auto state = dir / (std::string(profile) + (failure ? "-failed" : "-healthy"));
+        std::filesystem::create_directory(state);
+        chmod(state.c_str(), 0700);
+        Fake backend;
+        backend.fail_arm = failure;
+        Json run;
+        {
+          Engine engine(state, backend, catalog);
+          auto profiled = admission;
+          profiled["observationProfile"] = profile;
+          auto a = call(engine, "start", profiled);
+          auto j = wait(engine, a);
+          run = call(engine, "run", {{"id", a["runId"]}});
+          if (failure) {
+            check(j["state"] == "failed" && backend.released == 0,
+                  "failed arm never releases traffic");
+            continue;
+          }
+          check(j["state"] == "succeeded" && run["captureCoverage"] == "recording",
+                "capture-first run succeeds");
+          check(run["captures"].size() == topology["edges"].size(),
+                "one capture per declared edge");
+          auto op = [&](std::string action, std::string key) {
+            run = call(engine, "run", {{"id", run["id"]}});
+            return wait(engine, call(engine, "operate",
+                                     {{"runId", run["id"]},
+                                      {"expectedRevision", run["revision"]},
+                                      {"operation", action},
+                                      {"idempotencyKey", key}}));
+          };
+          check(op("stop", "m3-stop-key")["state"] == "succeeded" && backend.closed > 0,
+                "quiesce closes captures");
+          check(op("resume", "m3-resume-key")["state"] == "succeeded",
+                "resume rearms capture barrier");
           run = call(engine, "run", {{"id", run["id"]}});
-          return wait(engine, call(engine, "operate",
-                                   {{"runId", run["id"]},
-                                    {"expectedRevision", run["revision"]},
-                                    {"operation", action},
-                                    {"idempotencyKey", key}}));
-        };
-        check(op("stop", "m3-stop-key")["state"] == "succeeded" && backend.closed > 0,
-              "quiesce closes captures");
-        check(op("resume", "m3-resume-key")["state"] == "succeeded",
-              "resume rearms capture barrier");
-        run = call(engine, "run", {{"id", run["id"]}});
-        check(run["captureEpoch"] == "2", "resume creates new capture epoch");
-        backend.unhealthy = true;
-        for (int i = 0; i < 400; ++i) {
-          run = call(engine, "run", {{"id", run["id"]}});
-          if (run["state"] == "reconciling")
-            break;
-          std::this_thread::sleep_for(std::chrono::milliseconds(10));
+          check(run["captureEpoch"] == "2", "resume creates new capture epoch");
+          backend.unhealthy = true;
+          for (int i = 0; i < 400; ++i) {
+            run = call(engine, "run", {{"id", run["id"]}});
+            if (run["state"] == "reconciling")
+              break;
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+          }
+          check(run["captureCoverage"] == "incomplete" && backend.held > 0,
+                "capture loss marks incomplete and quiesces");
         }
-        check(run["captureCoverage"] == "incomplete" && backend.held > 0,
-              "capture loss marks incomplete and quiesces");
+        {
+          Engine recovered(state, backend, catalog);
+          check(backend.adopted == 1, "restart adopts surviving captures");
+          run = call(recovered, "run", {{"id", run["id"]}});
+          check(run["state"] == "reconciling" && backend.released == 2,
+                "adoption does not resume stale traffic");
+          check(run["captureCoverage"] == "incomplete", "restart preserves known coverage loss");
+        }
       }
-      {
-        Engine recovered(state, backend, catalog);
-        check(backend.adopted == 1, "restart adopts surviving captures");
-        run = call(recovered, "run", {{"id", run["id"]}});
-        check(run["state"] == "reconciling" && backend.released == 2,
-              "adoption does not resume stale traffic");
-        check(run["captureCoverage"] == "incomplete", "restart preserves known coverage loss");
-      }
-    }
     auto stopped_state = dir / "stopped";
     std::filesystem::create_directory(stopped_state);
     chmod(stopped_state.c_str(), 0700);

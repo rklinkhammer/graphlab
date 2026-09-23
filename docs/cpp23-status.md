@@ -72,3 +72,7 @@ The C++23 implementation now includes independent libpcap/systemd workers, PCAPN
 ## M5 telemetry and faults
 
 M5 adds shared C++ rate derivation, Linux directional counters, bounded SQLite history, typed netem jobs with expiry/recovery, and browser charts/timeline. See [operations and placement limits](m5-telemetry-faults.md) and [verification](validation/m5-verification.md). Guest-originating TAP faults require an unimplemented IFB backend and are explicitly rejected.
+
+## M6 operational qualification
+
+C++ qualification manifest verification, Linux capacity/reboot fixtures and the reproducible integration runner are described in [M6 operations](m6-qualification.md). Consult the measured evidence and matrix there before claiming full runtime qualification; a skipped or partial required gate is not a pass.

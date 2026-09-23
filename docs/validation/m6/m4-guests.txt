@@ -1,0 +1,49 @@
+Evidence: "/tmp/gl4-OcXOmW"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T23:53:32Z","error":null,"finishedAt":"2026-09-22T23:53:35Z","id":"a2ab35b4-74b9-4a5c-874d-7aa00c53f988","operation":"start","revision":"1","runId":"d2af183a-155b-49e7-8b41-25448d4e4817","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T23:53:56Z","error":null,"finishedAt":"2026-09-22T23:53:56Z","id":"ca19cf8a-37ac-4b64-8466-2bc0129461d6","operation":"recover","revision":"2","runId":"d2af183a-155b-49e7-8b41-25448d4e4817","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS serial artifact finalized
+PASS guest SSH is unavailable on the data interface
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+Evidence: "/tmp/gl4-JyE0O2"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-22T23:54:07Z","error":null,"finishedAt":"2026-09-22T23:54:11Z","id":"6ca1610d-466b-42be-8e9f-211f7f5aec7f","operation":"start","revision":"1","runId":"f79a0e46-395e-468d-8c59-ef03685710e1","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS inject abrupt VM supervisor shutdown
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T23:54:34Z","error":null,"finishedAt":"2026-09-22T23:54:34Z","id":"1a7c84d8-cb75-4bdc-8e67-15df8c0d37ba","operation":"recover","revision":"2","runId":"f79a0e46-395e-468d-8c59-ef03685710e1","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS abrupt shutdown preserves partial recording
+PASS guest SSH is unavailable on the data interface
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+M4 Linux QEMU tests passed

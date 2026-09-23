@@ -1,0 +1,139 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/lab-capture.dir/cpp/capture/worker.cpp.o
+[2/2] Linking CXX executable lab-capture
+Evidence: "/tmp/gl3-iXh8M3"
+PASS root worker disconnects cannot terminate controller with SIGPIPE
+PASS fixture generated
+PASS capture-first start: {"cancelRequested":false,"createdAt":"2026-09-23T00:38:25Z","error":null,"finishedAt":"2026-09-23T00:38:30Z","id":"e6917a97-9307-497f-8a81-f060f7d2fccb","operation":"start","revision":"1","runId":"61c38d61-abad-4870-8579-2703334a58e7","state":"succeeded"}
+PASS all data edges captured
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS worker activation precedes release
+PASS first released application probe delivered
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS independent reader accepts edge PCAPNG
+PASS independent reader reaches clean EOF
+PASS earliest application payload recorded with valid files for every edge
+PASS artifact listing
+PASS closed artifact available alongside partial stream
+PASS scoped closed artifact download
+PASS quiesce finalizes captures
+PASS worker identity cannot be restarted or overwrite prior evidence
+PASS resume rearms
+PASS new epoch on resume
+PASS owned worker killed
+PASS worker loss degrades coverage and quiesces
+PASS failed worker recovery cleans resources
+PASS second capture run
+PASS independent worker records through agent outage
+PASS restart adopts workers and holds traffic
+PASS stale controller fenced
+PASS adopted worker cleanup
+PASS lease-outage run
+PASS capture lost during agent outage
+PASS node lease bounds outage quiescence to 12 seconds
+PASS external UDP receives no application echo after lease expiry
+PASS outage recovery cleanup
+PASS stop-race run armed
+PASS kill owned capture immediately before finalization
+PASS killed capture is inactive before finalization
+PASS stop accounts for killed worker
+PASS real stop race persists coverage gap and interrupted observation
+PASS stop-race workload remains held
+PASS stop-race cleanup
+PASS repeated real cleanup preserves incomplete coverage
+PASS invalid capture filter fails start
+PASS failed activation never releases live workload
+PASS failed-arm resources cleaned
+PASS quota test run armed
+PASS bounded owned-interface traffic fixture
+PASS real quota exhaustion reports loss and quiesces
+PASS rotation under packet load preserves multiple segments
+PASS quota failure cleanup
+PASS OS write limit prevents capture activation acknowledgement
+PASS write-denied arm holds traffic
+PASS write-denied cleanup
+PASS alternate graph validates
+PASS direct Docker-Docker capture start: {"cancelRequested":false,"createdAt":"2026-09-23T00:39:23Z","error":null,"finishedAt":"2026-09-23T00:39:24Z","id":"197f136f-227f-4048-833e-5bc5b37ce615","operation":"start","revision":"1","runId":"6c49b8c8-e99c-44d0-833a-33fe95006644","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS direct edge capture uses verified container namespace
+PASS direct Docker-Docker application traffic
+PASS alternate graph cleanup
+PASS alternate graph validates
+PASS isolated capture start: {"cancelRequested":false,"createdAt":"2026-09-23T00:39:24Z","error":null,"finishedAt":"2026-09-23T00:39:24Z","id":"6a36db9f-9bdf-4a69-8382-b0c58fb1f393","operation":"start","revision":"1","runId":"5a938461-3d58-41f8-8bc3-5ed1e1da6b63","state":"succeeded"}
+PASS no fictitious or omitted edge captures
+PASS alternate graph cleanup
+M3 Linux tests passed
+PASS capacity fixture
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+PASS capacity fixture
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+PASS capacity fixture
+MEASURE capture 250 true
+MEASURE capture 1000 true
+MEASURE capture 4000 true
+MEASURE capture 250 true
+MEASURE capture 1000 true
+MEASURE capture 4000 true
+Capacity report: "/tmp/gl6-rem-direct/capacity.json"
+PASS capacity fixture
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+PASS capacity fixture
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+PASS capacity fixture
+MEASURE capture 250 true
+MEASURE capture 1000 true
+MEASURE capture 4000 true
+MEASURE capture 250 true
+MEASURE capture 1000 true
+MEASURE capture 4000 true
+Capacity report: "/tmp/gl6-rem-triangle/capacity.json"

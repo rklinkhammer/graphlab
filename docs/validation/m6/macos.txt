@@ -1,0 +1,33 @@
+Test project /Users/rklinkhammer/workspace/graphlab/build/dev
+      Start  1: m1_acceptance
+ 1/14 Test  #1: m1_acceptance ....................   Passed    4.99 sec
+      Start  2: m0_acceptance
+ 2/14 Test  #2: m0_acceptance ....................   Passed    0.31 sec
+      Start  3: cli_validate
+ 3/14 Test  #3: cli_validate .....................   Passed    0.15 sec
+      Start  4: cli_plan
+ 4/14 Test  #4: cli_plan .........................   Passed    0.02 sec
+      Start  5: cli_preflight
+ 5/14 Test  #5: cli_preflight ....................   Passed    0.01 sec
+      Start  6: cli_side_effects
+ 6/14 Test  #6: cli_side_effects .................   Passed    0.06 sec
+      Start  7: installed_package
+ 7/14 Test  #7: installed_package ................   Passed    0.47 sec
+      Start  8: m2_journal
+ 8/14 Test  #8: m2_journal .......................   Passed    1.19 sec
+      Start  9: m3_capture
+ 9/14 Test  #9: m3_capture .......................   Passed    2.56 sec
+      Start 10: m3_transport
+10/14 Test #10: m3_transport .....................   Passed    0.51 sec
+      Start 11: m4_terminal
+11/14 Test #11: m4_terminal ......................   Passed    0.10 sec
+      Start 12: m5_telemetry_faults
+12/14 Test #12: m5_telemetry_faults ..............   Passed    1.97 sec
+      Start 13: m5_remediation
+13/14 Test #13: m5_remediation ...................   Passed    1.29 sec
+      Start 14: m6_qualification_manifest
+14/14 Test #14: m6_qualification_manifest ........   Passed    0.08 sec
+
+100% tests passed out of 14
+
+Total Test time (real) =  13.71 sec

@@ -1,0 +1,40 @@
+[0/2] Re-checking globbed directories...
+[1/3] Building CXX object CMakeFiles/lab-qualify.dir/cpp/qualification/main.cpp.o
+[2/3] Linking CXX executable lab-qualify
+Test project /Users/rklinkhammer/workspace/graphlab/build/verify
+      Start  1: m1_acceptance
+ 1/16 Test  #1: m1_acceptance ....................   Passed    4.47 sec
+      Start  2: m0_acceptance
+ 2/16 Test  #2: m0_acceptance ....................   Passed    0.96 sec
+      Start  3: cli_validate
+ 3/16 Test  #3: cli_validate .....................   Passed    0.04 sec
+      Start  4: cli_plan
+ 4/16 Test  #4: cli_plan .........................   Passed    0.04 sec
+      Start  5: cli_preflight
+ 5/16 Test  #5: cli_preflight ....................   Passed    0.02 sec
+      Start  6: cli_side_effects
+ 6/16 Test  #6: cli_side_effects .................   Passed    0.15 sec
+      Start  7: m2_journal
+ 7/16 Test  #7: m2_journal .......................   Passed    1.25 sec
+      Start  8: m3_capture
+ 8/16 Test  #8: m3_capture .......................   Passed    2.55 sec
+      Start  9: m3_transport
+ 9/16 Test  #9: m3_transport .....................   Passed    0.70 sec
+      Start 10: m4_terminal
+10/16 Test #10: m4_terminal ......................   Passed    0.02 sec
+      Start 11: m5_telemetry_faults
+11/16 Test #11: m5_telemetry_faults ..............   Passed    1.83 sec
+      Start 12: m5_remediation
+12/16 Test #12: m5_remediation ...................   Passed    1.15 sec
+      Start 13: m6_qualification_manifest
+13/16 Test #13: m6_qualification_manifest ........   Passed    0.30 sec
+      Start 14: m6_capacity_summary
+14/16 Test #14: m6_capacity_summary ..............   Passed    0.12 sec
+      Start 15: m6_runner_exit
+15/16 Test #15: m6_runner_exit ...................   Passed    0.52 sec
+      Start 16: m6_terminal_corpus
+16/16 Test #16: m6_terminal_corpus ...............   Passed    0.15 sec
+
+100% tests passed out of 16
+
+Total Test time (real) =  14.28 sec

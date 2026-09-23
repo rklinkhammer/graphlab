@@ -55,3 +55,5 @@ Hashing uses parsed JSON with lexically sorted object keys, compact serializatio
 See [input contract](schemas/README.md), [M0 status and validation](docs/cpp23-status.md), and the [full implementation plan](docs/option-d-console-plan.md).
 
 M5 adds directional telemetry, bounded history, typed netem faults and a correlated timeline. See [operation and supported placements](docs/m5-telemetry-faults.md) and [verification](docs/validation/m5-verification.md).
+
+M6 adds [operational qualification tooling](docs/m6-qualification.md), explicit T01–T19 release gates, retained artifact hashes and baseline/telemetry/capture capacity measurements. Incomplete gates prevent a full qualification claim.

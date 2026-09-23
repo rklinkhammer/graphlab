@@ -48,3 +48,5 @@ Apply body example (replace the revision and edge):
 The existing `lab control --socket PATH --agent-uid UID METHOD PARAMS.json` command exposes methods `telemetry`, `timeline`, `faults`, `fault.preview`, `fault.apply` and `fault.remove`; params also include `runId`. See `lab --help` for transport invocation. These paths use the same executor and revision/idempotency checks as the browser.
 
 Acceptance commands and measured limits are recorded in [M5 verification](validation/m5-verification.md). No Python component is required.
+
+M6 adds an explicit `minimal` observation profile for new runs; fault expiry and capture/guest safety enforcement remain enabled. See [M6 qualification](m6-qualification.md) for the measured baseline comparison and profile contract.

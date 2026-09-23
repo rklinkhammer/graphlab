@@ -1,0 +1,199 @@
+{
+  "apiVersion": "graphlab.qualification/v1",
+  "runtimeLock": "runtime-lock.json",
+  "sourceArchive": "source.tar.gz",
+  "workloadArchive": "workloads.tar.gz",
+  "capacityReport": "capacity.json",
+  "gates": [
+    {
+      "id": "T01",
+      "status": "passed",
+      "reason": "Named chain/star/ring/mesh/disconnected/isolated/parallel/triangle fixtures and variable-sized/self-link graphs pass parser/planner and browser counts; generated graph plans and alternate capture counts are derived from graph data.",
+      "evidence": [
+        "ctest.txt",
+        "browser.txt",
+        "m3.txt"
+      ]
+    },
+    {
+      "id": "T02",
+      "status": "passed",
+      "reason": "Malformed contracts/topologies are rejected by portable acceptance before runtime side effects.",
+      "evidence": [
+        "ctest.txt"
+      ]
+    },
+    {
+      "id": "T03",
+      "status": "passed",
+      "reason": "Real same/cross-VLAN and management controls plus independent VLAN 100 trunk packet readback, observed RSTP roles, and delivery restoration within a predeclared 15000 ms bound after cutting the forwarding trunk.",
+      "evidence": [
+        "m2.txt",
+        "remediation-runtime.txt",
+        "network-artifacts.tar.gz"
+      ]
+    },
+    {
+      "id": "T04",
+      "status": "partial",
+      "reason": "Real capture barriers, failed-arm holds and alternate graph counts pass; first numbered packet on every required shape is not yet demonstrated.",
+      "evidence": [
+        "m3.txt"
+      ]
+    },
+    {
+      "id": "T05",
+      "status": "passed",
+      "reason": "Numbered UDP datagrams observed at both Docker endpoints under asymmetric 80 ms delay and 100% loss with kernel-verified GRO/GSO on and off. Endpoint delivery, capture source counters and qdisc telemetry are retained separately; no delivered-loss inference from PCAP.",
+      "evidence": [
+        "remediation-runtime.txt",
+        "direction-artifacts.tar.gz"
+      ]
+    },
+    {
+      "id": "T06",
+      "status": "passed",
+      "reason": "Capture worker loss, quota exhaustion, rotation under load, partial files and measured bounded quiescence pass.",
+      "evidence": [
+        "remediation-measurement.txt"
+      ]
+    },
+    {
+      "id": "T07",
+      "status": "partial",
+      "reason": "Agent adoption and continuing capture/terminal output pass; simultaneous independent API restart continuity is not freshly exercised by this runner.",
+      "evidence": [
+        "m3.txt",
+        "m4-console.txt"
+      ]
+    },
+    {
+      "id": "T08",
+      "status": "passed",
+      "reason": "Actual VM reboot rejects prior capture and terminal handles, changes boot/controller generation, indexes five readable retained capture segments and completes scoped recovery. Prior-boot Docker exec cleanup regression fixed; same-boot console cleanup retested.",
+      "evidence": [
+        "reboot.txt",
+        "reboot-initial.txt",
+        "post-reboot.txt",
+        "reboot-artifacts.tar.gz"
+      ]
+    },
+    {
+      "id": "T09",
+      "status": "partial",
+      "reason": "Idempotency, stale revisions, serialization and fault cancellation pass; concurrent real CLI/UI fault submission is not a dedicated fixture.",
+      "evidence": [
+        "ctest.txt",
+        "m5.txt"
+      ]
+    },
+    {
+      "id": "T10",
+      "status": "partial",
+      "reason": "Real M2 before/after mutation crash matrix preserves sentinels. Exhaustive new QEMU/fault/terminal mutation crash windows remain unqualified.",
+      "evidence": [
+        "m2.txt"
+      ]
+    },
+    {
+      "id": "T11",
+      "status": "passed",
+      "reason": "Fresh known one-way kernel traffic, identity rejection and collector/counter epoch tests pass. Browser clock-skew/stale refresh behavior uses the prior M5 live-browser regression on unchanged UI sources, explicitly retained as historical evidence.",
+      "evidence": [
+        "ctest.txt",
+        "m5.txt",
+        "m5-browser-prior.txt"
+      ]
+    },
+    {
+      "id": "T12",
+      "status": "partial",
+      "reason": "Recorded PTY, writer fencing, replay and default input privacy pass. New delayed independent viewers replay 409600 exact bytes in bounded pages. Full live slow-viewer/retention eviction matrix remains unqualified.",
+      "evidence": [
+        "ctest.txt",
+        "m4-console.txt",
+        "transport.txt",
+        "remediation-macos.txt",
+        "remediation-sanitizers.txt",
+        "terminal-corpus.txt"
+      ]
+    },
+    {
+      "id": "T13",
+      "status": "passed",
+      "reason": "PowerPC/TCG and ARM64/KVM readiness, paused launch and recording checks pass; unsupported first-byte serial guarantee remains explicitly disabled.",
+      "evidence": [
+        "m4-guests.txt",
+        "remediation-runtime.txt"
+      ]
+    },
+    {
+      "id": "T14",
+      "status": "passed",
+      "reason": "Auth/Origin/CSRF and scoped path checks pass; malformed RPC corpus yields bounded errors without echoing secrets. 512 seeded malformed recordings stay bounded. Browser corpus covers HTML, clipboard/title/link escapes and 256 seeded control sequences without script execution or attacker requests.",
+      "evidence": [
+        "remediation-runtime.txt",
+        "remediation-macos.txt",
+        "remediation-sanitizers.txt",
+        "remediation-browser.txt",
+        "transport.txt",
+        "terminal-corpus.txt"
+      ]
+    },
+    {
+      "id": "T15",
+      "status": "passed",
+      "reason": "Real capture loss during controller outage triggers scoped node/VM lease enforcement and measured cessation.",
+      "evidence": [
+        "m3.txt",
+        "m4-guests.txt",
+        "remediation-runtime.txt"
+      ]
+    },
+    {
+      "id": "T16",
+      "status": "passed",
+      "reason": "Expired fault restart removal, stale controller fencing and worker identity rejection pass.",
+      "evidence": [
+        "m5.txt",
+        "m3.txt"
+      ]
+    },
+    {
+      "id": "T17",
+      "status": "partial",
+      "reason": "Owned cleanup and real crash sentinels pass within current fixtures. Not every new backend partial-start boundary is covered; cleanup inventory is retained.",
+      "evidence": [
+        "m2.txt",
+        "m3.txt",
+        "m4-guests.txt",
+        "cleanup.txt",
+        "cleanup-post-reboot.txt",
+        "network-post-reboot.txt",
+        "remediation-cleanup.txt"
+      ]
+    },
+    {
+      "id": "T18",
+      "status": "partial",
+      "reason": "Final worker uses packet-readiness wakeups and a 16 MiB requested capture buffer. Repeated bounded direct and fixed-root triangle measurements publish CPU/RAM/I/O, RTT, throughput and recording counters. Sustained long-duration capacity and larger-graph limits remain unqualified.",
+      "evidence": [
+        "capacity.json",
+        "capacity-triangle.json",
+        "capacity-direct.md",
+        "capacity-triangle.md",
+        "remediation-measurement.txt",
+        "triangle-fixed-root.txt"
+      ]
+    },
+    {
+      "id": "T19",
+      "status": "partial",
+      "reason": "app-a and app-b independently rebuilt using the installed common C++ package and immutable base; unsupported major rejected. Independent released protocol-minor interoperability matrix remains unqualified.",
+      "evidence": [
+        "workload-build.txt",
+        "ctest.txt"
+      ]
+    }
+  ]
+}

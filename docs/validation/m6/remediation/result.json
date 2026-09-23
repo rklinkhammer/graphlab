@@ -1,0 +1,16 @@
+{
+  "apiVersion": "graphlab.qualification-result/v1",
+  "incompleteGates": [
+    "T04",
+    "T07",
+    "T09",
+    "T10",
+    "T12",
+    "T17",
+    "T18",
+    "T19"
+  ],
+  "integrityVerified": true,
+  "manifestSha256": "sha256:9b0bfae28f91546fc4932f3395efcf9e9fef5017f1a051d83af841aeef2052f3",
+  "qualified": false
+}

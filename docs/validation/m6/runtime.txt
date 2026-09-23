@@ -1,0 +1,277 @@
+2026-09-22T23:57:18Z
+Linux lima-graphlab 6.8.0-134-generic #134-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun 26 18:28:11 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+8
+MemTotal:       16341536 kB
+MemFree:         3717636 kB
+MemAvailable:   15559892 kB
+Buffers:           93732 kB
+Cached:         11393520 kB
+SwapCached:            0 kB
+Active:          1232692 kB
+Inactive:       10427288 kB
+Active(anon):     188564 kB
+Inactive(anon):     2488 kB
+Active(file):    1044128 kB
+Inactive(file): 10424800 kB
+Unevictable:       81376 kB
+Mlocked:           81376 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:                68 kB
+Writeback:             0 kB
+AnonPages:        254152 kB
+Mapped:           209224 kB
+Shmem:              1548 kB
+KReclaimable:     628636 kB
+Slab:             780064 kB
+SReclaimable:     628636 kB
+SUnreclaim:       151428 kB
+KernelStack:        3920 kB
+ShadowCallStack:    1076 kB
+PageTables:         4156 kB
+SecPageTables:         8 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     8170768 kB
+Committed_AS:    1029588 kB
+VmallocTotal:   133141626880 kB
+VmallocUsed:       17100 kB
+VmallocChunk:          0 kB
+Percpu:            10336 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:          32768 kB
+CmaFree:           26624 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+cmake version 3.28.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+1.11.1
+Client:
+ Version:           29.1.3
+ API version:       1.52
+ Go version:        go1.24.4
+ Git commit:        29.1.3-0ubuntu3~24.04.2
+ Built:             Wed Apr 29 16:41:06 2026
+ OS/Arch:           linux/arm64
+ Context:           default
+
+Server:
+ Engine:
+  Version:          29.1.3
+  API version:      1.52 (minimum version 1.44)
+  Go version:       go1.24.4
+  Git commit:       29.1.3-0ubuntu3~24.04.2
+  Built:            Wed Apr 29 16:41:06 2026
+  OS/Arch:          linux/arm64
+  Experimental:     false
+ containerd:
+  Version:          2.2.1
+  GitCommit:        
+ runc:
+  Version:          1.3.4-0ubuntu1~24.04.1
+  GitCommit:        
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        
+Client:
+ Version:    29.1.3
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  trust: Manage trust on Docker images (Docker Inc.)
+    Version:  29.1.3
+    Path:     /usr/libexec/docker/cli-plugins/docker-trust
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 50
+ Server Version: 29.1.3
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 
+ runc version: 
+ init version: 
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.8.0-134-generic
+ Operating System: Ubuntu 24.04.4 LTS
+ OSType: linux
+ Architecture: aarch64
+ CPUs: 8
+ Total Memory: 15.58GiB
+ Name: lima-graphlab
+ ID: 66ad13f4-975d-4be6-916c-72089de0a5e8
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+
+ovs-vsctl (Open vSwitch) 3.3.9
+DB Schema 8.5.1
+QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+systemd 255 (255.4-1ubuntu8.17)
++PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified
+ip utility, iproute2-6.1.0, libbpf 1.3.0
+tc utility, iproute2-6.1.0, libbpf 1.3.0
+docker.io	29.1.3-0ubuntu3~24.04.2
+iproute2	6.1.0-1ubuntu6.4
+libpcap0.8t64:arm64	1.10.4-4.1ubuntu3
+libssl3t64:arm64	3.0.13-0ubuntu3.15
+openvswitch-switch	3.3.9-0ubuntu0.24.04.1
+qemu-system-arm	1:8.2.2+ds-0ubuntu1.18
+qemu-system-ppc	1:8.2.2+ds-0ubuntu1.18
+[
+    {
+        "Architecture": "arm64",
+        "Config": {
+            "Entrypoint": [
+                "/usr/local/bin/lab-node"
+            ],
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Labels": {
+                "graphlab.gate-protocol": "1",
+                "graphlab.lab-support.language": "cpp23",
+                "graphlab.traffic-lease": "1",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "Created": "2026-09-22T02:55:11.515254154-04:00",
+        "Descriptor": {
+            "digest": "sha256:be5f4184e81e402c997478da98ee34e208b84922da122a94948f033b3f95a458",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 755
+        },
+        "Id": "sha256:be5f4184e81e402c997478da98ee34e208b84922da122a94948f033b3f95a458",
+        "Metadata": {
+            "LastTagTime": "2026-09-22T23:48:05.212986534Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:625badf794278d872131f4f6ccabf7d748e2ccb6b20a516a770ff96a75b4aa34",
+        "RepoDigests": [
+            "graphlab-m3/app-a@sha256:be5f4184e81e402c997478da98ee34e208b84922da122a94948f033b3f95a458",
+            "graphlab-m6/app-a@sha256:be5f4184e81e402c997478da98ee34e208b84922da122a94948f033b3f95a458"
+        ],
+        "RepoTags": [
+            "graphlab-m3/app-a:verification",
+            "graphlab-m6/app-a:qualification"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:8edaba05454265cd17270d38ec146446c640d1d25637413c3da64a3eff296c36",
+                "sha256:17bf98f30bdc035d2af8fedbc69590941861b6b12b7c220ed4f9f54894f80031"
+            ],
+            "Type": "layers"
+        },
+        "Size": 29870049
+    },
+    {
+        "Architecture": "arm64",
+        "Config": {
+            "Entrypoint": [
+                "/usr/local/bin/lab-node"
+            ],
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Labels": {
+                "graphlab.gate-protocol": "1",
+                "graphlab.lab-support.language": "cpp23",
+                "graphlab.traffic-lease": "1",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "Created": "2026-09-22T02:55:12.017983083-04:00",
+        "Descriptor": {
+            "digest": "sha256:b8e9428c9d62ebd4dcc39d26d7e24340cfd08353f44aca42e45cb47b2a64e509",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 755
+        },
+        "Id": "sha256:b8e9428c9d62ebd4dcc39d26d7e24340cfd08353f44aca42e45cb47b2a64e509",
+        "Metadata": {
+            "LastTagTime": "2026-09-22T23:48:05.495627446Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:3395b31ba0b782a9d7238821c79104dfc2cd259faca03a3ad350caf1aee09e6e",
+        "RepoDigests": [
+            "graphlab-m3/app-b@sha256:b8e9428c9d62ebd4dcc39d26d7e24340cfd08353f44aca42e45cb47b2a64e509",
+            "graphlab-m6/app-b@sha256:b8e9428c9d62ebd4dcc39d26d7e24340cfd08353f44aca42e45cb47b2a64e509"
+        ],
+        "RepoTags": [
+            "graphlab-m3/app-b:verification",
+            "graphlab-m6/app-b:qualification"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:8edaba05454265cd17270d38ec146446c640d1d25637413c3da64a3eff296c36",
+                "sha256:7e86fca9de6527e79f99f56f04218ab0feb504a6b2e513c710be58c3d8990832"
+            ],
+            "Type": "layers"
+        },
+        "Size": 29870052
+    }
+]
+efe325b83c73d2b74eae4e69b6c4755234213a5feceadf5ca598dc796f4fe715  /tmp/graphlab-m0-source/build/dev/lab-agent
+2cf5adf9841993e090f5f45f530b676f91b818bc1e8ab0bf01b63b46855dc985  /tmp/graphlab-m0-source/build/dev/lab-api
+c1d9086b1f2807fc1971a3affebb7b7f8c227477b8982c5d6b85bdebe392f941  /tmp/graphlab-m0-source/build/dev/lab-capture
+a900dbeef39b58fb416a52a65ba198f0a09a51b27bad29d5054eee4c8a2d0c9e  /tmp/graphlab-m0-source/build/dev/lab-terminal
+312e48f98d7c11d8fc79cdd102a9b9e3adb7ab85a2b67ecacfdd5cae24a851d9  /tmp/graphlab-m0-source/build/dev/m6_capacity

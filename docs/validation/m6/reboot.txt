@@ -1,0 +1,37 @@
+[0/2] Re-checking globbed directories...
+[1/23] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[2/23] Linking CXX static library libgraphlab_runtime.a
+[3/23] Linking CXX executable lab-capture
+[4/23] Linking CXX executable lab
+[5/23] Linking CXX executable lab-guest-template
+[6/23] Linking CXX executable lab-api
+[7/23] Linking CXX executable lab-terminal
+[8/23] Linking CXX executable m1_tests
+[9/23] Linking CXX executable lab-agent
+[10/23] Linking CXX executable m4_tests
+[11/23] Linking CXX executable m3_transport
+[12/23] Linking CXX executable m2_tests
+[13/23] Linking CXX executable m2_linux
+[14/23] Linking CXX executable m4_linux
+[15/23] Linking CXX executable m5_tests
+[16/23] Linking CXX executable m5_remediation
+[17/23] Linking CXX executable m3_linux
+[18/23] Linking CXX executable m5_linux
+[19/23] Linking CXX executable m3_tests
+[20/23] Linking CXX executable m4_console_linux
+[21/23] Linking CXX executable m6_capacity
+[22/23] Building CXX object CMakeFiles/m6_reboot.dir/tests/qualification/reboot.cpp.o
+[23/23] Linking CXX executable m6_reboot
+PASS host boot identity changed
+PASS prior-boot run cannot claim continuity
+PASS new controller generation
+PASS prior-boot capture authority rejected
+PASS old terminal handle cannot reattach to unrelated session
+PASS prior-boot cleanup
+PASS retained artifacts indexed after reboot
+PASS prior-boot capture has a retained readable segment
+PASS prior-boot capture has a retained readable segment
+PASS prior-boot capture has a retained readable segment
+PASS prior-boot capture has a retained readable segment
+PASS prior-boot capture has a retained readable segment
+M6 reboot checks passed

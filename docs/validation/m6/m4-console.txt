@@ -1,0 +1,19 @@
+Evidence: "/tmp/gl4c-XnlLNH"
+PASS console fixture generated
+PASS console run starts: {"cancelRequested":false,"createdAt":"2026-09-22T23:54:45Z","error":null,"finishedAt":"2026-09-22T23:54:49Z","id":"ac680802-ea2c-490b-8af4-225669035dbf","operation":"start","revision":"1","runId":"d427b240-9dc3-45d6-8dd4-f92cd5b8d1f7","state":"succeeded"}
+PASS scoped Docker exec FD attached without Docker socket in worker
+PASS second writer denied
+PASS real PTY input output and resize
+PASS default recording excludes input records
+PASS takeover fences old writer
+PASS output continues and replays through controller restart
+PASS terminate recorder independently
+OBS recorder unit absent=1
+OBS exec running after successful close=0
+PASS console run cleanup: {"cancelRequested":false,"createdAt":"2026-09-22T23:54:52Z","error":null,"finishedAt":"2026-09-22T23:54:52Z","id":"944b0f78-2236-4e35-8dce-42e3bb57dc0f","operation":"recover","revision":"2","runId":"d427b240-9dc3-45d6-8dd4-f92cd5b8d1f7","state":"succeeded"}
+PASS recorder exit hook terminates Docker exec before explicit close
+PASS explicit close cleans orphan exec with absent recorder unit
+PASS orphan fixture was running before explicit close
+PASS exec cleanup preserves parent workload
+PASS closed recorder must not leave Docker exec alive
+M4 Docker console tests passed

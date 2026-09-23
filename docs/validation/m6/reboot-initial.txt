@@ -1,0 +1,274 @@
+Get:1 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 cmake-data all 3.28.3-1build7 [2155 kB]
+Fetched 2155 kB in 1s (1848 kB/s)
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+Preset CMake variables:
+
+  BUILD_TESTING="ON"
+  CMAKE_BUILD_TYPE="Debug"
+
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test GRAPHLAB_HAS_EXPECTED
+-- Performing Test GRAPHLAB_HAS_EXPECTED - Success
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so.3 (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Found SQLite3: /var/tmp/graphlab-m6-tools/root/usr/include (found suitable version "3.45.1", minimum required is "3.24") 
+-- Configuring done (3.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-m0-source/build/dev
+[0/2] Re-checking globbed directories...
+[1/101] Building CXX object CMakeFiles/graphlab_planner.dir/cpp/planner.cpp.o
+[2/101] Building CXX object CMakeFiles/lab-agent.dir/cpp/console/agent_main.cpp.o
+[3/101] Building CXX object CMakeFiles/lab.dir/cpp/main.cpp.o
+[4/101] Building CXX object CMakeFiles/graphlab_catalog.dir/cpp/console/inventory.cpp.o
+[5/101] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/rpc.cpp.o
+[6/101] Building CXX object CMakeFiles/lab-api.dir/cpp/console/api_main.cpp.o
+[7/101] Building CXX object CMakeFiles/m0_tests.dir/tests/m0.cpp.o
+[8/101] Building CXX object CMakeFiles/m1_tests.dir/tests/console/m1.cpp.o
+[9/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[10/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/writer.cpp.o
+[11/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/process.cpp.o
+[12/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[13/101] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/http.cpp.o
+[14/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/recording.cpp.o
+[15/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/manager.cpp.o
+[16/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[17/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/qemu/backend.cpp.o
+[18/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/store.cpp.o
+[19/101] Building CXX object CMakeFiles/m3_transport.dir/tests/capture/transport.cpp.o
+[20/101] Building CXX object CMakeFiles/lab-capture.dir/cpp/capture/worker.cpp.o
+[21/101] Building CXX object CMakeFiles/lab-guest-template.dir/qemu-guests/common/template.cpp.o
+[22/101] Building CXX object CMakeFiles/lab-terminal.dir/cpp/terminal/worker.cpp.o
+[23/101] Building CXX object CMakeFiles/m4_tests.dir/tests/terminal/m4.cpp.o
+[24/101] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/engine.cpp.o
+[25/101] Building CXX object packages/lab-support/CMakeFiles/lab_contracts.dir/cpp/document.cpp.o
+[26/101] Building CXX object CMakeFiles/lab-qualify.dir/cpp/qualification/main.cpp.o
+[27/101] Building CXX object CMakeFiles/m5_tests.dir/tests/telemetry/m5.cpp.o
+[28/101] Building CXX object CMakeFiles/m2_linux.dir/tests/runtime/linux_integration.cpp.o
+[29/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/contrib/graphbuilder.cpp.o
+[30/101] Building CXX object CMakeFiles/m5_remediation.dir/tests/telemetry/remediation.cpp.o
+[31/101] Building CXX object packages/lab-support/CMakeFiles/lab_lifecycle.dir/cpp/lifecycle.cpp.o
+[32/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/contrib/graphbuilderadapter.cpp.o
+[33/101] Linking CXX static library packages/lab-support/liblab_lifecycle.a
+[34/101] Building CXX object packages/lab-support/CMakeFiles/lab_telemetry.dir/cpp/telemetry.cpp.o
+[35/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/binary.cpp.o
+[36/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/directives.cpp.o
+[37/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/depthguard.cpp.o
+[38/101] Building CXX object packages/lab-support/CMakeFiles/lab_contracts.dir/cpp/contracts.cpp.o
+[39/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emit.cpp.o
+[40/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitfromevents.cpp.o
+[41/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/convert.cpp.o
+[42/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitterstate.cpp.o
+[43/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitter.cpp.o
+[44/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/exceptions.cpp.o
+[45/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/exp.cpp.o
+[46/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitterutils.cpp.o
+[47/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/node.cpp.o
+[48/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/memory.cpp.o
+[49/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/null.cpp.o
+[50/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/nodebuilder.cpp.o
+[51/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/node_data.cpp.o
+[52/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/ostream_wrapper.cpp.o
+[53/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/nodeevents.cpp.o
+[54/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/parse.cpp.o
+[55/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/regex_yaml.cpp.o
+[56/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/parser.cpp.o
+[57/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scantag.cpp.o
+[58/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scanscalar.cpp.o
+[59/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scanner.cpp.o
+[60/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/simplekey.cpp.o
+[61/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/stream.cpp.o
+[62/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/tag.cpp.o
+[63/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scantoken.cpp.o
+[64/101] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/singledocparser.cpp.o
+[65/101] Linking CXX static library _deps/yaml-cpp-build/libyaml-cppd.a
+[66/101] Linking CXX static library packages/lab-support/liblab_contracts.a
+[67/101] Linking CXX static library packages/lab-support/liblab_telemetry.a
+[68/101] Linking CXX static library libgraphlab_planner.a
+[69/101] Linking CXX static library libgraphlab_catalog.a
+[70/101] Linking CXX executable lab-qualify
+[71/101] Linking CXX executable m0_tests
+[72/101] Linking CXX static library libgraphlab_runtime.a
+[73/101] Linking CXX static library libgraphlab_console.a
+[74/101] Linking CXX executable m4_tests
+[75/101] Linking CXX executable lab-guest-template
+[76/101] Linking CXX executable lab-capture
+[77/101] Linking CXX executable lab
+[78/101] Linking CXX executable m3_transport
+[79/101] Linking CXX executable lab-terminal
+[80/101] Linking CXX executable lab-api
+[81/101] Linking CXX executable lab-agent
+[82/101] Linking CXX executable m1_tests
+[83/101] Linking CXX executable m2_linux
+[84/101] Linking CXX executable m5_tests
+[85/101] Linking CXX executable m5_remediation
+[86/101] Building CXX object CMakeFiles/m4_linux.dir/tests/qemu/linux.cpp.o
+[87/101] Building CXX object CMakeFiles/m3_linux.dir/tests/capture/linux.cpp.o
+[88/101] Building CXX object CMakeFiles/m2_tests.dir/tests/runtime/m2.cpp.o
+[89/101] Linking CXX executable m4_linux
+[90/101] Linking CXX executable m3_linux
+[91/101] Linking CXX executable m2_tests
+[92/101] Building CXX object CMakeFiles/m5_linux.dir/tests/telemetry/linux.cpp.o
+[93/101] Building CXX object CMakeFiles/m3_tests.dir/tests/capture/m3.cpp.o
+[94/101] Building CXX object CMakeFiles/m4_console_linux.dir/tests/terminal/linux.cpp.o
+[95/101] Building CXX object CMakeFiles/m6_reboot.dir/tests/qualification/reboot.cpp.o
+[96/101] Linking CXX executable m5_linux
+[97/101] Linking CXX executable m3_tests
+[98/101] Linking CXX executable m4_console_linux
+[99/101] Linking CXX executable m6_reboot
+[100/101] Building CXX object CMakeFiles/m6_capacity.dir/tests/qualification/capacity.cpp.o
+[101/101] Linking CXX executable m6_capacity
+PASS host boot identity changed
+PASS prior-boot run cannot claim continuity
+PASS new controller generation
+PASS prior-boot capture authority rejected
+PASS old terminal handle cannot reattach to unrelated session
+prior-boot cleanup

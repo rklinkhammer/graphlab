@@ -33,3 +33,5 @@ M3 adds `release-lease` and `renew-lease` to the shared gate protocol. Leases us
 ## M5 telemetry package
 
 `LabSupport::telemetry` exports `lab_support/telemetry.hpp`: pure C++23 directional rate and counter-epoch derivation over typed JSON observations. It preserves uint64 counters as decimal strings, uses monotonic deltas, and emits null rates at resets or observation gaps. It links the shared contracts package and contains no Linux collector, SQLite store or privileged fault executor. See [M5 operations](../../docs/m5-telemetry-faults.md) for the observation contract and limits.
+
+The M6 qualification bundle retains the installed common package alongside independently compiled node images and source contexts. The [qualification manifest](../../qualification/README.md) binds actual archive bytes; package version `1.0.0` alone is not a substitute for that artifact identity.

@@ -160,6 +160,28 @@ int main(int argc, char **argv) {
       s.read_some(asio::buffer(&byte, 1), ec);
       check(bool(ec), "oversized RPC closes connection before allocation");
     }
+    for (const auto &payload : {std::string("{"), std::string("[]"),
+                                std::string("{\"apiVersion\":\"graphlab.rpc/v999\"}"),
+                                std::string("{\"secret\":\"M6_DO_NOT_ECHO\",\"x\":NaN}"),
+                                std::string(4096, '['), std::string("\xff\0\xff", 3)}) {
+      asio::io_context io;
+      asio::local::stream_protocol::socket s(io);
+      s.connect(asio::local::stream_protocol::endpoint(socket));
+      std::string frame(4, '\0');
+      for (int i = 0; i < 4; ++i)
+        frame[i] = static_cast<char>(payload.size() >> (24 - 8 * i));
+      frame += payload;
+      asio::write(s, asio::buffer(frame));
+      std::array<unsigned char, 4> header{};
+      asio::read(s, asio::buffer(header));
+      auto size = (std::uint32_t(header[0]) << 24) | (std::uint32_t(header[1]) << 16) |
+                  (std::uint32_t(header[2]) << 8) | header[3];
+      check(size > 0 && size <= 4096, "malformed RPC response bounded");
+      std::string body(size, '\0');
+      asio::read(s, asio::buffer(body));
+      check(Json::parse(body).at("ok") == false && body.find("M6_DO_NOT_ECHO") == std::string::npos,
+            "malformed RPC denied without echoing supplied secrets");
+    }
     {
       asio::io_context io;
       asio::local::stream_protocol::socket s(io);

@@ -1,0 +1,25 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/m6_capacity.dir/tests/qualification/capacity.cpp.o
+[2/2] Linking CXX executable m6_capacity
+PASS capacity fixture
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+MEASURE baseline 250 true
+MEASURE baseline 1000 true
+MEASURE baseline 4000 true
+PASS capacity fixture
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+MEASURE telemetry 250 true
+MEASURE telemetry 1000 true
+MEASURE telemetry 4000 true
+PASS capacity fixture
+MEASURE capture 250 true
+MEASURE capture 1000 true
+MEASURE capture 4000 true
+MEASURE capture 250 true
+MEASURE capture 1000 true
+MEASURE capture 4000 true
+Capacity report: "/tmp/gl6-tri-large/capacity.json"

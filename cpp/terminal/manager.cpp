@@ -131,6 +131,15 @@ void cleanup_docker(const Json &d) {
   auto dir = std::filesystem::path(d["directory"].get<std::string>());
 #ifdef __linux__
   SessionLock lock(dir);
+  // No exec process can survive a host boot. Do not query a retired Docker exec
+  // ID or signal a PID that may have been reused in the new boot.
+  std::ifstream boot_file("/proc/sys/kernel/random/boot_id");
+  std::string current_boot;
+  boot_file >> current_boot;
+  if (current_boot.empty() || d.value("bootId", "").empty())
+    throw runtime::Failure("session_boot_identity_unavailable");
+  if (d["bootId"] != current_boot)
+    return;
   if (d["kind"] == "docker" && std::filesystem::exists(dir / "exec.json")) {
     auto exec = console::load(dir / "exec.json");
     auto path = "/v1.52/exec/" + exec["id"].get<std::string>() + "/json";

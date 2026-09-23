@@ -1,0 +1,212 @@
+[0/2] Re-checking globbed directories...
+ninja: no work to do.
+-- Install configuration: "Debug"
+-- Installing: /tmp/graphlab-m6-sdk/include
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/adl_serializer.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/json_fwd.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/ordered_map.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/json.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/macro_unscope.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/hash.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/exceptions.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/value_t.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/string_utils.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/abi_macros.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/output
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/output/output_adapters.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/output/serializer.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/output/binary_writer.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/detected.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/identity_tag.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/void_t.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/std_fs.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/call_std
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/call_std/begin.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/call_std/end.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/is_sax.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/type_traits.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/meta/cpp_future.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/string_escape.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/json_pointer.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/conversions
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/conversions/to_chars.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/conversions/to_json.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/conversions/from_json.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators/internal_iterator.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators/iteration_proxy.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators/iterator_traits.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators/primitive_iterator.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators/iter_impl.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/iterators/json_reverse_iterator.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/string_concat.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/json_ref.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/json_custom_base_class.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/macro_scope.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input/lexer.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input/input_adapters.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input/json_sax.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input/position_t.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input/binary_reader.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/detail/input/parser.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/thirdparty
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/thirdparty/hedley
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/thirdparty/hedley/hedley.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/nlohmann/byte_container_with_subtype.hpp
+-- Installing: /tmp/graphlab-m6-sdk/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake
+-- Installing: /tmp/graphlab-m6-sdk/share/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake
+-- Installing: /tmp/graphlab-m6-sdk/share/cmake/nlohmann_json/nlohmann_jsonTargets.cmake
+-- Installing: /tmp/graphlab-m6-sdk/share/pkgconfig/nlohmann_json.pc
+-- Installing: /tmp/graphlab-m6-sdk/lib/libyaml-cppd.a
+-- Up-to-date: /tmp/graphlab-m6-sdk/include
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/null.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/ostream_wrapper.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/exceptions.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/dll.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/contrib
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/contrib/graphbuilder.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/contrib/anchordict.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/emitfromevents.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/emitter.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/eventhandler.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/yaml.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/mark.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/stlemitter.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/binary.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/traits.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/parser.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/noexcept.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/emitterstyle.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/emittermanip.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/node.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/iterator.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/parse.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/ptr.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/type.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/emit.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/convert.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/impl.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/node_iterator.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/node.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/iterator.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/node_data.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/impl.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/iterator_fwd.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/node_ref.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/node/detail/memory.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/depthguard.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/emitterdef.h
+-- Installing: /tmp/graphlab-m6-sdk/include/yaml-cpp/anchor.h
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/yaml-cpp/yaml-cpp-targets.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/yaml-cpp/yaml-cpp-targets-debug.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/yaml-cpp/yaml-cpp-config.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/yaml-cpp/yaml-cpp-config-version.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/pkgconfig/yaml-cpp.pc
+-- Installing: /tmp/graphlab-m6-sdk/lib/liblab_contracts.a
+-- Up-to-date: /tmp/graphlab-m6-sdk/include
+-- Installing: /tmp/graphlab-m6-sdk/include/._lab_support
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support/contracts.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support/telemetry.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support/._lifecycle.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support/._telemetry.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support/._contracts.hpp
+-- Installing: /tmp/graphlab-m6-sdk/include/lab_support/lifecycle.hpp
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/LabSupport/LabSupportTargets.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/LabSupport/LabSupportTargets-debug.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/LabSupport/LabSupportConfig.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/cmake/LabSupport/LabSupportConfigVersion.cmake
+-- Installing: /tmp/graphlab-m6-sdk/lib/liblab_lifecycle.a
+-- Installing: /tmp/graphlab-m6-sdk/lib/liblab_telemetry.a
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab" to ""
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab-agent
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab-agent" to ""
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab-api
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab-api" to ""
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab-capture
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab-capture" to ""
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab-terminal
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab-terminal" to ""
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab-guest-template
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab-guest-template" to ""
+-- Installing: /tmp/graphlab-m6-sdk/bin/lab-qualify
+-- Set non-toolchain portion of runtime path of "/tmp/graphlab-m6-sdk/bin/lab-qualify" to ""
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /tmp/graphlab-m6-sdk/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so.3 (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-m6-independent/app-a-build
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.938MB
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/5 : COPY lab-node /usr/local/bin/lab-node
+ ---> Using cache
+ ---> 7475bdb317f9
+Step 4/5 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Using cache
+ ---> 625badf79427
+Step 5/5 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Using cache
+ ---> be5f4184e81e
+Successfully built be5f4184e81e
+Successfully tagged graphlab-m6/app-a:qualification
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found nlohmann_json: /tmp/graphlab-m6-sdk/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found suitable exact version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so.3 (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-m6-independent/app-b-build
+[1/2] Building CXX object CMakeFiles/lab-node.dir/cpp/main.cpp.o
+[2/2] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.938MB
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> 008173c23f95
+Step 3/5 : COPY lab-node /usr/local/bin/lab-node
+ ---> Using cache
+ ---> d027a9b1c008
+Step 4/5 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Using cache
+ ---> 3395b31ba0b7
+Step 5/5 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Using cache
+ ---> b8e9428c9d62
+Successfully built b8e9428c9d62
+Successfully tagged graphlab-m6/app-b:qualification

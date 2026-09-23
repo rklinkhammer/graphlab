@@ -1,0 +1,47 @@
+[0/2] Re-checking globbed directories...
+[1/16] Building CXX object CMakeFiles/lab-qualify.dir/cpp/qualification/main.cpp.o
+[2/16] Linking CXX executable lab-qualify
+[3/16] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[4/16] Linking CXX static library libgraphlab_runtime.a
+[5/16] Linking CXX executable lab-guest-template
+[6/16] Linking CXX executable m3_transport
+[7/16] Linking CXX executable lab
+[8/16] Linking CXX executable lab-agent
+[9/16] Linking CXX executable m1_tests
+[10/16] Linking CXX executable lab-api
+[11/16] Linking CXX executable m4_tests
+[12/16] Linking CXX executable m5_tests
+[13/16] Linking CXX executable m5_remediation
+[14/16] Linking CXX executable m2_tests
+[15/16] Linking CXX executable m3_tests
+Test project /Users/rklinkhammer/workspace/graphlab/build/verify
+      Start  1: m1_acceptance
+ 1/13 Test  #1: m1_acceptance ....................   Passed    5.54 sec
+      Start  2: m0_acceptance
+ 2/13 Test  #2: m0_acceptance ....................   Passed    0.96 sec
+      Start  3: cli_validate
+ 3/13 Test  #3: cli_validate .....................   Passed    0.26 sec
+      Start  4: cli_plan
+ 4/13 Test  #4: cli_plan .........................   Passed    0.05 sec
+      Start  5: cli_preflight
+ 5/13 Test  #5: cli_preflight ....................   Passed    0.02 sec
+      Start  6: cli_side_effects
+ 6/13 Test  #6: cli_side_effects .................   Passed    0.15 sec
+      Start  7: m2_journal
+ 7/13 Test  #7: m2_journal .......................   Passed    1.71 sec
+      Start  8: m3_capture
+ 8/13 Test  #8: m3_capture .......................   Passed    2.84 sec
+      Start  9: m3_transport
+ 9/13 Test  #9: m3_transport .....................   Passed    1.00 sec
+      Start 10: m4_terminal
+10/13 Test #10: m4_terminal ......................   Passed    0.16 sec
+      Start 11: m5_telemetry_faults
+11/13 Test #11: m5_telemetry_faults ..............   Passed    2.11 sec
+      Start 12: m5_remediation
+12/13 Test #12: m5_remediation ...................   Passed    1.47 sec
+      Start 13: m6_qualification_manifest
+13/13 Test #13: m6_qualification_manifest ........   Passed    0.30 sec
+
+100% tests passed out of 13
+
+Total Test time (real) =  16.55 sec

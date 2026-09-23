@@ -1,0 +1,240 @@
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-m0-source/build/dev
+[0/2] Re-checking globbed directories...
+[1/6] Building CXX object CMakeFiles/m6_network.dir/tests/qualification/network.cpp.o
+[2/6] Building CXX object CMakeFiles/m6_direction.dir/tests/qualification/direction.cpp.o
+[3/6] Linking CXX executable m6_network
+[4/6] Linking CXX executable m6_direction
+[5/6] Building CXX object CMakeFiles/m1_tests.dir/tests/console/m1.cpp.o
+[6/6] Linking CXX executable m1_tests
+Test project /tmp/graphlab-m0-source/build/dev
+      Start  1: m1_acceptance
+ 1/17 Test  #1: m1_acceptance ....................   Passed    4.36 sec
+      Start  2: m0_acceptance
+ 2/17 Test  #2: m0_acceptance ....................   Passed    0.22 sec
+      Start  3: cli_validate
+ 3/17 Test  #3: cli_validate .....................   Passed    0.01 sec
+      Start  4: cli_plan
+ 4/17 Test  #4: cli_plan .........................   Passed    0.01 sec
+      Start  5: cli_preflight
+ 5/17 Test  #5: cli_preflight ....................   Passed    0.00 sec
+      Start  6: cli_side_effects
+ 6/17 Test  #6: cli_side_effects .................   Passed    0.03 sec
+      Start  7: installed_package
+ 7/17 Test  #7: installed_package ................   Passed    0.05 sec
+      Start  8: m2_journal
+ 8/17 Test  #8: m2_journal .......................   Passed    0.99 sec
+      Start  9: m3_capture
+ 9/17 Test  #9: m3_capture .......................   Passed    2.40 sec
+      Start 10: m3_transport
+10/17 Test #10: m3_transport .....................***Skipped   0.00 sec
+      Start 11: m4_terminal
+11/17 Test #11: m4_terminal ......................   Passed    0.00 sec
+      Start 12: m5_telemetry_faults
+12/17 Test #12: m5_telemetry_faults ..............   Passed    1.76 sec
+      Start 13: m5_remediation
+13/17 Test #13: m5_remediation ...................   Passed    1.12 sec
+      Start 14: m6_qualification_manifest
+14/17 Test #14: m6_qualification_manifest ........   Passed    0.03 sec
+      Start 15: m6_capacity_summary
+15/17 Test #15: m6_capacity_summary ..............   Passed    0.02 sec
+      Start 16: m6_runner_exit
+16/17 Test #16: m6_runner_exit ...................   Passed    0.04 sec
+      Start 17: m6_terminal_corpus
+17/17 Test #17: m6_terminal_corpus ...............   Passed    0.08 sec
+
+100% tests passed, 0 tests failed out of 17
+
+Total Test time (real) =  11.11 sec
+
+The following tests did not run:
+	 10 - m3_transport (Skipped)
+Evidence: "/tmp/gl6-net-5GcAqR"
+PASS network fixture generated
+PASS trunk triangle validates
+PASS network run ready
+PASS owned trunk identity resolved
+PASS RSTP forwarding and alternate state observable
+PASS independent trunk reader armed
+PASS same-VLAN positive control before cut
+PASS tagged frame retained for independent readback
+PASS independent packet reader observes VLAN 100 tag on trunk
+PASS cut owned forwarding trunk
+PASS restore owned trunk
+PASS RSTP failover within predeclared 15000 ms target: 29.021019
+PASS network cleanup
+Evidence: "/tmp/gl6-dir-TNDBkg"
+PASS direction fixture generated
+PASS direction topology validates
+PASS captured direct edge ready
+PASS GRO/GSO disabled with kernel readback
+PASS GRO/GSO disabled with kernel readback
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS 80 ms delay measured only in forward direction
+PASS policy removed
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS policy removed
+PASS GRO/GSO enabled with kernel readback
+PASS GRO/GSO enabled with kernel readback
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS 80 ms delay measured only in forward direction
+PASS policy removed
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS policy removed
+PASS direction cleanup
+Evidence: "/tmp/gl4-94YlP4"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-23T00:47:05Z","error":null,"finishedAt":"2026-09-23T00:47:09Z","id":"4cb1951b-9deb-4b71-894f-738b40290755","operation":"start","revision":"1","runId":"c212445b-47cf-41be-8455-2b8944213b14","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-23T00:47:29Z","error":null,"finishedAt":"2026-09-23T00:47:30Z","id":"a88d1f0b-a625-4e16-8cca-2b5946803dd3","operation":"recover","revision":"2","runId":"c212445b-47cf-41be-8455-2b8944213b14","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS serial artifact finalized
+PASS guest SSH is unavailable on the data interface
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+Evidence: "/tmp/gl4-KjxNO2"
+PASS guest topology validates
+PASS test-owned receiver VLAN
+PASS test-owned guest traffic receiver
+PASS capture-first guest start: {"cancelRequested":false,"createdAt":"2026-09-23T00:47:41Z","error":null,"finishedAt":"2026-09-23T00:47:44Z","id":"98fca44b-8929-49df-8249-e62d4757f5c2","operation":"start","revision":"1","runId":"d4364db4-f45c-4ad4-8939-556247d047f1","state":"succeeded"}
+PASS guest TAP captured
+PASS guest readiness observed separately from process start
+PASS guest SSH host key pinned and authenticated
+PASS guest SSH PTY input output and resize
+PASS serial output durably replayable
+PASS first-byte claim explicitly unavailable
+PASS independent watchdog pauses guest during controller outage
+PASS serial worker survives controller outage
+PASS actual guest application packets captured
+PASS guest application traffic ceases after watchdog pause
+PASS inject abrupt VM supervisor shutdown
+PASS restart holds guest for recovery
+PASS guest recovery cleanup: {"cancelRequested":false,"createdAt":"2026-09-23T00:48:07Z","error":null,"finishedAt":"2026-09-23T00:48:07Z","id":"71339a92-a4f1-453a-873c-1fe6053132e1","operation":"recover","revision":"2","runId":"d4364db4-f45c-4ad4-8939-556247d047f1","state":"succeeded"}
+PASS closed terminal download preserves recording header
+PASS retained run exports terminal recordings
+PASS abrupt shutdown preserves partial recording
+PASS guest SSH is unavailable on the data interface
+PASS invalid firmware fails guest start
+PASS failed-boot owned resource cleanup
+M4 Linux QEMU tests passed
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+[0/2] Re-checking globbed directories...
+[1/6] Building CXX object CMakeFiles/lab-qualify.dir/cpp/qualification/main.cpp.o
+[2/6] Linking CXX executable lab-qualify
+[3/6] Building CXX object CMakeFiles/m6_network.dir/tests/qualification/network.cpp.o
+[4/6] Building CXX object CMakeFiles/m6_direction.dir/tests/qualification/direction.cpp.o
+[5/6] Linking CXX executable m6_network
+[6/6] Linking CXX executable m6_direction
+Test project /tmp/graphlab-m0-source/build/dev
+    Start 14: m6_qualification_manifest
+1/4 Test #14: m6_qualification_manifest ........   Passed    0.02 sec
+    Start 15: m6_capacity_summary
+2/4 Test #15: m6_capacity_summary ..............   Passed    0.02 sec
+    Start 16: m6_runner_exit
+3/4 Test #16: m6_runner_exit ...................   Passed    0.04 sec
+    Start 17: m6_terminal_corpus
+4/4 Test #17: m6_terminal_corpus ...............   Passed    0.09 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.17 sec
+Evidence: "/tmp/gl6-net-bct5z3"
+PASS network fixture generated
+PASS trunk triangle validates
+PASS network run ready
+PASS owned trunk identity resolved
+PASS RSTP forwarding and alternate state observable
+PASS independent trunk reader armed
+PASS same-VLAN positive control before cut
+PASS tagged frame retained for independent readback
+PASS independent packet reader observes VLAN 100 tag on trunk
+PASS cut owned forwarding trunk
+PASS restore owned trunk
+PASS RSTP failover within predeclared 15000 ms target: 17.331560
+PASS network cleanup
+Evidence: "/tmp/gl6-dir-68FLNj"
+PASS direction fixture generated
+PASS direction topology validates
+PASS captured direct edge ready
+PASS GRO/GSO disabled with kernel readback
+PASS GRO/GSO disabled with kernel readback
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS 80 ms delay measured only in forward direction
+PASS policy removed
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS policy removed
+PASS GRO/GSO enabled with kernel readback
+PASS GRO/GSO enabled with kernel readback
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS 80 ms delay measured only in forward direction
+PASS policy removed
+PASS asymmetric policy installed
+PASS numbered sender and receiver completed
+PASS numbered sender and receiver completed
+PASS endpoint sequences confirm asymmetric delivery
+PASS policy removed
+PASS direction cleanup

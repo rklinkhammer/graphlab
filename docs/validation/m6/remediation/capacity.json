@@ -1,0 +1,1113 @@
+{
+  "apiVersion": "graphlab.capacity/v1",
+  "captureBudgetBytes": 268435456,
+  "edges": 1,
+  "measurementScope": "host CPU and paging I/O include unrelated VM activity; RSS is controller sample, not aggregate container/capture RSS",
+  "nodes": 2,
+  "observedAt": "2026-09-23T00:39:25Z",
+  "qualification": "bounded samples, not an extrapolated saturation limit",
+  "samples": [
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 12372,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 1.1395320644926659,
+      "hostMemAvailableKiB": 15627216,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 10.664791362643598,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": null,
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 512000.0,
+      "payloadBytes": 256,
+      "profile": "baseline",
+      "received": 2500,
+      "receivedRequestsPerSecond": 250.0,
+      "repeat": 0,
+      "rttP50Us": 160.375,
+      "rttP95Us": 346.125,
+      "rttP99Us": 531.667,
+      "runId": "e20082c1-74f2-480f-88a4-86ca76ff7fb9",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 2500,
+      "targetRequestsPerSecond": 250,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 12372,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 1.9452887537993921,
+      "hostMemAvailableKiB": 15645052,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 24.376146472775318,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": null,
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 2048000.0,
+      "payloadBytes": 256,
+      "profile": "baseline",
+      "received": 10000,
+      "receivedRequestsPerSecond": 1000.0,
+      "repeat": 0,
+      "rttP50Us": 131.25,
+      "rttP95Us": 314.126,
+      "rttP99Us": 420.543,
+      "runId": "e20082c1-74f2-480f-88a4-86ca76ff7fb9",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 10000,
+      "targetRequestsPerSecond": 1000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 12372,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.7554255059741526,
+      "hostMemAvailableKiB": 15644880,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 7.233737938178273,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": null,
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 8192000.0,
+      "payloadBytes": 256,
+      "profile": "baseline",
+      "received": 40000,
+      "receivedRequestsPerSecond": 4000.0,
+      "repeat": 0,
+      "rttP50Us": 116.751,
+      "rttP95Us": 275.959,
+      "rttP99Us": 393.334,
+      "runId": "e20082c1-74f2-480f-88a4-86ca76ff7fb9",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 40000,
+      "targetRequestsPerSecond": 4000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 12372,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 1.1020951919583384,
+      "hostMemAvailableKiB": 15644628,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 2.666370860499163,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": null,
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 512000.0,
+      "payloadBytes": 256,
+      "profile": "baseline",
+      "received": 2500,
+      "receivedRequestsPerSecond": 250.0,
+      "repeat": 1,
+      "rttP50Us": 158.709,
+      "rttP95Us": 353.959,
+      "rttP99Us": 468.96,
+      "runId": "e20082c1-74f2-480f-88a4-86ca76ff7fb9",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 2500,
+      "targetRequestsPerSecond": 250,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 12372,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.3714458560193585,
+      "hostMemAvailableKiB": 15644396,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 0.3808764416623465,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": null,
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 2047795.2,
+      "payloadBytes": 256,
+      "profile": "baseline",
+      "received": 9999,
+      "receivedRequestsPerSecond": 999.9,
+      "repeat": 1,
+      "rttP50Us": 126.708,
+      "rttP95Us": 319.501,
+      "rttP99Us": 470.043,
+      "runId": "e20082c1-74f2-480f-88a4-86ca76ff7fb9",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 9999,
+      "targetRequestsPerSecond": 1000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 12372,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.458715596330275,
+      "hostMemAvailableKiB": 15645920,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 24.365852588277654,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": null,
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 8192000.0,
+      "payloadBytes": 256,
+      "profile": "baseline",
+      "received": 40000,
+      "receivedRequestsPerSecond": 4000.0,
+      "repeat": 1,
+      "rttP50Us": 115.083,
+      "rttP95Us": 274.25,
+      "rttP99Us": 425.543,
+      "runId": "e20082c1-74f2-480f-88a4-86ca76ff7fb9",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 40000,
+      "targetRequestsPerSecond": 4000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 13104,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 1.4809419762078175,
+      "hostMemAvailableKiB": 15643588,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 244.53495653199747,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "4545759",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 512000.0,
+      "payloadBytes": 256,
+      "profile": "telemetry",
+      "received": 2500,
+      "receivedRequestsPerSecond": 250.0,
+      "repeat": 0,
+      "rttP50Us": 142.709,
+      "rttP95Us": 314.543,
+      "rttP99Us": 434.501,
+      "runId": "43ac026a-fec6-48ff-81c5-69292d83626a",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 2500,
+      "targetRequestsPerSecond": 250,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 13148,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.2141119221411194,
+      "hostMemAvailableKiB": 15645928,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 205.67415236023155,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "5339511",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 2048000.0,
+      "payloadBytes": 256,
+      "profile": "telemetry",
+      "received": 10000,
+      "receivedRequestsPerSecond": 1000.0,
+      "repeat": 0,
+      "rttP50Us": 115.0,
+      "rttP95Us": 287.084,
+      "rttP99Us": 401.793,
+      "runId": "43ac026a-fec6-48ff-81c5-69292d83626a",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 10000,
+      "targetRequestsPerSecond": 1000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 13220,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.3391812865497075,
+      "hostMemAvailableKiB": 15645496,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 196.07649753869734,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "10253937",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 8192000.0,
+      "payloadBytes": 256,
+      "profile": "telemetry",
+      "received": 40000,
+      "receivedRequestsPerSecond": 4000.0,
+      "repeat": 0,
+      "rttP50Us": 87.833,
+      "rttP95Us": 217.084,
+      "rttP99Us": 328.168,
+      "runId": "43ac026a-fec6-48ff-81c5-69292d83626a",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 40000,
+      "targetRequestsPerSecond": 4000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 13272,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 1.6472868217054264,
+      "hostMemAvailableKiB": 15637248,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 201.12018614761104,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "10203394",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 512000.0,
+      "payloadBytes": 256,
+      "profile": "telemetry",
+      "received": 2500,
+      "receivedRequestsPerSecond": 250.0,
+      "repeat": 1,
+      "rttP50Us": 136.959,
+      "rttP95Us": 344.417,
+      "rttP99Us": 469.376,
+      "runId": "43ac026a-fec6-48ff-81c5-69292d83626a",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 2500,
+      "targetRequestsPerSecond": 250,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 13336,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.122727827253873,
+      "hostMemAvailableKiB": 15641192,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 188.91412037349173,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "5974470",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 2048000.0,
+      "payloadBytes": 256,
+      "profile": "telemetry",
+      "received": 10000,
+      "receivedRequestsPerSecond": 1000.0,
+      "repeat": 1,
+      "rttP50Us": 123.542,
+      "rttP95Us": 291.209,
+      "rttP99Us": 448.793,
+      "runId": "43ac026a-fec6-48ff-81c5-69292d83626a",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 10000,
+      "targetRequestsPerSecond": 1000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 0.0,
+      "captureObservation": null,
+      "controllerRssKiB": 13356,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.6709139916687086,
+      "hostMemAvailableKiB": 15634056,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 95.56519150951746,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "10917188",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 8190976.0,
+      "payloadBytes": 256,
+      "profile": "telemetry",
+      "received": 39995,
+      "receivedRequestsPerSecond": 3999.5,
+      "repeat": 1,
+      "rttP50Us": 108.417,
+      "rttP95Us": 271.458,
+      "rttP99Us": 423.626,
+      "runId": "43ac026a-fec6-48ff-81c5-69292d83626a",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 39995,
+      "targetRequestsPerSecond": 4000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 158121.2533497196,
+      "captureObservation": [
+        {
+          "activatedAt": "2026-09-23T00:41:36Z",
+          "activationMessage": "",
+          "activationStatus": 0,
+          "apiVersion": "graphlab.capture/v1",
+          "bootId": "f7d0f192-8bfe-47df-85f6-ef28f63c96db",
+          "captureEndpointEnabledAt": "2026-09-23T00:41:36Z",
+          "edge": "wire",
+          "epoch": "1",
+          "exclusions": "interface creation before activation; per-packet direction unavailable; offloads unknown",
+          "filterInstalled": true,
+          "generation": "1",
+          "heartbeatAt": "2026-09-23T00:41:48Z",
+          "id": "d340ea91bbc942e24a51605d",
+          "invocationId": "fb5baed540c54b99a225e912b9063703",
+          "libpcap": "libpcap version 1.10.4 (with TPACKET_V3)",
+          "mapping": {
+            "endpoints": [
+              {
+                "containerId": "844cd28e36daec75b3697013608808aac5b96d0ed22d72a6aa51f60434d78246",
+                "ifindex": 285,
+                "name": "data0",
+                "namespaceInode": "4026532337"
+              },
+              {
+                "containerId": "fcd3961d5bd500cfc280c7492c70f5ebd07a7df5496239560d63eab23376860a",
+                "ifindex": 284,
+                "name": "data0",
+                "namespaceInode": "4026532408"
+              }
+            ]
+          },
+          "outputReady": true,
+          "pid": 31084,
+          "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+          "segments": [
+            {
+              "closedAt": "2026-09-23T00:41:46Z",
+              "file": "0.pcapng",
+              "packets": "3929",
+              "sequence": "0",
+              "sha256": "sha256:e2f0b40a320023e0e078b983b5cb7abd18676bf238eccbf401ca7343c8c89415",
+              "size": "1303584",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 3929,
+                "source": "libpcap-cumulative"
+              }
+            }
+          ],
+          "sourceSeq": "12",
+          "state": "active",
+          "statistics": {
+            "dropped": 0,
+            "interfaceDropped": null,
+            "received": 4944,
+            "source": "libpcap-cumulative"
+          }
+        }
+      ],
+      "controllerRssKiB": 14904,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.5458996328029375,
+      "hostMemAvailableKiB": 15598492,
+      "hostPagingReadKiBPerSecond": 1.9045200477658275,
+      "hostPagingWriteKiBPerSecond": 549.2635817756646,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "63219911",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 512000.0,
+      "payloadBytes": 256,
+      "profile": "capture",
+      "received": 2500,
+      "receivedRequestsPerSecond": 250.0,
+      "repeat": 0,
+      "rttP50Us": 140.876,
+      "rttP95Us": 371.834,
+      "rttP99Us": 555.917,
+      "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 2500,
+      "targetRequestsPerSecond": 250,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 632271.8840149939,
+      "captureObservation": [
+        {
+          "activatedAt": "2026-09-23T00:41:36Z",
+          "activationMessage": "",
+          "activationStatus": 0,
+          "apiVersion": "graphlab.capture/v1",
+          "bootId": "f7d0f192-8bfe-47df-85f6-ef28f63c96db",
+          "captureEndpointEnabledAt": "2026-09-23T00:41:36Z",
+          "edge": "wire",
+          "epoch": "1",
+          "exclusions": "interface creation before activation; per-packet direction unavailable; offloads unknown",
+          "filterInstalled": true,
+          "generation": "1",
+          "heartbeatAt": "2026-09-23T00:41:59Z",
+          "id": "d340ea91bbc942e24a51605d",
+          "invocationId": "fb5baed540c54b99a225e912b9063703",
+          "libpcap": "libpcap version 1.10.4 (with TPACKET_V3)",
+          "mapping": {
+            "endpoints": [
+              {
+                "containerId": "844cd28e36daec75b3697013608808aac5b96d0ed22d72a6aa51f60434d78246",
+                "ifindex": 285,
+                "name": "data0",
+                "namespaceInode": "4026532337"
+              },
+              {
+                "containerId": "fcd3961d5bd500cfc280c7492c70f5ebd07a7df5496239560d63eab23376860a",
+                "ifindex": 284,
+                "name": "data0",
+                "namespaceInode": "4026532408"
+              }
+            ]
+          },
+          "outputReady": true,
+          "pid": 31084,
+          "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+          "segments": [
+            {
+              "closedAt": "2026-09-23T00:41:46Z",
+              "file": "0.pcapng",
+              "packets": "3929",
+              "sequence": "0",
+              "sha256": "sha256:e2f0b40a320023e0e078b983b5cb7abd18676bf238eccbf401ca7343c8c89415",
+              "size": "1303584",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 3929,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:41:56Z",
+              "file": "1.pcapng",
+              "packets": "15762",
+              "sequence": "1",
+              "sha256": "sha256:902e85513dd079c3f7663ffc38ae860ce56423b9610143e39626c1d6cce4a841",
+              "size": "5233164",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 19692,
+                "source": "libpcap-cumulative"
+              }
+            }
+          ],
+          "sourceSeq": "23",
+          "state": "active",
+          "statistics": {
+            "dropped": 0,
+            "interfaceDropped": null,
+            "received": 25004,
+            "source": "libpcap-cumulative"
+          }
+        }
+      ],
+      "controllerRssKiB": 14904,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 3.9413720901588865,
+      "hostMemAvailableKiB": 15607600,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 1011.607591326635,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "53712393",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 2048000.0,
+      "payloadBytes": 256,
+      "profile": "capture",
+      "received": 10000,
+      "receivedRequestsPerSecond": 1000.0,
+      "repeat": 0,
+      "rttP50Us": 128.917,
+      "rttP95Us": 330.709,
+      "rttP99Us": 572.084,
+      "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 10000,
+      "targetRequestsPerSecond": 1000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 2527730.8708399893,
+      "captureObservation": [
+        {
+          "activatedAt": "2026-09-23T00:41:36Z",
+          "activationMessage": "",
+          "activationStatus": 0,
+          "apiVersion": "graphlab.capture/v1",
+          "bootId": "f7d0f192-8bfe-47df-85f6-ef28f63c96db",
+          "captureEndpointEnabledAt": "2026-09-23T00:41:36Z",
+          "edge": "wire",
+          "epoch": "1",
+          "exclusions": "interface creation before activation; per-packet direction unavailable; offloads unknown",
+          "filterInstalled": true,
+          "generation": "1",
+          "heartbeatAt": "2026-09-23T00:42:09Z",
+          "id": "d340ea91bbc942e24a51605d",
+          "invocationId": "fb5baed540c54b99a225e912b9063703",
+          "libpcap": "libpcap version 1.10.4 (with TPACKET_V3)",
+          "mapping": {
+            "endpoints": [
+              {
+                "containerId": "844cd28e36daec75b3697013608808aac5b96d0ed22d72a6aa51f60434d78246",
+                "ifindex": 285,
+                "name": "data0",
+                "namespaceInode": "4026532337"
+              },
+              {
+                "containerId": "fcd3961d5bd500cfc280c7492c70f5ebd07a7df5496239560d63eab23376860a",
+                "ifindex": 284,
+                "name": "data0",
+                "namespaceInode": "4026532408"
+              }
+            ]
+          },
+          "outputReady": true,
+          "pid": 31084,
+          "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+          "segments": [
+            {
+              "closedAt": "2026-09-23T00:41:46Z",
+              "file": "0.pcapng",
+              "packets": "3929",
+              "sequence": "0",
+              "sha256": "sha256:e2f0b40a320023e0e078b983b5cb7abd18676bf238eccbf401ca7343c8c89415",
+              "size": "1303584",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 3929,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:41:56Z",
+              "file": "1.pcapng",
+              "packets": "15762",
+              "sequence": "1",
+              "sha256": "sha256:902e85513dd079c3f7663ffc38ae860ce56423b9610143e39626c1d6cce4a841",
+              "size": "5233164",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 19692,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:05Z",
+              "file": "2.pcapng",
+              "packets": "50534",
+              "sequence": "2",
+              "sha256": "sha256:1d7d04c35e8026bceb645c2ca61a2bc280acd055cc4821335f0988bdfb3c6298",
+              "size": "16777468",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 70231,
+                "source": "libpcap-cumulative"
+              }
+            }
+          ],
+          "sourceSeq": "33",
+          "state": "active",
+          "statistics": {
+            "dropped": 0,
+            "interfaceDropped": null,
+            "received": 104066,
+            "source": "libpcap-cumulative"
+          }
+        }
+      ],
+      "controllerRssKiB": 14904,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 4.50869884832149,
+      "hostMemAvailableKiB": 15605184,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 2866.0439874867006,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "52733807",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 8191180.8,
+      "payloadBytes": 256,
+      "profile": "capture",
+      "received": 39996,
+      "receivedRequestsPerSecond": 3999.6,
+      "repeat": 0,
+      "rttP50Us": 85.583,
+      "rttP95Us": 182.667,
+      "rttP99Us": 355.709,
+      "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 39996,
+      "targetRequestsPerSecond": 4000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 158109.08369419284,
+      "captureObservation": [
+        {
+          "activatedAt": "2026-09-23T00:41:36Z",
+          "activationMessage": "",
+          "activationStatus": 0,
+          "apiVersion": "graphlab.capture/v1",
+          "bootId": "f7d0f192-8bfe-47df-85f6-ef28f63c96db",
+          "captureEndpointEnabledAt": "2026-09-23T00:41:36Z",
+          "edge": "wire",
+          "epoch": "1",
+          "exclusions": "interface creation before activation; per-packet direction unavailable; offloads unknown",
+          "filterInstalled": true,
+          "generation": "1",
+          "heartbeatAt": "2026-09-23T00:42:20Z",
+          "id": "d340ea91bbc942e24a51605d",
+          "invocationId": "fb5baed540c54b99a225e912b9063703",
+          "libpcap": "libpcap version 1.10.4 (with TPACKET_V3)",
+          "mapping": {
+            "endpoints": [
+              {
+                "containerId": "844cd28e36daec75b3697013608808aac5b96d0ed22d72a6aa51f60434d78246",
+                "ifindex": 285,
+                "name": "data0",
+                "namespaceInode": "4026532337"
+              },
+              {
+                "containerId": "fcd3961d5bd500cfc280c7492c70f5ebd07a7df5496239560d63eab23376860a",
+                "ifindex": 284,
+                "name": "data0",
+                "namespaceInode": "4026532408"
+              }
+            ]
+          },
+          "outputReady": true,
+          "pid": 31084,
+          "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+          "segments": [
+            {
+              "closedAt": "2026-09-23T00:41:46Z",
+              "file": "0.pcapng",
+              "packets": "3929",
+              "sequence": "0",
+              "sha256": "sha256:e2f0b40a320023e0e078b983b5cb7abd18676bf238eccbf401ca7343c8c89415",
+              "size": "1303584",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 3929,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:41:56Z",
+              "file": "1.pcapng",
+              "packets": "15762",
+              "sequence": "1",
+              "sha256": "sha256:902e85513dd079c3f7663ffc38ae860ce56423b9610143e39626c1d6cce4a841",
+              "size": "5233164",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 19692,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:05Z",
+              "file": "2.pcapng",
+              "packets": "50534",
+              "sequence": "2",
+              "sha256": "sha256:1d7d04c35e8026bceb645c2ca61a2bc280acd055cc4821335f0988bdfb3c6298",
+              "size": "16777468",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 70231,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:15Z",
+              "file": "3.pcapng",
+              "packets": "37344",
+              "sequence": "3",
+              "sha256": "sha256:f3db8007cbfdb242e5324be08cbd320ab64d19d6295d0bd9cef520a65c5c95db",
+              "size": "12397876",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 107570,
+                "source": "libpcap-cumulative"
+              }
+            }
+          ],
+          "sourceSeq": "44",
+          "state": "active",
+          "statistics": {
+            "dropped": 0,
+            "interfaceDropped": null,
+            "received": 109998,
+            "source": "libpcap-cumulative"
+          }
+        }
+      ],
+      "controllerRssKiB": 14904,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 2.2114216281895502,
+      "hostMemAvailableKiB": 15604844,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 558.7943273499058,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "8481349",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 512000.0,
+      "payloadBytes": 256,
+      "profile": "capture",
+      "received": 2500,
+      "receivedRequestsPerSecond": 250.0,
+      "repeat": 1,
+      "rttP50Us": 112.541,
+      "rttP95Us": 310.751,
+      "rttP99Us": 517.793,
+      "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 2500,
+      "targetRequestsPerSecond": 250,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 632292.6676623604,
+      "captureObservation": [
+        {
+          "activatedAt": "2026-09-23T00:41:36Z",
+          "activationMessage": "",
+          "activationStatus": 0,
+          "apiVersion": "graphlab.capture/v1",
+          "bootId": "f7d0f192-8bfe-47df-85f6-ef28f63c96db",
+          "captureEndpointEnabledAt": "2026-09-23T00:41:36Z",
+          "edge": "wire",
+          "epoch": "1",
+          "exclusions": "interface creation before activation; per-packet direction unavailable; offloads unknown",
+          "filterInstalled": true,
+          "generation": "1",
+          "heartbeatAt": "2026-09-23T00:42:30Z",
+          "id": "d340ea91bbc942e24a51605d",
+          "invocationId": "fb5baed540c54b99a225e912b9063703",
+          "libpcap": "libpcap version 1.10.4 (with TPACKET_V3)",
+          "mapping": {
+            "endpoints": [
+              {
+                "containerId": "844cd28e36daec75b3697013608808aac5b96d0ed22d72a6aa51f60434d78246",
+                "ifindex": 285,
+                "name": "data0",
+                "namespaceInode": "4026532337"
+              },
+              {
+                "containerId": "fcd3961d5bd500cfc280c7492c70f5ebd07a7df5496239560d63eab23376860a",
+                "ifindex": 284,
+                "name": "data0",
+                "namespaceInode": "4026532408"
+              }
+            ]
+          },
+          "outputReady": true,
+          "pid": 31084,
+          "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+          "segments": [
+            {
+              "closedAt": "2026-09-23T00:41:46Z",
+              "file": "0.pcapng",
+              "packets": "3929",
+              "sequence": "0",
+              "sha256": "sha256:e2f0b40a320023e0e078b983b5cb7abd18676bf238eccbf401ca7343c8c89415",
+              "size": "1303584",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 3929,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:41:56Z",
+              "file": "1.pcapng",
+              "packets": "15762",
+              "sequence": "1",
+              "sha256": "sha256:902e85513dd079c3f7663ffc38ae860ce56423b9610143e39626c1d6cce4a841",
+              "size": "5233164",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 19692,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:05Z",
+              "file": "2.pcapng",
+              "packets": "50534",
+              "sequence": "2",
+              "sha256": "sha256:1d7d04c35e8026bceb645c2ca61a2bc280acd055cc4821335f0988bdfb3c6298",
+              "size": "16777468",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 70231,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:15Z",
+              "file": "3.pcapng",
+              "packets": "37344",
+              "sequence": "3",
+              "sha256": "sha256:f3db8007cbfdb242e5324be08cbd320ab64d19d6295d0bd9cef520a65c5c95db",
+              "size": "12397876",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 107570,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:25Z",
+              "file": "4.pcapng",
+              "packets": "11690",
+              "sequence": "4",
+              "sha256": "sha256:e157807cf715502ab351dc62a683f04c913e622127455653eb52aab20dee2fd3",
+              "size": "3880748",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 119260,
+                "source": "libpcap-cumulative"
+              }
+            }
+          ],
+          "sourceSeq": "54",
+          "state": "active",
+          "statistics": {
+            "dropped": 0,
+            "interfaceDropped": null,
+            "received": 129790,
+            "source": "libpcap-cumulative"
+          }
+        }
+      ],
+      "controllerRssKiB": 14904,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 4.244357212953877,
+      "hostMemAvailableKiB": 15602648,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 899.638922281895,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "12438148",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 2048000.0,
+      "payloadBytes": 256,
+      "profile": "capture",
+      "received": 10000,
+      "receivedRequestsPerSecond": 1000.0,
+      "repeat": 1,
+      "rttP50Us": 122.625,
+      "rttP95Us": 351.876,
+      "rttP99Us": 584.459,
+      "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 10000,
+      "targetRequestsPerSecond": 1000,
+      "withinSampleEnvelope": true
+    },
+    {
+      "captureBytesPerSecond": 2527835.7557808426,
+      "captureObservation": [
+        {
+          "activatedAt": "2026-09-23T00:41:36Z",
+          "activationMessage": "",
+          "activationStatus": 0,
+          "apiVersion": "graphlab.capture/v1",
+          "bootId": "f7d0f192-8bfe-47df-85f6-ef28f63c96db",
+          "captureEndpointEnabledAt": "2026-09-23T00:41:36Z",
+          "edge": "wire",
+          "epoch": "1",
+          "exclusions": "interface creation before activation; per-packet direction unavailable; offloads unknown",
+          "filterInstalled": true,
+          "generation": "1",
+          "heartbeatAt": "2026-09-23T00:42:41Z",
+          "id": "d340ea91bbc942e24a51605d",
+          "invocationId": "fb5baed540c54b99a225e912b9063703",
+          "libpcap": "libpcap version 1.10.4 (with TPACKET_V3)",
+          "mapping": {
+            "endpoints": [
+              {
+                "containerId": "844cd28e36daec75b3697013608808aac5b96d0ed22d72a6aa51f60434d78246",
+                "ifindex": 285,
+                "name": "data0",
+                "namespaceInode": "4026532337"
+              },
+              {
+                "containerId": "fcd3961d5bd500cfc280c7492c70f5ebd07a7df5496239560d63eab23376860a",
+                "ifindex": 284,
+                "name": "data0",
+                "namespaceInode": "4026532408"
+              }
+            ]
+          },
+          "outputReady": true,
+          "pid": 31084,
+          "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+          "segments": [
+            {
+              "closedAt": "2026-09-23T00:41:46Z",
+              "file": "0.pcapng",
+              "packets": "3929",
+              "sequence": "0",
+              "sha256": "sha256:e2f0b40a320023e0e078b983b5cb7abd18676bf238eccbf401ca7343c8c89415",
+              "size": "1303584",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 3929,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:41:56Z",
+              "file": "1.pcapng",
+              "packets": "15762",
+              "sequence": "1",
+              "sha256": "sha256:902e85513dd079c3f7663ffc38ae860ce56423b9610143e39626c1d6cce4a841",
+              "size": "5233164",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 19692,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:05Z",
+              "file": "2.pcapng",
+              "packets": "50534",
+              "sequence": "2",
+              "sha256": "sha256:1d7d04c35e8026bceb645c2ca61a2bc280acd055cc4821335f0988bdfb3c6298",
+              "size": "16777468",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 70231,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:15Z",
+              "file": "3.pcapng",
+              "packets": "37344",
+              "sequence": "3",
+              "sha256": "sha256:f3db8007cbfdb242e5324be08cbd320ab64d19d6295d0bd9cef520a65c5c95db",
+              "size": "12397876",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 107570,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:25Z",
+              "file": "4.pcapng",
+              "packets": "11690",
+              "sequence": "4",
+              "sha256": "sha256:e157807cf715502ab351dc62a683f04c913e622127455653eb52aab20dee2fd3",
+              "size": "3880748",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 119260,
+                "source": "libpcap-cumulative"
+              }
+            },
+            {
+              "closedAt": "2026-09-23T00:42:35Z",
+              "file": "5.pcapng",
+              "packets": "43670",
+              "sequence": "5",
+              "sha256": "sha256:49b0bbfb1ae30f9106364375d5d0e7851c87fa4ac73783e9daeb6cc59f7c2038",
+              "size": "14498620",
+              "state": "closed",
+              "statistics": {
+                "dropped": 0,
+                "interfaceDropped": null,
+                "received": 162931,
+                "source": "libpcap-cumulative"
+              }
+            }
+          ],
+          "sourceSeq": "65",
+          "state": "active",
+          "statistics": {
+            "dropped": 0,
+            "interfaceDropped": null,
+            "received": 209994,
+            "source": "libpcap-cumulative"
+          }
+        }
+      ],
+      "controllerRssKiB": 14936,
+      "durationSeconds": 10,
+      "hostCpuBusyPercent": 4.363545692557038,
+      "hostMemAvailableKiB": 15612840,
+      "hostPagingReadKiBPerSecond": 0.0,
+      "hostPagingWriteKiBPerSecond": 2744.640253834199,
+      "invalidOrDuplicate": 0,
+      "lastCollectionDurationNs": "6430470",
+      "lossFraction": 0.0,
+      "payloadBitsPerSecond": 8191385.6,
+      "payloadBytes": 256,
+      "profile": "capture",
+      "received": 39997,
+      "receivedRequestsPerSecond": 3999.7,
+      "repeat": 1,
+      "rttP50Us": 107.125,
+      "rttP95Us": 284.542,
+      "rttP99Us": 497.043,
+      "runId": "41b83d17-cb8b-4629-8fc5-b18c498c1e11",
+      "runState": "ready",
+      "sendErrors": 0,
+      "sent": 39997,
+      "targetRequestsPerSecond": 4000,
+      "withinSampleEnvelope": true
+    }
+  ],
+  "shape": "direct Docker a:data0 to b:data0"
+}

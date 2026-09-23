@@ -1,0 +1,2 @@
+PASS delayed independent viewers: 7 bounded pages, 409600 exact bytes
+PASS 512 seeded malformed recording cases; 342 rejected

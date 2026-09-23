@@ -71,9 +71,11 @@ int main(int argc, char **argv) {
       auto start = call(engine, "start",
                         {{"topologyHash", lab_support::validate(t, artifacts)->hash},
                          {"idempotencyKey", "review-start"},
+                         {"observationProfile", "minimal"},
                          {"developmentMode", true}});
       check(wait(engine, start)["state"] == "succeeded", "probe fixture starts");
       auto run = call(engine, "run", {{"id", start["runId"]}});
+      check(run["observationProfile"] == "minimal", "minimal observation profile is journaled");
       auto apply = call(engine, "fault.apply",
                         {{"runId", run["id"]},
                          {"expectedRevision", run["revision"]},
@@ -97,6 +99,8 @@ int main(int argc, char **argv) {
             "expiry removal failure is persisted");
       check(backend.quiesces > before && !run["quiescenceAcknowledgedAt"].is_null(),
             "expiry failure quiesces a development run without a lease");
+      check(call(engine, "telemetry", {{"runId", run["id"]}})["current"].empty(),
+            "minimal observations retain fault enforcement without periodic counters");
       check(run["faults"][apply["faultId"].get<std::string>()]["state"] == "recovery-required",
             "uncertain fault retains explicit recovery state");
       std::cout << "fault state: " << run["faults"][apply["faultId"].get<std::string>()]["state"]

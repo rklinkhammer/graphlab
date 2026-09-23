@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
     if (!pcap)
       throw runtime::Failure("pcap_create");
     if (pcap_set_snaplen(pcap, config.at("snaplen")) || pcap_set_promisc(pcap, 1) ||
-        pcap_set_timeout(pcap, 50) || pcap_set_buffer_size(pcap, 4 * 1024 * 1024) ||
+        pcap_set_timeout(pcap, 50) || pcap_set_buffer_size(pcap, 16 * 1024 * 1024) ||
         pcap_set_immediate_mode(pcap, 1))
       throw runtime::Failure("pcap_configuration");
     auto activated = pcap_activate(pcap);
@@ -206,9 +206,12 @@ int main(int argc, char **argv) {
         writer->open();
         opened = now;
       }
-      pollfd event{server.fd, POLLIN, 0};
-      poll(&event, 1, 10);
-      if (!(event.revents & POLLIN))
+      // Wake for packet readiness as well as control commands. Waiting only on
+      // the control socket throttles a quiet worker to one drain every 10 ms,
+      // which can overflow the kernel ring even at modest packet rates.
+      pollfd events[2] = {{server.fd, POLLIN, 0}, {pcap_get_selectable_fd(pcap), POLLIN, 0}};
+      poll(events, 2, 10);
+      if (!(events[0].revents & POLLIN))
         continue;
       FD client{accept4(server.fd, nullptr, nullptr, SOCK_CLOEXEC)};
       if (client.fd < 0)
