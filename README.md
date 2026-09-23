@@ -2,8 +2,6 @@
 
 M0 implements a C++23 topology validator and deterministic dry-run planner. M1 adds a C++23 read-only agent/API and an authenticated React topology console. Neither milestone starts Docker containers, QEMU guests or OVS bridges.
 
-See [M1 console setup and invocation](docs/m1-console.md) for build, login, service startup and browser instructions.
-
 M2 adds opt-in durable Linux execution, Docker/shared-OVS resources, run/job controls and shared C++ gated nodes. See [M2 setup and qualification limits](docs/m2-executor.md). The original agent invocation remains read-only; execution requires explicit state/peer configuration.
 
 M3 adds capture-first runs, independent C++ PCAPNG workers, renewable traffic leases and verified artifact downloads. See [M3 setup and behavior](docs/m3-captures.md) and [verification evidence](docs/validation/m3-verification.md). No-capture development topologies still require explicit acknowledgement.
@@ -23,6 +21,52 @@ ctest --preset dev
 ```
 
 On Linux with GCC 14 installed, use the `linux-gcc14` configure/build/test preset instead. Other toolchains must pass the feature probe and tests. On macOS, OpenSSL installed under a nonstandard prefix can be selected using `-DOPENSSL_ROOT_DIR=/path/to/openssl` when configuring.
+
+## Web console
+
+Install the exact frontend and Playwright versions from the lockfile, install the matching Chromium build, and build the current console:
+
+```sh
+npm ci --prefix console/web
+npx --prefix console/web playwright install chromium
+npm run build --prefix console/web
+```
+
+Create a private runtime directory and operator credential from the repository root:
+
+```sh
+mkdir -m 700 build/m1-runtime
+build/dev/lab-api init-auth build/m1-runtime/auth.json
+```
+
+The command prints the credential once. Start the read-only agent in one terminal:
+
+```sh
+build/dev/lab-agent \
+  --socket "$PWD/build/m1-runtime/agent.sock" \
+  --topologies "$PWD/topologies" \
+  --lock "$PWD/topologies/artifacts.lock.json"
+```
+
+Start the API and static console in another terminal:
+
+```sh
+build/dev/lab-api \
+  --socket "$PWD/build/m1-runtime/agent.sock" \
+  --auth "$PWD/build/m1-runtime/auth.json" \
+  --assets "$PWD/console/web/dist" \
+  --port 8088
+```
+
+Open [http://127.0.0.1:8088](http://127.0.0.1:8088) and sign in with the generated credential. Use `127.0.0.1`, not `localhost`, because the API validates the browser authority. This profile is read-only; Linux execution and later runtime features require the milestone-specific agent configuration described in [M2 setup](docs/m2-executor.md), [M3 captures](docs/m3-captures.md), and [M4 QEMU consoles](docs/m4-qemu-consoles.md). See [M1 console setup and invocation](docs/m1-console.md) for deployment and security details.
+
+To exercise the real agent, API, and console in a browser that remains visible while the test harness drives it, run:
+
+```sh
+npm run test:headed --prefix console/web -- tests/console.spec.ts
+```
+
+The harness uses port 18088, creates a temporary credential, opens Chromium, tests the console, and cleans up its child services and private data. A graphical desktop session is required. The regular `npm test --prefix console/web` command remains headless for automation.
 
 ## Invoke M0
 
