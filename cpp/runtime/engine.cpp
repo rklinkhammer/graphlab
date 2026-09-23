@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <graphlab/application_telemetry.hpp>
 #include <graphlab/capture.hpp>
 #include <graphlab/runtime.hpp>
 #include <graphlab/telemetry.hpp>
@@ -90,6 +91,7 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
         "PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON; CREATE TABLE IF "
         "NOT EXISTS state (id INTEGER PRIMARY KEY CHECK(id=1), document TEXT NOT NULL);");
     telemetry::initialize(db_);
+    application_telemetry::initialize(db_);
     sqlite3_stmt *query = nullptr;
     if (sqlite3_prepare_v2(db_, "SELECT document FROM state WHERE id=1", -1, &query, nullptr) !=
         SQLITE_OK)
@@ -226,6 +228,18 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
     auto args = p.value("params", Json::object());
     const auto owner = std::to_string(principal) + ":" + p.value("owner", std::string("cli"));
     args["owner"] = owner;
+    if (operation == "logs") {
+      fields(p, {"runId", "node", "operation", "owner"});
+      auto node = string(p, "node");
+      for (const auto &resource : run["resources"])
+        if (resource["logical"] == node &&
+            (resource["kind"] == "container" || resource["kind"] == "qemu")) {
+          if (!resource.contains("identity"))
+            throw Failure("node_not_started", 409);
+          return backend_.logs(run, resource);
+        }
+      throw Failure("node_logs_unavailable", 404);
+    }
     if (operation == "list") {
       Json items = Json::array();
       for (const auto &r : run["resources"])
@@ -320,7 +334,7 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
     }
     if (operation != "status" && operation != "acquire" && operation != "renew-writer" &&
         operation != "input" && operation != "resize" && operation != "revoke" &&
-        operation != "close")
+        operation != "close" && operation != "release-writer")
       throw Failure("unsupported_terminal_operation");
     if (operation == "close") {
       if (d["kind"] == "qemu")

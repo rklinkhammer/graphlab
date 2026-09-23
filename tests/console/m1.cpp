@@ -229,6 +229,10 @@ int main(int argc, char **argv) {
       oversized = true;
     }
     check(oversized, "oversized HTTP body rejected before routing");
+    check(
+        request(port, http::verb::get, "/api/v1/runs/unknown/application-telemetry").result_int() ==
+            401,
+        "application telemetry requires authenticated session");
     check(request(port, http::verb::get, "/api/v1/topologies").result_int() == 401,
           "unauthenticated API denied");
     check(request(port, http::verb::get, "/", "", "", "http://hostile.invalid").result_int() == 403,

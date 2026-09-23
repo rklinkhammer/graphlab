@@ -5,6 +5,7 @@
 #include <graphlab/qemu.hpp>
 #include <graphlab/runtime.hpp>
 #include <graphlab/telemetry.hpp>
+#include <graphlab/terminal.hpp>
 #include <sstream>
 #include <sys/stat.h>
 #include <sys/utsname.h>
@@ -236,6 +237,8 @@ Json node_exec(const Json &run, const Json &r, const std::string &action) {
     i += 8;
     if (i + n > response.body.size())
       throw Failure("invalid_exec_stream");
+    if (output.size() + n > 4096)
+      throw Failure("node_status_size_limit");
     output += response.body.substr(i, n);
     i += n;
   }
@@ -942,10 +945,15 @@ Json LinuxBackend::observe(const Json &run) {
         nodes.push_back({{"id", r["logical"]}, {"guest", qemu::command(run, r, "status")}});
   if (run["state"] != "destroyed")
     for (const auto &r : run["resources"])
-      if (r["kind"] == "container")
-        nodes.push_back({{"id", r["logical"]},
-                         {"gate", node_exec(run, r, "status")},
-                         {"containerId", inspect_container(run, r)["Id"]}});
+      if (r["kind"] == "container") {
+        try {
+          nodes.push_back({{"id", r["logical"]},
+                           {"gate", node_exec(run, r, "status")},
+                           {"containerId", inspect_container(run, r)["Id"]}});
+        } catch (const std::exception &e) {
+          nodes.push_back({{"id", r["logical"]}, {"error", e.what()}});
+        }
+      }
   return {{"observedAt", console::timestamp()},
           {"nodes", nodes},
           {"captureCoverage", "unavailable-development-mode"}};
@@ -1084,6 +1092,43 @@ Json LinuxBackend::telemetry(const Json &run) {
       out.push_back(s);
     }
   return out;
+}
+Json LinuxBackend::logs(const Json &run, const Json &resource) {
+  ProcessResult result;
+  std::string source, generation;
+  if (resource["kind"] == "container") {
+    // Inspect the owned name, then read only the immutable, verified container ID.
+    auto container = inspect_container(run, resource);
+    generation = container["Id"].get<std::string>();
+    result = process({"/usr/bin/docker", "--host", "unix:///var/run/docker.sock", "logs",
+                      "--timestamps", "--tail", "200", generation},
+                     2);
+    source = "Container stdout/stderr";
+  } else if (resource["kind"] == "qemu") {
+    auto expected = "graphlab-vm-" + resource_name(run, resource["key"]) + ".service";
+    if (resource["identity"].value("unit", "") != expected)
+      throw Failure("node_log_identity_changed", 409);
+    generation = resource["identity"]["id"].get<std::string>();
+    result = process({"/usr/bin/journalctl", "--no-pager", "--quiet", "--output=short-iso",
+                      "--lines=200", "--unit=" + expected},
+                     2);
+    source = "QEMU worker/process journal (guest serial is a separate recording)";
+  } else {
+    throw Failure("node_logs_unavailable", 404);
+  }
+  if (result.code)
+    throw Failure("node_log_source_unavailable", 503);
+  constexpr std::size_t limit = 65536;
+  bool truncated = result.output.size() > limit;
+  if (truncated)
+    result.output.erase(0, result.output.size() - limit);
+  return {{"base64", terminal::encode(result.output)},
+          {"source", source},
+          {"generation", generation},
+          {"observedAt", console::timestamp()},
+          {"limitBytes", limit},
+          {"truncated", truncated},
+          {"lineLimit", 200}};
 }
 Json LinuxBackend::fault(const Json &run, const Json &f, const std::string &action) {
   auto r = edge_resource(run, f["edge"]);

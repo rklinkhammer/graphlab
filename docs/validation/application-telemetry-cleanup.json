@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": "30b0eba5-9879-4d2e-8944-212f47e6a8f1",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:f63e1410dd9202f4611bc23f63fa8c2d429cde7d7e383a9a219e19bbc17b2a8a"
+    },
+    {
+      "id": "cdb9c326-76bb-420b-8609-b97d414b335f",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:f63e1410dd9202f4611bc23f63fa8c2d429cde7d7e383a9a219e19bbc17b2a8a"
+    },
+    {
+      "id": "ce4add23-0538-45fb-8a83-d0a3c8d8de7f",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:7229c168e59d84478b963c4883a8451a4563b0e8ce0f2d29c4013edd551bcca1"
+    }
+  ]
+}

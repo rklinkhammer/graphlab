@@ -374,6 +374,9 @@ int main(int argc, char **argv) {
             writer.renew(p.at("owner"), p.at("token"));
           } else if (op == "revoke") {
             writer.revoke();
+          } else if (op == "release-writer") {
+            writer.require(p.at("owner"), p.at("token"));
+            writer.revoke();
           } else if (op == "replay") {
             recording->sync();
             response =

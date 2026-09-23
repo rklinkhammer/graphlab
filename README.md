@@ -24,6 +24,10 @@ On Linux with GCC 14 installed, use the `linux-gcc14` configure/build/test prese
 
 ## Web console
 
+The console connects topology selection to serial/SSH/container sessions, searchable process logs, directional link metrics, capture artifacts, and event history. See [feature parity and verification](docs/web-console-feature-parity.md) for implemented features and remaining GraphX-specific gaps.
+
+[Application telemetry v1](docs/application-telemetry.md) adds optional workload message/payload rates, errors, rejection/backpressure counters and explicitly defined local service-time histograms. The instrumented C++ `app-a` fixture reports through the existing gate; bounded agent history and authenticated console views remain separate from interface counters. Uninstrumented workloads remain supported.
+
 Install the exact frontend and Playwright versions from the lockfile, install the matching Chromium build, and build the current console:
 
 ```sh

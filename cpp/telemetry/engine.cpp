@@ -1,3 +1,4 @@
+#include <graphlab/application_telemetry.hpp>
 #include <graphlab/telemetry.hpp>
 #include <regex>
 namespace graphlab::runtime {
@@ -29,13 +30,26 @@ void bump(Json &r) {
 std::optional<Json> Engine::m5_dispatch(const Json &request, uid_t principal) {
   auto method = request["method"].get<std::string>();
   if (method != "telemetry" && method != "timeline" && method != "faults" &&
-      method != "fault.preview" && method != "fault.apply" && method != "fault.remove")
+      method != "fault.preview" && method != "fault.apply" && method != "fault.remove" &&
+      method != "application-telemetry")
     return std::nullopt;
   const auto &p = request["params"];
   auto id = p.at("runId").get<std::string>();
   if (!state_["runs"].contains(id))
     throw Failure("not_found", 404);
   auto &r = state_["runs"][id];
+  if (method == "application-telemetry") {
+    auto result = application_telemetry::query(db_, id, p, collector_);
+    result["errors"] = r.value("applicationTelemetryErrors", Json::object());
+    result["observationProfile"] = r.value("observationProfile", "full");
+    result["runState"] = r["state"];
+    for (auto &value : result["current"])
+      if (r["state"] == "destroyed" ||
+          result["errors"].contains(value["node"].get<std::string>()) ||
+          result["errors"].contains("collector"))
+        value["stale"] = true;
+    return result;
+  }
   if (method == "telemetry") {
     auto result = telemetry::query(db_, id, p);
     auto current = samples_.value(id, Json::object());
@@ -324,6 +338,30 @@ void Engine::m5_monitor() {
       }
       std::lock_guard lock(mutex_);
       auto &r = state_["runs"][id];
+      r["applicationTelemetryErrors"] = Json::object();
+      if (health.contains("error"))
+        r["applicationTelemetryErrors"]["collector"] = health["error"];
+      for (const auto &node : health.value("nodes", Json::array())) {
+        auto name = node.value("id", std::string());
+        bool owned = false;
+        for (const auto &resource : run["resources"])
+          if (resource["kind"] == "container" && resource["logical"] == name)
+            owned = true;
+        if (!owned)
+          continue;
+        if (node.contains("error")) {
+          r["applicationTelemetryErrors"][name] = node["error"];
+          continue;
+        }
+        const auto gate = node.value("gate", Json::object());
+        if (!gate.contains("applicationTelemetry"))
+          continue;
+        try {
+          application_telemetry::ingest(db_, id, name, gate["applicationTelemetry"], collector_);
+        } catch (const std::exception &) {
+          r["applicationTelemetryErrors"][name] = "application_report_rejected";
+        }
+      }
       r["health"] = health;
       r["healthMonotonicNs"] = std::to_string(telemetry::monotonic());
       event(r, "health", health);

@@ -1,0 +1,189 @@
+[0/2] Re-checking globbed directories...
+[1/6] Building CXX object packages/lab-support/CMakeFiles/lab_lifecycle.dir/cpp/lifecycle.cpp.o
+[2/6] Linking CXX static library packages/lab-support/liblab_lifecycle.a
+[3/6] Building CXX object packages/lab-support/CMakeFiles/lab_telemetry.dir/cpp/application_telemetry.cpp.o
+[4/6] Linking CXX static library packages/lab-support/liblab_telemetry.a
+[5/6] Building CXX object CMakeFiles/application_telemetry_tests.dir/tests/application.cpp.o
+[6/6] Linking CXX executable application_telemetry_tests
+PASS first sample has no rate
+PASS mean and histogram percentile semantics
+PASS counter intervals use workload monotonic time
+PASS collector restart creates a gap
+PASS workload restart creates a gap
+PASS long interval does not imply zero traffic
+PASS uint64 deltas remain exact before float conversion
+PASS overflow percentile is never clamped to a false upper bound
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS unsupported version rejected
+PASS workload cannot claim node identity
+PASS inconsistent histogram sum rejected
+PASS oversized report rejected
+PASS out of order sequence rejected
+PASS counter reset requires new epoch
+PASS duplicate report is not stored twice
+PASS same sequence with different payload rejected
+PASS persisted samples are stale after collector restart
+PASS bounded history reports truncation
+PASS run isolation
+PASS node filter does not mix streams
+PASS oversized query rejected
+PASS global history ceiling enforced
+PASS retention fixtures inserted
+PASS expired history is excluded even before pruning
+PASS global latest-record ceiling enforced
+PASS expired history physically pruned at ingestion
+Application telemetry contract/store tests passed
+-- Install configuration: ""
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/adl_serializer.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/json_fwd.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/ordered_map.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/json.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/macro_unscope.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/hash.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/exceptions.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/value_t.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/string_utils.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/abi_macros.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/output
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/output/output_adapters.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/output/serializer.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/output/binary_writer.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/detected.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/identity_tag.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/void_t.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/std_fs.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/call_std
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/call_std/begin.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/call_std/end.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/is_sax.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/type_traits.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/meta/cpp_future.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/string_escape.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/json_pointer.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/conversions
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/conversions/to_chars.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/conversions/to_json.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/conversions/from_json.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators/internal_iterator.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators/iteration_proxy.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators/iterator_traits.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators/primitive_iterator.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators/iter_impl.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/iterators/json_reverse_iterator.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/string_concat.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/json_ref.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/json_custom_base_class.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/macro_scope.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input/lexer.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input/input_adapters.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input/json_sax.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input/position_t.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input/binary_reader.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/detail/input/parser.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/thirdparty
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/thirdparty/hedley
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/thirdparty/hedley/hedley.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/nlohmann/byte_container_with_subtype.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/share/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/share/cmake/nlohmann_json/nlohmann_jsonTargets.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/share/pkgconfig/nlohmann_json.pc
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/libyaml-cpp.a
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/null.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/ostream_wrapper.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/exceptions.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/dll.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/contrib
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/contrib/graphbuilder.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/contrib/anchordict.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/emitfromevents.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/emitter.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/eventhandler.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/yaml.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/mark.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/stlemitter.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/binary.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/traits.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/parser.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/noexcept.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/emitterstyle.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/emittermanip.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/node.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/iterator.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/parse.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/ptr.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/type.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/emit.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/convert.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/impl.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/node_iterator.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/node.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/iterator.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/node_data.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/impl.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/iterator_fwd.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/node_ref.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/node/detail/memory.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/depthguard.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/emitterdef.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/yaml-cpp/anchor.h
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/yaml-cpp/yaml-cpp-targets.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/yaml-cpp/yaml-cpp-targets-noconfig.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/yaml-cpp/yaml-cpp-config.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/yaml-cpp/yaml-cpp-config-version.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/pkgconfig/yaml-cpp.pc
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/liblab_contracts.a
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/lab_support
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/lab_support/contracts.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/lab_support/telemetry.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/lab_support/application_telemetry.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/include/lab_support/lifecycle.hpp
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/LabSupport/LabSupportTargets.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/LabSupport/LabSupportTargets-noconfig.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/LabSupport/LabSupportConfig.cmake
+-- Up-to-date: /tmp/graphlab-application-sdk-20260923/lib/cmake/LabSupport/LabSupportConfigVersion.cmake
+-- Installing: /tmp/graphlab-application-sdk-20260923/lib/liblab_lifecycle.a
+-- Installing: /tmp/graphlab-application-sdk-20260923/lib/liblab_telemetry.a
+[1/1] Linking CXX executable lab-node
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  2.594MB
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> be5f4184e81e
+Step 3/5 : COPY lab-node /usr/local/bin/lab-node
+ ---> c6471ce72c2d
+Step 4/5 : LABEL graphlab.gate-protocol="1" graphlab.traffic-lease="1" graphlab.lab-support.language="cpp23"
+ ---> Running in 639ffbc0787d
+ ---> Removed intermediate container 639ffbc0787d
+ ---> 6b25460a0ca0
+Step 5/5 : ENTRYPOINT ["/usr/local/bin/lab-node"]
+ ---> Running in e6891ece8a0d
+ ---> Removed intermediate container e6891ece8a0d
+ ---> 0ec50f05c81e
+Successfully built 0ec50f05c81e
+Successfully tagged graphlab-application/app-a:qualification

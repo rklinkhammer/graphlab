@@ -224,13 +224,15 @@ Response Router::handle(const Request &r) {
           return error(http::status::method_not_allowed, "unsupported_method");
         } else if (path.starts_with("/api/v1/runs/") &&
                    (path.ends_with("/faults") || path.ends_with("/faults/preview") ||
-                    path.ends_with("/faults/remove") || path.ends_with("/telemetry/query"))) {
+                    path.ends_with("/faults/remove") || path.ends_with("/telemetry/query") ||
+                    path.ends_with("/application-telemetry/query"))) {
           auto slash = path.find('/', 13);
           params["runId"] = path.substr(13, slash - 13);
-          method = path.ends_with("/telemetry/query") ? "telemetry"
-                   : path.ends_with("/preview")       ? "fault.preview"
-                   : path.ends_with("/remove")        ? "fault.remove"
-                                                      : "fault.apply";
+          method = path.ends_with("/application-telemetry/query") ? "application-telemetry"
+                   : path.ends_with("/telemetry/query")           ? "telemetry"
+                   : path.ends_with("/preview")                   ? "fault.preview"
+                   : path.ends_with("/remove")                    ? "fault.remove"
+                                                                  : "fault.apply";
         } else if (path.starts_with("/api/v1/runs/") && path.ends_with("/terminal")) {
           method = "terminal";
           params["runId"] = path.substr(13, path.size() - 13 - 9);
@@ -249,7 +251,7 @@ Response Router::handle(const Request &r) {
         auto artifact = path.find("/artifacts");
         if (path.starts_with("/api/v1/runs/") &&
             (path.ends_with("/telemetry") || path.ends_with("/timeline") ||
-             path.ends_with("/faults"))) {
+             path.ends_with("/faults") || path.ends_with("/application-telemetry"))) {
           auto slash = path.find('/', 13);
           params["runId"] = path.substr(13, slash - 13);
           method = path.substr(slash + 1);

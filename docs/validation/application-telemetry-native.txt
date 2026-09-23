@@ -1,0 +1,43 @@
+Test project /Users/rklinkhammer/workspace/graphlab/build/dev
+      Start  1: m6_protocol_contract
+ 1/19 Test  #1: m6_protocol_contract .............   Passed    0.00 sec
+      Start  2: m1_acceptance
+ 2/19 Test  #2: m1_acceptance ....................   Passed    4.32 sec
+      Start  3: m0_acceptance
+ 3/19 Test  #3: m0_acceptance ....................   Passed    0.30 sec
+      Start  4: cli_validate
+ 4/19 Test  #4: cli_validate .....................   Passed    0.01 sec
+      Start  5: cli_plan
+ 5/19 Test  #5: cli_plan .........................   Passed    0.01 sec
+      Start  6: cli_preflight
+ 6/19 Test  #6: cli_preflight ....................   Passed    0.01 sec
+      Start  7: cli_side_effects
+ 7/19 Test  #7: cli_side_effects .................   Passed    0.05 sec
+      Start  8: installed_package
+ 8/19 Test  #8: installed_package ................   Passed    2.61 sec
+      Start  9: m2_journal
+ 9/19 Test  #9: m2_journal .......................   Passed    0.92 sec
+      Start 10: m3_capture
+10/19 Test #10: m3_capture .......................   Passed    2.38 sec
+      Start 11: m3_transport
+11/19 Test #11: m3_transport .....................   Passed    0.33 sec
+      Start 12: m4_terminal
+12/19 Test #12: m4_terminal ......................   Passed    0.01 sec
+      Start 13: m5_telemetry_faults
+13/19 Test #13: m5_telemetry_faults ..............   Passed    1.79 sec
+      Start 14: m5_remediation
+14/19 Test #14: m5_remediation ...................   Passed    1.14 sec
+      Start 15: m6_qualification_manifest
+15/19 Test #15: m6_qualification_manifest ........   Passed    0.08 sec
+      Start 16: m6_capacity_summary
+16/19 Test #16: m6_capacity_summary ..............   Passed    0.05 sec
+      Start 17: m6_runner_exit
+17/19 Test #17: m6_runner_exit ...................   Passed    0.45 sec
+      Start 18: m6_terminal_corpus
+18/19 Test #18: m6_terminal_corpus ...............   Passed    0.08 sec
+      Start 19: application_telemetry
+19/19 Test #19: application_telemetry ............   Passed    0.28 sec
+
+100% tests passed out of 19
+
+Total Test time (real) =  14.82 sec

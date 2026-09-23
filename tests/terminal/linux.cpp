@@ -56,6 +56,22 @@ int main(int argc, char **argv) {
       auto job = wait(e, a);
       check(job["state"] == "succeeded", "console run starts: " + job.dump());
       run = call(e, "run", {{"id", a["runId"]}});
+      auto logs = call(e, "terminal", {{"runId", run["id"]}, {"node", "a"}, {"operation", "logs"}});
+      check(logs["source"] == "Container stdout/stderr" &&
+                terminal::decode(logs["base64"]).size() <= 65536,
+            "bounded logs from verified container");
+      for (auto resource : run["resources"]) {
+        if (resource["kind"] != "container" || resource["logical"] != "a")
+          continue;
+        resource["identity"]["id"] = "foreign-container";
+        bool denied = false;
+        try {
+          backend.logs(run, resource);
+        } catch (...) {
+          denied = true;
+        }
+        check(denied, "log retrieval rejects changed container identity");
+      }
       auto terminal = [&](std::string op, Json params = Json::object()) {
         return call(e, "terminal",
                     {{"runId", run["id"]},
@@ -112,6 +128,22 @@ int main(int argc, char **argv) {
         denied = true;
       }
       check(denied, "takeover fences old writer");
+      bool old_release_denied = false;
+      try {
+        terminal("release-writer", {{"token", token}});
+      } catch (...) {
+        old_release_denied = true;
+      }
+      check(old_release_denied, "stale writer cannot release successor");
+      terminal("release-writer", {{"token", next["token"]}});
+      bool released_denied = false;
+      try {
+        terminal("input", {{"token", next["token"]}, {"base64", terminal::encode("stale\n")}});
+      } catch (...) {
+        released_denied = true;
+      }
+      check(released_denied, "released writer cannot send input");
+      next = terminal("acquire");
       terminal("input", {{"token", next["token"]},
                          {"base64", terminal::encode("sleep 1; printf 'SURVIVED_AGENT\\n'\n")}});
     }

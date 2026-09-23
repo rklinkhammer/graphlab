@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "3c93f019-d0b9-43b8-857f-00489cc1c052",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:84c83e388c19c993a706b606ca9c0d31a07dce9747054853da838f4f4fb10900"
+    },
+    {
+      "id": "6bc04ebb-d206-4e85-8f20-cf8514ce22c4",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:84c83e388c19c993a706b606ca9c0d31a07dce9747054853da838f4f4fb10900"
+    },
+    {
+      "id": "b247b416-e71a-4ea3-896d-b0f741d05a78",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:84c83e388c19c993a706b606ca9c0d31a07dce9747054853da838f4f4fb10900"
+    },
+    {
+      "id": "cd34c635-c267-4ede-8974-703d55309812",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:84c83e388c19c993a706b606ca9c0d31a07dce9747054853da838f4f4fb10900"
+    }
+  ]
+}

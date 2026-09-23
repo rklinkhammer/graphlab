@@ -50,3 +50,11 @@ The existing `lab control --socket PATH --agent-uid UID METHOD PARAMS.json` comm
 Acceptance commands and measured limits are recorded in [M5 verification](validation/m5-verification.md). No Python component is required.
 
 M6 adds an explicit `minimal` observation profile for new runs; fault expiry and capture/guest safety enforcement remain enabled. See [M6 qualification](m6-qualification.md) for the measured baseline comparison and profile contract.
+
+## Topology-linked performance and history
+
+The graph and run panels share the selected edge. Edge badges show A→B/B→A rates from the same bounded query used by the inspector; they age to stale on failed polling. Link performance includes packet rates and exact decimal byte/packet/error/drop counters, with the canonical endpoint's RX/TX mapped to topology direction. Charts have UTC axes, point values, a bounded value table, and breaks at missing observations. The display counter baseline affects only the browser and becomes invalid on counter-epoch changes; it does not reset interface counters or delete history.
+
+Graph selection also filters the capture catalog and chooses the fault edge. Run and artifact selectors are restricted to the selected topology revision. Inspecting a different retained run disables the active run's lifecycle controls until it is selected again. Workspace navigation jumps to performance, consoles, history, and captures without terminating sessions.
+
+The correlated timeline supports filtering, older-record pages of 100 items, and return-to-newest. Paging freezes the returned event snapshot so background polling cannot move the page. Pagination is within the backend's bounded retained event response, not a packet-history database. Application latency, backpressure, message identity, and per-packet observations remain unavailable without an additional workload/capture measurement contract.

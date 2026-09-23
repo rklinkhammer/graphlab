@@ -1,0 +1,14 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/application-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:39461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Running as unit: graphlab-application-agent.service; invocation ID: a6643cec25004707afbf0826ee1e0f9d
+{"runId":"ce4add23-0538-45fb-8a83-d0a3c8d8de7f","counters":{"backpressureEvents":"0","errors":"0","receivedMessages":"10","receivedPayloadBytes":"160","rejectedMessages":"0","sentMessages":"10","sentPayloadBytes":"160"},"latency":{"basis":"process-cumulative","count":"10","kind":"local-service-time","meanUs":29.7955,"p95Overflow":false,"p95UpperBoundUs":100},"rates":{"receivedMessagesPerSecond":1.8657464028759645,"receivedPayloadBytesPerSecond":29.851942446015432,"sentMessagesPerSecond":1.8657464028759645,"sentPayloadBytesPerSecond":29.851942446015432},"retainedReports":3,"restartGap":"collector_restarted","legacyNodeReports":0}
+  ✓  1 tests/application-live.spec.ts:5:1 › application reports through Linux workload, persistence, authenticated API and browser (18.5s)
+
+  1 passed (18.8s)

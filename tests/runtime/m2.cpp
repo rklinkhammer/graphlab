@@ -33,6 +33,9 @@ struct Simulated : Backend {
   bool fail_remove = false;
   int delay_ms = 0;
   std::map<std::string, Json> live;
+  Json logs(const Json &run, const Json &resource) override {
+    return {{"runId", run["id"]}, {"node", resource["logical"]}};
+  }
   void preflight(const Json &, const Json &) override {}
   Json prepare(const Json &run, const Json &r) override {
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
@@ -245,6 +248,32 @@ int main(int argc, char **argv) {
       check(wait(engine, accepted)["state"] == "succeeded", "start executes");
       auto run = call(engine, "run", {{"id", accepted["runId"]}});
       check(run["state"] == "ready" && !backend.live.empty(), "ready after resource preparation");
+      std::string log_node;
+      for (const auto &resource : run["resources"])
+        if (resource["kind"] == "container") {
+          log_node = resource["logical"];
+          break;
+        }
+      check(!log_node.empty(), "log fixture has a workload");
+      auto logs = call(engine, "terminal",
+                       {{"runId", run["id"]}, {"operation", "logs"}, {"node", log_node}});
+      check(logs["runId"] == run["id"] && logs["node"] == log_node,
+            "logs use scoped registered node");
+      for (const auto &params : std::vector<Json>{
+               {{"runId", run["id"]}, {"operation", "logs"}, {"node", "../../etc/passwd"}},
+               {{"runId", "foreign-run"}, {"operation", "logs"}, {"node", log_node}},
+               {{"runId", run["id"]},
+                {"operation", "logs"},
+                {"node", log_node},
+                {"params", {{"path", "/etc/passwd"}}}}}) {
+        bool refused = false;
+        try {
+          call(engine, "terminal", params);
+        } catch (const Failure &) {
+          refused = true;
+        }
+        check(refused, "logs reject foreign identity and arbitrary paths");
+      }
       auto op = Json{{"runId", run["id"]},
                      {"operation", "stop"},
                      {"expectedRevision", "0"},

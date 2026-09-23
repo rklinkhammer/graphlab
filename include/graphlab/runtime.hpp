@@ -42,6 +42,7 @@ public:
     throw Failure("capture_backend_unavailable");
   }
   virtual Json telemetry(const Json &) { return Json::array(); }
+  virtual Json logs(const Json &, const Json &) { throw Failure("node_logs_unavailable"); }
   virtual Json fault(const Json &, const Json &, const std::string &) {
     throw Failure("fault_backend_unavailable");
   }
@@ -66,6 +67,7 @@ public:
   Json capture_plan(const Json &) override;
   Json capture_control(const Json &, const std::string &) override;
   Json telemetry(const Json &) override;
+  Json logs(const Json &, const Json &) override;
   Json fault(const Json &, const Json &, const std::string &) override;
   void preflight(const Json &, const Json &) override;
   Json prepare(const Json &, const Json &) override;

@@ -1,4 +1,6 @@
 #include <arpa/inet.h>
+#include <array>
+#include <cerrno>
 #include <chrono>
 #include <csignal>
 #include <cstring>
@@ -8,6 +10,7 @@
 #include <lab_support/lifecycle.hpp>
 #include <nlohmann/json.hpp>
 #include <poll.h>
+#include <random>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <unistd.h>
@@ -73,6 +76,9 @@ std::string probe(const std::string &ip) {
 }
 } // namespace
 int run_node(int argc, char **argv, const char *application) {
+  return run_node(argc, argv, application, false);
+}
+int run_node(int argc, char **argv, const char *application, bool application_telemetry) {
   try {
     if (argc >= 3 && std::string(argv[1]) == "control") {
       std::string command = argv[2];
@@ -84,14 +90,24 @@ int run_node(int argc, char **argv, const char *application) {
         throw std::runtime_error("gate_unavailable");
       command += '\n';
       send(client.value, command.data(), command.size(), 0);
-      pollfd p{client.value, POLLIN, 0};
-      if (poll(&p, 1, 2500) <= 0)
-        throw std::runtime_error("gate_timeout");
-      char buffer[4096];
-      auto n = recv(client.value, buffer, sizeof(buffer), 0);
-      if (n <= 0)
-        throw std::runtime_error("gate_closed");
-      auto result = Json::parse(std::string(buffer, n));
+      std::string response;
+      const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(2500);
+      while (!response.ends_with('\n')) {
+        auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
+                             deadline - std::chrono::steady_clock::now())
+                             .count();
+        pollfd p{client.value, POLLIN, 0};
+        if (remaining <= 0 || poll(&p, 1, static_cast<int>(remaining)) <= 0)
+          throw std::runtime_error("gate_timeout");
+        char buffer[4096];
+        auto n = recv(client.value, buffer, sizeof(buffer), 0);
+        if (n <= 0)
+          throw std::runtime_error("gate_closed");
+        if (response.size() + n > 4096)
+          throw std::runtime_error("gate_response_limit");
+        response.append(buffer, n);
+      }
+      auto result = Json::parse(response);
       std::cout << result.dump() << '\n';
       return result.contains("error") ? 2 : 0;
     }
@@ -107,7 +123,18 @@ int run_node(int argc, char **argv, const char *application) {
     bool released = false;
     bool leased = false;
     auto deadline = std::chrono::steady_clock::time_point::min();
-    std::uint64_t packets = 0;
+    std::uint64_t packets = 0, sent = 0, received_bytes = 0, sent_bytes = 0, errors = 0,
+                  rejected = 0, backpressure = 0, sequence = 0, latency_sum = 0;
+    std::array<std::uint64_t, 8> latency_buckets{};
+    constexpr std::uint64_t latency_bounds[] = {10000,   50000,   100000,  500000,
+                                                1000000, 5000000, 10000000};
+    const auto began = std::chrono::steady_clock::now();
+    std::string epoch;
+    if (application_telemetry) {
+      std::random_device random;
+      for (int i = 0; i < 32; ++i)
+        epoch += "0123456789abcdef"[random() & 15];
+    }
     FD data;
     auto expire = [&] {
       if (leased && std::chrono::steady_clock::now() >= deadline) {
@@ -129,11 +156,32 @@ int run_node(int argc, char **argv, const char *application) {
         char buffer[1500];
         sockaddr_in peer{};
         socklen_t len = sizeof(peer);
-        auto n = recvfrom(data.value, buffer, sizeof(buffer), 0,
+        auto n = recvfrom(data.value, buffer, sizeof(buffer), application_telemetry ? MSG_TRUNC : 0,
                           reinterpret_cast<sockaddr *>(&peer), &len);
-        if (released && n > 0) {
-          sendto(data.value, buffer, n, 0, reinterpret_cast<sockaddr *>(&peer), len);
+        if (released && (n > 0 || (application_telemetry && n == 0))) {
+          const auto received = std::chrono::steady_clock::now();
           ++packets;
+          received_bytes += static_cast<std::uint64_t>(n);
+          if (n > static_cast<ssize_t>(sizeof(buffer))) {
+            ++rejected;
+          } else if (sendto(data.value, buffer, n, 0, reinterpret_cast<sockaddr *>(&peer), len) ==
+                     n) {
+            ++sent;
+            sent_bytes += n;
+            const auto elapsed =
+                static_cast<std::uint64_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                               std::chrono::steady_clock::now() - received)
+                                               .count());
+            latency_sum += elapsed;
+            std::size_t bucket = 0;
+            while (bucket < 7 && elapsed > latency_bounds[bucket])
+              ++bucket;
+            ++latency_buckets[bucket];
+          } else {
+            ++errors;
+            if (errno == EAGAIN || errno == EWOULDBLOCK)
+              ++backpressure;
+          }
         }
       }
       if (!(p[0].revents & POLLIN))
@@ -202,9 +250,37 @@ int run_node(int argc, char **argv, const char *application) {
       result["apiVersion"] = "graphlab.gate/v1";
       result["protocolMinor"] = node_gate_minor;
       result["capabilities"] = Json::array({"quiesce", "traffic-lease"});
+      if (application_telemetry)
+        result["capabilities"].push_back("application-telemetry/v1");
       result["state"] = released ? "released" : "held";
       result["application"] = application;
       result["echoPackets"] = std::to_string(packets);
+      if (application_telemetry && command == "status") {
+        Json buckets = Json::array();
+        for (auto n : latency_buckets)
+          buckets.push_back(std::to_string(n));
+        result["applicationTelemetry"] = {
+            {"apiVersion", "graphlab.application-telemetry/v1"},
+            {"stream", "udp-echo"},
+            {"epoch", epoch},
+            {"sequence", std::to_string(++sequence)},
+            {"elapsedNs", std::to_string(std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                             std::chrono::steady_clock::now() - began)
+                                             .count())},
+            {"counters",
+             {{"sentMessages", std::to_string(sent)},
+              {"receivedMessages", std::to_string(packets)},
+              {"sentPayloadBytes", std::to_string(sent_bytes)},
+              {"receivedPayloadBytes", std::to_string(received_bytes)},
+              {"errors", std::to_string(errors)},
+              {"rejectedMessages", std::to_string(rejected)},
+              {"backpressureEvents", std::to_string(backpressure)}}},
+            {"latency",
+             {{"kind", "local-service-time"},
+              {"count", std::to_string(sent)},
+              {"sumNs", std::to_string(latency_sum)},
+              {"buckets", buckets}}}};
+      }
       result["dataReady"] = data.value >= 0;
       result["leaseActive"] = leased && released;
       result["leaseMilliseconds"] =
