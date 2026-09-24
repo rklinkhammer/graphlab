@@ -239,6 +239,16 @@ Response Router::handle(const Request &r) {
                    : path.ends_with("/preview")                     ? "fault.preview"
                    : path.ends_with("/remove")                      ? "fault.remove"
                                                                     : "fault.apply";
+        } else if (path.starts_with("/api/v1/runs/") &&
+                   (path.ends_with("/process-logs/query") || path.ends_with("/process-logs/download"))) {
+          auto slash=path.find('/',13);params["runId"]=path.substr(13,slash-13);
+          method=path.ends_with("/query")?"process-logs.query":"process-logs.download";
+        } else if (path.starts_with("/api/v1/runs/") &&
+                   (path.ends_with("/source-controls/query") ||
+                    path.ends_with("/source-controls/command"))) {
+          auto slash = path.find('/', 13);
+          params["runId"] = path.substr(13, slash - 13);
+          method = path.ends_with("/query") ? "source-controls.query" : "source-controls.command";
         } else if (path.starts_with("/api/v1/runs/") && path.ends_with("/terminal")) {
           method = "terminal";
           params["runId"] = path.substr(13, path.size() - 13 - 9);

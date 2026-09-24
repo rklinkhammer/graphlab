@@ -1,0 +1,18 @@
+
+> graphlab-console@0.1.0 test
+> playwright test --grep source
+
+
+Running 6 tests using 1 worker
+
+(node:35094) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/parity.spec.ts:637:1 › source controls bind identity, show outcomes and fence late selection responses (363ms)
+  ✓  2 tests/parity.spec.ts:658:33 › source command rejection 409 stays visible and permits a fresh identity-bound action (4.2s)
+  ✓  3 tests/parity.spec.ts:658:33 › source command rejection 429 stays visible and permits a fresh identity-bound action (4.1s)
+  ✓  4 tests/parity.spec.ts:688:43 › uncertain source server failure retains retry across successful polling (4.3s)
+  ✓  5 tests/parity.spec.ts:688:43 › uncertain source network failure retains retry across successful polling (4.3s)
+  -  6 tests/source-control-live.spec.ts:4:1 › source pause/resume through Linux generator, capture, authenticated API and console
+
+  1 skipped
+  5 passed (17.8s)

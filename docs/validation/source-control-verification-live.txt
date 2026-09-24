@@ -1,0 +1,16 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/source-control-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:32286) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Authorization and identity checks passed
+Selected source node
+Running as unit: graphlab-source-agent.service; invocation ID: f5047d31ba3b4483bd1933046f5cb341
+{"runId":"3afd1f5b-c106-4ebe-8d7c-dbe53b28060b","first":{"alpha":12,"beta":16},"second":{"alpha":12,"beta":27},"held":{"alpha":16,"beta":37},"captureProcessesUnchanged":true,"receivingWhilePaused":true,"proof":{"alpha":0,"beta":10,"references":[{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":5880},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":6064},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":6248},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":6432},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":6616},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":6800},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":7072},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":7408},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":7592},{"artifact":"9f980a57531f7d5f475ec82e","file":"0.pcapng","blockOffset":7776}],"interval":[1790210236.4711015,1790210238.6947818]}}
+  ✓  1 tests/source-control-live.spec.ts:4:1 › source pause/resume through Linux generator, capture, authenticated API and console (16.6s)
+
+  1 passed (16.9s)

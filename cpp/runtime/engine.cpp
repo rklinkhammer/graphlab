@@ -3,6 +3,7 @@
 #include <graphlab/capture.hpp>
 #include <graphlab/packet_history.hpp>
 #include <graphlab/runtime.hpp>
+#include <graphlab/process_logs.hpp>
 #include <graphlab/telemetry.hpp>
 #include <graphlab/terminal.hpp>
 #include <regex>
@@ -118,6 +119,13 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
     sqlite3_finalize(query);
     if (state_.value("apiVersion", "") != "graphlab.state/v1")
       throw Failure("unsupported_database");
+    if (!state_.contains("sourceCommands"))
+      state_["sourceCommands"] = Json::object();
+    for (auto &[id, command] : state_["sourceCommands"].items())
+      if (command["outcome"] == "requested") {
+        command["outcome"] = "interrupted";
+        command["error"] = "agent_restarted_no_replay";
+      }
     for (auto &[id, job] : state_["jobs"].items())
       if (pending(job)) {
         job["state"] = "failed";
@@ -163,6 +171,11 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
       save();
     }
     m5_recover();
+    try {
+      process_logs_=std::make_unique<process_logs::History>(directory_/"process-logs.sqlite");
+      if(backend_.durable_logs()) process_logs_->start(backend_,[this]{return log_candidates();});
+    } catch(const std::exception&) { /* Optional log store never changes run admission. */ }
+
     worker_ = std::thread([this] { work(); });
   } catch (...) {
     if (db_)
@@ -179,6 +192,7 @@ Engine::~Engine() {
   }
   if (worker_.joinable())
     worker_.join();
+  process_logs_.reset();
   packet_history_.reset();
   sqlite3_close(db_);
   if (lock_ >= 0)
@@ -223,6 +237,17 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
   std::unique_lock guard(mutex_);
   if (stopping_)
     throw Failure("journal_unavailable", 503);
+  if(method=="process-logs.query" || method=="process-logs.download") {
+    auto runid=string(p,"runId");
+    if(!state_["runs"].contains(runid)) throw Failure("not_found",404);
+    auto node=string(p,"node");
+    if(!state_["runs"][runid]["topology"]["nodes"].contains(node)) throw Failure("node_not_found",404);
+    if(!process_logs_) throw Failure("log_store_unavailable",503);
+    guard.unlock();
+    return method=="process-logs.query"?process_logs_->query(p):process_logs_->download(p);
+  }
+  if (auto result = source_dispatch(request, principal))
+    return *result;
   if (auto m5 = m5_dispatch(request, principal))
     return *m5;
   if (method == "terminal") {
@@ -587,6 +612,7 @@ void Engine::work() {
       if (id.empty()) {
         guard.unlock();
         monitor();
+        source_work();
         continue;
       }
       state_["jobs"][id]["state"] = "running";
@@ -915,3 +941,26 @@ Json Engine::inventory(Json logical) {
   return logical;
 }
 } // namespace graphlab::runtime
+
+namespace graphlab::runtime {
+Json Engine::log_candidates() {
+  std::lock_guard guard(mutex_);
+  Json result=Json::array();std::size_t index=0;
+  for(const auto &[id,run]:state_["runs"].items()) {
+    if(stopping_ || run["state"]=="destroyed") continue;
+    for(const auto &r:run["resources"]) {
+      if(!r.contains("identity") || r.value("state","")=="removed" || (r["kind"]!="container"&&r["kind"]!="qemu"))continue;
+      std::vector<std::string> sources=r["kind"]=="container"?std::vector<std::string>{"docker-output"}:std::vector<std::string>{"qemu-worker"};
+      if(r["kind"]=="qemu" && r["identity"].contains("runnerId"))sources.push_back("qemu-runner");
+      for(const auto &source:sources) {
+        if(index++ < log_cursor_)continue;
+        if(result.size()>=16){log_cursor_=index-1;return result;}
+        auto resource=r;resource["logSource"]=source;
+        if(resource.dump().size()>32768){log_cursor_=index;throw Failure("log_candidate_descriptor_limit",503);}
+        result.push_back({{"run",{{"id",id},{"generation",run["generation"]},{"controllerGeneration",run["controllerGeneration"]}}},{"resource",resource}});
+      }
+    }
+  }
+  log_cursor_=0;return result;
+}
+}

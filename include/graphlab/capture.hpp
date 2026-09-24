@@ -11,6 +11,7 @@ class Writer {
   std::filesystem::path directory_, partial_;
   Json config_, segments_ = Json::array();
   std::uint64_t bytes_ = 0, total_ = 0, packets_ = 0, sequence_ = 0;
+  std::uint64_t captured_bytes_ = 0, original_bytes_ = 0, truncated_packets_ = 0;
   void block(std::uint32_t, std::span<const unsigned char>);
 
 public:

@@ -22,6 +22,11 @@ export type Sample = {
   adminUp?: boolean;
   carrierUp?: boolean;
   gapReason?: string;
+  mapping?: Record<string, unknown>;
+  rstp?: Record<string, unknown>;
+  rstpObservedMonotonicNs?: string;
+  operstate?: string;
+  reason?: string;
 };
 export function MetricDetails({
   sample,
@@ -64,6 +69,20 @@ export function MetricDetails({
         · {sample?.source ?? "Source unavailable"} ·{" "}
         {sample?.at ?? "Observation time unavailable"}
       </p>
+      <section aria-label="Network observation evidence">
+        <h4>Network observation evidence</h4>
+        <p>Values below belong to the observation above{stale ? " and may be stale" : ""}. Administrative state, carrier and RSTP are independent observations; none proves application reachability or delivery.</p>
+        <dl><dt>Administrative / carrier state</dt><dd>{sample?.adminUp == null ? "Unknown" : sample.adminUp ? "Up" : "Down"} / {sample?.carrierUp == null ? "Unknown" : sample.carrierUp ? "Up" : "Down"}</dd>
+        <dt>Operational state</dt><dd>{sample?.operstate ?? "Unknown"}</dd>
+        <dt>Mapping identity digest</dt><dd>{sample?.mappingEpoch ?? "Unavailable"}</dd>
+        <dt>Counter epoch</dt><dd>{sample?.counterEpoch ?? "Unavailable"}</dd>
+        <dt>Collection failure evidence</dt><dd>{sample?.reason ?? "No failure reason reported; this is not a health assertion."}</dd>
+        <dt>RSTP cache observation (host monotonic ns)</dt><dd>{sample?.rstpObservedMonotonicNs ?? "Unavailable"}</dd></dl>
+        <p>RSTP comes from a separately cached OVS observation. Its monotonic clock is host-local; it is not a wall-clock timestamp or evidence of an observed route.</p>
+        <details><summary>Observed runtime interface mapping</summary><pre>{sample?.mapping ? JSON.stringify(sample.mapping,null,2) : "Mapping unavailable"}</pre></details>
+        <details><summary>Observed RSTP ports</summary><pre>{sample?.rstp && Object.keys(sample.rstp).length ? JSON.stringify(sample.rstp,null,2) : "RSTP unavailable or not applicable; no forwarding state inferred"}</pre></details>
+        <p>Failure layer and root cause: undetermined. Inspect the reported observations; missing telemetry is not proof of a network failure.</p>
+      </section>
       <div className="metric-grid">
         {[
           ["A→B", forward, "forward"],

@@ -1,0 +1,31 @@
+{
+  "runs": [
+    {
+      "id": "2422aec7-aa74-4ee6-8010-4c0c2d62d916",
+      "state": "destroyed"
+    },
+    {
+      "id": "6de8e048-7dbd-405f-8382-2169486212a1",
+      "state": "destroyed"
+    },
+    {
+      "id": "b2e8f0c8-d733-4052-810e-51a35e3c6bf4",
+      "state": "destroyed"
+    },
+    {
+      "id": "bd23b246-57df-4c37-8e23-635557267b90",
+      "state": "destroyed"
+    },
+    {
+      "id": "da5bb18b-2883-4f00-8786-fe2ee40c93b2",
+      "state": "destroyed"
+    },
+    {
+      "id": "f84eeb62-2a2d-4f80-8f37-b66ce057c881",
+      "state": "destroyed"
+    }
+  ]
+}
+inactive
+inactive
+{"runningContainers": [], "ovsBridges": []}

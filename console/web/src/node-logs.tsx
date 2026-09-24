@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import {RetainedLogs} from "./retained-logs";
 type Snapshot = {
   base64: string;
   source: string;
@@ -7,7 +8,7 @@ type Snapshot = {
   truncated: boolean;
   limitBytes: number;
 };
-export function NodeLogs({
+function LiveNodeLogs({
   runId,
   node,
   csrf,
@@ -115,4 +116,9 @@ export function NodeLogs({
       </pre>
     </section>
   );
+}
+
+export function NodeLogs(props:{runId:string,node:string,csrf:string,api:(p:string,i?:RequestInit)=>Promise<any>}) {
+ const [retained,setRetained]=useState(false);
+ return <><button aria-pressed={!retained} onClick={()=>setRetained(false)}>Live runtime tail</button>{" "}<button aria-pressed={retained} onClick={()=>setRetained(true)}>Retained log artifacts</button>{retained?<RetainedLogs key={`${props.runId}/${props.node}`} {...props}/>:<LiveNodeLogs key={`${props.runId}/${props.node}`} {...props}/>}</>;
 }

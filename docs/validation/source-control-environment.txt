@@ -1,0 +1,10 @@
+app-a sha256:93b02802466ccd3238dbe1e1509b3a0c5c9511494656ababd8e4e3e40a9a3c2b
+app-b sha256:c01d4979e4e71643aac14663c016f70406cbbb66eca7ad4f86588bdc777a9d51
+Running as unit: graphlab-source-agent.service; invocation ID: 2b0375f9c3f745e88e6dbdf8597e61e1
+Running as unit: graphlab-source-api.service; invocation ID: 2b0e71126ddd402b93a572ba2ad2fae7
+app-a sha256:d997e865d1fecf98060b4811b6d46d18a201ebf617ca53dd4c13dbd4d2ee9285
+app-b sha256:4428c3666e6273ea31b31445986e3698f0a3773e4148ad4f61be2242a5e2b0d3
+Running as unit: graphlab-source-agent.service; invocation ID: a51c8a21a16d43d2afd2b12268fa5253
+Running as unit: graphlab-source-api.service; invocation ID: ad928f5706ec446d85c211dddda91e65
+Running as unit: graphlab-source-agent.service; invocation ID: 0d471572ad514ccfa5a27770566395f4
+Running as unit: graphlab-source-api.service; invocation ID: 36a78e300b4f4033bbaf95e0c2b42407

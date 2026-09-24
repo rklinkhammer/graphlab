@@ -170,6 +170,7 @@ void Writer::open() {
     throw runtime::Failure("capture_open");
   bytes_ = 0;
   packets_ = 0;
+  captured_bytes_ = original_bytes_ = truncated_packets_ = 0;
   Bytes b;
   u32(b, 0x1a2b3c4d);
   u16(b, 1);
@@ -205,6 +206,9 @@ void Writer::packet(std::uint64_t micros, std::span<const unsigned char> bytes,
   pad(b);
   block(6, b);
   ++packets_;
+  captured_bytes_ += bytes.size();
+  original_bytes_ += original;
+  truncated_packets_ += bytes.size() < original;
 }
 void Writer::sync() {
   if (fd_ < 0 || fsync(fd_))
@@ -247,6 +251,15 @@ void Writer::close(Json stats) {
                        {"sha256", file_hash(closed)},
                        {"state", "closed"},
                        {"statistics", stats},
+                       {"packetLengths",
+                        {{"apiVersion", "graphlab.capture-lengths/v1"},
+                         {"capturedBytes", std::to_string(captured_bytes_)},
+                         {"originalBytes", std::to_string(original_bytes_)},
+                         {"truncatedPackets", std::to_string(truncated_packets_)}}},
+                       {"format", "pcapng"},
+                       {"linkType", 1},
+                       {"snaplen", config_.at("snaplen")},
+                       {"interface", config_.at("interface")},
                        {"closedAt", console::timestamp()}});
   total_ += bytes_;
   bytes_ = 0;

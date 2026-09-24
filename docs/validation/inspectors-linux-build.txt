@@ -1,0 +1,77 @@
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at /tmp/graphlab-m0-source/build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-inspectors-20260923/build/dev
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/m3_tests.dir/tests/capture/m3.cpp.o
+[2/2] Linking CXX executable m3_tests
+PASS capture fixture generated
+PASS failed arm never releases traffic
+PASS captures armed before convergence
+PASS capture barrier before release
+PASS capture-first run succeeds
+PASS one capture per declared edge
+PASS quiesce closes captures
+PASS captures armed before convergence
+PASS capture barrier before release
+PASS resume rearms capture barrier
+PASS resume creates new capture epoch
+PASS capture loss marks incomplete and quiesces
+PASS restart adopts surviving captures
+PASS adoption does not resume stale traffic
+PASS restart preserves known coverage loss
+PASS failed arm never releases traffic
+PASS captures armed before convergence
+PASS capture barrier before release
+PASS capture-first run succeeds
+PASS one capture per declared edge
+PASS quiesce closes captures
+PASS captures armed before convergence
+PASS capture barrier before release
+PASS resume rearms capture barrier
+PASS resume creates new capture epoch
+PASS capture loss marks incomplete and quiesces
+PASS restart adopts surviving captures
+PASS adoption does not resume stale traffic
+PASS restart preserves known coverage loss
+PASS captures armed before convergence
+PASS capture barrier before release
+PASS stopped restart fixture starts
+PASS stopped restart fixture closes captures
+PASS restart preserves stopped run without adopting closed workers
+PASS captures armed before convergence
+PASS capture barrier before release
+PASS interrupted stop fixture starts
+PASS interrupted worker can be stopped
+PASS stop persists interrupted observations and incomplete coverage
+PASS repeat stop or cleanup succeeds
+PASS later closed observations never erase a known gap
+PASS repeat stop or cleanup succeeds
+PASS later closed observations never erase a known gap
+PASS repeat stop or cleanup succeeds
+PASS later closed observations never erase a known gap
+PASS restart-only workload rejected before admission
+PASS closed capture manifest
+PASS unknown drops remain null
+PASS rotation preserves both segments
+PASS complete packet lengths recorded exactly
+PASS rotation resets length summaries and records truncation
+PASS catalog metadata derives from descriptor and finalized manifest
+PASS wrong-run or stale capture identity cannot publish catalog identity or download
+PASS wrong-run or stale capture identity cannot publish catalog identity or download
+PASS wrong-run or stale capture identity cannot publish catalog identity or download
+PASS legacy summaries remain unavailable rather than zero
+PASS partial validation preserves interrupted bytes
+PASS reused directory cannot overwrite closed segment
+PASS independent libpcap opens PCAPNG
+PASS independent reader verifies packet length and timestamp
+PASS quota preserves partial file without false completion
+M3 tests passed

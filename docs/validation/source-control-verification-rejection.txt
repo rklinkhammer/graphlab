@@ -1,0 +1,13 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/source-rejection-verification.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:32570) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+REPRODUCED: rejected request remains requested; all source buttons disabled and retry/error disappear after successful polling
+  ✓  1 tests/source-rejection-verification.spec.ts:230:1 › verification: rejected source command becomes unrecoverable after refresh (2.2s)
+
+  1 passed (2.6s)

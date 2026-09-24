@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graphlab.source-control/v1",
+  "title": "Source control HTTP command body (run is owned by the route)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "node", "instance", "epoch", "source", "action", "requestId"],
+  "properties": {
+    "apiVersion": {"const": "graphlab.source-control/v1"},
+    "node": {"type": "string", "minLength": 1, "maxLength": 128},
+    "instance": {"type": "string", "minLength": 1, "maxLength": 128},
+    "epoch": {"type": "string", "pattern": "^[a-f0-9]{32}$"},
+    "source": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"},
+    "action": {"enum": ["pause", "resume"]},
+    "requestId": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,64}$"}
+  }
+}

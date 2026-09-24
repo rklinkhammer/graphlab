@@ -245,9 +245,69 @@ int main(int argc, char **argv) {
           "closed capture manifest");
     check(writer.segments()[0]["statistics"]["dropped"].is_null(), "unknown drops remain null");
     writer.open();
-    writer.packet(1700000001123456, packet, 60);
+    writer.packet(1700000001123456, packet, 90);
     writer.close({{"received", 2}, {"dropped", 0}});
     check(writer.segments().size() == 2, "rotation preserves both segments");
+    check(writer.segments()[0]["packetLengths"] ==
+              Json({{"apiVersion", "graphlab.capture-lengths/v1"},
+                    {"capturedBytes", "60"},
+                    {"originalBytes", "60"},
+                    {"truncatedPackets", "0"}}),
+          "complete packet lengths recorded exactly");
+    check(writer.segments()[1]["packetLengths"]["originalBytes"] == "90" &&
+              writer.segments()[1]["packetLengths"]["truncatedPackets"] == "1" &&
+              writer.segments()[1]["packetLengths"]["capturedBytes"] == "60",
+          "rotation resets length summaries and records truncation");
+    Json descriptor = {{"id", "metadata"},
+                       {"runId", "metadata-run"},
+                       {"edge", "test-edge"},
+                       {"epoch", "1"},
+                       {"bootId", "boot"},
+                       {"mapping", {{"ifindex", 7}}},
+                       {"directory", output.string()},
+                       {"interface", "test0"},
+                       {"canonicalEndpoint", "a:data0"},
+                       {"snaplen", 65535},
+                       {"byteBudget", 1048576},
+                       {"rotateBytes", 65536},
+                       {"rotateSeconds", 5}};
+    auto manifest = descriptor;
+    manifest["segments"] = writer.segments();
+    graphlab::capture::atomic_json(output / "manifest.json", manifest);
+    Json catalog_run = {{"resources",Json::array()}, {"id", "metadata-run"},
+                        {"captureCoverage", "closed"},
+                        {"captures", Json::array({descriptor})}};
+    auto capture_catalog = graphlab::capture::artifacts(catalog_run)["items"];
+    check(capture_catalog.size() == 2 &&
+              capture_catalog[1]["packetLengths"] == writer.segments()[1]["packetLengths"] &&
+              capture_catalog[1]["canonicalEndpoint"] == "a:data0" &&
+              capture_catalog[1]["captureInterface"] == "test0" && capture_catalog[1]["linkType"] == 1 &&
+              capture_catalog[1]["limits"]["byteBudget"] == 1048576 &&
+              capture_catalog[1]["closedAt"] == writer.segments()[1]["closedAt"],
+          "catalog metadata derives from descriptor and finalized manifest");
+    for (auto key : {"runId", "epoch", "mapping"}) {
+      auto changed = manifest;
+      changed[key] = "different";
+      graphlab::capture::atomic_json(output / "manifest.json", changed);
+      auto missing = graphlab::capture::artifacts(catalog_run)["items"];
+      bool denied = false;
+      try {
+        graphlab::capture::download(catalog_run, "metadata-0", 0);
+      } catch (const Failure &) {
+        denied = true;
+      }
+      check(denied && std::none_of(missing.begin(), missing.end(),
+                                   [](const Json &v) { return v.contains("id"); }),
+            "wrong-run or stale capture identity cannot publish catalog identity or download");
+    }
+    graphlab::capture::atomic_json(output / "manifest.json", manifest);
+    auto legacy = manifest;
+    for (auto &segment : legacy["segments"])
+      segment.erase("packetLengths");
+    graphlab::capture::atomic_json(output / "manifest.json", legacy);
+    check(!graphlab::capture::artifacts(catalog_run)["items"][0].contains("packetLengths"),
+          "legacy summaries remain unavailable rather than zero");
+    graphlab::capture::atomic_json(output / "manifest.json", manifest);
     auto original = std::filesystem::file_size(output / "0.pcapng");
     {
       std::ofstream tail(output / "0.pcapng", std::ios::binary | std::ios::app);

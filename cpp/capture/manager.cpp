@@ -28,8 +28,12 @@ std::string command(std::vector<std::string> args) {
   return r.output;
 }
 Json manifest(const Json &c) {
-  return console::load(std::filesystem::path(c.at("directory").get<std::string>()) /
-                       "manifest.json");
+  auto m =
+      console::load(std::filesystem::path(c.at("directory").get<std::string>()) / "manifest.json");
+  for (auto key : {"id", "runId", "edge", "epoch", "mapping", "bootId"})
+    if (c.contains(key) && (!m.contains(key) || m[key] != c[key]))
+      throw runtime::Failure("capture_manifest_identity_changed", 409);
+  return m;
 }
 bool captured(const Json &r) { return r["topology"]["capture"]["required"] == true; }
 void verify(const Json &c, const Json &s) {
@@ -385,6 +389,8 @@ Json artifacts(const Json &run) {
         result.push_back(partial);
       }
     try {
+      if (c.contains("runId") && c["runId"] != run.at("id"))
+        throw runtime::Failure("capture_run_mismatch", 409);
       auto m = manifest(c);
       for (auto segment : m.at("segments")) {
         segment["id"] =
@@ -392,6 +398,18 @@ Json artifacts(const Json &run) {
         segment["captureId"] = c["id"];
         segment["edge"] = c["edge"];
         segment["epoch"] = c["epoch"];
+        segment["runId"] = run.at("id");
+        segment["provenance"] =
+            "owned capture descriptor and finalized worker manifest; bytes verified on download";
+        segment["canonicalEndpoint"] = c.value("canonicalEndpoint", Json(nullptr));
+        segment["captureInterface"] = c.value("interface", Json(nullptr));
+        segment["captureCoverage"] = run.value("captureCoverage", "unknown");
+        segment["mappingEpoch"] =
+            c.contains("mapping") ? Json(lab_support::digest(c["mapping"])) : Json(nullptr);
+        segment["limits"] = Json::object();
+        for (auto key : {"snaplen", "byteBudget", "rotateBytes", "rotateSeconds"})
+          segment["limits"][key] = c.value(key, Json(nullptr));
+
         result.push_back(segment);
       }
     } catch (...) {
@@ -412,6 +430,8 @@ Json download(const Json &run, const std::string &id, std::uint64_t offset) {
   for (const auto &c : captures) {
     if (!id.starts_with(c.at("id").get<std::string>() + "-"))
       continue;
+    if (c.contains("runId") && c["runId"] != run.at("id"))
+      throw runtime::Failure("capture_run_mismatch", 409);
     auto m = manifest(c);
     for (const auto &s : m.at("segments")) {
       if (id != c.at("id").get<std::string>() + "-" + s.at("sequence").get<std::string>())

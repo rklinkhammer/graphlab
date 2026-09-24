@@ -115,3 +115,8 @@ M6 adds [operational qualification tooling](docs/m6-qualification.md), explicit 
 Application/network console views: [application dataflow mapping contract and example](docs/application-dataflow.md).
 
 [Application-edge telemetry](docs/application-edge-telemetry.md) adds endpoint-owned stream reports, declared protocol metadata, and a separate two-stream TCP qualification fixture in `docker-nodes/app-streams`. Existing node telemetry remains compatible; source-only controls and message correlation are separate increments.
+
+Source-specific pause/resume is documented in [Source controls v1](docs/source-controls.md), including capability/identity requirements, run-quiesce precedence and bounded command retention.
+
+Retained process logs: [snapshot contract, limits and qualification](docs/process-logs.md).
+Capture and diagnostic inspectors: [field provenance, metadata and limitations](docs/capture-inspectors.md).

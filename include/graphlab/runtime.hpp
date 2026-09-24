@@ -10,6 +10,7 @@ struct sqlite3;
 namespace graphlab::packets {
 class History;
 }
+namespace graphlab::process_logs { class History; }
 namespace graphlab::runtime {
 using lab_support::Json;
 struct Failure : std::runtime_error {
@@ -40,12 +41,16 @@ Json docker_json(const std::string &method, const std::string &path, const Json 
 class Backend {
 public:
   virtual ~Backend() = default;
+  virtual bool durable_logs() const { return false; }
   virtual void configure(const std::filesystem::path &) {}
   virtual Json capture_plan(const Json &) { throw Failure("capture_backend_unavailable"); }
   virtual Json capture_control(const Json &, const std::string &) {
     throw Failure("capture_backend_unavailable");
   }
   virtual Json telemetry(const Json &) { return Json::array(); }
+  virtual Json source_control(const Json &, const Json &, const Json &) {
+    throw Failure("source_control_unsupported");
+  }
   virtual Json logs(const Json &, const Json &) { throw Failure("node_logs_unavailable"); }
   virtual Json fault(const Json &, const Json &, const std::string &) {
     throw Failure("fault_backend_unavailable");
@@ -64,6 +69,7 @@ class LinuxBackend final : public Backend {
   std::uint64_t tree_time_ = 0;
 
 public:
+  bool durable_logs() const override { return true; }
   void configure(const std::filesystem::path &p) override {
     capture_root_ = p / "captures";
     state_root_ = p;
@@ -72,6 +78,7 @@ public:
   Json capture_control(const Json &, const std::string &) override;
   Json telemetry(const Json &) override;
   Json logs(const Json &, const Json &) override;
+  Json source_control(const Json &, const Json &, const Json &) override;
   Json fault(const Json &, const Json &, const std::string &) override;
   void preflight(const Json &, const Json &) override;
   Json prepare(const Json &, const Json &) override;
@@ -99,6 +106,8 @@ class Engine {
   void monitor();
   std::optional<Json> m5_dispatch(const Json &, uid_t);
   void m5_monitor();
+  std::optional<Json> source_dispatch(const Json &, uid_t);
+  void source_work();
   void m5_recover();
   void m5_fault_failure(const std::string &, const std::string &, const std::string &);
   void m5_clear(const std::string &);
@@ -106,6 +115,9 @@ class Engine {
   Json samples_ = Json::object();
   std::string collector_ = console::random_hex(12);
   std::unique_ptr<packets::History> packet_history_;
+  std::unique_ptr<process_logs::History> process_logs_;
+  std::size_t log_cursor_ = 0;
+  Json log_candidates();
 
 public:
   Engine(const std::filesystem::path &directory, Backend &, const console::Catalog &);

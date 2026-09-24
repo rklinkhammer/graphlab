@@ -1,0 +1,35 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Using the multi-header code from /Users/rklinkhammer/workspace/graphlab/build/dev/_deps/nlohmann_json-src/include/
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/rklinkhammer/workspace/graphlab/build/dev
+[0/4] Re-checking globbed directories...
+[1/24] Building CXX object CMakeFiles/process_log_tests.dir/tests/process_logs.cpp.o
+[2/24] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/logs/history.cpp.o
+/Users/rklinkhammer/workspace/graphlab/cpp/logs/history.cpp:11:24: warning: unused variable 'global_bytes' [-Wunused-const-variable]
+   11 | constexpr std::int64_t global_bytes = 32 * 1024 * 1024, source_bytes = 4 * 1024 * 1024;
+      |                        ^~~~~~~~~~~~
+/Users/rklinkhammer/workspace/graphlab/cpp/logs/history.cpp:11:57: warning: unused variable 'source_bytes' [-Wunused-const-variable]
+   11 | constexpr std::int64_t global_bytes = 32 * 1024 * 1024, source_bytes = 4 * 1024 * 1024;
+      |                                                         ^~~~~~~~~~~~
+2 warnings generated.
+[3/24] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[4/24] Linking CXX static library libgraphlab_runtime.a
+[5/24] Linking CXX executable lab-guest-template
+[6/24] Linking CXX executable m3_transport
+[7/24] Linking CXX executable lab
+[8/24] Linking CXX executable lab-agent
+[9/24] Linking CXX executable lab-api
+[10/24] Linking CXX executable m1_tests
+[11/24] Linking CXX executable m4_tests
+[12/24] Linking CXX executable m5_tests
+[13/24] Linking CXX executable m6_terminal
+[14/24] Linking CXX executable m5_remediation
+[15/24] Linking CXX executable application_telemetry_tests
+[16/24] Linking CXX executable m2_tests
+[17/24] Linking CXX executable packet_history_tests
+[18/24] Linking CXX executable process_log_tests
+[19/24] Linking CXX executable packet_maintenance_tests
+[20/24] Linking CXX executable source_control_tests
+[21/24] Linking CXX executable m3_tests

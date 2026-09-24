@@ -1,0 +1,25 @@
+Evidence: "/tmp/gl4-wvNKyK"
+PASS guest topology validates
+Evidence: "/tmp/gl4-vGQc4q"
+PASS guest topology validates
+M4 Linux QEMU tests passed
+graphlab-source/app-sources 4428c3666e62
+graphlab-source/app-a d997e865d1fe
+graphlab-edge/app-b e2f02d7b1ccd
+graphlab-edge/app-streams 50dfbaee6bb6
+graphlab-application/app-a 0ec50f05c81e
+graphlab-m7/qemu-runner 802b24b4b250
+graphlab-m6/incompatible 8222997add5c
+graphlab-m6/app-b 679efd9e285d
+graphlab-m6/app-a e3cd8d0ce38c
+graphlab-m6/app-b 3ac729818a7e
+graphlab-m6/app-a 1906c9982dcd
+graphlab-m3/app-b b8e9428c9d62
+graphlab-m6/app-b b8e9428c9d62
+graphlab-m3/app-a be5f4184e81e
+graphlab-m6/app-a be5f4184e81e
+graphlab-m2/app-b 20cad7bf81b8
+graphlab-m2/app-a 820e47417796
+graphlab/guest-q 29c6c9f97bfd
+graphlab/guest-q 29c6c9f97bfd
+graphlab/guest-q a789d3295529

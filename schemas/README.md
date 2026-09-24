@@ -58,3 +58,8 @@ Each step has `id`, `operation`, sorted unique `dependsOn`, and logical `resourc
 M4 guest lock metadata accepts explicit `kvm` or `tcg` acceleration, a versioned machine and firmware hash. Optional `kernelSha256`/`initrdSha256` and `sshUser`/`knownHostsSha256` must each be supplied as a pair. Actual binary and credential checks occur on the Linux executor; schema validation remains read-only. See [guest templates](../qemu-guests/README.md).
 
 `application-edge-telemetry-v1.schema.json` describes optional endpoint-owned edge reports; the shared C++ validator additionally enforces uint64, histogram and temporal consistency, and the agent validates declared topology/instance ownership.
+
+`source-control-v1.schema.json` describes authenticated source commands; runtime validation also enforces ownership, capability, declaration, byte limits and lifecycle state. See [source controls](../docs/source-controls.md).
+
+`graphlab.process-log-snapshot/v1` is the agent-owned retained output contract documented in [process logs](../docs/process-logs.md); consumers cannot submit arbitrary log sources.
+`graphlab.capture-lengths/v1` contains writer-owned decimal captured/original byte totals and truncated-packet counts for finalized PCAPNG segments; see [capture metadata](../docs/capture-inspectors.md).

@@ -1,0 +1,20 @@
+PASS pause affects only selected generator
+PASS old duplicate acknowledgement cannot reapply pause
+PASS conflicting ID rejected
+PASS old process epoch rejected
+PASS unknown fields rejected
+PASS workload 256 record bound never evicts idempotency
+PASS durable requested outcome
+PASS second pending command for the same source rejected
+PASS worker acknowledgement persisted
+PASS agent duplicate does not dispatch again
+PASS ID cannot target replacement instance
+PASS new request wrong instance rejected
+PASS wrong epoch rejected before queuing
+PASS undeclared source owner rejected
+PASS legacy receiver advertises no source control
+PASS transport timeout is uncertain outcome
+PASS mismatched acknowledgement cannot succeed
+PASS restart fences bounded retained commands without replay
+PASS agent 256-record ledger rejects overflow without eviction
+PASS restart sends no old commands

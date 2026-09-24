@@ -1,0 +1,4 @@
+All task fixture runs destroyed
+{"runningContainers": [], "ovsBridges": []}
+inactive
+inactive

@@ -1,0 +1,41 @@
+
+> graphlab-console@0.1.0 test
+> playwright test
+
+
+Running 29 tests using 1 worker
+
+(node:25250) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  -   1 tests/application-edge-live.spec.ts:4:1 › two application streams through real Linux workload, agent, API and console
+  -   2 tests/application-live.spec.ts:5:1 › application reports through Linux workload, persistence, authenticated API and browser
+  ✓   3 tests/console.spec.ts:21:1 › all graph shapes, parallel edges, management, inspector, reload and logout (1.7s)
+  ✓   4 tests/console.spec.ts:48:1 › layout supports variable sizes, reversed parallel edges and self-links (555ms)
+  ✓   5 tests/console.spec.ts:57:1 › invalidated session returns to login on refresh (843ms)
+  ✓   6 tests/console.spec.ts:62:1 › agent loss clears the graph and exposes an unavailable diagnostic (844ms)
+  -   7 tests/m2-live.spec.ts:4:1 › M2 browser admits, quiesces, resumes and destroys a real Linux run
+  -   8 tests/m3-live.spec.ts:4:1 › M3 browser captures, closes and downloads verified artifacts
+  -   9 tests/m4-live.spec.ts:4:1 › M4 recorded shell, WebSocket replay, writer and reconnect
+  -  10 tests/m5-live.spec.ts:4:1 › M5 directional telemetry, fault preview, expiry and timeline
+  -  11 tests/m5-remediation-live.spec.ts:4:1 › M5 skewed browser clock and independent refresh recovery
+  -  12 tests/m6-services-live.spec.ts:14:1 › M6 real CLI/UI faults and independent API/agent restarts while recording
+  -  13 tests/m6-terminal-live.spec.ts:47:1 › M6 paused TCP viewer does not block recording or independent exact replay
+  ✓  14 tests/m6-terminal.spec.ts:10:1 › hostile terminal bytes remain terminal data (485ms)
+  -  15 tests/packet-history-live.spec.ts:7:1 › finalized Linux PCAPNG to authenticated packet history and browser
+  -  16 tests/parity-live.spec.ts:4:1 › parity console through real Linux API, Docker PTY, logs and link telemetry
+  ✓  17 tests/parity.spec.ts:230:1 › application and network views use declared mappings without inferred metrics (590ms)
+  ✓  18 tests/parity.spec.ts:250:1 › application edge reports stay endpoint scoped with exact counters and unavailable metrics (367ms)
+  ✓  19 tests/parity.spec.ts:276:1 › legacy topology has no invented application edges (239ms)
+  ✓  20 tests/parity.spec.ts:282:1 › packet maintenance requires explicit global scope and displays rebuild state (448ms)
+  ✓  21 tests/parity.spec.ts:304:1 › packet history freezes older pages, filters selection and exposes capture references (6.2s)
+  ✓  22 tests/parity.spec.ts:338:1 › topology-scoped run, selected serial, logs, lease release and retained sessions (1.1s)
+  ✓  23 tests/parity.spec.ts:407:1 › directional edge selection, precise counters, history pages, stale overlays and narrow layout (4.8s)
+  ✓  24 tests/parity.spec.ts:451:1 › late writer acquisition cannot authorize a different session (363ms)
+  ✓  25 tests/parity.spec.ts:491:1 › counter epoch reset clears the display baseline and missing rates remain unavailable (1.6s)
+  ✓  26 tests/parity.spec.ts:524:1 › late fault preview cannot enable a different impairment (322ms)
+  ✓  27 tests/parity.spec.ts:547:1 › application measurements remain separate, unavailable and stale states are explicit (15.7s)
+  ✓  28 tests/parity.spec.ts:637:1 › source controls bind identity, show outcomes and fence late selection responses (349ms)
+  -  29 tests/source-control-live.spec.ts:4:1 › source pause/resume through Linux generator, capture, authenticated API and console
+
+  12 skipped
+  17 passed (37.8s)

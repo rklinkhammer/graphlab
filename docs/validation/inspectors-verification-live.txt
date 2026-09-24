@@ -1,0 +1,11 @@
+
+Running 1 test using 1 worker
+
+(node:78476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"captureArtifacts":5,"packets":1318,"independentPcapngAndManifestComparison":true}
+Running as unit: graphlab-inspectors-agent.service; invocation ID: 2cf499c428584e3b9cda684728848707
+{"runId":"c22f34ab-3ebd-4f2f-8ab2-356549630279","id":"8","bytes":59,"independentComparison":true,"authorization":true,"rollover":true,"restart":true,"retainedAfterDestruction":true}
+  ✓  1 tests/inspectors-live.spec.ts:5:1 › capture inspector metadata matches Linux manifests and PCAPNG records (23.6s)
+
+  1 passed (23.9s)

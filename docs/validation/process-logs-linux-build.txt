@@ -1,0 +1,49 @@
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at /tmp/graphlab-m0-source/build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-logs-20260923/build/dev
+[0/2] Re-checking globbed directories...
+[1/14] Building CXX object CMakeFiles/process_log_tests.dir/tests/process_logs.cpp.o
+[2/14] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/logs/history.cpp.o
+[3/14] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[4/14] Linking CXX static library libgraphlab_runtime.a
+[5/14] Linking CXX executable lab-capture
+[6/14] Linking CXX executable lab
+[7/14] Linking CXX executable lab-api
+[8/14] Linking CXX executable process_log_tests
+[9/14] Linking CXX executable lab-agent
+[10/14] Linking CXX executable lab-terminal
+[11/14] Linking CXX executable m2_tests
+[12/14] Linking CXX executable m4_linux
+[13/14] Building CXX object CMakeFiles/process_log_linux.dir/tests/qualification/process_logs_linux.cpp.o
+[14/14] Linking CXX executable process_log_linux
+PASS first bounded snapshot atomically published
+PASS invalid UTF-8 and NUL bytes preserved exactly
+PASS unchanged replay coalesced
+PASS source restart gets distinct artifact and gap
+PASS artifact bound to run
+PASS artifact bound to node
+PASS snapshot byte bound
+PASS older cursor stable while new snapshots arrive
+PASS cursor scope isolation
+PASS storage error visible
+PASS failed commit preserves retained artifacts
+PASS retry after exhaustion/failure publishes once
+PASS retained download rejects checksum corruption
+PASS restart marks source observations stale
+PASS restart records attachment gap
+PASS artifact survives collector restart and absent runtime
+PASS per-source byte retention bounded
+PASS evictions visible
+PASS expired snapshots are pruned and unavailable
+PASS global artifact count bounded
+PASS global artifact byte limit bounded
+PASS source catalog rejects overflow without unbounded tombstones

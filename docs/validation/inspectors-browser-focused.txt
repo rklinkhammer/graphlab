@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:65974) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/parity.spec.ts:754:1 › capture metadata shows provenance and unavailable legacy fields; corrupt downloads fail (505ms)
+  ✓  2 tests/parity.spec.ts:765:1 › network inspector separates stale evidence, unknown state and failure hypotheses (423ms)
+
+  2 passed (1.5s)

@@ -1,0 +1,14 @@
+
+Running 3 tests using 1 worker
+
+(node:79467) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/parity.spec.ts:338:1 › topology-scoped run, selected serial, logs, lease release and retained sessions (1.1s)
+(node:79494) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/parity.spec.ts:338:1 › topology-scoped run, selected serial, logs, lease release and retained sessions (1.2s)
+(node:79503) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/parity.spec.ts:338:1 › topology-scoped run, selected serial, logs, lease release and retained sessions (1.2s)
+
+  3 passed (4.7s)

@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fcntl.h>
 #include <fstream>
+#include <iostream>
 #include <graphlab/qemu.hpp>
 #include <poll.h>
 #include <pty.h>
@@ -119,6 +120,7 @@ int main(int argc, char **argv) {
                              .dump());
     server = listener(dir / "control.sock");
     bool vm = c["kind"] == "qemu";
+    if(vm) std::cerr << "Graphlab QEMU worker attached: " << c["id"].get<std::string>() << std::endl;
     bool leased = false;
     auto deadline = terminal::Clock::time_point::min();
     if (vm) {

@@ -1,4 +1,5 @@
 #include "record_io.hpp"
+#include "source_control.hpp"
 #include <arpa/inet.h>
 #include <array>
 #include <cerrno>
@@ -121,6 +122,10 @@ int run_node(int argc, char **argv, const char *application, bool application_te
 }
 int run_node(int argc, char **argv, const char *application, bool application_telemetry,
              bool edge_telemetry) {
+  return run_node(argc, argv, application, application_telemetry, edge_telemetry, nullptr);
+}
+int run_node(int argc, char **argv, const char *application, bool application_telemetry,
+             bool edge_telemetry, const char *source_target) {
   try {
     if (argc >= 3 && std::string(argv[1]) == "control") {
       std::string command = argv[2];
@@ -172,11 +177,15 @@ int run_node(int argc, char **argv, const char *application, bool application_te
                                                 1000000, 5000000, 10000000};
     const auto began = std::chrono::steady_clock::now();
     std::string epoch;
-    if (application_telemetry) {
+    if (application_telemetry || source_target) {
       std::random_device random;
       for (int i = 0; i < 32; ++i)
         epoch += "0123456789abcdef"[random() & 15];
     }
+    detail::Sources sources(epoch);
+    std::array<std::uint64_t, 2> generated{};
+    FD generator;
+    auto next_send = began;
     struct Stream {
       std::uint64_t received = 0, bytes = 0, errors = 0, rejected = 0, connections = 0, count = 0,
                     sum = 0;
@@ -270,6 +279,41 @@ int run_node(int argc, char **argv, const char *application, bool application_te
           }
         }
       }
+      // No backlog/catch-up: at most one datagram per enabled source per 200 ms tick.
+      // Single-threaded control acknowledgement is after any earlier send syscall.
+      expire();
+      if (source_target && released && std::chrono::steady_clock::now() >= next_send) {
+        next_send = std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
+        if (generator.value < 0) {
+          generator.value = socket(AF_INET, SOCK_DGRAM, 0);
+          auto local = data_address();
+          local.sin_port = 0;
+          if (generator.value < 0 || fcntl(generator.value, F_SETFL, O_NONBLOCK) ||
+              bind(generator.value, reinterpret_cast<sockaddr *>(&local), sizeof(local)))
+            throw std::runtime_error("source_bind_failed");
+        }
+        sockaddr_in target{};
+        target.sin_family = AF_INET;
+        target.sin_port = htons(49000);
+        if (inet_pton(AF_INET, source_target, &target.sin_addr) != 1)
+          throw std::runtime_error("source_target_invalid");
+        for (int i = 0; i < 2; ++i) {
+          expire();
+          if (!released || sources.paused(i))
+            continue;
+          char bytes[16];
+          std::memset(bytes, i == 0 ? 'A' : 'B', sizeof(bytes));
+          if (sendto(generator.value, bytes, sizeof(bytes), 0,
+                     reinterpret_cast<sockaddr *>(&target), sizeof(target)) == 16)
+            ++generated[i];
+        }
+      }
+      if (generator.value >= 0) {
+        char bytes[1500];
+        for (int i = 0; i < 16; ++i)
+          if (recv(generator.value, bytes, sizeof(bytes), 0) < 0)
+            break;
+      }
       if (!(p[0].revents & POLLIN))
         continue;
       FD client{accept(server.value, nullptr, nullptr)};
@@ -278,7 +322,7 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       pollfd input{client.value, POLLIN, 0};
       if (poll(&input, 1, 500) <= 0)
         continue;
-      char buffer[128];
+      char buffer[1024];
       auto n = recv(client.value, buffer, sizeof(buffer), 0);
       if (n <= 0)
         continue;
@@ -289,7 +333,11 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       Json result;
       try {
         expire();
-        if (command == "renew-lease") {
+        if (command.starts_with("source-command ")) {
+          if (!source_target)
+            throw std::runtime_error("source_control_unsupported");
+          result["sourceAcknowledgement"] = sources.apply(Json::parse(command.substr(15)));
+        } else if (command == "renew-lease") {
           if (!released || !leased)
             throw std::runtime_error("lease_expired_or_not_armed");
           deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
@@ -364,6 +412,10 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       result["capabilities"] = Json::array({"quiesce", "traffic-lease"});
       if (application_telemetry)
         result["capabilities"].push_back("application-telemetry/v1");
+      if (source_target) {
+        result["capabilities"].push_back("source-control/v1");
+        result["sourceControl"] = sources.status(generated);
+      }
       result["state"] = released ? "released" : "held";
       result["application"] = application;
       result["echoPackets"] = std::to_string(packets);

@@ -1,0 +1,10 @@
+
+Running 1 test using 1 worker
+
+(node:52864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Running as unit: graphlab-logs-agent.service; invocation ID: d44cf3e86248431ea735cdc5a0635a25
+{"runId":"0750f68c-5f55-4aba-8fb4-a6e0f16d9745","id":"20","bytes":59,"independentComparison":true,"authorization":true,"rollover":true,"restart":true,"retainedAfterDestruction":true}
+  ✓  1 tests/process-logs-live.spec.ts:4:1 › durable Docker log bytes survive restart and destruction (23.5s)
+
+  1 passed (23.8s)

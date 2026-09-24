@@ -633,3 +633,140 @@ test("application measurements remain separate, unavailable and stale states are
     { timeout: 8000 },
   );
 });
+
+test("source controls bind identity, show outcomes and fence late selection responses", async ({page}) => {
+  await setup(page);
+  let release:()=>void=()=>{};let sent:any;
+  await page.route("**/source-controls/query",async route=>{
+    const {node}=route.request().postDataJSON();
+    await route.fulfill({json:{runState:"stopped",instance:"instance-b",commands:[],capability:node==="a"?{apiVersion:"graphlab.source-control/v1",epoch:"epoch-b",sources:[{id:"alpha",state:"running",generatedDatagrams:"9007199254740993"}]}:null}});
+  });
+  await page.route("**/source-controls/command",async route=>{
+    sent=route.request().postDataJSON();await new Promise<void>(r=>{release=r;});await route.fulfill({json:{request:sent,outcome:"acknowledged"}});
+  });
+  await page.getByText("Accessible inventory · all nodes and data edges").click();
+  await page.getByRole("button",{name:"a · docker · runtime ready",exact:true}).click();
+  const panel=page.getByRole("region",{name:"Source controls"});
+  await expect(panel).toContainText("9007199254740993");
+  await panel.getByRole("button",{name:"Pause source alpha",exact:true}).click();
+  await expect(panel).toContainText("requested");await expect(panel.getByRole("button",{name:"Resume source alpha",exact:true})).toBeDisabled();
+  expect(sent).toMatchObject({node:"a",instance:"instance-b",epoch:"epoch-b",source:"alpha",action:"pause"});
+  await page.getByRole("button",{name:"guest · qemu · runtime ready",exact:true}).click();release();
+  await expect(panel).toContainText("Target: guest");await expect(panel.getByRole("button",{name:/Pause source/})).toHaveCount(0);await expect(panel).not.toContainText("acknowledged");
+});
+
+for (const status of [409,429]) test(`source command rejection ${status} stays visible and permits a fresh identity-bound action`, async ({page}) => {
+  await setup(page);
+  let epoch="a".repeat(32), queries=0;
+  const requests:any[]=[];
+  await page.route("**/source-controls/query",async route=>{
+    queries++;
+    await route.fulfill({json:{runState:"ready",instance:`instance-${epoch[0]}`,commands:[],capability:{apiVersion:"graphlab.source-control/v1",epoch,sources:[{id:"alpha",state:"running",generatedDatagrams:"4"}]}}});
+  });
+  await page.route("**/source-controls/command",async route=>{
+    const body=route.request().postDataJSON();requests.push(body);
+    if(requests.length===1){epoch="b".repeat(32);await route.fulfill({status,json:{error:{code:status===409?"source_epoch_changed":"source_command_capacity"}}});}
+    else await route.fulfill({json:{request:body,outcome:"acknowledged"}});
+  });
+  await page.getByText("Accessible inventory · all nodes and data edges").click();
+  await page.getByRole("button",{name:"a · docker · runtime ready",exact:true}).click();
+  const panel=page.getByRole("region",{name:"Source controls"});
+  await panel.getByRole("button",{name:"Pause source alpha",exact:true}).click();
+  await expect(panel.getByRole("status")).toContainText("failed");
+  await expect(panel.getByRole("button",{name:"Pause source alpha",exact:true})).toBeEnabled();
+  await expect.poll(()=>queries).toBeGreaterThan(2);
+  await expect(panel.getByRole("alert")).toContainText(status===409?"source epoch changed":"source command capacity");
+  await expect(panel.getByRole("status")).toContainText("failed");
+  if(status===409)await panel.screenshot({path:resolve("../../docs/validation/source-control-remediation-recovery.png")});
+  await panel.getByRole("button",{name:"Resume source alpha",exact:true}).click();
+  await expect(panel.getByRole("status")).toContainText("acknowledged");
+  await expect(panel.getByRole("button",{name:"Pause source alpha",exact:true})).toBeEnabled();
+  expect(requests[1]).toMatchObject({instance:"instance-b",epoch:"b".repeat(32),action:"resume"});
+  expect(requests[1].requestId).not.toBe(requests[0].requestId);
+});
+
+for(const failure of ["server","network"])test(`uncertain source ${failure} failure retains retry across successful polling`, async({page})=>{
+  await setup(page);
+  let queries=0;
+  const requests:any[]=[];
+  await page.route("**/source-controls/query",async route=>{
+    queries++;
+    await route.fulfill({json:{runState:"ready",instance:"instance-a",commands:[],capability:{apiVersion:"graphlab.source-control/v1",epoch:"a".repeat(32),sources:[{id:"alpha",state:"running",generatedDatagrams:"4"}]}}});
+  });
+  await page.route("**/source-controls/command",async route=>{
+    const body=route.request().postDataJSON();requests.push(body);
+    if(requests.length===1){if(failure==="network")await route.abort("failed");else await route.fulfill({status:503,json:{error:{code:"agent_unavailable"}}});}
+    else await route.fulfill({json:{request:body,outcome:"acknowledged"}});
+  });
+  await page.getByText("Accessible inventory · all nodes and data edges").click();
+  await page.getByRole("button",{name:"a · docker · runtime ready",exact:true}).click();
+  const panel=page.getByRole("region",{name:"Source controls"});
+  await panel.getByRole("button",{name:"Pause source alpha",exact:true}).click();
+  await expect(panel.getByRole("status")).toContainText("unknown");
+  await expect.poll(()=>queries).toBeGreaterThan(2);
+  await expect(panel.getByRole("button",{name:"Pause source alpha",exact:true})).toBeDisabled();
+  await expect(panel.getByRole("alert")).toBeVisible();
+  await panel.getByRole("button",{name:"Retry same request",exact:true}).click();
+  await expect(panel.getByRole("status")).toContainText("acknowledged");
+  await expect(panel.getByRole("button",{name:"Pause source alpha",exact:true})).toBeEnabled();
+  expect(requests[1]).toEqual(requests[0]);
+});
+
+test("retained process logs freeze pages, scope search and verify exact-byte downloads",async({page})=>{
+ await setup(page);let queries=0;const bytes=Buffer.from([0,255,60,115,99,114,105,112,116,62,10]);
+ const source={id:"qemu-worker",stale:true,evicted:"2",error:""};
+ const item=(id:string)=>({id,sourceId:"qemu-worker",observedAt:"2026-09-23",size:"11",gap:"snapshot_boundary",generation:"g"});
+ await page.route("**/process-logs/query",async route=>{queries++;const p=route.request().postDataJSON();expect(p.node).toBe("guest");await route.fulfill({json:{sources:[source],items:[item(p.cursor?"1":"2")],nextCursor:p.cursor?null:"frozen-page",coverage:"bounded"}});});
+ await page.route("**/process-logs/download",async route=>{const p=route.request().postDataJSON();expect(p.node).toBe("guest");await route.fulfill({json:{...item(p.id),sha256:"fixture-checksum",base64:bytes.toString("base64")}});});
+ await page.getByText("Accessible inventory · all nodes and data edges").click();await page.getByRole("button",{name:"guest · qemu · runtime ready",exact:true}).click();await page.getByRole("button",{name:"Logs",exact:true}).click();await page.getByRole("button",{name:"Retained log artifacts",exact:true}).click();
+ const panel=page.getByRole("region",{name:"Retained process logs"});await expect(panel).toContainText("2 snapshots evicted");await panel.getByRole("button",{name:"Older log snapshots",exact:true}).click();await expect(panel).toContainText("Frozen older page");await expect(panel.getByRole("button",{name:"Inspect log 1",exact:true})).toBeVisible();const frozen=queries;await page.waitForTimeout(3300);expect(queries).toBe(frozen);
+ await panel.getByRole("button",{name:"Inspect log 1",exact:true}).click();await expect(panel.locator("pre")).toContainText("<script>");expect(await panel.locator("script").count()).toBe(0);await expect(panel).toContainText("invalid UTF-8");
+ const pending=page.waitForEvent("download");await panel.getByRole("button",{name:"Download log 1",exact:true}).click();const download=await pending;const stream=await download.createReadStream();const chunks:Buffer[]=[];for await(const chunk of stream!)chunks.push(Buffer.from(chunk));expect(Buffer.concat(chunks)).toEqual(bytes);
+ await panel.getByLabel("Search selected snapshot").fill("absent");await expect(panel.locator("pre")).toHaveText("");await panel.getByLabel("Search selected snapshot").fill("<script>");await expect(panel.locator("pre")).toContainText("<script>");
+ await panel.screenshot({path:resolve("../../docs/validation/process-logs-browser.png")});await panel.getByRole("button",{name:"Return to newest logs",exact:true}).click();await expect(panel.getByRole("button",{name:"Inspect log 2",exact:true})).toBeVisible();
+ await panel.getByLabel("Log source").selectOption("qemu-worker");await expect(panel.locator("pre")).toHaveCount(0);await expect(panel.getByRole("button",{name:"Inspect log 2",exact:true})).toBeVisible();
+ await page.route("**/process-logs/download",r=>r.fulfill({status:409,json:{error:{code:"log_artifact_checksum_mismatch"}}}));await panel.getByRole("button",{name:"Download log 2",exact:true}).click();await expect(panel.getByRole("alert")).toContainText("checksum mismatch");
+});
+
+for(const failure of ["checksum","network"])test(`retained log ${failure} error survives catalog polling until retry or scope change`,async({page})=>{
+ await setup(page);let queries=0,failDownload=true,failQuery=false;
+ const item={id:"2",sourceId:"qemu-worker",size:"8",gap:"snapshot_boundary",generation:"g"};
+ await page.route("**/process-logs/query",async route=>{
+   queries++;
+   if(failQuery)return route.fulfill({status:503,json:{error:{code:"log_database_error"}}});
+   await route.fulfill({json:{sources:[{id:"qemu-worker",evicted:"0",stale:false}],items:[{...item,observedAt:`poll-${queries}`}],nextCursor:null}});
+ });
+ await page.route("**/process-logs/download",async route=>{
+   if(failDownload){if(failure==="network")return route.abort("failed");return route.fulfill({status:409,json:{error:{code:"log_artifact_checksum_mismatch"}}});}
+   await route.fulfill({json:{...item,sha256:"fixture",base64:Buffer.from("retained").toString("base64")}});
+ });
+ await page.getByText("Accessible inventory · all nodes and data edges").click();await page.getByRole("button",{name:"guest · qemu · runtime ready",exact:true}).click();await page.getByRole("button",{name:"Logs",exact:true}).click();await page.getByRole("button",{name:"Retained log artifacts",exact:true}).click();
+ const panel=page.getByRole("region",{name:"Retained process logs"}),artifactError=panel.getByRole("alert").filter({hasText:"Artifact:"}),catalogError=panel.getByRole("alert").filter({hasText:"Catalog:"});
+ await panel.getByRole("button",{name:"Download log 2",exact:true}).click();await expect(artifactError).toBeVisible();if(failure==="checksum")await expect(artifactError).toContainText("checksum mismatch");
+ const before=queries;await expect.poll(()=>queries).toBeGreaterThan(before);await expect(panel).toContainText(`poll-${queries}`);await expect(artifactError).toBeVisible();
+ // A failed catalog poll and its recovery must not erase the action failure either.
+ failQuery=true;await expect(catalogError).toBeVisible();await expect(artifactError).toBeVisible();
+ failDownload=false;await panel.getByRole("button",{name:"Inspect log 2",exact:true}).click();await expect(panel.locator("pre")).toHaveText("retained");await expect(artifactError).toHaveCount(0);await expect(catalogError).toBeVisible();
+ failQuery=false;await expect(catalogError).toHaveCount(0);
+ failDownload=true;await panel.getByRole("button",{name:"Download log 2",exact:true}).click();await expect(artifactError).toBeVisible();await panel.getByLabel("Log source").selectOption("qemu-worker");await expect(artifactError).toHaveCount(0);await expect(panel.locator("pre")).toHaveCount(0);
+});
+
+test("capture metadata shows provenance and unavailable legacy fields; corrupt downloads fail",async({page})=>{
+ await setup(page);
+ await page.route("**/artifacts",r=>r.fulfill({json:{items:[{id:"cap-0",edge:"link",epoch:"1",state:"closed",size:"3",sha256:"sha256:wrong",format:"pcapng",linkType:1,canonicalEndpoint:"guest:p1",captureInterface:"tap0",mappingEpoch:"mapping-1",captureCoverage:"closed",closedAt:"2026-09-23T12:00:00Z",packets:"2",packetLengths:{capturedBytes:"60",originalBytes:"90",truncatedPackets:"1"},limits:{snaplen:65535,byteBudget:1048576,rotateBytes:65536,rotateSeconds:5},provenance:"owned capture descriptor and finalized worker manifest; bytes verified on download"},{id:"legacy-0",edge:"link",state:"closed",size:"3",sha256:"sha256:wrong"}]}}));
+ await page.route("**/artifacts/cap-0/chunks/0",r=>r.fulfill({json:{base64:"YWJj",eof:true,next:"3"}}));
+ await page.getByText("Capture metadata cap-0",{exact:true}).click();const detail=page.locator("#artifact-cap-0");
+ await expect(detail).toContainText("guest:p1");await expect(detail).toContainText("tap0");await expect(detail).toContainText("1 · Ethernet");await expect(detail).toContainText("60 / 90");await expect(detail).toContainText("2026-09-23T12:00:00Z");await expect(detail).toContainText("excluding PCAPNG overhead");
+ await page.getByText("Capture metadata legacy-0",{exact:true}).click();await expect(page.locator("#artifact-legacy-0")).toContainText("Unavailable / Unavailable");
+ await detail.getByRole("button",{name:"Download PCAPNG (3 bytes)",exact:true}).click();await expect(page.getByRole("alert")).toContainText("checksum mismatch");
+ await detail.screenshot({path:resolve("../../docs/validation/inspectors-capture.png")});
+});
+
+test("network inspector separates stale evidence, unknown state and failure hypotheses",async({page})=>{
+ await setup(page);
+ await page.route("**/telemetry/query",r=>r.fulfill({json:{items:[],current:{link:{...sample,stale:true,adminUp:false,carrierUp:true,reason:"stats64_unavailable",mapping:{name:"tap7",ifindex:7},rstp:{},rstpObservedMonotonicNs:"123456"}}}}));
+ await page.getByText("Accessible inventory · all nodes and data edges").click();await page.getByRole("button",{name:/^link: guest/}).click();
+ const evidence=page.getByRole("region",{name:"Network observation evidence"});await expect(evidence).toContainText("Down / Up");await expect(evidence).toContainText("may be stale");await expect(evidence).toContainText("stats64_unavailable");await expect(evidence).toContainText("root cause: undetermined");await expect(evidence).toContainText("Unknown");
+ await evidence.getByText("Observed runtime interface mapping",{exact:true}).click();await expect(evidence).toContainText("tap7");await evidence.getByText("Observed RSTP ports",{exact:true}).click();await expect(evidence).toContainText("RSTP unavailable or not applicable");
+ await evidence.screenshot({path:resolve("../../docs/validation/inspectors-network.png")});
+});

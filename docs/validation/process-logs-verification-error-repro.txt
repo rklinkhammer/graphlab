@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:54936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/process-logs-verification-repro.spec.ts:715:1 › retained process logs freeze pages, scope search and verify exact-byte downloads (12.9s)
+
+
+  1) tests/process-logs-verification-repro.spec.ts:715:1 › retained process logs freeze pages, scope search and verify exact-byte downloads 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('region', { name: 'Retained process logs' }).getByRole('alert')
+    Expected substring: "checksum mismatch"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByRole('region', { name: 'Retained process logs' }).getByRole('alert') with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Retained process logs' }).getByRole('alert')
+
+
+      726 |  await panel.screenshot({path:resolve("../../docs/validation/process-logs-browser.png")});await panel.getByRole("button",{name:"Return to newest logs",exact:true}).click();await expect(panel.getByRole("button",{name:"Inspect log 2",exact:true})).toBeVisible();
+      727 |  await panel.getByLabel("Log source").selectOption("qemu-worker");await expect(panel.locator("pre")).toHaveCount(0);await expect(panel.getByRole("button",{name:"Inspect log 2",exact:true})).toBeVisible();
+    > 728 |  await page.route("**/process-logs/download",r=>r.fulfill({status:409,json:{error:{code:"log_artifact_checksum_mismatch"}}}));await panel.getByRole("button",{name:"Download log 2",exact:true}).click();await expect(panel.getByRole("alert")).toContainText("checksum mismatch");const beforeRefresh=queries;await expect.poll(()=>queries).toBeGreaterThan(beforeRefresh);await expect(panel.getByRole("alert")).toContainText("checksum mismatch");
+          |                                                                                                                                                                                                                                                                                                                                                                                                                     ^
+      729 | });
+      730 |
+        at /Users/rklinkhammer/workspace/graphlab/console/web/tests/process-logs-verification-repro.spec.ts:728:405
+
+    Error Context: test-results/process-logs-verification--c81e4-verify-exact-byte-downloads/error-context.md
+
+    Error Context: test-results/process-logs-verification--c81e4-verify-exact-byte-downloads/error-context.md
+
+  1 failed
+    tests/process-logs-verification-repro.spec.ts:715:1 › retained process logs freeze pages, scope search and verify exact-byte downloads 

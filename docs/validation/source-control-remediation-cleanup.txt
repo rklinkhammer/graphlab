@@ -1,0 +1,4 @@
+All fixture runs destroyed
+{"runningContainers": [], "ovsBridges": []}
+inactive
+inactive

@@ -138,7 +138,7 @@ DockerResponse docker_request(const std::string &method, const std::string &path
   boost::beast::flat_buffer buffer;
   http::response_parser<http::string_body> parser;
   parser.body_limit(4 * 1024 * 1024);
-  bool success = false;
+  bool success = false, timed_out = false;
   auto finish = [&] {
     boost::system::error_code ec;
     socket.close(ec);
@@ -146,8 +146,10 @@ DockerResponse docker_request(const std::string &method, const std::string &path
   };
   timer.expires_after(std::chrono::seconds(15));
   timer.async_wait([&](auto ec) {
-    if (!ec)
+    if (!ec) {
+      timed_out = true;
       finish();
+    }
   });
   socket.async_connect(asio::local::stream_protocol::endpoint("/var/run/docker.sock"),
                        [&](auto ec) {
@@ -164,7 +166,7 @@ DockerResponse docker_request(const std::string &method, const std::string &path
                        });
   io.run();
   if (!success)
-    throw Failure("docker_unavailable", 503);
+    throw Failure(timed_out ? "docker_timeout" : "docker_unavailable", 503);
   return {parser.get().result_int(), parser.get().body()};
 }
 Json docker_json(const std::string &method, const std::string &path, const Json &body) {

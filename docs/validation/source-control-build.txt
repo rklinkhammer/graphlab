@@ -1,0 +1,20 @@
+[0/2] Re-checking globbed directories...
+[1/20] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/process.cpp.o
+[2/20] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[3/20] Linking CXX static library libgraphlab_runtime.a
+[4/20] Linking CXX executable lab-agent
+[5/20] Linking CXX executable lab
+[6/20] Linking CXX executable lab-api
+[7/20] Linking CXX executable m1_tests
+[8/20] Linking CXX executable lab-guest-template
+[9/20] Linking CXX executable m4_tests
+[10/20] Linking CXX executable m3_transport
+[11/20] Linking CXX executable m2_tests
+[12/20] Linking CXX executable m5_tests
+[13/20] Linking CXX executable m6_terminal
+[14/20] Linking CXX executable m5_remediation
+[15/20] Linking CXX executable m3_tests
+[16/20] Linking CXX executable application_telemetry_tests
+[17/20] Linking CXX executable packet_history_tests
+[18/20] Linking CXX executable packet_maintenance_tests
+[19/20] Linking CXX executable source_control_tests

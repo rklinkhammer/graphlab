@@ -1,0 +1,2 @@
+Running as unit: graphlab-logs-agent.service; invocation ID: fde79df41ed4482b87d7d479e412562a
+Running as unit: graphlab-logs-api.service; invocation ID: 243c28a3f7b347ba80c76cb30ff58230

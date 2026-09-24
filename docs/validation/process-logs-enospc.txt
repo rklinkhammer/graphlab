@@ -1,0 +1,5 @@
+PASS refuse exhaustion outside small dedicated tmpfs
+log_storage_full
+PASS real ENOSPC fails optional log publication
+PASS ENOSPC leaves committed artifact intact
+PASS retry after freeing space publishes complete artifact

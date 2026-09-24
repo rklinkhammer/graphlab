@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { CaptureDetails } from "./capture-details";
+import { SourceControls } from "./source-controls";
 import { ApplicationTelemetry } from "./application-telemetry";
 import { PacketHistory } from "./packet-history";
 import { Telemetry } from "./telemetry";
@@ -400,7 +402,7 @@ export function Execution({
               {a.id && <small>{a.id} · </small>}
               {a.edge} · {a.mediaType ?? "application/x-pcapng"} ·{" "}
               {a.size ?? "unknown"} bytes · epoch {a.epoch ?? "?"} · {a.state}
-              {a.id && a.state === "closed" && (
+              <CaptureDetails artifact={a}/>{a.mediaType !== "application/x-graphlab-terminal" && a.edge && <button onClick={()=>onEdge(a.edge)}>Inspect network edge {a.edge}</button>}{a.id && a.state === "closed" && (
                 <button disabled={pending} onClick={() => download(a)}>
                   Download{" "}
                   {a.mediaType === "application/x-graphlab-terminal"
@@ -435,6 +437,7 @@ export function Execution({
               setTimeout(() => { const item = document.getElementById(`artifact-${id}`); item?.scrollIntoView({behavior: "smooth"}); item?.focus(); }, 0);
             }}
           />
+          <SourceControls key={`sources-${inspected!.id}-${selectedNode}`} runId={inspected!.id} node={selectedNode} csrf={csrf} api={api} />
           <ApplicationTelemetry
             key={`application-${inspected!.id}`}
             runId={inspected!.id}

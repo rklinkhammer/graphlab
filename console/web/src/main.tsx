@@ -1,3 +1,4 @@
+import { ApiError } from "./api-error";
 import React, { useEffect, useState, useCallback } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -81,7 +82,8 @@ async function api(path: string, init?: RequestInit) {
   });
   if (!response.ok) {
     const detail = await response.json().catch(() => null);
-    throw new Error(
+    throw new ApiError(
+      response.status,
       response.status === 401
         ? "Sign in to continue."
         : response.status === 503
@@ -345,6 +347,8 @@ function App() {
               <button aria-pressed={applicationEdge === flow.id} onClick={() => {setSelectedNode(""); setSelectedEdge(""); setApplicationEdge(flow.id); setViewMode("application");}}>{flow.id}: {flow.source} → {flow.target}</button>
               {selectedEdge && flow.networkEdges.includes(selectedEdge) && <span> · maps selected network edge</span>}
               {applicationEdge === flow.id && <div>
+                {!flow.protocol && <p>Application protocol, framing and schema: unspecified.</p>}
+                <p>Provenance: validated topology {inventory.topologyHash}; application-edge declaration.</p>
                 {flow.protocol && <p>Declared protocol: {flow.protocol.transport} · framing {flow.protocol.framing} · schema {flow.protocol.schema}. Not runtime protocol verification.</p>}
                 <p>Declared network association; not an observed route, exclusive allocation, or message-to-packet correlation.</p>
                 <button onClick={() => chooseNode(flow.source)}>Inspect source {flow.source}</button>{" "}
@@ -478,7 +482,11 @@ function App() {
                   {selectedNode ? "Open node console" : "Open link performance"}
                 </button>
               )}
-              <pre>{JSON.stringify(selection, null, 2)}</pre>
+              <section aria-label="Resource provenance"><p>Provenance: validated topology and agent-owned runtime identity snapshot. Runtime mappings do not establish current reachability.</p>
+              <p>Runtime snapshot observed: {inventory?.runtimeObservedAt ?? "Unavailable"} · generated: {inventory?.generatedAt ?? "Unavailable"}</p>
+              <p>Shared failure domains: {inventory?.failureDomains?.length ? inventory.failureDomains.map(d=>`${d.id}: ${d.state} — ${d.description}`).join("; ") : "Unavailable"}. These describe shared resources, not an observed cause of failure.</p>
+              <p>Use the selected edge's link-performance panel for independently timestamped interface/RSTP observations and the run's catalog for capture coverage.</p></section>
+              <details><summary>Declared resource and runtime identity</summary><pre>{JSON.stringify(selection, null, 2)}</pre></details>
             </>
           ) : (
             <>
