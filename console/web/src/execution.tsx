@@ -33,6 +33,7 @@ export function Execution({
   required,
   selectedNode,
   selectedEdge,
+  applicationEdge = "",
   onEdge,
   onRates,
 }: {
@@ -42,6 +43,7 @@ export function Execution({
   required: boolean;
   selectedNode: string;
   selectedEdge: string;
+  applicationEdge?: string;
   onEdge: (id: string) => void;
   onRates: (v: Record<string, string>) => void;
 }) {
@@ -437,6 +439,7 @@ export function Execution({
             key={`application-${inspected!.id}`}
             runId={inspected!.id}
             node={selectedNode}
+            edge={applicationEdge}
             csrf={csrf}
             api={api}
           />

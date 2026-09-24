@@ -1,3 +1,4 @@
+#include "record_io.hpp"
 #include <arpa/inet.h>
 #include <array>
 #include <cerrno>
@@ -74,11 +75,52 @@ std::string probe(const std::string &ip) {
              ? "received"
              : "timeout";
 }
+using detail::record_io;
+std::string stream_probe(const std::string &ip, char stream, detail::Deadline traffic_deadline) {
+  FD fd{socket(AF_INET, SOCK_STREAM, 0)};
+  if (fd.value < 0 || fcntl(fd.value, F_SETFL, O_NONBLOCK))
+    throw std::runtime_error("probe_socket");
+  auto local = data_address();
+  local.sin_port = 0;
+  if (bind(fd.value, reinterpret_cast<sockaddr *>(&local), sizeof(local)))
+    throw std::runtime_error("data_bind_failed");
+  sockaddr_in remote{};
+  remote.sin_family = AF_INET;
+  remote.sin_port = htons(49001);
+  if (inet_pton(AF_INET, ip.c_str(), &remote.sin_addr) != 1)
+    throw std::runtime_error("invalid_address");
+  if (detail::Clock::now() >= traffic_deadline)
+    return "timeout";
+  if (connect(fd.value, reinterpret_cast<sockaddr *>(&remote), sizeof(remote)) &&
+      errno != EINPROGRESS)
+    return "timeout";
+  if (!detail::wait_ready(
+          fd.value, POLLOUT,
+          std::min(traffic_deadline, detail::Clock::now() + std::chrono::milliseconds(500))))
+    return "timeout";
+  int error = 0;
+  socklen_t size = sizeof(error);
+  if (getsockopt(fd.value, SOL_SOCKET, SO_ERROR, &error, &size) || error)
+    return "timeout";
+  char bytes[16];
+  std::memset(bytes, stream, sizeof(bytes));
+  if (!record_io(fd.value, bytes, true, traffic_deadline) ||
+      !record_io(fd.value, bytes, false, traffic_deadline))
+    return "timeout";
+  for (char c : bytes)
+    if (c != stream)
+      return "mismatch";
+  return "received";
+}
 } // namespace
 int run_node(int argc, char **argv, const char *application) {
   return run_node(argc, argv, application, false);
 }
 int run_node(int argc, char **argv, const char *application, bool application_telemetry) {
+  return run_node(argc, argv, application, application_telemetry, false);
+}
+int run_node(int argc, char **argv, const char *application, bool application_telemetry,
+             bool edge_telemetry) {
   try {
     if (argc >= 3 && std::string(argv[1]) == "control") {
       std::string command = argv[2];
@@ -135,11 +177,22 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       for (int i = 0; i < 32; ++i)
         epoch += "0123456789abcdef"[random() & 15];
     }
+    struct Stream {
+      std::uint64_t received = 0, bytes = 0, errors = 0, rejected = 0, connections = 0, count = 0,
+                    sum = 0;
+      std::array<std::uint64_t, 8> buckets{};
+    };
+    std::array<Stream, 2> streams{};
+    FD tcp;
     FD data;
     auto expire = [&] {
       if (leased && std::chrono::steady_clock::now() >= deadline) {
         released = false;
         leased = false;
+        if (tcp.value >= 0) {
+          close(tcp.value);
+          tcp.value = -1;
+        }
         if (data.value >= 0) {
           close(data.value);
           data.value = -1;
@@ -148,10 +201,43 @@ int run_node(int argc, char **argv, const char *application, bool application_te
     };
     while (!stopped) {
       expire();
-      pollfd p[2] = {{server.value, POLLIN, 0}, {data.value, POLLIN, 0}};
-      if (poll(p, 2, 100) < 0)
+      pollfd p[3] = {{server.value, POLLIN, 0}, {data.value, POLLIN, 0}, {tcp.value, POLLIN, 0}};
+      if (poll(p, 3, 100) < 0)
         continue;
       expire();
+      if (released && tcp.value >= 0 && (p[2].revents & POLLIN)) {
+        FD peer{accept(tcp.value, nullptr, nullptr)};
+        if (peer.value >= 0 && !fcntl(peer.value, F_SETFL, O_NONBLOCK)) {
+          const auto traffic_deadline = leased ? deadline : detail::Deadline::max();
+          char bytes[16];
+          if (record_io(peer.value, bytes, false, traffic_deadline) &&
+              (bytes[0] == 'A' || bytes[0] == 'B')) {
+            auto started = std::chrono::steady_clock::now();
+            auto &stream = streams[bytes[0] == 'A' ? 0 : 1];
+            ++stream.connections;
+            ++stream.received;
+            stream.bytes += 16;
+            bool valid = true;
+            for (char c : bytes)
+              valid &= c == bytes[0];
+            if (!valid)
+              ++stream.rejected;
+            else if (record_io(peer.value, bytes, true, traffic_deadline)) {
+              auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                            std::chrono::steady_clock::now() - started)
+                            .count();
+              ++stream.count;
+              stream.sum += ns;
+              std::size_t bucket = 0;
+              while (bucket < 7 && static_cast<std::uint64_t>(ns) > latency_bounds[bucket])
+                ++bucket;
+              ++stream.buckets[bucket];
+            } else
+              ++stream.errors;
+          }
+        }
+      }
+      expire(); // TCP I/O may have consumed the remaining traffic lease.
       if (p[1].revents & POLLIN) {
         char buffer[1500];
         sockaddr_in peer{};
@@ -231,13 +317,38 @@ int run_node(int argc, char **argv, const char *application, bool application_te
               }
             }
           }
+          if (edge_telemetry && tcp.value < 0) {
+            auto local = data_address();
+            local.sin_port = htons(49001);
+            tcp.value = socket(AF_INET, SOCK_STREAM, 0);
+            int reuse = 1;
+            setsockopt(tcp.value, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+            if (tcp.value < 0 || fcntl(tcp.value, F_SETFL, O_NONBLOCK) ||
+                bind(tcp.value, reinterpret_cast<sockaddr *>(&local), sizeof(local)) ||
+                listen(tcp.value, 8)) {
+              if (tcp.value >= 0)
+                close(tcp.value);
+              tcp.value = -1;
+              throw std::runtime_error("stream_listener_failed");
+            }
+          }
         } else if (command == "quiesce") {
+          if (tcp.value >= 0) {
+            close(tcp.value);
+            tcp.value = -1;
+          }
           released = false;
           leased = false;
           if (data.value >= 0) {
             close(data.value);
             data.value = -1;
           }
+        } else if (command.starts_with("probe-alpha ") || command.starts_with("probe-beta ")) {
+          if (!released)
+            throw std::runtime_error("gate_held");
+          result["probe"] = stream_probe(command.substr(command.find(' ') + 1),
+                                         command.starts_with("probe-alpha") ? 'A' : 'B',
+                                         leased ? deadline : detail::Deadline::max());
         } else if (command.starts_with("probe ")) {
           if (!released)
             throw std::runtime_error("gate_held");
@@ -247,6 +358,7 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       } catch (const std::exception &e) {
         result["error"] = e.what();
       }
+      expire();
       result["apiVersion"] = "graphlab.gate/v1";
       result["protocolMinor"] = node_gate_minor;
       result["capabilities"] = Json::array({"quiesce", "traffic-lease"});
@@ -280,6 +392,39 @@ int run_node(int argc, char **argv, const char *application, bool application_te
               {"count", std::to_string(sent)},
               {"sumNs", std::to_string(latency_sum)},
               {"buckets", buckets}}}};
+      }
+      if (edge_telemetry && command == "status") {
+        result["capabilities"].push_back("application-edge-telemetry/v1");
+        result["applicationEdgeTelemetry"] = Json::array();
+        for (int i = 0; i < 2; i++) {
+          auto &stream = streams[i];
+          Json buckets = Json::array();
+          for (auto n : stream.buckets)
+            buckets.push_back(std::to_string(n));
+          result["applicationEdgeTelemetry"].push_back(
+              {{"apiVersion", "graphlab.application-edge-telemetry/v1"},
+               {"edge", i == 0 ? "alpha" : "beta"},
+               {"endpoint", "target"},
+               {"stream", i == 0 ? "alpha" : "beta"},
+               {"epoch", epoch},
+               {"sequence", std::to_string(sequence)},
+               {"elapsedNs", result["applicationTelemetry"]["elapsedNs"]},
+               {"counters",
+                {{"sentMessages", nullptr},
+                 {"sentPayloadBytes", nullptr},
+                 {"receivedMessages", std::to_string(stream.received)},
+                 {"receivedPayloadBytes", std::to_string(stream.bytes)},
+                 {"errors", std::to_string(stream.errors)},
+                 {"rejectedMessages", std::to_string(stream.rejected)},
+                 {"backpressureEvents", nullptr},
+                 {"backpressureNs", nullptr},
+                 {"reconnects", std::to_string(stream.connections ? stream.connections - 1 : 0)}}},
+               {"latency",
+                {{"kind", "local-service-time"},
+                 {"count", std::to_string(stream.count)},
+                 {"sumNs", std::to_string(stream.sum)},
+                 {"buckets", buckets}}}});
+        }
       }
       result["dataReady"] = data.value >= 0;
       result["leaseActive"] = leased && released;

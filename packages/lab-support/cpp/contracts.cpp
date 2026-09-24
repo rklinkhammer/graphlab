@@ -223,7 +223,8 @@ Result<ValidatedTopology> validate(const Json &t, const Json &lock) {
     validate_lock(lock);
     fields(t, "topology",
            {"apiVersion", "id", "artifactLock", "backend", "management", "nodes", "edges",
-            "managementAttachments", "capture", "requiredFeatures", "limits", "loopPolicy"});
+            "managementAttachments", "capture", "requiredFeatures", "limits", "loopPolicy",
+            "application"});
     if (getstr(t, "apiVersion", "topology") != "graphlab.topology/v2")
       fail("topology.apiVersion", "unsupported topology major", "unsupported_version");
     id(getstr(t, "id", "topology"), "topology.id");
@@ -398,6 +399,58 @@ Result<ValidatedTopology> validate(const Json &t, const Json &lock) {
       if (a == b && (ak != "ovs-switch" || loop != "unprotected"))
         fail(p, "self-links require switch ports and explicit unprotected loopPolicy");
       out.edges.push_back({key, first, second});
+    }
+    if (t.contains("application")) {
+      const auto &app = t["application"];
+      fields(app, "application", {"apiVersion", "edges"});
+      if (getstr(app, "apiVersion", "application") != "graphlab.application-dataflow/v1")
+        fail("application.apiVersion", "unsupported dataflow version", "unsupported_version");
+      const auto &flows = need(app, "edges", "application");
+      array(flows, "application.edges");
+      if (flows.size() > 1024)
+        fail("application.edges", "application edge budget exceeded", "resource_limit");
+      std::set<std::string> ids;
+      Json normalized = Json::array();
+      for (const auto &flow : flows) {
+        fields(flow, "application.edge", {"id", "source", "target", "networkEdges", "protocol"});
+        auto key = getstr(flow, "id", "application.edge");
+        id(key, "application.edge.id");
+        auto p = "application.edges." + key;
+        if (!ids.insert(key).second)
+          fail(p, "duplicate application edge ID");
+        for (auto field : {"source", "target"}) {
+          auto node = getstr(flow, field, p);
+          if (!out.nodes.contains(node) || out.nodes.at(node).kind == "ovs-switch")
+            fail(p + "." + field, "expected declared workload node");
+        }
+        if (flow.contains("protocol")) {
+          const auto &protocol = flow["protocol"];
+          fields(protocol, p + ".protocol", {"apiVersion", "transport", "framing", "schema"});
+          if (getstr(protocol, "apiVersion", p) != "graphlab.application-protocol/v1")
+            fail(p + ".protocol.apiVersion", "unsupported protocol declaration version");
+          for (auto field : {"transport", "framing", "schema"}) {
+            auto value = getstr(protocol, field, p);
+            if (!std::regex_match(value, std::regex("[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}")))
+              fail(p + ".protocol", "invalid or oversized declaration identifier");
+          }
+        }
+        const auto &refs = need(flow, "networkEdges", p);
+        array(refs, p + ".networkEdges");
+        if (refs.size() > 256)
+          fail(p, "network mapping budget exceeded", "resource_limit");
+        std::set<std::string> links;
+        for (const auto &ref : refs) {
+          auto link = str(ref, p + ".networkEdges");
+          if (!edge_ids.contains(link) || !links.insert(link).second)
+            fail(p + ".networkEdges", "unknown or duplicate data edge");
+        }
+        auto value = flow;
+        value["networkEdges"] = links;
+        normalized.push_back(value);
+      }
+      std::sort(normalized.begin(), normalized.end(),
+                [](const Json &a, const Json &b) { return a["id"] < b["id"]; });
+      out.canonical["application"]["edges"] = normalized;
     }
     // For the normal switching profile, every switch in a cyclic component must enable RSTP.
     std::map<std::string, std::string> parent;

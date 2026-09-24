@@ -14,5 +14,8 @@ public:
   explicit History(const std::filesystem::path &);
   ~History();
   Json query(const Json &run, const Json &params);
+  Json rebuild(const Json &run);
+  // Caller must stop all index users first. Captures and the execution journal are untouched.
+  static void recover(const std::filesystem::path &);
 };
 } // namespace graphlab::packets

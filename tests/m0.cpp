@@ -253,6 +253,44 @@ int main(int argc, char **argv) {
       s["nodes"]["a"]["ports"]["data0"].erase("medium");
       check(validate(s, lock)->hash == validate(t, lock)->hash, "default hash changed");
     });
+    test("application dataflow contract and canonicalization", [&] {
+      auto s = t;
+      Json flow = {{"id", "echo"}, {"source", "a"}, {"target", "a"},
+                   {"networkEdges", Json::array({t["edges"][1]["id"], t["edges"][0]["id"]})}};
+      s["application"] = {{"apiVersion", "graphlab.application-dataflow/v1"},
+                          {"edges", Json::array({flow})}};
+      auto v = validate(s, lock);
+      check(bool(v), "valid application mapping rejected");
+      check(v->hash != validate(t, lock)->hash, "mapping excluded from topology identity");
+      auto declared = s;
+      declared["application"]["edges"][0]["protocol"] = {{"apiVersion","graphlab.application-protocol/v1"},{"transport","tcp"},{"framing","fixed-16"},{"schema","echo/v1"}};
+      check(bool(validate(declared,lock)) && validate(declared,lock)->hash != v->hash, "protocol declaration participates in immutable identity");
+      declared["application"]["edges"][0]["protocol"]["schema"] = std::string(129,'x');
+      check(!validate(declared,lock), "oversized protocol declaration rejected");
+      auto before = v->hash;
+      std::reverse(s["application"]["edges"][0]["networkEdges"].begin(),
+                   s["application"]["edges"][0]["networkEdges"].end());
+      check(validate(s, lock)->hash == before, "unordered mapping changes identity");
+      auto bad = [&](const std::function<void(Json &)> &change) {
+        auto invalid = s;
+        change(invalid["application"]);
+        check(!validate(invalid, lock), "invalid application mapping accepted");
+      };
+      bad([](Json &a) { a["apiVersion"] = "unknown"; });
+      bad([](Json &a) { a["edges"][0]["source"] = "absent"; });
+      bad([](Json &a) { a["edges"][0]["target"] = "s1"; });
+      bad([](Json &a) { a["edges"].push_back(a["edges"][0]); });
+      bad([](Json &a) { a["edges"][0]["networkEdges"] = Json::array({"absent"}); });
+      bad([](Json &a) { auto &r = a["edges"][0]["networkEdges"]; r.push_back(r[0]); });
+      bad([](Json &a) { a["edges"][0]["measuredRoute"] = true; });
+      bad([](Json &a) { a["edges"][0].erase("networkEdges"); });
+      bad([](Json &a) { a["edges"] = Json::array(); for (int i=0;i<1025;i++) a["edges"].push_back(Json::object()); });
+      bad([](Json &a) { a["edges"][0]["networkEdges"] = std::vector<std::string>(257, "x"); });
+      s["application"]["edges"][0]["networkEdges"] = Json::array();
+      check(bool(validate(s, lock)), "explicit unspecified mapping rejected");
+      auto p = graphlab::plan(s, lock);
+      check(bool(p), "application metadata prevented execution planning");
+    });
     auto reject = [&](const std::string &name, const std::function<void(Json &)> &change) {
       test(name, [&] {
         auto s = t;

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { formatRate } from "./metrics";
 type Report = {
+  edge?: string;
+  endpoint?: string;
   stream: string;
   epoch: string;
   sequence: string;
-  counters: Record<string, string>;
+  counters: Record<string, string | null>;
 };
 type Sample = {
   node: string;
@@ -32,11 +34,13 @@ type Response = {
 export function ApplicationTelemetry({
   runId,
   node,
+  edge = "",
   csrf,
   api,
 }: {
   runId: string;
   node: string;
+  edge?: string;
   csrf: string;
   api: (p: string, i?: RequestInit) => Promise<any>;
 }) {
@@ -56,7 +60,7 @@ export function ApplicationTelemetry({
         const next = await api(`runs/${runId}/application-telemetry/query`, {
           method: "POST",
           headers: { "Content-Type": "application/json", "X-CSRF-Token": csrf },
-          body: JSON.stringify({ limit: 100, ...(node ? { node } : {}) }),
+          body: JSON.stringify({ limit: 100, ...(edge ? {edge} : node ? { node } : {}) }),
         });
         if (live) {
           setData(next);
@@ -78,7 +82,7 @@ export function ApplicationTelemetry({
       live = false;
       clearInterval(timer);
     };
-  }, [runId, node, csrf, api]);
+  }, [runId, node, edge, csrf, api]);
   return (
     <section aria-label="Application telemetry">
       <h3>Application telemetry</h3>
@@ -86,6 +90,7 @@ export function ApplicationTelemetry({
         Workload-reported messages and payload bytes. Separate from interface
         packets and wire bytes; no inferred link or message-to-capture mapping.
       </p>
+      {edge && <p>Selected application edge {edge}. Source and target reports remain separate; no endpoint totals are summed.</p>}
       {error && (
         <p role="alert">Application telemetry unavailable or stale: {error}</p>
       )}
@@ -110,9 +115,9 @@ export function ApplicationTelemetry({
       {data?.current.map((s) => {
         const stale = s.stale || Boolean(error) || clock - observed >= 15000;
         return (
-          <article key={s.node}>
+          <article key={`${s.node}/${s.report.edge ?? "node"}/${s.report.endpoint ?? ""}`}>
             <h4>
-              {s.node} · {s.report.stream}
+              {s.node} · {s.report.stream}{s.report.edge ? ` · edge ${s.report.edge} · ${s.report.endpoint} reporter` : " · node-scoped report"}
             </h4>
             <p>
               {stale
@@ -121,7 +126,7 @@ export function ApplicationTelemetry({
               · {s.observedAt} · {s.gapReason ?? "valid rate interval"}
             </p>
             <div className="metric-grid">
-              {["sent", "received"].map((direction) => (
+              {(s.report.endpoint ? [s.report.endpoint === "source" ? "sent" : "received"] : ["sent", "received"]).map((direction) => (
                 <div key={direction}>
                   <strong>{direction === "sent" ? "Sent" : "Received"}</strong>
                   <p>
@@ -151,9 +156,10 @@ export function ApplicationTelemetry({
             <p>
               Errors {s.report.counters.errors} · rejected messages{" "}
               {s.report.counters.rejectedMessages} · backpressure events{" "}
-              {s.report.counters.backpressureEvents}. These are application
+              {s.report.counters.backpressureEvents ?? "unavailable"}. These are application
               counters, not delivered network loss.
             </p>
+            {s.report.edge && <p>Reconnects: {s.report.counters.reconnects ?? "unavailable"} · backpressure duration: {s.report.counters.backpressureNs == null ? "unavailable" : `${s.report.counters.backpressureNs} ns`}</p>}
             {s.latency ? (
               <>
                 <h4>Local echo-service time</h4>

@@ -1,0 +1,6 @@
+PASS disk-full test restricted to dedicated small tmpfs
+PASS create isolated filler
+PASS tmpfs reaches real ENOSPC
+PASS reserve bounded room for SQLite transaction startup
+PASS filesystem exhaustion rolls back packet rows and receipt
+PASS freeing filesystem space permits exactly one retry

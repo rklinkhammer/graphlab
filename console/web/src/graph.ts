@@ -1,6 +1,8 @@
-import type {Node, Edge} from '@xyflow/react';
+import {MarkerType, type Node, type Edge} from '@xyflow/react';
 export type Runtime = {state: string; observedAt: string | null; mappingEpoch: string | null; identity: unknown; reason: string};
+export type ApplicationEdge = {id: string; source: string; target: string; networkEdges: string[]; protocol?: {apiVersion: string; transport: string; framing: string; schema: string}};
 export type Inventory = {
+  application?: {apiVersion: string; edges: ApplicationEdge[]} | null;
   capturePolicy?: {required:boolean};
   topologyHash: string; topologyId: string; generatedAt: string; runtimeObservedAt: string | null; runtimeFreshness: string;
   nodes: {id: string; kind: string; configuration: Record<string, unknown>; runtime: Runtime; failureDomain: string | null}[];
@@ -8,7 +10,23 @@ export type Inventory = {
   management: {networks: Record<string, unknown>}; managementAttachments: {endpoint: string; network: string; address: string}[];
   failureDomains: {id: string; state: string; description: string}[];
 };
-export function graph(inventory: Inventory, management: boolean): {nodes: Node[]; edges: Edge[]} {
+export function graph(inventory: Inventory, management: boolean, application = false): {nodes: Node[]; edges: Edge[]} {
+  if (application) {
+    const flows = inventory.application?.edges ?? [];
+    const workloads = inventory.nodes.filter(n => n.kind !== 'ovs-switch');
+    const pairs = new Map<string, string[]>();
+    for (const e of flows) {
+      const key = [e.source, e.target].sort().join(':');
+      pairs.set(key, [...(pairs.get(key) ?? []), e.id]);
+    }
+    return {
+      nodes: workloads.map((n, i) => ({id: n.id, type: 'logical', position: {x: (i % 4) * 260, y: Math.floor(i / 4) * 190}, data: {label: n.id, kind: n.kind, state: n.runtime.state}})),
+      edges: flows.map(e => {
+        const group = pairs.get([e.source, e.target].sort().join(':'))!;
+        return {id: `application/${e.id}`, source: e.source, target: e.target, type: 'cable', markerEnd: {type: MarkerType.ArrowClosed}, data: {application: true, label: e.id, offset: (group.indexOf(e.id) - (group.length - 1) / 2) * 65}, ariaLabel: `Application edge ${e.id}: ${e.source} to ${e.target}`};
+      }),
+    };
+  }
   const columns = Math.max(1, Math.ceil(Math.sqrt(inventory.nodes.length)));
   const nodes: Node[] = inventory.nodes.map((node, i) => ({id: node.id, type: 'logical', position: {x: (i % columns) * 260, y: Math.floor(i / columns) * 190},
     data: {label: node.id, kind: node.kind, state: node.runtime.state, domain: node.failureDomain}}));

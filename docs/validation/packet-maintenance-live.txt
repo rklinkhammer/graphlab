@@ -1,0 +1,16 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/packet-history-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:82272) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+reading from file /var/tmp/gl6-maint-20260923/state/captures/ea7315ff3b403a7824325a47/0.pcapng, link-type EN10MB (Ethernet), snapshot length 65535
+Running as unit: graphlab-maintenance-agent.service; invocation ID: 74c0cf6f760149d9b222f5e7e9e5ce67
+Maintenance: authenticated rebuild/recovery, running-run recovery rejection, cursor invalidation, quarantine non-overwrite and capture SHA preservation passed
+{"runId":"876f68ac-bdba-4c68-8f01-658cf7f91522","edge":"a-s","udpPackets":20,"tcpdumpUdpPackets":20,"artifact":"ea7315ff3b403a7824325a47-0","sha256":"sha256:a7a3a94d77196e1b3e1ca858eb308af7a84415359c37781a9d8c9db44544471e","exactOffsetsAndTimestamps":true,"restartCursorPreserved":true,"segments":[{"artifactId":"2a2e09ac97b4289799e7bb47-0","edge":"l31","indexedRecords":30,"omittedRecords":"0","packetCount":"30","sha256":"sha256:0e2184fafbfbb5cb7744e49b42761d437ca2f08f05ccca3fe97a10cabb7cafe0","size":"2972","state":"indexed"},{"artifactId":"9348ab96bac4dcc02a5086f7-0","edge":"l23","indexedRecords":30,"omittedRecords":"0","packetCount":"30","sha256":"sha256:11e45378edca20e6f79f5633f1b0db505b153e86c1a5b2c020027f6c8a3b7b71","size":"2972","state":"indexed"},{"artifactId":"93c14a5f20799a1fa5b6aede-0","edge":"l12","indexedRecords":9,"omittedRecords":"0","packetCount":"9","sha256":"sha256:40c687fdd5dbfe8b8b96ccbebaf22cddd3e7fe0ce4fe132a150a5ed3eeebd82c","size":"972","state":"indexed"},{"artifactId":"bea7025a91b9ba4fa92473d7-0","edge":"b-s","indexedRecords":26,"omittedRecords":"0","packetCount":"26","sha256":"sha256:140a0af14093c3723d87daa7621ecf41a91add906b2ec1ab94c256563e1733d8","size":"2532","state":"indexed"},{"artifactId":"ea7315ff3b403a7824325a47-0","edge":"a-s","indexedRecords":28,"omittedRecords":"0","packetCount":"28","sha256":"sha256:a7a3a94d77196e1b3e1ca858eb308af7a84415359c37781a9d8c9db44544471e","size":"2708","state":"indexed"}]}
+  ✓  1 tests/packet-history-live.spec.ts:7:1 › finalized Linux PCAPNG to authenticated packet history and browser (15.8s)
+
+  1 passed (16.2s)

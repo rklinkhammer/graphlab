@@ -30,6 +30,8 @@ The console connects topology selection to serial/SSH/container sessions, search
 
 [Packet history v1](docs/packet-history.md) indexes finalized, checksum-verified PCAPNG segments in a bounded, persistent metadata store. The console filters by selected node/edge and protocol, freezes older pages, and links each packet to its exact capture artifact and block offset. Active files, inferred packet direction and application-message correlation are excluded.
 
+Packet-index maintenance now recycles the bounded segment catalog without automatically replaying retired captures. The console provides run-level rebuild and explicitly scoped database recovery, with preserved capture files and a quarantined prior index. See [recovery and limits](docs/packet-history.md#recovery-procedure-and-failure-behavior).
+
 Install the exact frontend and Playwright versions from the lockfile, install the matching Chromium build, and build the current console:
 
 ```sh
@@ -109,3 +111,7 @@ See [input contract](schemas/README.md), [M0 status and validation](docs/cpp23-s
 M5 adds directional telemetry, bounded history, typed netem faults and a correlated timeline. See [operation and supported placements](docs/m5-telemetry-faults.md) and [verification](docs/validation/m5-verification.md).
 
 M6 adds [operational qualification tooling](docs/m6-qualification.md), explicit T01–T19 release gates, retained artifact hashes and baseline/telemetry/capture capacity measurements. Incomplete gates prevent a full qualification claim.
+
+Application/network console views: [application dataflow mapping contract and example](docs/application-dataflow.md).
+
+[Application-edge telemetry](docs/application-edge-telemetry.md) adds endpoint-owned stream reports, declared protocol metadata, and a separate two-stream TCP qualification fixture in `docker-nodes/app-streams`. Existing node telemetry remains compatible; source-only controls and message correlation are separate increments.

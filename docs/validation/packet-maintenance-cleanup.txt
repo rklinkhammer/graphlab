@@ -1,0 +1,29 @@
+All runs confirmed destroyed:
+{
+  "items": [
+    {
+      "id": "0a37bf5d-81b6-4423-8a31-47480805a3b3",
+      "revision": "3",
+      "state": "destroyed",
+      "topologyHash": "sha256:10b5c54821f52baeba0270075be7eb16cff264e3447a4a4ed3a3766b4227625a"
+    },
+    {
+      "id": "876f68ac-bdba-4c68-8f01-658cf7f91522",
+      "revision": "3",
+      "state": "destroyed",
+      "topologyHash": "sha256:10b5c54821f52baeba0270075be7eb16cff264e3447a4a4ed3a3766b4227625a"
+    },
+    {
+      "id": "88a3a430-88f2-4a33-85cd-1dc61ac392b2",
+      "revision": "2",
+      "state": "destroyed",
+      "topologyHash": "sha256:10b5c54821f52baeba0270075be7eb16cff264e3447a4a4ed3a3766b4227625a"
+    }
+  ]
+}
+
+API/agent service status followed by running Docker names and OVS bridges:
+inactive
+inactive
+
+The dedicated /var/tmp/gl-packet-full-20260923 mount/directory is absent (remote assertion passed).

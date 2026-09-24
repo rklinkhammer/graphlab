@@ -122,9 +122,25 @@ int main(int argc, char **argv) {
       }
       check(rejected, "invalid RPC rejected");
     }
+    // Real authenticated HTTP fixture carries an explicit application mapping.
+    std::filesystem::create_directory(work / "http-topologies");
+    for (const auto &entry : std::filesystem::directory_iterator(source / "topologies"))
+      if (entry.path().extension() == ".yaml")
+        std::filesystem::copy_file(entry.path(), work / "http-topologies" / entry.path().filename());
+    auto dataflow = load(source / "topologies/isolated.yaml");
+    dataflow["id"] = "dataflow";
+    for (auto node : {"a", "b"})
+      dataflow["nodes"][node] = {{"kind", "docker"}, {"workload", "app-a"},
+        {"ports", {{"data0", {{"role", "data"}}}, {"mgmt0", {{"role", "management"}}}}}};
+    dataflow["edges"] = Json::array({{{"id", "wire"}, {"endpoints", {"a:data0", "b:data0"}}}});
+    dataflow["application"] = {{"apiVersion", "graphlab.application-dataflow/v1"},
+      {"edges", Json::array({{{"id", "echo"}, {"source", "a"}, {"target", "b"}, {"networkEdges", {"wire"}}}})}};
+    std::ofstream(work / "http-topologies/dataflow.yaml") << dataflow.dump();
+    auto validated_flow = lab_support::validate(dataflow, load(source / "topologies/artifacts.lock.json"));
+    check(bool(validated_flow), "dataflow HTTP fixture validates");
     Child agent;
     start(agent, argv[2],
-          {"--socket", socket, "--topologies", (source / "topologies").string(), "--lock",
+          {"--socket", socket, "--topologies", (work / "http-topologies").string(), "--lock",
            (source / "topologies/artifacts.lock.json").string()});
     for (int n = 0; n < 100 && !std::filesystem::exists(socket); ++n)
       std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -269,6 +285,13 @@ int main(int argc, char **argv) {
     check(request(port, http::verb::get, "/api/v1/topologies/" + hash + "/inventory", "", cookie)
                   .result_int() == 200,
           "inventory routing by immutable hash");
+    auto flow_path = "/api/v1/topologies/" + validated_flow->hash + "/inventory";
+    check(request(port, http::verb::get, flow_path).result_int() == 401,
+          "application mapping requires authenticated inventory access");
+    auto flow_response = request(port, http::verb::get, flow_path, "", cookie);
+    check(flow_response.result_int() == 200 &&
+          Json::parse(flow_response.body())["application"] == dataflow["application"],
+          "validated application mapping survives catalog, RPC and authenticated HTTP");
     check(request(port, http::verb::get, "/api/v1/diagnostics", "", cookie).result_int() == 200,
           "host diagnostics available");
     check(request(port, http::verb::post, "/api/v1/runs", "{}", cookie).result_int() == 405,

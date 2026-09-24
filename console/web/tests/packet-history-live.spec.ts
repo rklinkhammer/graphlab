@@ -5,15 +5,17 @@ import {createHash} from "node:crypto";
 import {resolve} from "node:path";
 
 test("finalized Linux PCAPNG to authenticated packet history and browser", async ({page, request}) => {
-  test.skip(!process.env.GRAPHLAB_PACKETS_LIVE, "Requires isolated Linux packet-history fixture");
+  const maintenance = Boolean(process.env.GRAPHLAB_PACKET_MAINTENANCE_LIVE);
+  test.skip(!process.env.GRAPHLAB_PACKETS_LIVE && !maintenance, "Requires isolated Linux packet-history fixture");
   test.setTimeout(180000);
   const config = process.env.GRAPHLAB_SSH_CONFIG ?? `${process.env.HOME}/.lima/graphlab/ssh.config`;
-  const root = "/var/tmp/gl6-packets-20260923", source = "/tmp/graphlab-packets-20260923";
+  const root = maintenance ? "/var/tmp/gl6-maint-20260923" : "/var/tmp/gl6-packets-20260923", source = maintenance ? "/tmp/graphlab-maintenance-20260923" : "/tmp/graphlab-packets-20260923";
+  const port = maintenance ? 18094 : 18093, unit = maintenance ? "graphlab-maintenance-agent" : "graphlab-packets-agent";
   const ssh = (cmd: string) => execFileSync("ssh", ["-F",config,"-o","BatchMode=yes","lima-graphlab",cmd], {encoding:"utf8"});
-  const password = ssh(`cat ${root}/password`).trim(), base = "http://127.0.0.1:18093";
+  const password = ssh(`cat ${root}/password`).trim(), base = `http://127.0.0.1:${port}`;
   let tunnel: ChildProcess | undefined, runId = "", verified = false;
   try {
-    tunnel = spawn("ssh",["-F",config,"-N","-o","ExitOnForwardFailure=yes","-L","127.0.0.1:18093:127.0.0.1:18093","lima-graphlab"],{stdio:"ignore"});
+    tunnel = spawn("ssh",["-F",config,"-N","-o","ExitOnForwardFailure=yes","-L",`127.0.0.1:${port}:127.0.0.1:${port}`,"lima-graphlab"],{stdio:"ignore"});
     await expect.poll(async () => {try{return (await fetch(base)).status;}catch{return 0;}}).toBe(200);
     await page.goto(base);
     await page.getByLabel("Operator credential").fill(password);
@@ -34,6 +36,12 @@ test("finalized Linux PCAPNG to authenticated packet history and browser", async
     expect((await page.request.post(`${endpoint}/query`,{data:{},headers:{Origin:base}})).status()).toBe(403);
     expect((await page.request.post(`${endpoint}/query`,{data:{},headers:{...headers,Origin:"http://hostile.invalid"}})).status()).toBe(403);
     expect((await page.request.post(`${endpoint}/query`,{data:{limit:201},headers})).status()).toBe(422);
+    if(maintenance){
+      expect((await request.post(`${endpoint}/rebuild`,{data:{},headers:{Origin:base}})).status()).toBe(401);
+      expect((await page.request.post(`${endpoint}/rebuild`,{data:{},headers:{Origin:base}})).status()).toBe(403);
+      expect((await page.request.post(`${endpoint}/recover`,{data:{scope:"all-runs"},headers:{...headers,Origin:"http://hostile.invalid"}})).status()).toBe(403);
+      expect((await page.request.post(`${endpoint}/recover`,{data:{scope:"all-runs"},headers})).status()).toBe(409);
+    }
     expect((await query()).items).toEqual([]);
     await expect.poll(async () => {
       const r=await (await page.request.get(`${base}/api/v1/runs/${runId}`)).json();
@@ -81,10 +89,27 @@ test("finalized Linux PCAPNG to authenticated packet history and browser", async
     expect(cap.id).toMatch(/^[a-f0-9]{24}$/);
     const tcpdump=ssh(`sudo tcpdump -tt -n -r ${root}/state/captures/${cap.id}/0.pcapng udp`);
     expect(tcpdump.trim().split("\n")).toHaveLength(20);
-    await panel.screenshot({path:resolve("..","..","docs/validation/packet-history-live.png")});
-    ssh("sudo systemctl stop graphlab-packets-agent");
-    ssh(`sudo systemd-run --unit=graphlab-packets-agent --property=KillMode=process ${source}/build/dev/lab-agent --socket ${root}/rpc/agent.sock --topologies ${root} --lock ${root}/artifacts.lock.json --state ${root}/state --allow-uid 501`);
+    await panel.screenshot({path:resolve("..","..",maintenance ? "docs/validation/packet-maintenance-live.png" : "docs/validation/packet-history-live.png")});
+    ssh(`sudo systemctl stop ${unit}`);
+    ssh(`sudo systemd-run --unit=${unit} --property=KillMode=process ${source}/build/dev/lab-agent --socket ${root}/rpc/agent.sock --topologies ${root} --lock ${root}/artifacts.lock.json --state ${root}/state --allow-uid 501`);
     await expect.poll(async()=>{try{return (await query({...filter,limit:5,cursor:first.nextCursor})).items?.map((p:any)=>p.id);}catch{return [];}}).toEqual(older.items.map((p:any)=>p.id));
+    if(maintenance){
+      await panel.getByText("Packet index maintenance",{exact:true}).click();
+      await panel.getByRole("button",{name:"Rebuild this run's packet index",exact:true}).click();
+      await expect.poll(async()=> (await query()).maintenance?.state,{timeout:30000}).toBe("completed");
+      expect((await query(filter)).items).toHaveLength(20);
+      expect((await page.request.post(`${endpoint}/query`,{data:{...filter,cursor:first.nextCursor},headers})).status()).toBe(409);
+      expect((await page.request.post(`${endpoint}/recover`,{data:{},headers})).status()).toBe(422);
+      await panel.getByLabel("Replace derived packet indexes for all runs; preserve capture files.").check();
+      await panel.getByRole("button",{name:"Recover packet index for all runs",exact:true}).click();
+      await expect(panel.getByRole("status")).toContainText("recover: completed");
+      await expect.poll(async()=> (await query(filter)).items.length,{timeout:30000}).toBe(20);
+      expect((await query(filter)).items[0].artifactSha256).toBe(indexed.items[0].artifactSha256);
+      expect((await page.request.post(`${endpoint}/recover`,{data:{scope:"all-runs"},headers})).status()).toBe(409);
+      await expect(panel.getByRole("button",{name:/Show capture/})).toHaveCount(20,{timeout:15000});
+      await panel.screenshot({path:resolve("..","..","docs/validation/packet-maintenance-live.png")});
+      console.log("Maintenance: authenticated rebuild/recovery, running-run recovery rejection, cursor invalidation, quarantine non-overwrite and capture SHA preservation passed");
+    }
     console.log(JSON.stringify({runId,edge:"a-s",udpPackets:indexed.items.length,tcpdumpUdpPackets:20,artifact,sha256:indexed.items[0].artifactSha256,exactOffsetsAndTimestamps:true,restartCursorPreserved:true,segments:indexed.segments}));
     verified = true;
   } finally {

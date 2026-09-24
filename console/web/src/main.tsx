@@ -48,7 +48,9 @@ function Cable({
   const self = Math.abs(sy - ty) < 1 && sx > tx && sx - tx < 240;
   const mx = (sx + tx) / 2,
     my = (sy + ty) / 2 + offset;
-  const path = self
+  const path = data?.application && sx > tx
+    ? `M ${sx} ${sy} C ${sx + 140} ${sy - 200 - Math.abs(Number(data?.offset ?? 0))}, ${tx - 140} ${ty - 200 - Math.abs(Number(data?.offset ?? 0))}, ${tx} ${ty}`
+    : self
     ? `M ${sx} ${sy} C ${sx + 100} ${sy - 140 - offset}, ${tx - 100} ${ty - 140 - offset}, ${tx} ${ty}`
     : `M ${sx} ${sy} Q ${mx} ${my} ${tx} ${ty}`;
   return (
@@ -93,6 +95,8 @@ async function api(path: string, init?: RequestInit) {
 function App() {
   const [selectedNode, setSelectedNode] = useState(""),
     [selectedEdge, setSelectedEdge] = useState("");
+  const [viewMode, setViewMode] = useState("network");
+  const [applicationEdge, setApplicationEdge] = useState("");
   const [rates, setRates] = useState<Record<string, string>>({});
   const updateRates = useCallback(
     (value: Record<string, string>) => setRates(value),
@@ -100,6 +104,7 @@ function App() {
   );
   const chooseNode = (id: string) => {
     setSelectedNode(id);
+    setApplicationEdge("");
     setSelectedEdge("");
   };
   const chooseEdge = (id: string) => {
@@ -195,7 +200,7 @@ function App() {
   }, [inventory, selectedNode, selectedEdge]);
   useEffect(() => {
     if (inventory) {
-      const view = graph(inventory, management);
+      const view = graph(inventory, management, viewMode === "application");
       setNodes((old) =>
         view.nodes.map((n) => ({
           ...n,
@@ -207,7 +212,8 @@ function App() {
       setNodes([]);
       setEdges([]);
     }
-  }, [inventory, management]);
+  }, [inventory, management, viewMode]);
+  useEffect(() => {setApplicationEdge("");}, [inventory?.topologyHash]);
   async function login(e: React.FormEvent) {
     e.preventDefault();
     try {
@@ -328,9 +334,29 @@ function App() {
               {error}
             </p>
           )}
+          <label>Topology view <select value={viewMode} onChange={e => setViewMode(e.target.value)}>
+            <option value="network">Network resources</option><option value="application">Application dataflow</option>
+          </select></label>
+          {viewMode === "application" && <p>Declared directed workload relationships. Arrows do not indicate observed traffic or delivery. No application metrics are inferred from network counters.</p>}
+          <section aria-label="Application dataflow mapping">
+            <h3>Application dataflow mapping</h3>
+            {!inventory?.application?.edges.length && <p>No application edges declared.</p>}
+            {inventory?.application?.edges.map(flow => <div key={flow.id}>
+              <button aria-pressed={applicationEdge === flow.id} onClick={() => {setSelectedNode(""); setSelectedEdge(""); setApplicationEdge(flow.id); setViewMode("application");}}>{flow.id}: {flow.source} → {flow.target}</button>
+              {selectedEdge && flow.networkEdges.includes(selectedEdge) && <span> · maps selected network edge</span>}
+              {applicationEdge === flow.id && <div>
+                {flow.protocol && <p>Declared protocol: {flow.protocol.transport} · framing {flow.protocol.framing} · schema {flow.protocol.schema}. Not runtime protocol verification.</p>}
+                <p>Declared network association; not an observed route, exclusive allocation, or message-to-packet correlation.</p>
+                <button onClick={() => chooseNode(flow.source)}>Inspect source {flow.source}</button>{" "}
+                <button onClick={() => chooseNode(flow.target)}>Inspect target {flow.target}</button>
+                {!flow.networkEdges.length && <p>Network mapping unspecified.</p>}
+                {flow.networkEdges.map(id => <button key={id} onClick={() => {setViewMode("network"); chooseEdge(id);}}>Inspect network edge {id}</button>)}
+              </div>}
+            </div>)}
+          </section>
           <div className="summary">
-            <span>{inventory?.nodes.length ?? "—"} nodes</span>
-            <span>{inventory?.edges.length ?? "—"} data edges</span>
+            <span>{viewMode === "application" ? inventory?.nodes.filter(n => n.kind !== "ovs-switch").length ?? "—" : inventory?.nodes.length ?? "—"} {viewMode === "application" ? "workloads" : "nodes"}</span>
+            <span>{viewMode === "application" ? inventory?.application?.edges.length ?? 0 : inventory?.edges.length ?? "—"} {viewMode === "application" ? "application edges" : "data edges"}</span>
             <span>
               ○ Runtime mappings:{" "}
               {inventory?.runtimeFreshness === "snapshot"
@@ -340,12 +366,12 @@ function App() {
           </div>
           <div className="canvas" aria-label="Topology graph">
             <ReactFlow
-              key={hash}
+              key={`${hash}/${viewMode}`}
               nodes={nodes}
               edges={edges.map((e) => ({
                 ...e,
-                selected: e.id === selectedEdge,
-                data: { ...e.data, rate: rates[e.id] },
+                selected: e.id === selectedEdge || (viewMode === "application" ? e.id === `application/${applicationEdge}` : Boolean(inventory?.application?.edges.find(f => f.id === applicationEdge)?.networkEdges.includes(e.id))),
+                data: { ...e.data, rate: viewMode === "network" ? rates[e.id] : undefined },
               }))}
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
@@ -360,6 +386,7 @@ function App() {
                 );
               }}
               onEdgeClick={(_, edge) => {
+                if (viewMode === "application") {setSelectedNode(""); setSelectedEdge(""); setApplicationEdge(edge.id.slice(12)); return;}
                 chooseEdge(edge.id);
                 setSelection(
                   inventory?.edges.find((e) => e.id === edge.id) ??
@@ -417,6 +444,7 @@ function App() {
               api={api}
               required={inventory?.capturePolicy?.required ?? true}
               selectedNode={selectedNode}
+              applicationEdge={applicationEdge}
               selectedEdge={selectedEdge}
               onEdge={chooseEdge}
               onRates={updateRates}

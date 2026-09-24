@@ -1,0 +1,41 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/packet_maintenance_tests.dir/tests/packet_maintenance.cpp.o
+[2/2] Linking CXX executable packet_maintenance_tests
+PASS catalog recycles beyond lifetime ceiling
+PASS bounded newest-segment window is explicit
+PASS evicted receipts cannot replay packets after restart
+PASS rebuild admitted
+PASS rebuild replaces scoped rows including retired artifacts
+PASS rebuild invalidates old pagination
+PASS corrupt index fails closed
+PASS recovery preserves bounded quarantine copy
+PASS recovery indexes verified source again
+PASS recovery changes database epoch and rejects prior cursors
+PASS maintenance preserves source artifact bytes
+PASS existing quarantine is not overwritten
+PASS fixture SQL succeeds
+PASS legacy receipts acquire retirement keys without replay
+CHECKPOINT SIGKILL packet.before-commit
+PASS process killed at requested durable boundary
+PASS killed transaction publishes all rows or none
+PASS restart retries without duplicate packets
+CHECKPOINT SIGKILL packet.after-commit
+PASS process killed at requested durable boundary
+PASS killed transaction publishes all rows or none
+PASS restart retries without duplicate packets
+CHECKPOINT SIGKILL packet.rebuild-before-commit
+PASS process killed at requested durable boundary
+PASS rebuild clearing is atomic
+CHECKPOINT SIGKILL packet.rebuild-after-commit
+PASS process killed at requested durable boundary
+PASS rebuild clearing is atomic
+PASS restart marks committed but unfinished rebuild interrupted
+CHECKPOINT SIGKILL packet.recovery-quarantined
+PASS process killed at requested durable boundary
+PASS interrupted recovery blocks automatic opening
+CHECKPOINT SIGKILL packet.recovery-published
+PASS process killed at requested durable boundary
+PASS interrupted recovery blocks automatic opening
+PASS SQLITE_FULL rolls back receipts and rows together
+PASS storage capacity restored: retry succeeds once
+Packet maintenance tests passed

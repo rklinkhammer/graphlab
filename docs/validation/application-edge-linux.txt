@@ -1,0 +1,62 @@
+[0/2] Re-checking globbed directories...
+[1/5] Building CXX object CMakeFiles/application_telemetry_tests.dir/tests/application.cpp.o
+[2/5] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/application.cpp.o
+[3/5] Linking CXX static library libgraphlab_runtime.a
+[4/5] Linking CXX executable application_telemetry_tests
+[5/5] Linking CXX executable lab-agent
+PASS first sample has no rate
+PASS mean and histogram percentile semantics
+PASS counter intervals use workload monotonic time
+PASS collector restart creates a gap
+PASS workload restart creates a gap
+PASS long interval does not imply zero traffic
+PASS uint64 deltas remain exact before float conversion
+PASS overflow percentile is never clamped to a false upper bound
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS missing required report field rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS noncanonical or overflowing integer rejected
+PASS unsupported version rejected
+PASS workload cannot claim node identity
+PASS inconsistent histogram sum rejected
+PASS oversized report rejected
+PASS out of order sequence rejected
+PASS counter reset requires new epoch
+PASS duplicate report is not stored twice
+PASS same sequence with different payload rejected
+PASS persisted samples are stale after collector restart
+PASS bounded history reports truncation
+PASS run isolation
+PASS node filter does not mix streams
+PASS oversized query rejected
+PASS edge scope and dedup preserve independent stream counts
+PASS legacy node queries exclude coexisting edge series
+PASS node and edge filters intersect
+PASS target report cannot impersonate source
+PASS edge report requires agent-owned instance
+PASS undeclared edge rejected
+PASS target cannot claim source send counters
+PASS reconnect regression rejected
+PASS one declared endpoint cannot multiply streams by renaming
+PASS container replacement cannot carry rate baseline
+PASS edge identity and data survive restart without false freshness
+PASS source and target reporters remain separate
+PASS edge deltas above JS precision are exact and unowned rates unavailable
+PASS storage failure injected
+PASS failed history insertion rejects edge report
+PASS storage failure rolls back latest baseline atomically
+PASS global history ceiling enforced
+PASS retention fixtures inserted
+PASS expired history is excluded even before pruning
+PASS global latest-record ceiling enforced
+PASS expired history physically pruned at ingestion
+PASS encoded byte ceiling fixture inserted
+PASS encoded history byte ceiling enforced before record limit
+Application telemetry contract/store tests passed

@@ -112,7 +112,7 @@ const sample = {
   adminUp: true,
   carrierUp: true,
 };
-async function setup(page: any) {
+async function setup(page: any, application: any = null) {
   const calls: any[] = [];
   let failTelemetry = false;
   await page.route("**/api/v1/**", async (route: any) => {
@@ -132,6 +132,7 @@ async function setup(page: any) {
     else if (path.endsWith("/inventory"))
       value = {
         ...inventory,
+        application,
         topologyHash: path.includes("h2") ? "h2" : "h1",
         topologyId: path.includes("h2") ? "other" : "lab",
       };
@@ -226,6 +227,80 @@ async function setup(page: any) {
     },
   };
 }
+test("application and network views use declared mappings without inferred metrics", async ({page}) => {
+  await setup(page, {apiVersion: "graphlab.application-dataflow/v1", edges: [
+    {id: "echo", source: "guest", target: "a", networkEdges: ["link"]},
+    {id: "unmapped", source: "a", target: "guest", networkEdges: []},
+  ]});
+  const panel = page.getByRole("region", {name: "Application dataflow mapping"});
+  await panel.getByRole("button", {name: "echo: guest → a", exact: true}).click();
+  await expect(page.getByLabel("Topology view")).toHaveValue("application");
+  await expect(page.getByLabel("Application edge echo: guest to a", {exact: true})).toBeVisible();
+  await expect(panel.getByText(/not an observed route/)).toBeVisible();
+  await page.screenshot({path: resolve("../../docs/validation/application-dataflow.png"), fullPage: true});
+  await panel.getByRole("button", {name: "Inspect network edge link"}).click();
+  await expect(page.getByLabel("Topology view")).toHaveValue("network");
+  await expect(panel.getByText("· maps selected network edge")).toBeVisible();
+  await expect(page.getByLabel("Data edge link: guest:p1 to a:p1; runtime ready", {exact: true})).toHaveClass(/selected/);
+  await panel.getByRole("button", {name: "unmapped: a → guest", exact: true}).click();
+  await expect(panel.getByText("Network mapping unspecified.")).toBeVisible();
+  await panel.getByRole("button", {name: "Inspect source a"}).click();
+  await expect(page.getByRole("button", {name: "Open node console"})).toBeVisible();
+});
+test("application edge reports stay endpoint scoped with exact counters and unavailable metrics", async ({page}) => {
+  const protocol = {apiVersion:"graphlab.application-protocol/v1",transport:"tcp",framing:"fixed-16",schema:"echo/v1"};
+  const fixture = await setup(page, {apiVersion:"graphlab.application-dataflow/v1",edges:[
+    {id:"alpha",source:"guest",target:"a",networkEdges:["link"],protocol},
+    {id:"beta",source:"guest",target:"a",networkEdges:["link"]},
+  ]});
+  await page.route("**/application-telemetry/query", route => {
+    const edge = route.request().postDataJSON().edge;
+    const sample = {node:"a",observedAt:"2026-09-23",stale:edge==="beta",report:{edge,endpoint:"target",stream:edge,epoch:"a".repeat(32),sequence:"2",counters:{sentMessages:null,sentPayloadBytes:null,receivedMessages:edge==="alpha"?"9007199254740993":"7",receivedPayloadBytes:"16",errors:"0",rejectedMessages:"0",backpressureEvents:null,backpressureNs:null,reconnects:"3"}},rates:{receivedMessagesPerSecond:1},latency:null};
+    return route.fulfill({json:{current:edge?[sample]:[],items:[],errors:{},observationProfile:"full"}});
+  });
+  await page.getByRole("button",{name:"alpha: guest → a",exact:true}).click();
+  const panel=page.getByRole("region",{name:"Application telemetry"});
+  await expect(panel).toContainText("Selected application edge alpha");
+  await expect(panel).toContainText("9007199254740993 messages");
+  await expect(panel).toContainText("target reporter");
+  await expect(panel).toContainText("Reconnects: 3");
+  await expect(panel).toContainText("backpressure duration: unavailable");
+  await expect(panel.getByText("Sent",{exact:true})).toHaveCount(0);
+  await expect(page.getByText(/Declared protocol: tcp/)).toBeVisible();
+  await page.getByRole("button",{name:"beta: guest → a",exact:true}).click();
+  await expect(panel).toContainText("Selected application edge beta");
+  await expect(panel).toContainText("7 messages");
+  await expect(panel).not.toContainText("9007199254740993");
+  await expect(panel).toContainText("Stale / retained observation");
+});
+test("legacy topology has no invented application edges", async ({page}) => {
+  await setup(page);
+  await page.getByLabel("Topology view").selectOption("application");
+  await expect(page.getByText("No application edges declared.")).toBeVisible();
+  await expect(page.locator('.react-flow__edge')).toHaveCount(0);
+});
+test("packet maintenance requires explicit global scope and displays rebuild state", async ({page}) => {
+  await setup(page);
+  let last: any;
+  await page.route("**/packet-history/rebuild", async route => {last=route.request().postDataJSON();await route.fulfill({json:{state:"queued"}});});
+  await page.route("**/packet-history/recover", async route => {last=route.request().postDataJSON();await route.fulfill({json:{state:"completed"}});});
+  await page.route("**/packet-history/query", route=>route.fulfill({json:{items:[],segments:[],nextCursor:null,retirementBoundary:"2026-09-23T00:00:00Z/run/cap/000",retiredCatalogEntries:20,scanWindowTruncated:true,maintenance:{runId:"r1",state:"interrupted"}}}));
+  const panel=page.getByRole("region",{name:"Packet history"});
+  await panel.getByRole("button",{name:"Return to newest packets"}).click();
+  await expect(panel).toContainText("Catalog entries recycled: 20");
+  await expect(panel).toContainText("Only the newest 1,000");
+  await panel.getByText("Packet index maintenance",{exact:true}).click();
+  await expect(panel).toContainText("Last rebuild: interrupted");
+  await expect(panel.getByRole("button",{name:"Recover packet index for all runs",exact:true})).toBeDisabled();
+  await panel.getByRole("button",{name:"Rebuild this run's packet index",exact:true}).click();
+  await expect(panel.getByRole("status")).toContainText("rebuild: queued");
+  expect(last).toEqual({});
+  await panel.getByLabel("Replace derived packet indexes for all runs; preserve capture files.").check();
+  await panel.getByRole("button",{name:"Recover packet index for all runs",exact:true}).click();
+  await expect(panel.getByRole("status")).toContainText("recover: completed");
+  expect(last).toEqual({scope:"all-runs"});
+  await expect(panel.getByLabel("Replace derived packet indexes for all runs; preserve capture files.")).not.toBeChecked();
+});
 test("packet history freezes older pages, filters selection and exposes capture references", async ({page}) => {
   await setup(page);
   let queries: any[] = [];

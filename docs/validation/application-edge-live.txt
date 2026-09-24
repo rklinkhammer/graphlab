@@ -1,0 +1,14 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/application-edge-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:5881) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Running as unit: graphlab-edge-agent.service; invocation ID: da45f9d7166649ceb3c69909436ab533
+{"runId":"20094874-dbe9-4a27-8fef-7601c4c31a58","counts":{"alpha":5,"beta":3},"bytes":{"alpha":80,"beta":48},"reconnects":{"alpha":4,"beta":2},"captureCoverage":"recording","legacyReports":0,"independentCounters":[{"edge":"alpha","counters":{"backpressureEvents":null,"backpressureNs":null,"errors":"0","receivedMessages":"5","receivedPayloadBytes":"80","reconnects":"4","rejectedMessages":"0","sentMessages":null,"sentPayloadBytes":null}},{"edge":"beta","counters":{"backpressureEvents":null,"backpressureNs":null,"errors":"0","receivedMessages":"3","receivedPayloadBytes":"48","reconnects":"2","rejectedMessages":"0","sentMessages":null,"sentPayloadBytes":null}}]}
+  ✓  1 tests/application-edge-live.spec.ts:4:1 › two application streams through real Linux workload, agent, API and console (19.9s)
+
+  1 passed (20.2s)

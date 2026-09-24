@@ -1,0 +1,13 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/parity.spec.ts -g application and network|legacy topology
+
+
+Running 2 tests using 1 worker
+
+(node:90563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/parity.spec.ts:230:1 › application and network views use declared mappings without inferred metrics (595ms)
+  ✓  2 tests/parity.spec.ts:250:1 › legacy topology has no invented application edges (224ms)
+
+  2 passed (1.2s)

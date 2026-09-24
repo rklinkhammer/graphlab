@@ -49,3 +49,7 @@ Responses distinguish `current` from newest-first historical `items`, report tru
 Source comparison used graphx-docker commit `7cad4da8646eda302a005070228495c1aa87d89a`, particularly `apps/telemetry/metric-store.mjs` (`ingestTotals`, `currentRates`, `latencyPercentile`) and `web/src/components/EdgeInspector.jsx`. This implementation preserves the separation of cumulative application counters and unavailable measurements, while using explicit local-service semantics, decimal uint64 counters, strict histogram validation and honest overflow bounds. It does not copy GraphX's five-second event-rate window or assume GraphX message envelopes.
 
 Message/trace identities, exact capture correlation, reconnect metrics, delivery loss, multiple streams per node, source controls, application-edge mapping and packet history remain outside this increment. No active probes are launched by the collector; verification explicitly invokes existing fixture probes.
+
+## Compatible edge-report extension
+
+[Application-edge telemetry v1](application-edge-telemetry.md), added in SDK 1.4.0, preserves this report format and the default node-only query results. Explicit edge queries return separately versioned endpoint-owned reports. Both share the existing store with additional 4 MiB latest / 32 MiB history encoded-body ceilings. See that contract for identities, measurement ownership, fixture semantics and limitations.

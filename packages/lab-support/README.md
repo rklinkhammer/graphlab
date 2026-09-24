@@ -1,4 +1,4 @@
-# LabSupport 1.3.0
+# LabSupport 1.4.0
 
 C++23 contracts, bounded YAML/JSON parsing, workload validation, topology validation, and SHA-256 canonical document identity. No subprocesses, Docker API, runtime mutation, or environment-owned wiring are included.
 
@@ -11,7 +11,7 @@ cmake --install build/support --prefix "$PWD/build/support-install"
 Independent consumers use:
 
 ```cmake
-find_package(LabSupport 1.3.0 EXACT CONFIG REQUIRED)
+find_package(LabSupport 1.4.0 EXACT CONFIG REQUIRED)
 target_link_libraries(my_node PRIVATE LabSupport::contracts)
 ```
 
@@ -43,3 +43,5 @@ SDK 1.1.0 adds optional `protocolMinor: 1` and `capabilities` metadata to `graph
 SDK 1.2.0 adds validation of immutable QEMU `vm.runnerImage` IDs and direct guest attachment graphs for M7. The gate wire protocol remains 1.1. Frozen M6 SDK/image archives are unchanged.
 
 SDK 1.3.0 adds optional [application telemetry v1](../../docs/application-telemetry.md). `LabSupport::telemetry` exports strict report validation and rate/histogram derivation via `lab_support/application_telemetry.hpp`. The lifecycle overload `run_node(argc, argv, application, true)` instruments the UDP echo fixture; the original three-argument API remains uninstrumented. Gate wire version and required capabilities are unchanged.
+
+SDK 1.4.0 adds optional endpoint-owned [application edge reports](../../docs/application-edge-telemetry.md), preserving the v1 report and lifecycle overloads. A five-argument lifecycle overload enables the separate two-stream TCP qualification fixture; ordinary app-a remains the UDP fixture.

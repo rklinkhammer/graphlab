@@ -1,0 +1,49 @@
+Test project /Users/rklinkhammer/workspace/graphlab/build/dev
+      Start  1: m6_protocol_contract
+ 1/22 Test  #1: m6_protocol_contract .............   Passed    0.00 sec
+      Start  2: m1_acceptance
+ 2/22 Test  #2: m1_acceptance ....................   Passed    4.31 sec
+      Start  3: m0_acceptance
+ 3/22 Test  #3: m0_acceptance ....................   Passed    0.32 sec
+      Start  4: cli_validate
+ 4/22 Test  #4: cli_validate .....................   Passed    0.01 sec
+      Start  5: cli_plan
+ 5/22 Test  #5: cli_plan .........................   Passed    0.01 sec
+      Start  6: cli_preflight
+ 6/22 Test  #6: cli_preflight ....................   Passed    0.01 sec
+      Start  7: cli_side_effects
+ 7/22 Test  #7: cli_side_effects .................   Passed    0.05 sec
+      Start  8: installed_package
+ 8/22 Test  #8: installed_package ................   Passed    0.49 sec
+      Start  9: m2_journal
+ 9/22 Test  #9: m2_journal .......................   Passed    0.99 sec
+      Start 10: m3_capture
+10/22 Test #10: m3_capture .......................   Passed    2.36 sec
+      Start 11: m3_transport
+11/22 Test #11: m3_transport .....................   Passed    0.32 sec
+      Start 12: m4_terminal
+12/22 Test #12: m4_terminal ......................   Passed    0.01 sec
+      Start 13: m5_telemetry_faults
+13/22 Test #13: m5_telemetry_faults ..............   Passed    1.79 sec
+      Start 14: m5_remediation
+14/22 Test #14: m5_remediation ...................   Passed    1.12 sec
+      Start 15: m6_qualification_manifest
+15/22 Test #15: m6_qualification_manifest ........   Passed    0.06 sec
+      Start 16: m6_capacity_summary
+16/22 Test #16: m6_capacity_summary ..............   Passed    0.05 sec
+      Start 17: m6_runner_exit
+17/22 Test #17: m6_runner_exit ...................   Passed    0.44 sec
+      Start 18: m6_terminal_corpus
+18/22 Test #18: m6_terminal_corpus ...............   Passed    0.09 sec
+      Start 19: application_telemetry
+19/22 Test #19: application_telemetry ............   Passed    0.18 sec
+      Start 20: packet_history
+20/22 Test #20: packet_history ...................   Passed    0.21 sec
+      Start 21: packet_maintenance
+21/22 Test #21: packet_maintenance ...............   Passed    3.86 sec
+      Start 22: application_traffic_lease
+22/22 Test #22: application_traffic_lease ........   Passed    0.87 sec
+
+100% tests passed out of 22
+
+Total Test time (real) =  17.58 sec

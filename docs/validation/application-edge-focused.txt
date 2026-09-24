@@ -1,0 +1,9 @@
+Test project /Users/rklinkhammer/workspace/graphlab/build/dev
+    Start  3: m0_acceptance
+1/2 Test  #3: m0_acceptance ....................   Passed    0.47 sec
+    Start 19: application_telemetry
+2/2 Test #19: application_telemetry ............   Passed    0.30 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   0.77 sec

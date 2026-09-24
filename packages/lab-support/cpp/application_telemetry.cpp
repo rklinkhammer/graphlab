@@ -28,8 +28,18 @@ constexpr auto counters = {"sentMessages",         "receivedMessages", "sentPayl
 } // namespace
 Json validate(const Json &r) {
   require(r.dump().size() <= max_report_bytes);
-  fields(r, {"apiVersion", "stream", "epoch", "sequence", "elapsedNs", "counters", "latency"});
-  require(r.at("apiVersion") == "graphlab.application-telemetry/v1");
+  bool edge = r.at("apiVersion") == "graphlab.application-edge-telemetry/v1";
+  if (edge) {
+    fields(r, {"apiVersion", "stream", "epoch", "sequence", "elapsedNs", "counters", "latency",
+               "edge", "endpoint"});
+    require(r.at("edge").is_string() &&
+            std::regex_match(r.at("edge").get<std::string>(),
+                             std::regex("[A-Za-z][A-Za-z0-9_-]{0,63}")));
+    require(r.at("endpoint") == "source" || r.at("endpoint") == "target");
+  } else {
+    fields(r, {"apiVersion", "stream", "epoch", "sequence", "elapsedNs", "counters", "latency"});
+    require(r.at("apiVersion") == "graphlab.application-telemetry/v1");
+  }
   require(r.at("stream").is_string() &&
           std::regex_match(r.at("stream").get<std::string>(), std::regex("[a-z][a-z0-9-]{0,31}")));
   require(r.at("epoch").is_string() &&
@@ -37,10 +47,28 @@ Json validate(const Json &r) {
   require(number(r.at("sequence")) > 0);
   number(r.at("elapsedNs"));
   const auto &c = r.at("counters");
-  fields(c, {"sentMessages", "receivedMessages", "sentPayloadBytes", "receivedPayloadBytes",
-             "errors", "rejectedMessages", "backpressureEvents"});
+  if (edge) {
+    fields(c, {"sentMessages", "receivedMessages", "sentPayloadBytes", "receivedPayloadBytes",
+               "errors", "rejectedMessages", "backpressureEvents", "reconnects", "backpressureNs"});
+    for (auto key : {"reconnects", "backpressureNs"})
+      if (!c.at(key).is_null())
+        number(c.at(key));
+    for (auto key : r.at("endpoint") == "source"
+                        ? std::vector<std::string>{"receivedMessages", "receivedPayloadBytes"}
+                        : std::vector<std::string>{"sentMessages", "sentPayloadBytes"})
+      require(c.at(key).is_null());
+  } else
+    fields(c, {"sentMessages", "receivedMessages", "sentPayloadBytes", "receivedPayloadBytes",
+               "errors", "rejectedMessages", "backpressureEvents"});
   for (auto key : counters)
-    number(c.at(key));
+    if (edge && c.at(key).is_null()) {
+      require(std::string(key) == "backpressureEvents" ||
+              (r.at("endpoint") == "target" &&
+               (std::string(key) == "sentMessages" || std::string(key) == "sentPayloadBytes")) ||
+              (r.at("endpoint") == "source" && (std::string(key) == "receivedMessages" ||
+                                                std::string(key) == "receivedPayloadBytes")));
+    } else
+      number(c.at(key));
   if (r.contains("latency")) {
     const auto &l = r.at("latency");
     fields(l, {"kind", "count", "sumNs", "buckets"});
@@ -59,7 +87,10 @@ Json validate(const Json &r) {
       if (i < 7)
         maximum += static_cast<long double>(n) * upper[i];
     }
-    require(total == count && count <= number(c.at("sentMessages")) && minimum <= sum);
+    require(total == count &&
+            count <= number(c.at(edge && r.at("endpoint") == "target" ? "receivedMessages"
+                                                                      : "sentMessages")) &&
+            minimum <= sum);
     require(number(b[7]) > 0 || sum <= maximum);
     require(count != 0 || sum == 0);
   }
@@ -82,8 +113,20 @@ Json derive(const Json &old, const Json &input, const std::string &collector) {
     else {
       require(number(r["sequence"]) > number(p["sequence"]));
       require(number(r["elapsedNs"]) > number(p["elapsedNs"]));
-      for (auto key : counters)
-        require(number(r["counters"][key]) >= number(p["counters"][key]));
+      require(p.at("apiVersion") == r.at("apiVersion") && p.at("stream") == r.at("stream"));
+      if (r.contains("edge")) {
+        require(p.at("edge") == r.at("edge") && p.at("endpoint") == r.at("endpoint"));
+        for (auto key : {"reconnects", "backpressureNs"}) {
+          require(p["counters"][key].is_null() == r["counters"][key].is_null());
+          if (!r["counters"][key].is_null())
+            require(number(r["counters"][key]) >= number(p["counters"][key]));
+        }
+      }
+      for (auto key : counters) {
+        require(r["counters"][key].is_null() == p["counters"][key].is_null());
+        if (!r["counters"][key].is_null())
+          require(number(r["counters"][key]) >= number(p["counters"][key]));
+      }
       require(p.contains("latency") == r.contains("latency"));
       if (r.contains("latency")) {
         require(number(r["latency"]["sumNs"]) >= number(p["latency"]["sumNs"]));
@@ -100,8 +143,11 @@ Json derive(const Json &old, const Json &input, const std::string &collector) {
         Json rates = Json::object();
         for (auto key :
              {"sentMessages", "receivedMessages", "sentPayloadBytes", "receivedPayloadBytes"})
-          rates[std::string(key) + "PerSecond"] =
-              double(number(r["counters"][key]) - number(p["counters"][key])) / seconds;
+          if (r["counters"][key].is_null())
+            rates[std::string(key) + "PerSecond"] = nullptr;
+          else
+            rates[std::string(key) + "PerSecond"] =
+                double(number(r["counters"][key]) - number(p["counters"][key])) / seconds;
         result["rates"] = rates;
       }
     }

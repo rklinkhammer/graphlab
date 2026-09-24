@@ -8,6 +8,15 @@ export function PacketHistory({runId, node, edge, csrf, api, onArtifact}: {
   const [data, setData] = useState<any>(null), [error, setError] = useState("");
   const [cursor, setCursor] = useState<string | null>(null), [protocol, setProtocol] = useState("");
   const [revision, setRevision] = useState(0);
+  const [maintenancePending,setMaintenancePending]=useState(false), [maintenanceMessage,setMaintenanceMessage]=useState(""), [recoverAll,setRecoverAll]=useState(false);
+  async function maintain(operation: "rebuild" | "recover") {
+    setMaintenancePending(true);setMaintenanceMessage("");
+    try {
+      const result=await api(`runs/${runId}/packet-history/${operation}`,{method:"POST",headers:{"Content-Type":"application/json","X-CSRF-Token":csrf},body:JSON.stringify(operation==="recover"?{scope:"all-runs"}:{})});
+      setMaintenanceMessage(`${operation}: ${result.state}`);setCursor(null);setRevision(v=>v+1);setRecoverAll(false);
+    }catch(e){setMaintenanceMessage((e as Error).message);}
+    finally{setMaintenancePending(false);}
+  }
   const selection = `${runId}/${node}/${edge}/${protocol}`;
   const [scope, setScope] = useState(selection);
   // Reset pagination immediately when graph/run/filter selection changes.
@@ -47,6 +56,17 @@ export function PacketHistory({runId, node, edge, csrf, api, onArtifact}: {
     {data && !data.items?.length && <p>No retained packets match. Captures may be disabled, still active, awaiting indexing, empty, expired, or excluded by limits.</p>}
     {data && <p>Capture coverage: {data.captureCoverage} · {data.indexing ? "index scan queued or active" : "index idle"}. 24-hour index retention; 20,000 records / 16 MiB of record bodies globally; first 2,000 packets per segment. Capture downloads retain their independent lifecycle.</p>}
     {data && <p>Globally retained: {data.retainedRecords ?? "unknown"} records / {data.retainedRecordBytes ?? "unknown"} encoded bytes · retention generation {data.generation ?? "unknown"}.</p>}
+    {data?.retirementBoundary && <p>Catalog entries recycled: {data.retiredCatalogEntries}. Segments at or before retirement boundary {data.retirementBoundary} are excluded from automatic indexing, including late arrivals. Use rebuild to replay this run.</p>}
+    {data?.scanWindowTruncated && <p>Only the newest 1,000 finalized segments in this run are considered; older segments remain downloadable.</p>}
+    <details><summary>Packet index maintenance</summary>
+      <p>Rebuild replaces this run's derived rows from its newest 1,000 finalized segments and invalidates older-page cursors. Capture files are preserved.</p>
+      <button disabled={maintenancePending} onClick={()=>void maintain("rebuild")}>Rebuild this run's packet index</button>
+      {data?.maintenance?.runId===runId && <p>Last rebuild: {data.maintenance.state}{data.maintenance.error ? ` · ${data.maintenance.error}` : ""}</p>}
+      <p>Database recovery requires all runs stopped or destroyed. It replaces every run's derived index and keeps one quarantine copy. Existing quarantine files must be archived by an administrator before another recovery.</p>
+      <label><input type="checkbox" checked={recoverAll} onChange={e=>setRecoverAll(e.target.checked)}/> Replace derived packet indexes for all runs; preserve capture files.</label>{" "}
+      <button disabled={!recoverAll || maintenancePending} onClick={()=>void maintain("recover")}>Recover packet index for all runs</button>
+      {maintenanceMessage && <p role="status">{maintenanceMessage}</p>}
+    </details>
     <div style={{overflow: "auto", maxHeight: 560}}><table>
       <thead><tr><th>Capture time (Unix µs)</th><th>Edge / interface</th><th>Protocol / endpoints</th><th>Lengths</th><th>Capture reference</th></tr></thead>
       <tbody>{data?.items?.map((p: any) => <tr key={p.id}>

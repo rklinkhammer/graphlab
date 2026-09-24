@@ -364,12 +364,38 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
                       {"topologyHash", r["topologyHash"]}});
     return {{"items", runs}};
   }
-  if (method == "packet-history") {
+  if (method == "packet-history" || method == "packet-history.rebuild" ||
+      method == "packet-history.recover") {
     auto id = string(p, "runId");
     if (!state_["runs"].contains(id))
       throw Failure("not_found", 404);
+    if (method == "packet-history.recover") {
+      fields(p, {"runId", "scope"});
+      if (p.value("scope", "") != "all-runs")
+        throw Failure("packet_recovery_requires_all_runs_scope");
+      for (const auto &[key, run] : state_["runs"].items())
+        if (run["state"] != "stopped" && run["state"] != "destroyed")
+          throw Failure("packet_recovery_requires_quiescence", 409);
+      packet_history_.reset();
+      auto path = directory_ / "packet-history.sqlite";
+      try {
+        packets::History::recover(path);
+        packet_history_ = std::make_unique<packets::History>(path);
+      } catch (...) {
+        try {
+          packet_history_ = std::make_unique<packets::History>(path);
+        } catch (...) {
+        }
+        throw;
+      }
+      return {{"operation", "recover"}, {"state", "completed"}, {"scope", "all-runs"}};
+    }
     if (!packet_history_)
       throw Failure("packet_history_unavailable", 503);
+    if (method == "packet-history.rebuild") {
+      fields(p, {"runId"});
+      return packet_history_->rebuild(state_["runs"][id]);
+    }
     return packet_history_->query(state_["runs"][id], p);
   }
   if (method == "artifacts" || method == "artifact") {

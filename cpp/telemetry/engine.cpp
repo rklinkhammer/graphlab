@@ -1,6 +1,7 @@
 #include <graphlab/application_telemetry.hpp>
 #include <graphlab/telemetry.hpp>
 #include <regex>
+#include <set>
 namespace graphlab::runtime {
 namespace {
 void fields(const Json &p, std::initializer_list<std::string_view> names) {
@@ -354,10 +355,25 @@ void Engine::m5_monitor() {
           continue;
         }
         const auto gate = node.value("gate", Json::object());
-        if (!gate.contains("applicationTelemetry"))
-          continue;
+
         try {
-          application_telemetry::ingest(db_, id, name, gate["applicationTelemetry"], collector_);
+          if (gate.contains("applicationTelemetry"))
+            application_telemetry::ingest(db_, id, name, gate["applicationTelemetry"], collector_);
+          if (gate.contains("applicationEdgeTelemetry")) {
+            const auto &reports = gate["applicationEdgeTelemetry"];
+            if (!reports.is_array() || reports.size() > 4)
+              throw Failure("application_edge_report_limit");
+            std::set<std::string> seen;
+            for (const auto &report : reports) {
+              auto key = report.at("edge").get<std::string>() + "/" +
+                         report.at("endpoint").get<std::string>();
+              if (!seen.insert(key).second)
+                throw Failure("duplicate_application_edge_report");
+            }
+            for (const auto &report : reports)
+              application_telemetry::ingest_edge(db_, id, name, node.at("containerId"),
+                                                 run.at("topology"), report, collector_);
+          }
         } catch (const std::exception &) {
           r["applicationTelemetryErrors"][name] = "application_report_rejected";
         }

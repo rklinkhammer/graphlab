@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graphlab.application-edge-telemetry/v1",
+  "title": "Graphlab endpoint-owned application edge report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "stream",
+    "epoch",
+    "sequence",
+    "elapsedNs",
+    "counters",
+    "edge",
+    "endpoint"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "graphlab.application-edge-telemetry/v1"
+    },
+    "stream": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,31}$"
+    },
+    "epoch": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$"
+    },
+    "sequence": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "elapsedNs": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sentMessages",
+        "receivedMessages",
+        "sentPayloadBytes",
+        "receivedPayloadBytes",
+        "errors",
+        "rejectedMessages",
+        "backpressureEvents",
+        "reconnects",
+        "backpressureNs"
+      ],
+      "properties": {
+        "sentMessages": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receivedMessages": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sentPayloadBytes": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receivedPayloadBytes": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errors": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "rejectedMessages": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "backpressureEvents": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reconnects": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "backpressureNs": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "latency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "count",
+        "sumNs",
+        "buckets"
+      ],
+      "properties": {
+        "kind": {
+          "const": "local-service-time"
+        },
+        "count": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "sumNs": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "buckets": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,19})$"
+          }
+        }
+      }
+    },
+    "edge": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+    },
+    "endpoint": {
+      "enum": [
+        "source",
+        "target"
+      ]
+    }
+  },
+  "$comment": "Encoded report <=3072 bytes. Decimal strings must fit uint64; sequence >0; histogram counts/sum/counters must agree. Buckets are disjoint with upper bounds in ns: 10000,50000,100000,500000,1000000,5000000,10000000,overflow. C++ validator is authoritative. Endpoint ownership, required owned counters, null unowned counters and agent topology binding are checked by C++.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "endpoint": {
+            "const": "source"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "counters": {
+            "properties": {
+              "sentMessages": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,19})$"
+              },
+              "sentPayloadBytes": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,19})$"
+              },
+              "receivedMessages": {
+                "type": "null"
+              },
+              "receivedPayloadBytes": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "endpoint": {
+            "const": "target"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "counters": {
+            "properties": {
+              "receivedMessages": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,19})$"
+              },
+              "receivedPayloadBytes": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]{0,19})$"
+              },
+              "sentMessages": {
+                "type": "null"
+              },
+              "sentPayloadBytes": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

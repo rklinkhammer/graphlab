@@ -1,0 +1,27 @@
+Step 1 verification — 2026-09-23
+
+Fresh checks:
+- cmake --build build/dev -j 4: passed (no pending compilation).
+- ctest --test-dir build/dev --output-on-failure: 21/21 passed, 17.03 seconds.
+- console/web npm run build: passed; existing bundle-size and use-client warnings.
+- console/web npm test: 13 passed, 10 environment-gated live tests skipped, 30.7 seconds.
+- Dedicated Lima Linux packet_maintenance_tests: passed, including six SIGKILL
+  boundaries, restart recovery, cursor invalidation, recycling, migration, and SQLITE_FULL.
+- Dedicated isolated 8 MiB Linux tmpfs: actual ENOSPC rolled back rows and receipt;
+  freeing capacity allowed exactly one retry. Mount and directory removed afterward.
+- git diff --check: passed.
+
+Local and Linux source SHA-256 match:
+cpp/telemetry/packet_history.cpp
+17b7b990c9a6c5283ccc4e2960539d3727f95ddc4e290da399210d5a171afef8
+tests/packet_maintenance.cpp
+80780d683332ad0d1e9e587628fdbb5a4b76fbd4c743ba744e53054c04f25d3a
+
+Review found no additional blocking defect in the tested step-1 scope.
+The retirement boundary remains deliberately lossy for late older segments;
+explicit rebuild considers only the newest 1,000 segments. Recovery requires
+quiescent runs and preserves one quarantine set. These are documented limits.
+
+The actual-traffic live browser/API scenario was NOT rerun in this verification;
+its earlier evidence remains packet-maintenance-live.txt and packet-maintenance-live.png.
+Generated baseline browser screenshots were restored after this verification.

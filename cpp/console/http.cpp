@@ -226,10 +226,14 @@ Response Router::handle(const Request &r) {
                    (path.ends_with("/faults") || path.ends_with("/faults/preview") ||
                     path.ends_with("/faults/remove") || path.ends_with("/telemetry/query") ||
                     path.ends_with("/application-telemetry/query") ||
-                    path.ends_with("/packet-history/query"))) {
+                    path.ends_with("/packet-history/query") ||
+                    path.ends_with("/packet-history/rebuild") ||
+                    path.ends_with("/packet-history/recover"))) {
           auto slash = path.find('/', 13);
           params["runId"] = path.substr(13, slash - 13);
-          method = path.ends_with("/packet-history/query")          ? "packet-history"
+          method = path.ends_with("/packet-history/rebuild")        ? "packet-history.rebuild"
+                   : path.ends_with("/packet-history/recover")      ? "packet-history.recover"
+                   : path.ends_with("/packet-history/query")        ? "packet-history"
                    : path.ends_with("/application-telemetry/query") ? "application-telemetry"
                    : path.ends_with("/telemetry/query")             ? "telemetry"
                    : path.ends_with("/preview")                     ? "fault.preview"

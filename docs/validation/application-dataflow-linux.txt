@@ -1,0 +1,21 @@
+[0/2] Re-checking globbed directories...
+[1/10] Building CXX object CMakeFiles/m0_tests.dir/tests/m0.cpp.o
+[2/10] Building CXX object packages/lab-support/CMakeFiles/lab_contracts.dir/cpp/contracts.cpp.o
+[3/10] Linking CXX static library packages/lab-support/liblab_contracts.a
+[4/10] Linking CXX executable m0_tests
+[5/10] Building CXX object CMakeFiles/graphlab_catalog.dir/cpp/console/inventory.cpp.o
+[6/10] Linking CXX static library libgraphlab_catalog.a
+[7/10] Linking CXX executable lab-api
+[8/10] Linking CXX executable lab-agent
+[9/10] Building CXX object CMakeFiles/m1_tests.dir/tests/console/m1.cpp.o
+[10/10] Linking CXX executable m1_tests
+Internal ctest changing into directory: /tmp/graphlab-maintenance-20260923/build/dev
+Test project /tmp/graphlab-maintenance-20260923/build/dev
+    Start 2: m1_acceptance
+1/2 Test #2: m1_acceptance ....................   Passed    4.42 sec
+    Start 3: m0_acceptance
+2/2 Test #3: m0_acceptance ....................   Passed    0.24 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   4.66 sec
