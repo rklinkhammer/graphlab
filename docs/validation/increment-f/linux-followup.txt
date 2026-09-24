@@ -1,0 +1,8 @@
+Test project /tmp/graphlab-f-20260924/build/dev
+    Start 8: installed_package
+1/1 Test #8: installed_package ................   Passed    2.37 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.37 sec
+sudo: ./m3_transport_tests: command not found

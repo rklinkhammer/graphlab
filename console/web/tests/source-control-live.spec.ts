@@ -3,7 +3,7 @@ import {execFileSync,spawn,type ChildProcess} from 'node:child_process';
 import {resolve} from 'node:path';
 test('source pause/resume through Linux generator, capture, authenticated API and console',async({page,request})=>{
  test.skip(!process.env.GRAPHLAB_SOURCE_CONTROL_LIVE,'Requires isolated source control services');test.setTimeout(180000);page.setDefaultTimeout(10000);
- const config=`${process.env.HOME}/.lima/graphlab/ssh.config`,root='/var/tmp/gl6-source-20260923',base='http://127.0.0.1:18096';
+ const config=`${process.env.HOME}/.lima/graphlab/ssh.config`,root=process.env.GRAPHLAB_LIVE_ROOT??'/var/tmp/gl6-source-20260923',base='http://127.0.0.1:18096';
  const ssh=(cmd:string)=>execFileSync('ssh',['-F',config,'-o','BatchMode=yes','lima-graphlab',cmd],{encoding:'utf8'});
  const password=ssh(`cat ${root}/password`).trim();let tunnel:ChildProcess|undefined;
  try {
@@ -60,8 +60,8 @@ test('source pause/resume through Linux generator, capture, authenticated API an
  await page.getByRole('button',{name:'Quiesce',exact:true}).click();await expect(page.getByRole('status').filter({hasText:'stop: succeeded'})).toBeVisible({timeout:30000});
  const held=counts();const requestBody=cmd('held-resume','resume');expect((await post(requestBody)).status()).toBe(202);await expect.poll(async()=> (await query()).commands.find((c:any)=>c.request.requestId===requestBody.requestId)?.outcome).toBe('acknowledged');await new Promise(r=>setTimeout(r,500));expect(counts()).toEqual(held);expect(status().state).toBe('held');
  // Independent decoder inspects retained PCAPNG packet bytes in the paused interval.
- const proof=JSON.parse(ssh(`sudo python3 /tmp/graphlab-source-20260923/tests/qualification/source_capture.py ${root}/state/captures ${runId} ${begin} ${end}`));expect(proof.alpha).toBe(0);expect(proof.beta).toBeGreaterThan(0);
- ssh('sudo systemctl stop graphlab-source-agent');ssh(`sudo systemd-run --unit=graphlab-source-agent --property=KillMode=process /tmp/graphlab-source-20260923/build/dev/lab-agent --socket ${root}/rpc/agent.sock --topologies ${root} --lock ${root}/artifacts.lock.json --state ${root}/state --allow-uid 501`);
+ const proof=JSON.parse(ssh(`sudo python3 ${process.env.GRAPHLAB_LIVE_SOURCE??'/tmp/graphlab-source-20260923'}/tests/qualification/source_capture.py ${root}/state/captures ${runId} ${begin} ${end}`));expect(proof.alpha).toBe(0);expect(proof.beta).toBeGreaterThan(0);
+ ssh(`sudo systemctl stop ${process.env.GRAPHLAB_LIVE_AGENT??'graphlab-source-agent'}`);ssh(`sudo systemd-run --unit=${process.env.GRAPHLAB_LIVE_AGENT??'graphlab-source-agent'} --property=KillMode=process ${process.env.GRAPHLAB_LIVE_SOURCE??'/tmp/graphlab-source-20260923'}/build/dev/lab-agent --socket ${root}/rpc/agent.sock --topologies ${root} --lock ${root}/artifacts.lock.json --state ${root}/state --allow-uid 501`);
  await expect.poll(async()=>{try{return(await query()).commands.find((c:any)=>c.request.requestId===requestBody.requestId)?.outcome;}catch{return'';}}).toBe('acknowledged');expect(status().state).toBe('held');
  console.log(JSON.stringify({runId,first,second,held,captureProcessesUnchanged:true,receivingWhilePaused:true,proof}));
  } finally {try{if(await page.getByRole('button',{name:'Destroy run',exact:true}).isVisible()){await page.getByRole('button',{name:'Destroy run',exact:true}).click();await expect(page.getByRole('status').filter({hasText:'destroy: succeeded'})).toBeVisible({timeout:30000});}}finally{tunnel?.kill();}}

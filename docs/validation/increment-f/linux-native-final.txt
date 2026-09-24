@@ -1,0 +1,65 @@
+[0/2] Re-checking globbed directories...
+[1/4] Building CXX object CMakeFiles/application_full_linux.dir/tests/qualification/application_full_linux.cpp.o
+[2/4] Linking CXX executable application_full_linux
+[3/4] Building CXX object CMakeFiles/message_bounds_tests.dir/tests/message_bounds.cpp.o
+[4/4] Linking CXX executable message_bounds_tests
+Test project /tmp/graphlab-f-20260924/build/dev
+      Start  1: m6_protocol_contract
+ 1/26 Test  #1: m6_protocol_contract .............   Passed    0.00 sec
+      Start  2: m1_acceptance
+ 2/26 Test  #2: m1_acceptance ....................   Passed    4.42 sec
+      Start  3: m0_acceptance
+ 3/26 Test  #3: m0_acceptance ....................   Passed    0.25 sec
+      Start  4: cli_validate
+ 4/26 Test  #4: cli_validate .....................   Passed    0.01 sec
+      Start  5: cli_plan
+ 5/26 Test  #5: cli_plan .........................   Passed    0.01 sec
+      Start  6: cli_preflight
+ 6/26 Test  #6: cli_preflight ....................   Passed    0.00 sec
+      Start  7: cli_side_effects
+ 7/26 Test  #7: cli_side_effects .................   Passed    0.03 sec
+      Start  8: installed_package
+ 8/26 Test  #8: installed_package ................   Passed    0.06 sec
+      Start  9: m2_journal
+ 9/26 Test  #9: m2_journal .......................   Passed    1.48 sec
+      Start 10: m3_capture
+10/26 Test #10: m3_capture .......................   Passed    2.59 sec
+      Start 11: m3_transport
+11/26 Test #11: m3_transport .....................***Skipped   0.00 sec
+      Start 12: m4_terminal
+12/26 Test #12: m4_terminal ......................   Passed    0.00 sec
+      Start 13: m5_telemetry_faults
+13/26 Test #13: m5_telemetry_faults ..............   Passed    1.80 sec
+      Start 14: m5_remediation
+14/26 Test #14: m5_remediation ...................   Passed    1.15 sec
+      Start 15: m6_qualification_manifest
+15/26 Test #15: m6_qualification_manifest ........   Passed    0.04 sec
+      Start 16: m6_capacity_summary
+16/26 Test #16: m6_capacity_summary ..............   Passed    0.03 sec
+      Start 17: m6_runner_exit
+17/26 Test #17: m6_runner_exit ...................   Passed    0.04 sec
+      Start 18: m6_terminal_corpus
+18/26 Test #18: m6_terminal_corpus ...............   Passed    0.07 sec
+      Start 19: application_telemetry
+19/26 Test #19: application_telemetry ............   Passed    0.18 sec
+      Start 20: packet_history
+20/26 Test #20: packet_history ...................   Passed    0.22 sec
+      Start 21: packet_maintenance
+21/26 Test #21: packet_maintenance ...............   Passed   13.74 sec
+      Start 22: application_traffic_lease
+22/26 Test #22: application_traffic_lease ........   Passed    0.82 sec
+      Start 23: source_control
+23/26 Test #23: source_control ...................   Passed    3.22 sec
+      Start 24: process_logs
+24/26 Test #24: process_logs .....................   Passed    1.76 sec
+      Start 25: message_observations
+25/26 Test #25: message_observations .............   Passed   10.67 sec
+      Start 26: message_bounds
+26/26 Test #26: message_bounds ...................   Passed    5.79 sec
+
+100% tests passed, 0 tests failed out of 26
+
+Total Test time (real) =  48.38 sec
+
+The following tests did not run:
+	 11 - m3_transport (Skipped)

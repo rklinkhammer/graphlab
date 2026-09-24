@@ -1,0 +1,108 @@
+Evidence: "/tmp/gl6-pty-CJD8eX"
+PASS live terminal fixture
+PASS live terminal run starts
+PASS real exec stream attached
+PASS second writer refused
+PASS complete retained record boundary
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS bounded replay page
+PASS complete retained record boundary
+PASS resize event retained and applied to real PTY
+PASS default excludes secret bytes; opt-in retains exact input
+PASS complete retained record boundary
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS bounded replay page
+PASS complete retained record boundary
+PASS independent late viewer exact replay
+PASS real exec stream attached
+PASS second writer refused
+PASS complete retained record boundary
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS bounded replay page
+PASS complete retained record boundary
+PASS resize event retained and applied to real PTY
+PASS default excludes secret bytes; opt-in retains exact input
+PASS complete retained record boundary
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS bounded replay page
+PASS complete retained record boundary
+PASS independent late viewer exact replay
+PASS real exec stream attached
+PASS second writer refused
+PASS quota is an explicit recording discontinuity
+PASS quota retains bounded prefix without publishing complete artifact
+PASS complete retained record boundary
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS exact record sequence/output offset
+PASS bounded replay page
+PASS complete retained record boundary
+PASS earliest output retained, later output not falsely claimed
+PASS recovery preserves partial bytes
+PASS artifact API explicitly exposes incomplete recording
+PASS scoped terminal fixture cleanup
+T12 live privacy/quota passed

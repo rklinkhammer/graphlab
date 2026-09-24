@@ -1,0 +1,8 @@
+START edge
+edge exit=0
+START source
+source exit=0
+START inspectors
+inspectors exit=0
+START messages
+messages exit=0

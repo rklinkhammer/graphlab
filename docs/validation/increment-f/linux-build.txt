@@ -1,0 +1,179 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test GRAPHLAB_HAS_EXPECTED
+-- Performing Test GRAPHLAB_HAS_EXPECTED - Success
+-- Using the multi-header code from /tmp/graphlab-m0-source/build/dev/_deps/nlohmann_json-src/include/
+CMake Deprecation Warning at /tmp/graphlab-m0-source/build/dev/_deps/yaml-cpp-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so.3 (found suitable version "3.0.13", minimum required is "3") found components: Crypto 
+-- Found SQLite3: /var/tmp/graphlab-m6-tools/root/usr/include (found suitable version "3.45.1", minimum required is "3.24") 
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/graphlab-f-20260924/build/dev
+[0/2] Re-checking globbed directories...
+[1/153] Building CXX object CMakeFiles/graphlab_planner.dir/cpp/planner.cpp.o
+[2/153] Building CXX object CMakeFiles/lab.dir/cpp/main.cpp.o
+[3/153] Building CXX object CMakeFiles/graphlab_catalog.dir/cpp/console/inventory.cpp.o
+[4/153] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/rpc.cpp.o
+[5/153] Building CXX object CMakeFiles/m6_protocol_contract.dir/tests/qualification/protocol_contract.cpp.o
+[6/153] Building CXX object CMakeFiles/lab-api.dir/cpp/console/api_main.cpp.o
+[7/153] Building CXX object CMakeFiles/lab-agent.dir/cpp/console/agent_main.cpp.o
+[8/153] Building CXX object CMakeFiles/m0_tests.dir/tests/m0.cpp.o
+[9/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/messages/history.cpp.o
+[10/153] Building CXX object CMakeFiles/m1_tests.dir/tests/console/m1.cpp.o
+[11/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/messages/correlation.cpp.o
+[12/153] Building CXX object CMakeFiles/graphlab_console.dir/cpp/console/http.cpp.o
+[13/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/source_control.cpp.o
+[14/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/logs/history.cpp.o
+[15/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/process.cpp.o
+[16/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[17/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/writer.cpp.o
+[18/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/linux.cpp.o
+[19/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/capture/manager.cpp.o
+[20/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/recording.cpp.o
+[21/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/terminal/manager.cpp.o
+[22/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/qemu/arguments.cpp.o
+[23/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/qemu/backend.cpp.o
+[24/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/store.cpp.o
+[25/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/engine.cpp.o
+[26/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/application.cpp.o
+[27/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/packet_decoder.cpp.o
+[28/153] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/packet_history.cpp.o
+[29/153] Building CXX object CMakeFiles/lab-capture.dir/cpp/capture/worker.cpp.o
+[30/153] Building CXX object CMakeFiles/lab-qemu-runner.dir/qemu-runners/cpp-runner/main.cpp.o
+[31/153] Building CXX object CMakeFiles/lab-terminal.dir/cpp/terminal/worker.cpp.o
+[32/153] Building CXX object CMakeFiles/lab-guest-template.dir/qemu-guests/common/template.cpp.o
+[33/153] Building CXX object CMakeFiles/m3_transport.dir/tests/capture/transport.cpp.o
+[34/153] Building CXX object CMakeFiles/m4_tests.dir/tests/terminal/m4.cpp.o
+[35/153] Building CXX object CMakeFiles/m7_isolation.dir/tests/backends/isolation.cpp.o
+[36/153] Building CXX object CMakeFiles/m6_cleanup.dir/tests/qualification/cleanup.cpp.o
+[37/153] Building CXX object CMakeFiles/m5_tests.dir/tests/telemetry/m5.cpp.o
+[38/153] Building CXX object CMakeFiles/m2_linux.dir/tests/runtime/linux_integration.cpp.o
+[39/153] Building CXX object CMakeFiles/m5_remediation.dir/tests/telemetry/remediation.cpp.o
+[40/153] Building CXX object CMakeFiles/lab-qualify.dir/cpp/qualification/main.cpp.o
+[41/153] Building CXX object CMakeFiles/m6_terminal.dir/tests/qualification/terminal.cpp.o
+[42/153] Building CXX object CMakeFiles/application_lease_tests.dir/tests/application_lease.cpp.o
+[43/153] Linking CXX executable application_lease_tests
+[44/153] Building CXX object CMakeFiles/application_telemetry_tests.dir/tests/application.cpp.o
+[45/153] Building CXX object CMakeFiles/packet_history_tests.dir/tests/packet_history.cpp.o
+[46/153] Building CXX object CMakeFiles/packet_maintenance_tests.dir/tests/packet_maintenance.cpp.o
+[47/153] Building CXX object CMakeFiles/process_log_tests.dir/tests/process_logs.cpp.o
+[48/153] Building CXX object CMakeFiles/source_control_tests.dir/tests/source_control.cpp.o
+[49/153] Building CXX object CMakeFiles/message_linux.dir/tests/qualification/messages_linux.cpp.o
+[50/153] Building CXX object CMakeFiles/message_tests.dir/tests/messages.cpp.o
+[51/153] Building CXX object packages/lab-support/CMakeFiles/lab_contracts.dir/cpp/document.cpp.o
+[52/153] Building CXX object packages/lab-support/CMakeFiles/lab_contracts.dir/cpp/gate.cpp.o
+[53/153] Building CXX object CMakeFiles/message_bounds_tests.dir/tests/message_bounds.cpp.o
+[54/153] Building CXX object packages/lab-support/CMakeFiles/lab_telemetry.dir/cpp/telemetry.cpp.o
+[55/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/contrib/graphbuilder.cpp.o
+[56/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/contrib/graphbuilderadapter.cpp.o
+[57/153] Building CXX object packages/lab-support/CMakeFiles/lab_contracts.dir/cpp/contracts.cpp.o
+[58/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/binary.cpp.o
+[59/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/depthguard.cpp.o
+[60/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/directives.cpp.o
+[61/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/convert.cpp.o
+[62/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emit.cpp.o
+[63/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitfromevents.cpp.o
+[64/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitter.cpp.o
+[65/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitterstate.cpp.o
+[66/153] Building CXX object packages/lab-support/CMakeFiles/lab_lifecycle.dir/cpp/lifecycle.cpp.o
+[67/153] Linking CXX static library packages/lab-support/liblab_lifecycle.a
+[68/153] Building CXX object packages/lab-support/CMakeFiles/lab_telemetry.dir/cpp/application_telemetry.cpp.o
+[69/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/exceptions.cpp.o
+[70/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/exp.cpp.o
+[71/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/emitterutils.cpp.o
+[72/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/memory.cpp.o
+[73/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/node.cpp.o
+[74/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/null.cpp.o
+[75/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/node_data.cpp.o
+[76/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/nodeevents.cpp.o
+[77/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/nodebuilder.cpp.o
+[78/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/ostream_wrapper.cpp.o
+[79/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/regex_yaml.cpp.o
+[80/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/parse.cpp.o
+[81/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/parser.cpp.o
+[82/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scanner.cpp.o
+[83/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scanscalar.cpp.o
+[84/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scantag.cpp.o
+[85/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/scantoken.cpp.o
+[86/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/simplekey.cpp.o
+[87/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/stream.cpp.o
+[88/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/singledocparser.cpp.o
+[89/153] Building CXX object _deps/yaml-cpp-build/CMakeFiles/yaml-cpp.dir/src/tag.cpp.o
+[90/153] Linking CXX static library _deps/yaml-cpp-build/libyaml-cpp.a
+[91/153] Linking CXX static library packages/lab-support/liblab_contracts.a
+[92/153] Linking CXX static library libgraphlab_planner.a
+[93/153] Linking CXX static library libgraphlab_catalog.a
+[94/153] Linking CXX executable m6_protocol_contract
+[95/153] Linking CXX static library packages/lab-support/liblab_telemetry.a
+[96/153] Linking CXX executable lab-qualify
+[97/153] Linking CXX executable m0_tests
+[98/153] Linking CXX static library libgraphlab_runtime.a
+[99/153] Linking CXX executable lab-qemu-runner
+[100/153] Linking CXX static library libgraphlab_console.a
+[101/153] Linking CXX executable lab-capture
+[102/153] Linking CXX executable lab-guest-template
+[103/153] Linking CXX executable lab
+[104/153] Linking CXX executable lab-terminal
+[105/153] Linking CXX executable lab-api
+[106/153] Linking CXX executable m1_tests
+[107/153] Linking CXX executable lab-agent
+[108/153] Linking CXX executable m4_tests
+[109/153] Linking CXX executable m7_isolation
+[110/153] Linking CXX executable m3_transport
+[111/153] Linking CXX executable m6_cleanup
+[112/153] Linking CXX executable m2_linux
+[113/153] Linking CXX executable m5_tests
+[114/153] Linking CXX executable m5_remediation
+[115/153] Linking CXX executable m6_terminal
+[116/153] Linking CXX executable application_telemetry_tests
+[117/153] Linking CXX executable packet_history_tests
+[118/153] Linking CXX executable packet_maintenance_tests
+[119/153] Building CXX object CMakeFiles/m2_tests.dir/tests/runtime/m2.cpp.o
+[120/153] Linking CXX executable source_control_tests
+[121/153] Linking CXX executable process_log_tests
+[122/153] Building CXX object CMakeFiles/m4_linux.dir/tests/qemu/linux.cpp.o
+[123/153] Building CXX object CMakeFiles/m3_linux.dir/tests/capture/linux.cpp.o
+[124/153] Linking CXX executable m2_tests
+[125/153] Linking CXX executable m4_linux
+[126/153] Linking CXX executable m3_linux
+[127/153] Building CXX object CMakeFiles/process_log_linux.dir/tests/qualification/process_logs_linux.cpp.o
+[128/153] Building CXX object CMakeFiles/m3_tests.dir/tests/capture/m3.cpp.o
+[129/153] Building CXX object CMakeFiles/m6_protocol.dir/tests/qualification/protocol.cpp.o
+[130/153] Linking CXX executable m3_tests
+[131/153] Building CXX object CMakeFiles/m7_linux.dir/tests/backends/linux.cpp.o
+[132/153] Linking CXX executable m6_protocol
+[133/153] Linking CXX executable m7_linux
+[134/153] Building CXX object CMakeFiles/m6_terminal_live.dir/tests/qualification/terminal_live.cpp.o
+[135/153] Linking CXX executable m6_terminal_live
+[136/153] Building CXX object CMakeFiles/m4_console_linux.dir/tests/terminal/linux.cpp.o
+[137/153] Building CXX object CMakeFiles/m5_linux.dir/tests/telemetry/linux.cpp.o
+[138/153] Linking CXX executable m4_console_linux
+[139/153] Linking CXX executable m5_linux
+[140/153] Building CXX object CMakeFiles/m6_capacity.dir/tests/qualification/capacity.cpp.o
+[141/153] Linking CXX executable m6_capacity
+[142/153] Building CXX object CMakeFiles/m6_network.dir/tests/qualification/network.cpp.o
+[143/153] Building CXX object CMakeFiles/m6_barrier.dir/tests/qualification/barrier.cpp.o
+[144/153] Linking CXX executable m6_network
+[145/153] Linking CXX executable m6_barrier
+[146/153] Linking CXX executable process_log_linux
+[147/153] Building CXX object CMakeFiles/m6_direction.dir/tests/qualification/direction.cpp.o
+[148/153] Linking CXX executable message_linux
+[149/153] Linking CXX executable message_tests
+[150/153] Linking CXX executable message_bounds_tests
+[151/153] Linking CXX executable m6_direction
+[152/153] Building CXX object CMakeFiles/m6_reboot.dir/tests/qualification/reboot.cpp.o
+[153/153] Linking CXX executable m6_reboot

@@ -1,0 +1,3 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/application_full_linux.dir/tests/qualification/application_full_linux.cpp.o
+[2/2] Linking CXX executable application_full_linux

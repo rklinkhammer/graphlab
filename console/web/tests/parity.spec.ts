@@ -783,3 +783,23 @@ test("message observations freeze pages and distinguish exact, ambiguous and una
  status='ambiguous';await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect(panel.getByRole('heading',{name:'Correlation: ambiguous',exact:true})).toBeVisible();await panel.screenshot({path:resolve('../../docs/validation/messages-browser.png')});
  status='unavailable';await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect(panel).toContainText('Correlation: unavailable');await expect(panel.getByRole('button',{name:'Show message capture cap-0',exact:true})).toHaveCount(0);await panel.getByRole('button',{name:'Return to newest messages',exact:true}).click();await expect(panel.getByRole('button',{name:'Correlate event 2',exact:true})).toBeVisible();await expect(panel).toContainText('Delivery accounting and loss: unavailable');
 });
+
+test('message correlation fences late node responses and preserves failures through polling',async({page})=>{
+ await setup(page);let queries=0,resolveOld!:()=>void;const old=new Promise<void>(r=>resolveOld=r);
+ const event={id:'1',observation:{kind:'send',stream:'alpha',phase:'request',sequence:'1',payloadLength:'53',messageId:'a'.repeat(48),traceId:'a'.repeat(48),timestampMonotonicNs:'123'}};
+ await page.route('**/messages/query',async r=>{queries++;await r.fulfill({json:{items:[event],sources:[],nextCursor:null}});});
+ let held=false;await page.route('**/messages/correlate',async r=>{if(r.request().postDataJSON().node==='guest'){held=true;await old;await r.fulfill({json:{status:'exact',reason:'OLD_NODE_RESULT',matches:[]}});}else await r.fulfill({status:409,json:{error:{code:'capture_checksum_mismatch'}}});});
+ await page.getByText('Accessible inventory · all nodes and data edges').click();await page.getByRole('button',{name:'guest · qemu · runtime ready',exact:true}).click();let panel=page.getByRole('region',{name:'Application message observations'});
+ await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect.poll(()=>held).toBe(true);
+ await page.getByRole('button',{name:'a · docker · runtime ready',exact:true}).click();resolveOld();await expect(panel).toContainText('Reporting node a');await expect(panel).not.toContainText('OLD_NODE_RESULT');
+ await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect(panel.getByRole('alert')).toContainText('checksum mismatch');const before=queries;await expect.poll(()=>queries).toBeGreaterThan(before);await expect(panel.getByRole('alert')).toContainText('checksum mismatch');
+});
+
+test('message history supports narrow keyboard navigation and exposes expired-session failures',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await setup(page);let expired=false;
+ await page.route('**/messages/query',async r=>expired?r.fulfill({status:401,json:{error:{code:'session_expired'}}}):r.fulfill({json:{items:[{id:'1',observation:{kind:'send',stream:'alpha',phase:'request',sequence:'1',payloadLength:'53',messageId:'a'.repeat(48),traceId:'a'.repeat(48),timestampMonotonicNs:'123'}}],sources:[],nextCursor:null}}));
+ await page.getByText('Accessible inventory · all nodes and data edges').click();await page.getByRole('button',{name:'guest · qemu · runtime ready',exact:true}).click();const panel=page.getByRole('region',{name:'Application message observations'});
+ await panel.getByLabel('Message stream').selectOption('beta');await expect(panel.getByLabel('Message stream')).toHaveValue('beta');await panel.getByRole('button',{name:'Return to newest messages',exact:true}).press('Enter');await expect(panel).toContainText('Newest message observations (refreshing)');
+ await expect(panel.getByRole('button',{name:'Correlate event 1',exact:true})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+ expired=true;await expect(panel.getByRole('alert')).toContainText('Sign in to continue.');await panel.screenshot({path:resolve('../../docs/validation/increment-f-mobile.png')});
+});

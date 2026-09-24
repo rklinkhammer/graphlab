@@ -5,7 +5,7 @@ test('two application streams through real Linux workload, agent, API and consol
   test.skip(!process.env.GRAPHLAB_APPLICATION_EDGE_LIVE,'Requires isolated application edge services');
   test.setTimeout(180000);
   const config=process.env.GRAPHLAB_SSH_CONFIG ?? `${process.env.HOME}/.lima/graphlab/ssh.config`;
-  const root='/var/tmp/gl6-edge-20260923', source='/tmp/graphlab-edge-20260923', base='http://127.0.0.1:18095';
+  const root=process.env.GRAPHLAB_LIVE_ROOT??'/var/tmp/gl6-edge-20260923', source=process.env.GRAPHLAB_LIVE_SOURCE??'/tmp/graphlab-edge-20260923', base='http://127.0.0.1:18095';
   const ssh=(cmd:string)=>execFileSync('ssh',['-F',config,'-o','BatchMode=yes','lima-graphlab',cmd],{encoding:'utf8'});
   const password=ssh(`cat ${root}/password`).trim();
   let tunnel:ChildProcess|undefined,runId='';
@@ -60,8 +60,8 @@ test('two application streams through real Linux workload, agent, API and consol
     await panel.screenshot({path:resolve('../../docs/validation/application-edge-live.png')});
     await page.getByRole('button',{name:'Quiesce',exact:true}).click();
     await expect(page.getByRole('status').filter({hasText:'stop: succeeded'})).toBeVisible({timeout:30000});
-    ssh('sudo systemctl stop graphlab-edge-agent');
-    ssh(`sudo systemd-run --unit=graphlab-edge-agent --property=KillMode=process ${source}/build/dev/lab-agent --socket ${root}/rpc/agent.sock --topologies ${root} --lock ${root}/artifacts.lock.json --state ${root}/state --allow-uid 501`);
+    ssh(`sudo systemctl stop ${process.env.GRAPHLAB_LIVE_AGENT??'graphlab-edge-agent'}`);
+    ssh(`sudo systemd-run --unit=${process.env.GRAPHLAB_LIVE_AGENT??'graphlab-edge-agent'} --property=KillMode=process ${source}/build/dev/lab-agent --socket ${root}/rpc/agent.sock --topologies ${root} --lock ${root}/artifacts.lock.json --state ${root}/state --allow-uid 501`);
     await expect.poll(async()=>{try{return (await read({edge:'alpha'})).current[0]?.stale;}catch{return false;}},{timeout:20000}).toBe(true);
     await expect(page.getByRole('button',{name:'Resume',exact:true})).toBeVisible({timeout:10000});
     await page.getByRole('button',{name:'Resume',exact:true}).click();

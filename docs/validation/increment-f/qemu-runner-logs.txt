@@ -1,0 +1,9 @@
+PASS qualification mode
+PASS real capture-first QEMU starts: {"cancelRequested":false,"createdAt":"2026-09-24T13:54:29Z","error":null,"finishedAt":"2026-09-24T13:54:33Z","id":"a215e321-0190-4844-87a2-0d8ad15f61d6","operation":"start","revision":"1","runId":"7c582a34-025f-4f4c-8a7b-916617f9ecbd","state":"succeeded"}
+PASS QEMU worker journal artifact collected
+PASS nonempty actual worker journal diagnostic retained
+PASS QEMU artifact matches independent invocation-scoped journal bytes
+PASS container-runner output retained separately
+PASS runner bytes independently match (empty output is valid)
+PASS owned QEMU run destroyed
+PASS QEMU log survives resource destruction

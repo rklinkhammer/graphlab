@@ -1,5 +1,7 @@
 # Web console parity implementation
 
+**Current qualification:** increments A–F are complete within their documented bounded scope on the dedicated Linux ARM64 environment. [Increment F evidence and remaining limits](validation/increment-f/README.md) supersede historical “next increment” statements below. Full GraphX parity is not claimed for unsupported protocols, delivery accounting or other listed exclusions.
+
 Reference: [graphx-docker](https://github.com/rklinkhammer/graphx-docker/tree/7cad4da8646eda302a005070228495c1aa87d89a), revision `7cad4da8646eda302a005070228495c1aa87d89a`. Reference evidence is source inspection, not a fresh runtime qualification. Reference paths below are relative to that repository.
 
 | Feature / reference evidence | Graphlab baseline | Change and acceptance |
@@ -274,3 +276,14 @@ Limits: fixture-only Docker reporting; eight-event reporter suffix, best-effort 
 ### Increment E verification — 24 September 2026
 
 [Fresh verification report](validation/messages-verification.md): no blocking implementation defect found within the documented GLM1 fixture scope. Native/console builds, **25/25 native tests**, **27 browser tests** (15 environment-gated skips), the enabled Linux endpoint/PCAPNG/API/browser scenario, and fresh isolated ENOSPC rollback/retry passed. Exact selected-edge correlation and three-occurrence union ambiguity were independently checked, including authorization, restart/destruction and retained access. Task services/resources were cleaned up. Production code was unchanged. The report explicitly records remaining boundary, browser and broader qualification gaps; increment F remains open.
+
+
+## Increment F — qualification and reconciled claims (24 September 2026)
+
+[Qualification report](validation/increment-f/README.md): fresh local builds and **26/26 native tests**, production console build and **29 browser tests** (15 opt-in skips) passed. The independently built Linux suite passed 25 tests with its root-only transport case separately passed as root. Enabled live A–E suites passed against fresh isolated state and one current backend build, including real API authorization, independent workload counters and PCAPNG identities, restart, retained artifacts and destruction.
+
+Added targeted message source/body/expiry and correlation scan-bound tests, an actual application-edge ENOSPC fixture, late-response/error-persistence and narrow-screen/session-expiry browser regressions, and a real workload-restart log-generation check. Qualification found and fixed message-ID overflow on narrow screens. Existing live tests now accept explicit qualification source/state/unit overrides while preserving their defaults.
+
+Fresh Docker PTY, recorder quota/privacy/late-reader replay, PPC64LE/TCG and ARM64/KVM management SSH/serial/watchdog, native QEMU worker logs and container-runner retained logs all passed. Separate 8 MiB tmpfs tests verified committed-state preservation and retry for application telemetry, process logs and messages. Source/test/asset hashes matched; task services and runtime resources were cleaned up.
+
+F is complete for the implemented A–E scope. The report explicitly retains the product and qualification limits, including discontinuous snapshots, lifetime ledgers, finalized-only indexing, fixture-specific correlation, lack of delivery/latency inference, whole-host power-loss and broad saturation exclusions. No new feature increment is started automatically.

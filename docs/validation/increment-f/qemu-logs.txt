@@ -1,0 +1,10 @@
+PASS qualification mode
+PASS real capture-first QEMU starts: {"cancelRequested":false,"createdAt":"2026-09-24T13:52:57Z","error":null,"finishedAt":"2026-09-24T13:53:00Z","id":"d7c8830b-d28e-4456-8a40-9ccdf9290791","operation":"start","revision":"1","runId":"61eeb8e3-798e-4e24-89b2-a19b5b6f63aa","state":"succeeded"}
+PASS QEMU worker journal artifact collected
+PASS nonempty actual worker journal diagnostic retained
+PASS QEMU artifact matches independent invocation-scoped journal bytes
+PASS owned QEMU run destroyed
+PASS QEMU log survives resource destruction
+Error response from daemon: No such image: graphlab-m7/qemu-runner:latest
+PASS qualification mode
+topology.yaml: lock.workloads.guest-linux.vm.runnerImage: expected resolved lowercase SHA-256 digest

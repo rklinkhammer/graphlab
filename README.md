@@ -88,3 +88,5 @@ Retained process logs: [snapshot contract, limits and qualification](docs/proces
 Capture and diagnostic inspectors: [field provenance, metadata and limitations](docs/capture-inspectors.md).
 
 Opt-in message history and verified capture correlation: [contract, bounds and qualification](docs/message-observations.md).
+
+Current console qualification: [increments A–F results and remaining limits](docs/validation/increment-f/README.md), including live Linux Docker/QEMU checks and bounded persistence recovery.

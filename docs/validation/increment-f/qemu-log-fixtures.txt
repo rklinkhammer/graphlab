@@ -1,0 +1,5 @@
+Evidence: "/tmp/gl4-L51Pl6"
+PASS guest topology validates
+Evidence: "/tmp/gl4-m8uuJI"
+PASS guest topology validates
+M4 Linux QEMU tests passed

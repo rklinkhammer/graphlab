@@ -1,0 +1,12 @@
+PASS 256 reporter ledgers accepted with visible ceiling
+PASS 257th source rejected without eviction
+PASS existing source still works at capacity
+PASS 24-hour expiry omits old events with visible accounting
+PASS replayed expired sequence cannot resurrect history
+body bytes=4194204 records=4076
+PASS 4 MiB body limit prunes before record ceiling for maximum identities
+PASS 17 segments stop unique-match claims at 16-segment bound
+PASS 65 occurrences retain only 64 with incomplete scan
+PASS identifier beyond 2000 decoded packets is unavailable, not inferred
+PASS ESP packet cannot correlate even with GLM1-looking bytes
+PASS segment exceeding 16 MiB scan budget is visibly unavailable

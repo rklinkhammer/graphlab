@@ -478,3 +478,9 @@ h3[id],
 details[id] {
   scroll-margin-top: 65px;
 }
+
+/* Message and trace identifiers must remain readable on narrow screens. */
+section[aria-label="Application message observations"] {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
