@@ -1,5 +1,7 @@
 # M1 read-only console
 
+For current end-to-end startup, use **[Run the console for a specific topology](run-console.md)**. This document describes the historical milestone profile and its qualification; it is not the primary console quickstart.
+
 M1 adds the C++23 `lab-agent` and `lab-api` services and a React/TypeScript console. The agent loads validated, immutable topology revisions; API and CLI reads use its versioned Unix-socket protocol. The shared LabSupport package remains independently consumable. No Python is required.
 
 ## Build and run

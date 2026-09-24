@@ -1,14 +1,22 @@
 # Graphlab
 
-M0 implements a C++23 topology validator and deterministic dry-run planner. M1 adds a C++23 read-only agent/API and an authenticated React topology console. Neither milestone starts Docker containers, QEMU guests or OVS bridges.
+Graphlab validates topology definitions and runs Linux network experiments through an authenticated web console. The execution profile provides Docker/OVS and QEMU lifecycle controls, recorded consoles, interface metrics, capture artifacts, packet history and optional workload telemetry/message observations.
 
-M2 adds opt-in durable Linux execution, Docker/shared-OVS resources, run/job controls and shared C++ gated nodes. See [M2 setup and qualification limits](docs/m2-executor.md). The original agent invocation remains read-only; execution requires explicit state/peer configuration.
+## Run the web console for a topology
 
-M3 adds capture-first runs, independent C++ PCAPNG workers, renewable traffic leases and verified artifact downloads. See [M3 setup and behavior](docs/m3-captures.md) and [verification evidence](docs/validation/m3-verification.md). No-capture development topologies still require explicit acknowledgement.
+**Follow [Run the console for a specific topology](docs/run-console.md).** It gives a complete `console-triangle` example with real Docker images, a matching artifact lock, capture-first execution and generated message traffic:
 
-M4 adds QEMU guests and recorded Docker/SSH/serial consoles. See [operations](docs/m4-qemu-consoles.md), [preserved PowerPC/TCG and ARM64/KVM templates](qemu-guests/README.md), and [verification](docs/validation/m4-verification.md).
+1. Prepare a Linux host with Docker, OVS and systemd.
+2. Build/install the controller, capture/terminal workers and current frontend.
+3. Build the two workload images and create the topology's verified artifact lock.
+4. Create the operator credential and private state/socket directories.
+5. Launch the root agent with **`--state` and `--allow-uid`**, then the unprivileged API with **`--agent-uid 0`**.
+6. Verify `execution: true`, open `http://127.0.0.1:8088`, select the topology and click **Start selected topology**.
+7. Inspect the run, quiesce to finalize captures, then destroy its runtime resources.
 
-M7 adds [direct guest edges and an optional C++ QEMU container runner](docs/m7-backends.md). Experimental namespace OVS remains rejected until independent ownership and failure boundaries are qualified.
+The guide includes exact commands, a same-port SSH tunnel for macOS/remote browsers, a smaller capture policy, existing-topology substitution and troubleshooting. Run the executor on Linux; building on macOS provides the read-only tools, not Linux execution.
+
+**Why an older launch shows only M0/M1:** invoking `lab-agent` without `--state` and `--allow-uid` intentionally starts its read-only profile. Updating the frontend does not enable execution. Also, the checked-in `topologies/` lock uses synthetic artifact identities; those examples cannot be started unchanged. The [read-only setup](docs/m1-console.md) remains available specifically for viewing definitions.
 
 ## Build and test
 
@@ -28,53 +36,11 @@ The console connects topology selection to serial/SSH/container sessions, search
 
 [Application telemetry v1](docs/application-telemetry.md) adds optional workload message/payload rates, errors, rejection/backpressure counters and explicitly defined local service-time histograms. The instrumented C++ `app-a` fixture reports through the existing gate; bounded agent history and authenticated console views remain separate from interface counters. Uninstrumented workloads remain supported.
 
-[Packet history v1](docs/packet-history.md) indexes finalized, checksum-verified PCAPNG segments in a bounded, persistent metadata store. The console filters by selected node/edge and protocol, freezes older pages, and links each packet to its exact capture artifact and block offset. Active files, inferred packet direction and application-message correlation are excluded.
+[Packet history v1](docs/packet-history.md) indexes finalized, checksum-verified PCAPNG segments in a bounded, persistent metadata store. The console filters by selected node/edge and protocol, freezes older pages, and links each packet to its exact capture artifact and block offset. Active files and inferred packet direction are excluded. Separate opt-in [GLM1 message correlation](docs/message-observations.md) verifies identifiers in retained capture bytes.
 
 Packet-index maintenance now recycles the bounded segment catalog without automatically replaying retired captures. The console provides run-level rebuild and explicitly scoped database recovery, with preserved capture files and a quarantined prior index. See [recovery and limits](docs/packet-history.md#recovery-procedure-and-failure-behavior).
 
-Install the exact frontend and Playwright versions from the lockfile, install the matching Chromium build, and build the current console:
-
-```sh
-npm ci --prefix console/web
-npx --prefix console/web playwright install chromium
-npm run build --prefix console/web
-```
-
-Create a private runtime directory and operator credential from the repository root:
-
-```sh
-mkdir -m 700 build/m1-runtime
-build/dev/lab-api init-auth build/m1-runtime/auth.json
-```
-
-The command prints the credential once. Start the read-only agent in one terminal:
-
-```sh
-build/dev/lab-agent \
-  --socket "$PWD/build/m1-runtime/agent.sock" \
-  --topologies "$PWD/topologies" \
-  --lock "$PWD/topologies/artifacts.lock.json"
-```
-
-Start the API and static console in another terminal:
-
-```sh
-build/dev/lab-api \
-  --socket "$PWD/build/m1-runtime/agent.sock" \
-  --auth "$PWD/build/m1-runtime/auth.json" \
-  --assets "$PWD/console/web/dist" \
-  --port 8088
-```
-
-Open [http://127.0.0.1:8088](http://127.0.0.1:8088) and sign in with the generated credential. Use `127.0.0.1`, not `localhost`, because the API validates the browser authority. This profile is read-only; Linux execution and later runtime features require the milestone-specific agent configuration described in [M2 setup](docs/m2-executor.md), [M3 captures](docs/m3-captures.md), and [M4 QEMU consoles](docs/m4-qemu-consoles.md). See [M1 console setup and invocation](docs/m1-console.md) for deployment and security details.
-
-To exercise the real agent, API, and console in a browser that remains visible while the test harness drives it, run:
-
-```sh
-npm run test:headed --prefix console/web -- tests/console.spec.ts
-```
-
-The harness uses port 18088, creates a temporary credential, opens Chromium, tests the console, and cleans up its child services and private data. A graphical desktop session is required. The regular `npm test --prefix console/web` command remains headless for automation.
+For operational startup commands, use the [step-by-step execution guide](docs/run-console.md), rather than the historical milestone profiles. Browser automation is optional: `npm test --prefix console/web` runs the default tests; `npm run test:headed --prefix console/web -- tests/console.spec.ts` runs the read-only console test in a visible browser after installing Playwright's Chromium. That test starts its own temporary read-only services, not your experiment.
 
 ## Invoke M0
 
@@ -102,7 +68,7 @@ Hashing uses parsed JSON with lexically sorted object keys, compact serializatio
 
 ## Common contract package
 
-`packages/lab-support` is a standalone CMake project with its own version and dependency lock. It exports `LabSupport::contracts` through `find_package(LabSupport 1.0.0 EXACT CONFIG REQUIRED)`; see [package instructions](packages/lab-support/README.md). The package currently bootstraps in this repository; it is not claimed to have a separate Git history or published release. It can be built/released independently without the planner or CLI. No privileged controller code is in the package.
+`packages/lab-support` is a standalone CMake project with its own version and dependency lock. It exports `LabSupport::contracts` through `find_package(LabSupport 1.6.0 EXACT CONFIG REQUIRED)`; see [package instructions](packages/lab-support/README.md). The package currently bootstraps in this repository; it is not claimed to have a separate Git history or published release. It can be built/released independently without the planner or CLI. No privileged controller code is in the package.
 
 `docker-nodes/` now contains independently buildable M2 C++ fixture applications. No separate node Git repositories or published images have been created; local Linux test images were built for qualification.
 

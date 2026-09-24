@@ -1,5 +1,7 @@
 # M3: capture-first execution
 
+For current end-to-end startup, use **[Run the console for a specific topology](run-console.md)**. This document describes the historical milestone profile and its qualification; it is not the primary console quickstart.
+
 M3 adds C++23 libpcap workers, a PCAPNG writer, capture barriers, renewable node traffic leases, and artifact access to the M2 executor. Docker fixtures consume the common C++ lifecycle library; no Python support was added. Required-capture runs use the same single agent and SQLite journal as development runs.
 
 ## Build and launch

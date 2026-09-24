@@ -1,0 +1,9 @@
+All 13 shell blocks passed bash -n.
+Linux preparation check: reused the existing qualified SDK archive and message images; output directory build/console-docs-check. No runtime resources started.
+{
+  "artifactVerification": "local contract and lock integrity; referenced binaries not fetched",
+  "edges": 5,
+  "nodes": 5,
+  "topologyHash": "sha256:b047ffe3aaf45b738952b3944b2987c153b3cffdec5550a808cdfcf49c265dff",
+  "valid": true
+}

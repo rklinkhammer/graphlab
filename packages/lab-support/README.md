@@ -1,5 +1,7 @@
 # LabSupport 1.6.0
 
+To run a topology in the web console, follow the [execution startup guide](../../docs/run-console.md). This page covers the SDK build/API, not agent or console startup.
+
 C++23 contracts, bounded YAML/JSON parsing, workload validation, topology validation, and SHA-256 canonical document identity. No subprocesses, Docker API, runtime mutation, or environment-owned wiring are included.
 
 ```sh

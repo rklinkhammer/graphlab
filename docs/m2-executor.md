@@ -1,5 +1,7 @@
 # M2: one durable executor
 
+For current end-to-end startup, use **[Run the console for a specific topology](run-console.md)**. This document describes the historical milestone profile and its qualification; it is not the primary console quickstart.
+
 M2 adds an opt-in Linux executor to the C++23 agent. SQLite persists runs, jobs, idempotency records and resource intents. One worker performs Docker Engine API and OVS/Linux networking operations; both HTTP and CLI are clients of that authority. The browser adds run/job controls. Independent C++ fixture nodes live under `docker-nodes/app-a` and `docker-nodes/app-b` and consume the installed `LabSupport::lifecycle` package.
 
 This is the **development execution profile without capture coverage**. A start requires `developmentMode: true` and a topology with `capture.required: false`. Required-capture topologies fail admission until M3. QEMU nodes fail admission until M4. Existing M0/M1 example topologies are deliberately not executable as-is.
