@@ -1,0 +1,35 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/messages-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:20684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/messages-live.spec.ts:4:1 › message fixture endpoint reports correlate to verified Linux PCAPNG identities (5.0s)
+
+
+  1) tests/messages-live.spec.ts:4:1 › message fixture endpoint reports correlate to verified Linux PCAPNG identities 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       9 |  async function operation(action:string){const r=await(await page.request.get(`${base}/api/v1/runs/${runId}`)).json(),j=await(await page.request.post(`${base}/api/v1/runs/${runId}/operations`,{headers,data:{operation:action,expectedRevision:r.revision,idempotencyKey:crypto.randomUUID()}})).json();await expect.poll(async()=>(await(await page.request.get(`${base}/api/v1/jobs/${j.jobId}`)).json()).state,{timeout:30000}).toBe('succeeded');}
+      10 |  try{
+    > 11 |  await expect.poll(async()=>{try{return(await fetch(base)).status;}catch{return 0;}}).toBe(200);
+         |                                                                                       ^
+      12 |  await page.goto(base);await page.getByLabel('Operator credential').fill(ssh(`cat ${root}/password`).trim());await page.getByRole('button',{name:'Sign in',exact:true}).click();await expect(page.getByRole('heading',{name:'messages',exact:true})).toBeVisible();
+      13 |  headers={Origin:base,'X-CSRF-Token':(await(await page.request.get(`${base}/api/v1/session`)).json()).csrf};
+      14 |  for(const r of (await(await page.request.get(`${base}/api/v1/runs`)).json()).items.filter((r:any)=>r.state!=='destroyed')){runId=r.id;await operation(r.state==='reconciling'?'recover':'destroy');}runId='';
+        at /Users/rklinkhammer/workspace/graphlab/console/web/tests/messages-live.spec.ts:11:87
+
+    Error Context: test-results/messages-live-message-fixt-d307d-ied-Linux-PCAPNG-identities/error-context.md
+
+  1 failed
+    tests/messages-live.spec.ts:4:1 › message fixture endpoint reports correlate to verified Linux PCAPNG identities 

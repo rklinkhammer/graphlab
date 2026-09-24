@@ -249,6 +249,11 @@ Json node_exec(const Json &run, const Json &r, const std::string &action) {
   return Json::parse(output);
 }
 } // namespace
+Json LinuxBackend::message_report(const Json &run,const Json &r) {
+ auto status=node_exec(run,r,"status");
+ if(!status.contains("capabilities") || std::find(status["capabilities"].begin(),status["capabilities"].end(),Json("message-observations/v1"))==status["capabilities"].end())return nullptr;
+ return node_exec(run,r,"message-observations").at("messageObservations");
+}
 Json LinuxBackend::source_control(const Json &run, const Json &r, const Json &command) {
   auto status = node_exec(run, r, "status"); // inspect_container fences immutable ownership.
   if (!status.contains("capabilities") ||

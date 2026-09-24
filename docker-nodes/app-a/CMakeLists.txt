@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 project(GraphlabNode LANGUAGES CXX)
-set(LAB_SUPPORT_VERSION "1.5.0" CACHE STRING "Exact pinned installed LabSupport release")
+set(LAB_SUPPORT_VERSION "1.6.0" CACHE STRING "Exact pinned installed LabSupport release")
 find_package(LabSupport ${LAB_SUPPORT_VERSION} EXACT REQUIRED CONFIG)
 add_executable(lab-node cpp/main.cpp)
 target_link_libraries(lab-node PRIVATE LabSupport::lifecycle)

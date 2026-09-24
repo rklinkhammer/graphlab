@@ -1,0 +1,27 @@
+[0/2] Re-checking globbed directories...
+[1/27] Building CXX object packages/lab-support/CMakeFiles/lab_lifecycle.dir/cpp/lifecycle.cpp.o
+[2/27] Linking CXX static library packages/lab-support/liblab_lifecycle.a
+[3/27] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/messages/correlation.cpp.o
+[4/27] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/telemetry/packet_decoder.cpp.o
+[5/27] Building CXX object CMakeFiles/message_tests.dir/tests/messages.cpp.o
+[6/27] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/messages/history.cpp.o
+[7/27] Building CXX object CMakeFiles/graphlab_runtime.dir/cpp/runtime/engine.cpp.o
+[8/27] Linking CXX static library libgraphlab_runtime.a
+[9/27] Linking CXX executable lab-guest-template
+[10/27] Linking CXX executable lab-agent
+[11/27] Linking CXX executable lab
+[12/27] Linking CXX executable m3_transport
+[13/27] Linking CXX executable m1_tests
+[14/27] Linking CXX executable lab-api
+[15/27] Linking CXX executable m4_tests
+[16/27] Linking CXX executable m6_terminal
+[17/27] Linking CXX executable m5_tests
+[18/27] Linking CXX executable application_telemetry_tests
+[19/27] Linking CXX executable m5_remediation
+[20/27] Linking CXX executable m2_tests
+[21/27] Linking CXX executable packet_history_tests
+[22/27] Linking CXX executable process_log_tests
+[23/27] Linking CXX executable message_tests
+[24/27] Linking CXX executable packet_maintenance_tests
+[25/27] Linking CXX executable source_control_tests
+[26/27] Linking CXX executable m3_tests

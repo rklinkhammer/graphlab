@@ -1,0 +1,23 @@
+PASS fixture emits explicit metadata without payload storage
+PASS payload recording rejected
+PASS noncontiguous report rejected
+PASS duplicate report replay coalesces
+PASS event sequence mutation rejected
+PASS older pages stable across inserts
+PASS cross-run cursor rejected
+PASS cross-run event lookup rejected
+PASS overwritten report observations visible as omissions, not delivery loss
+PASS restart marks old observations stale
+PASS event identity survives restart
+PASS one verified wire identity gives precise packet reference
+PASS duplicate/reused wire ID occurrences remain ambiguous
+PASS unrelated traffic is not correlated by tuple or timestamp
+PASS truncated datagram cannot produce exact correlation
+PASS wrong-run correlation rejected
+PASS active capture cannot establish unique correlation
+PASS checksum failures expose no matches
+PASS insertion failure rejected atomically
+PASS failed transaction preserves old events
+PASS store record and byte pruning visible
+PASS reporter epochs remain distinct
+PASS slow runtime source does not hold the history read mutex

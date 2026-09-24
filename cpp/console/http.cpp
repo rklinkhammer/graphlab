@@ -239,6 +239,8 @@ Response Router::handle(const Request &r) {
                    : path.ends_with("/preview")                     ? "fault.preview"
                    : path.ends_with("/remove")                      ? "fault.remove"
                                                                     : "fault.apply";
+        } else if(path.starts_with("/api/v1/runs/") && (path.ends_with("/messages/query")||path.ends_with("/messages/correlate"))) {
+          auto slash=path.find('/',13);params["runId"]=path.substr(13,slash-13);method=path.ends_with("/query")?"messages.query":"messages.correlate";
         } else if (path.starts_with("/api/v1/runs/") &&
                    (path.ends_with("/process-logs/query") || path.ends_with("/process-logs/download"))) {
           auto slash=path.find('/',13);params["runId"]=path.substr(13,slash-13);

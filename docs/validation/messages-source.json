@@ -1,0 +1,37 @@
+[
+  {
+    "file": "cpp/messages/history.cpp",
+    "sha256": "8fbbd2d08d5fe49eb67510b02e52ab96aa1866c1e842cab1be9d1bb1b0501cd7",
+    "linuxMatches": true
+  },
+  {
+    "file": "cpp/messages/correlation.cpp",
+    "sha256": "df3e26bcd283464d3295bd9684a4bf70bdda18c873ef33549ea774b11ec7238c",
+    "linuxMatches": true
+  },
+  {
+    "file": "tests/messages.cpp",
+    "sha256": "2e3c5939450b2a0ba999c9575aa8c499c32842655e39ebb45ed7b1f61ebbd767",
+    "linuxMatches": true
+  },
+  {
+    "file": "cpp/runtime/engine.cpp",
+    "sha256": "54dc6100213b97ffe7c5b056c848a69fda436191ffc524f11f433bdee0fb7e0c",
+    "linuxMatches": true
+  },
+  {
+    "file": "cpp/runtime/linux.cpp",
+    "sha256": "dfad00eb271e7d971fd04ec8c88485f7f3e4c3e13b3fe1d0870978c9915ed78d",
+    "linuxMatches": true
+  },
+  {
+    "file": "cpp/console/http.cpp",
+    "sha256": "287674c8f1647f75240e309be22efe5316573b9aeed026092fa82135fd4a64ff",
+    "linuxMatches": true
+  },
+  {
+    "file": "cpp/telemetry/packet_decoder.cpp",
+    "sha256": "556d2be349bd5911817f4b8834d4f6a0a8c727c3f5cf4e4c824251193af7586d",
+    "linuxMatches": true
+  }
+]

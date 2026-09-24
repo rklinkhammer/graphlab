@@ -1,0 +1,14 @@
+
+> graphlab-console@0.1.0 test
+> playwright test tests/messages-live.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:21698) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Running as unit: graphlab-messages-agent.service; invocation ID: 25c271548fe14b9aa1df4ff3d83f6e17
+{"runId":"1abe330e-925d-448d-81af-0c20e33032b1","sourceEpoch":"a142be83a9e3aba03f6b9cb7767d86e2","targetEpoch":"658cf1f72d8e00ab6d39a43fd29d7578","eventId":"30","messageId":"a142be83a9e3aba03f6b9cb7767d86e20000000000000008","independentEndpointReports":true,"proof":{"artifactId":"d1f56d0f91614856f05c9f6b-0","packetIndex":20,"blockOffset":2392,"wireIdentifierVerified":true,"sha256":"sha256:69591a2dc850dd5c93a9fc5e74a1e692faa9d1b8d79b9490e976a9684e980bd3"},"unionMatches":3,"authorization":true,"restart":true,"retainedAfterDestruction":true}
+  ✓  1 tests/messages-live.spec.ts:4:1 › message fixture endpoint reports correlate to verified Linux PCAPNG identities (11.8s)
+
+  1 passed (12.1s)

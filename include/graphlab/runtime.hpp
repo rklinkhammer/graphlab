@@ -11,6 +11,7 @@ namespace graphlab::packets {
 class History;
 }
 namespace graphlab::process_logs { class History; }
+namespace graphlab::messages { class History; }
 namespace graphlab::runtime {
 using lab_support::Json;
 struct Failure : std::runtime_error {
@@ -51,6 +52,7 @@ public:
   virtual Json source_control(const Json &, const Json &, const Json &) {
     throw Failure("source_control_unsupported");
   }
+  virtual Json message_report(const Json &,const Json &) { return nullptr; }
   virtual Json logs(const Json &, const Json &) { throw Failure("node_logs_unavailable"); }
   virtual Json fault(const Json &, const Json &, const std::string &) {
     throw Failure("fault_backend_unavailable");
@@ -78,6 +80,7 @@ public:
   Json capture_control(const Json &, const std::string &) override;
   Json telemetry(const Json &) override;
   Json logs(const Json &, const Json &) override;
+  Json message_report(const Json &,const Json &) override;
   Json source_control(const Json &, const Json &, const Json &) override;
   Json fault(const Json &, const Json &, const std::string &) override;
   void preflight(const Json &, const Json &) override;
@@ -116,8 +119,10 @@ class Engine {
   std::string collector_ = console::random_hex(12);
   std::unique_ptr<packets::History> packet_history_;
   std::unique_ptr<process_logs::History> process_logs_;
+  std::unique_ptr<messages::History> messages_;
   std::size_t log_cursor_ = 0;
-  Json log_candidates();
+  std::size_t message_cursor_ = 0;
+  Json log_candidates(bool message_sources=false);
 
 public:
   Engine(const std::filesystem::path &directory, Backend &, const console::Catalog &);

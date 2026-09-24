@@ -1,3 +1,4 @@
+#include <graphlab/message_history.hpp>
 #include <fcntl.h>
 #include <graphlab/application_telemetry.hpp>
 #include <graphlab/capture.hpp>
@@ -176,6 +177,7 @@ Engine::Engine(const std::filesystem::path &directory, Backend &backend,
       if(backend_.durable_logs()) process_logs_->start(backend_,[this]{return log_candidates();});
     } catch(const std::exception&) { /* Optional log store never changes run admission. */ }
 
+    try {messages_=std::make_unique<messages::History>(directory_/"messages.sqlite");if(backend_.durable_logs())messages_->start(backend_,[this]{return log_candidates(true);});}catch(const std::exception&){}
     worker_ = std::thread([this] { work(); });
   } catch (...) {
     if (db_)
@@ -192,6 +194,7 @@ Engine::~Engine() {
   }
   if (worker_.joinable())
     worker_.join();
+  messages_.reset();
   process_logs_.reset();
   packet_history_.reset();
   sqlite3_close(db_);
@@ -237,6 +240,13 @@ Json Engine::dispatch(const Json &request, uid_t principal) {
   std::unique_lock guard(mutex_);
   if (stopping_)
     throw Failure("journal_unavailable", 503);
+  if(method=="messages.query" || method=="messages.correlate") {
+    auto runid=string(p,"runId"),node=string(p,"node");if(!state_["runs"].contains(runid))throw Failure("not_found",404);
+    const auto &run=state_["runs"][runid];if(!run["topology"]["nodes"].contains(node))throw Failure("node_not_found",404);
+    if(!messages_)throw Failure("message_store_unavailable",503);
+    if(method=="messages.query"){guard.unlock();return messages_->query(p);}
+    auto snapshot=run;guard.unlock();auto event=messages_->event(p);return messages::correlate(snapshot,event,p);
+  }
   if(method=="process-logs.query" || method=="process-logs.download") {
     auto runid=string(p,"runId");
     if(!state_["runs"].contains(runid)) throw Failure("not_found",404);
@@ -943,24 +953,26 @@ Json Engine::inventory(Json logical) {
 } // namespace graphlab::runtime
 
 namespace graphlab::runtime {
-Json Engine::log_candidates() {
+Json Engine::log_candidates(bool message_sources) {
   std::lock_guard guard(mutex_);
+  auto &cursor=message_sources?message_cursor_:log_cursor_;
   Json result=Json::array();std::size_t index=0;
   for(const auto &[id,run]:state_["runs"].items()) {
     if(stopping_ || run["state"]=="destroyed") continue;
     for(const auto &r:run["resources"]) {
+      if(message_sources && r["kind"]!="container")continue;
       if(!r.contains("identity") || r.value("state","")=="removed" || (r["kind"]!="container"&&r["kind"]!="qemu"))continue;
       std::vector<std::string> sources=r["kind"]=="container"?std::vector<std::string>{"docker-output"}:std::vector<std::string>{"qemu-worker"};
       if(r["kind"]=="qemu" && r["identity"].contains("runnerId"))sources.push_back("qemu-runner");
       for(const auto &source:sources) {
-        if(index++ < log_cursor_)continue;
-        if(result.size()>=16){log_cursor_=index-1;return result;}
+        if(index++ < cursor)continue;
+        if(result.size()>=16){cursor=index-1;return result;}
         auto resource=r;resource["logSource"]=source;
-        if(resource.dump().size()>32768){log_cursor_=index;throw Failure("log_candidate_descriptor_limit",503);}
+        if(resource.dump().size()>32768){cursor=index;throw Failure("log_candidate_descriptor_limit",503);}
         result.push_back({{"run",{{"id",id},{"generation",run["generation"]},{"controllerGeneration",run["controllerGeneration"]}}},{"resource",resource}});
       }
     }
   }
-  log_cursor_=0;return result;
+  cursor=0;return result;
 }
 }

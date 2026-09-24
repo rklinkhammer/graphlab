@@ -148,6 +148,7 @@ async function setup(page: any, application: any = null) {
       value = { ...run, id: "foreign", topologyHash: "h2" };
     else if (path.endsWith("/packet-history/query"))
       value = {items: [], segments: [], nextCursor: null};
+    else if (path.endsWith("/messages/query")) value={items:[],sources:[],nextCursor:null};
     else if (path.endsWith("/application-telemetry/query"))
       value = {
         current: [],
@@ -769,4 +770,16 @@ test("network inspector separates stale evidence, unknown state and failure hypo
  const evidence=page.getByRole("region",{name:"Network observation evidence"});await expect(evidence).toContainText("Down / Up");await expect(evidence).toContainText("may be stale");await expect(evidence).toContainText("stats64_unavailable");await expect(evidence).toContainText("root cause: undetermined");await expect(evidence).toContainText("Unknown");
  await evidence.getByText("Observed runtime interface mapping",{exact:true}).click();await expect(evidence).toContainText("tap7");await evidence.getByText("Observed RSTP ports",{exact:true}).click();await expect(evidence).toContainText("RSTP unavailable or not applicable");
  await evidence.screenshot({path:resolve("../../docs/validation/inspectors-network.png")});
+});
+
+test("message observations freeze pages and distinguish exact, ambiguous and unavailable correlation",async({page})=>{
+ await setup(page);let queries=0,status='exact';
+ const event=(id:string)=>({id,observation:{kind:'send',stream:'alpha',phase:'request',sequence:id,payloadLength:'53',messageId:'a'.repeat(48),traceId:'a'.repeat(48),timestampMonotonicNs:'1000'}});
+ await page.route('**/messages/query',async route=>{queries++;const p=route.request().postDataJSON();expect(p.node).toBe('guest');await route.fulfill({json:{items:[event(p.cursor?'1':'2')],nextCursor:p.cursor?null:'older',sources:[{epoch:'e',instance:'i',stale:true,missedBeforeIngestion:'12',reporterEvicted:'20',expiredOrPruned:'4',retained:'2'}]}});});
+ await page.route('**/messages/correlate',async route=>{expect(route.request().postDataJSON().node).toBe('guest');await route.fulfill({json:{status,searchComplete:status==='exact',captureCoverage:'closed',reason:status==='exact'?'Exact identifier in verified UDP payload':status==='ambiguous'?'Multiple occurrences or incomplete coverage':'No verified match; no loss inferred',errors:[],matches:status==='unavailable'?[]:[{artifactId:'cap-0',edge:'link',packetIndex:'7',blockOffset:'128',matchBasis:'GLM1/v1 exact identifier'}]}});});
+ await page.getByText('Accessible inventory · all nodes and data edges').click();await page.getByRole('button',{name:'guest · qemu · runtime ready',exact:true}).click();const panel=page.getByRole('region',{name:'Application message observations'});
+ await expect(panel).toContainText('12 events missed before ingestion');await panel.getByRole('button',{name:'Older message observations',exact:true}).click();await expect(panel).toContainText('Frozen older message page');await expect(panel.getByRole('button',{name:'Correlate event 1',exact:true})).toBeVisible();const frozen=queries;await page.waitForTimeout(3300);expect(queries).toBe(frozen);
+ await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect(panel.getByRole('heading',{name:'Correlation: exact',exact:true})).toBeVisible();await expect(panel).toContainText('packet #7 · block offset 128');
+ status='ambiguous';await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect(panel.getByRole('heading',{name:'Correlation: ambiguous',exact:true})).toBeVisible();await panel.screenshot({path:resolve('../../docs/validation/messages-browser.png')});
+ status='unavailable';await panel.getByRole('button',{name:'Correlate event 1',exact:true}).click();await expect(panel).toContainText('Correlation: unavailable');await expect(panel.getByRole('button',{name:'Show message capture cap-0',exact:true})).toHaveCount(0);await panel.getByRole('button',{name:'Return to newest messages',exact:true}).click();await expect(panel.getByRole('button',{name:'Correlate event 2',exact:true})).toBeVisible();await expect(panel).toContainText('Delivery accounting and loss: unavailable');
 });

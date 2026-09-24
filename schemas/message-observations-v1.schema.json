@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GLM1 message observations v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "epoch",
+    "clock",
+    "payloadRecorded",
+    "total",
+    "evicted",
+    "events"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "graphlab.message-observations/v1"
+    },
+    "epoch": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$"
+    },
+    "clock": {
+      "const": "reporter-monotonic-ns"
+    },
+    "payloadRecorded": {
+      "const": false
+    },
+    "total": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,17})$"
+    },
+    "evicted": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,17})$"
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence",
+          "messageId",
+          "traceId",
+          "stream",
+          "kind",
+          "phase",
+          "payloadLength",
+          "timestampMonotonicNs"
+        ],
+        "properties": {
+          "sequence": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,17})$"
+          },
+          "messageId": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{48}$"
+          },
+          "traceId": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{48}$"
+          },
+          "stream": {
+            "enum": [
+              "alpha",
+              "beta"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "send",
+              "receive"
+            ]
+          },
+          "phase": {
+            "enum": [
+              "request",
+              "response"
+            ]
+          },
+          "payloadLength": {
+            "const": "53"
+          },
+          "timestampMonotonicNs": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,17})$"
+          }
+        }
+      }
+    }
+  }
+}

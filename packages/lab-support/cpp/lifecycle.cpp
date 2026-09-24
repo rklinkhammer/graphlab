@@ -1,3 +1,4 @@
+#include <lab_support/message_observation.hpp>
 #include "record_io.hpp"
 #include "source_control.hpp"
 #include <arpa/inet.h>
@@ -126,6 +127,10 @@ int run_node(int argc, char **argv, const char *application, bool application_te
 }
 int run_node(int argc, char **argv, const char *application, bool application_telemetry,
              bool edge_telemetry, const char *source_target) {
+ return run_node(argc,argv,application,application_telemetry,edge_telemetry,source_target,false);
+}
+int run_node(int argc,char **argv,const char *application,bool application_telemetry,
+             bool edge_telemetry,const char *source_target,bool message_observations) {
   try {
     if (argc >= 3 && std::string(argv[1]) == "control") {
       std::string command = argv[2];
@@ -177,12 +182,13 @@ int run_node(int argc, char **argv, const char *application, bool application_te
                                                 1000000, 5000000, 10000000};
     const auto began = std::chrono::steady_clock::now();
     std::string epoch;
-    if (application_telemetry || source_target) {
+    if (application_telemetry || source_target || message_observations) {
       std::random_device random;
       for (int i = 0; i < 32; ++i)
         epoch += "0123456789abcdef"[random() & 15];
     }
     detail::Sources sources(epoch);
+    messages::Reporter messages(epoch);
     std::array<std::uint64_t, 2> generated{};
     FD generator;
     auto next_send = began;
@@ -259,8 +265,11 @@ int run_node(int argc, char **argv, const char *application, bool application_te
           received_bytes += static_cast<std::uint64_t>(n);
           if (n > static_cast<ssize_t>(sizeof(buffer))) {
             ++rejected;
-          } else if (sendto(data.value, buffer, n, 0, reinterpret_cast<sockaddr *>(&peer), len) ==
-                     n) {
+          } else if ([&]{
+            if(message_observations){messages.observe(std::string_view(buffer,n),"receive");if(!messages::identifier(std::string_view(buffer,n)).is_null()){if(buffer[n-1]=='A')buffer[n-1]='a';if(buffer[n-1]=='B')buffer[n-1]='b';}}
+            return sendto(data.value,buffer,n,0,reinterpret_cast<sockaddr *>(&peer),len)==n;
+          }()) {
+            if(message_observations)messages.observe(std::string_view(buffer,n),"send");
             ++sent;
             sent_bytes += n;
             const auto elapsed =
@@ -283,7 +292,7 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       // Single-threaded control acknowledgement is after any earlier send syscall.
       expire();
       if (source_target && released && std::chrono::steady_clock::now() >= next_send) {
-        next_send = std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
+        next_send = std::chrono::steady_clock::now() + std::chrono::milliseconds(message_observations?1000:200);
         if (generator.value < 0) {
           generator.value = socket(AF_INET, SOCK_DGRAM, 0);
           auto local = data_address();
@@ -301,18 +310,15 @@ int run_node(int argc, char **argv, const char *application, bool application_te
           expire();
           if (!released || sources.paused(i))
             continue;
-          char bytes[16];
-          std::memset(bytes, i == 0 ? 'A' : 'B', sizeof(bytes));
-          if (sendto(generator.value, bytes, sizeof(bytes), 0,
-                     reinterpret_cast<sockaddr *>(&target), sizeof(target)) == 16)
-            ++generated[i];
+          auto bytes=message_observations?messages.datagram(i):std::string(16,i==0?'A':'B');
+          if(sendto(generator.value,bytes.data(),bytes.size(),0,reinterpret_cast<sockaddr *>(&target),sizeof(target))==static_cast<ssize_t>(bytes.size())) {
+            ++generated[i];if(message_observations)messages.observe(bytes,"send");
+          }
         }
       }
       if (generator.value >= 0) {
         char bytes[1500];
-        for (int i = 0; i < 16; ++i)
-          if (recv(generator.value, bytes, sizeof(bytes), 0) < 0)
-            break;
+        for(int i=0;i<16;++i){auto count=recv(generator.value,bytes,sizeof(bytes),0);if(count<0)break;if(message_observations)messages.observe(std::string_view(bytes,count),"receive");}
       }
       if (!(p[0].revents & POLLIN))
         continue;
@@ -401,6 +407,8 @@ int run_node(int argc, char **argv, const char *application, bool application_te
           if (!released)
             throw std::runtime_error("gate_held");
           result["probe"] = probe(command.substr(6));
+        } else if (command == "message-observations" && message_observations) {
+          result["messageObservations"]=messages.report();
         } else if (command != "status")
           throw std::runtime_error("unsupported_control");
       } catch (const std::exception &e) {
@@ -410,6 +418,7 @@ int run_node(int argc, char **argv, const char *application, bool application_te
       result["apiVersion"] = "graphlab.gate/v1";
       result["protocolMinor"] = node_gate_minor;
       result["capabilities"] = Json::array({"quiesce", "traffic-lease"});
+      if(message_observations)result["capabilities"].push_back("message-observations/v1");
       if (application_telemetry)
         result["capabilities"].push_back("application-telemetry/v1");
       if (source_target) {

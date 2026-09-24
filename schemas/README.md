@@ -63,3 +63,7 @@ M4 guest lock metadata accepts explicit `kvm` or `tcg` acceleration, a versioned
 
 `graphlab.process-log-snapshot/v1` is the agent-owned retained output contract documented in [process logs](../docs/process-logs.md); consumers cannot submit arbitrary log sources.
 `graphlab.capture-lengths/v1` contains writer-owned decimal captured/original byte totals and truncated-packet counts for finalized PCAPNG segments; see [capture metadata](../docs/capture-inspectors.md).
+
+## Message observations
+
+[Structural v1 schema](message-observations-v1.schema.json); [identity, clock, size and cross-field rules](../docs/message-observations.md). The authoritative runtime validator is `cpp/messages/history.cpp`.

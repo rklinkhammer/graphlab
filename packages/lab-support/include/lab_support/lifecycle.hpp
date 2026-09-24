@@ -9,4 +9,6 @@ int run_node(int argc, char **argv, const char *application, bool application_te
 // Opt-in autonomous UDP sources; target is fixture configuration, never browser input.
 int run_node(int argc, char **argv, const char *application, bool application_telemetry,
              bool edge_telemetry, const char *source_target);
+int run_node(int argc, char **argv, const char *application, bool application_telemetry,
+             bool edge_telemetry, const char *source_target, bool message_observations);
 } // namespace lab_support

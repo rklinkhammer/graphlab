@@ -1,3 +1,4 @@
+#include <lab_support/message_observation.hpp>
 #include <arpa/inet.h>
 #include <graphlab/packet_history.hpp>
 namespace graphlab::packets {
@@ -13,7 +14,7 @@ std::uint32_t le(Bytes b, std::size_t n) {
          std::uint32_t(b[n + 3]) << 24;
 }
 unsigned be(Bytes b, std::size_t n) { return unsigned(b[n]) * 256 + b[n + 1]; }
-Json protocol(Bytes b) {
+Json protocol(Bytes b, bool messages) {
   Json p = {{"protocol", "other"}, {"decodeStatus", "complete"}};
   auto short_header = [&]() {
     p["decodeStatus"] = "truncated-header";
@@ -104,6 +105,10 @@ Json protocol(Bytes b) {
     return short_header();
   p["sourcePort"] = be(b, pos);
   p["destinationPort"] = be(b, pos + 2);
+  if(messages && type==0x0800 && next==17 && be(b,pos+4)==61 && end>=pos+61) {
+    auto id=lab_support::messages::identifier(std::string_view(reinterpret_cast<const char*>(b.data()+pos+8),53));
+    if(!id.is_null())p["fixtureIdentifier"]=id;
+  }
   return p;
 }
 } // namespace
@@ -162,7 +167,7 @@ Json decode(std::span<const unsigned char> bytes, const Json &context, std::size
         row["capturedLength"] = captured;
         row["originalLength"] = original;
         row["truncated"] = captured < original;
-        row["headers"] = protocol(b.subspan(28, captured));
+        row["headers"] = protocol(b.subspan(28, captured),context.value("decodeMessageIdentifiers",false));
         items.push_back(std::move(row));
       }
     } else if (type == 5) {

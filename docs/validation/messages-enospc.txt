@@ -1,0 +1,3 @@
+message_storage_full
+PASS actual ENOSPC preserves committed events and rejects new report
+PASS retry after freeing space publishes complete batch

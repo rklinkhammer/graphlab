@@ -1,0 +1,3 @@
+{"source": "/tmp/graphlab-messages-20260924", "state": "/var/tmp/gl6-messages-20260924", "port": 18099, "sdkPackage": "sha256:26a329ca703fb89971f6726c92576794cebcde7acd6bfef9318aafe3f859b68e", "images": {"app-a": "graphlab.local/app-a@sha256:bf955aa5f7ec16950e97ca194a9884292a16cd6520955a3c69d3489a38da2f11", "app-b": "graphlab.local/app-b@sha256:feaaaaa568bc7901f52fcf720a468864d657e14ed739a9a7125447e4670c0be6"}}
+Running as unit: graphlab-messages-agent.service; invocation ID: fa060f17653a4626a33e7b669d040d7c
+Running as unit: graphlab-messages-api.service; invocation ID: 97c12569619644bc94529b5255aad423

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(LabSupport VERSION 1.5.0 LANGUAGES CXX)
+project(LabSupport VERSION 1.6.0 LANGUAGES CXX)
 include(FetchContent)
 # yaml-cpp 0.8.0 predates CMake 4's removal of pre-3.5 compatibility.
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CaptureDetails } from "./capture-details";
+import { MessageHistory } from "./message-history";
 import { SourceControls } from "./source-controls";
 import { ApplicationTelemetry } from "./application-telemetry";
 import { PacketHistory } from "./packet-history";
@@ -437,6 +438,7 @@ export function Execution({
               setTimeout(() => { const item = document.getElementById(`artifact-${id}`); item?.scrollIntoView({behavior: "smooth"}); item?.focus(); }, 0);
             }}
           />
+          <MessageHistory key={`messages-${inspected!.id}-${selectedNode}`} runId={inspected!.id} node={selectedNode} edge={selectedEdge} captureEdges={[...new Set(artifacts.filter(a=>a.mediaType!=="application/x-graphlab-terminal").map(a=>a.edge).filter(Boolean))]} csrf={csrf} api={api} onArtifact={(id,edge)=>{onEdge(edge);setTimeout(()=>{const item=document.getElementById(`artifact-${id}`);item?.scrollIntoView({behavior:"smooth"});item?.focus();},0);}}/>
           <SourceControls key={`sources-${inspected!.id}-${selectedNode}`} runId={inspected!.id} node={selectedNode} csrf={csrf} api={api} />
           <ApplicationTelemetry
             key={`application-${inspected!.id}`}

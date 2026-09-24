@@ -120,3 +120,5 @@ Source-specific pause/resume is documented in [Source controls v1](docs/source-c
 
 Retained process logs: [snapshot contract, limits and qualification](docs/process-logs.md).
 Capture and diagnostic inspectors: [field provenance, metadata and limitations](docs/capture-inspectors.md).
+
+Opt-in message history and verified capture correlation: [contract, bounds and qualification](docs/message-observations.md).

@@ -1,4 +1,4 @@
-# LabSupport 1.5.0
+# LabSupport 1.6.0
 
 C++23 contracts, bounded YAML/JSON parsing, workload validation, topology validation, and SHA-256 canonical document identity. No subprocesses, Docker API, runtime mutation, or environment-owned wiring are included.
 
@@ -11,7 +11,7 @@ cmake --install build/support --prefix "$PWD/build/support-install"
 Independent consumers use:
 
 ```cmake
-find_package(LabSupport 1.5.0 EXACT CONFIG REQUIRED)
+find_package(LabSupport 1.6.0 EXACT CONFIG REQUIRED)
 target_link_libraries(my_node PRIVATE LabSupport::contracts)
 ```
 
@@ -47,3 +47,5 @@ SDK 1.3.0 adds optional [application telemetry v1](../../docs/application-teleme
 SDK 1.4.0 adds optional endpoint-owned [application edge reports](../../docs/application-edge-telemetry.md), preserving the v1 report and lifecycle overloads. A five-argument lifecycle overload enables the separate two-stream TCP qualification fixture; ordinary app-a remains the UDP fixture.
 
 SDK 1.5.0 adds the opt-in six-argument autonomous source fixture and versioned [source pause/resume contract](../../docs/source-controls.md). Existing lifecycle overloads and telemetry contracts are unchanged.
+
+SDK 1.6.0 adds the explicit seven-argument message-observation fixture opt-in and `message_observation.hpp`. Existing overloads remain non-reporting unless explicitly enabled. See [message observation and wire contracts](../../docs/message-observations.md).
